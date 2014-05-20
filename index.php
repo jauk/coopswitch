@@ -12,6 +12,8 @@ include('header.php')
 
 		$name = $nameErr = $email = $emailErr = $cycle = $cycleErr = $major = $majorErr  = $numCoops = "";
 
+		$formMainClass="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3";
+		$formGroupClass="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3";
 		// if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			
 		// 	if (empty($_POST["name"])) {
@@ -46,10 +48,10 @@ include('header.php')
 			<p>This is currently for <em>Freshman</em> only.</p>
 		</div>
 
-		<div class="row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-center">
+		<div class="<?php echo "$formMainClass"; ?>">
 			<form role="form" id="register" method="post" action="" onchange="" onsubmit="this.action=validate_submit()" id="register">
 <!--			<form role="form" method="post" action="register.php" id="register"> 			-->
-				<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="name">Name</label>
 					<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" 
 						   value="<?php test_input($name);?>">
@@ -57,7 +59,7 @@ include('header.php')
 				</div>
 
 
-				<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="email">Email</label> 
 					<input type="text" class="form-control" id="email" name="email" placeholder="Enter your Drexel email"
 						   value="<?php test_input($email);?>" onchange="validate_email(this.value)">
@@ -65,8 +67,8 @@ include('header.php')
 				</div>
 
 
-				<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-					<label for="password">Password<small><br /> Do not use your Drexel One password.</small></label> 
+				<div class="<?php echo "$formGroupClass"; ?>">
+					<label for="password">Password<small><br /><em>Do not use your Drexel One password.</em></small></label> 
 					<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" value="password" onchange="validate_password()">
 					<br><input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
 					<span class="error"><div id="passwordError"></div></span>
@@ -80,25 +82,26 @@ include('header.php')
 					?>
 					</select>
 				</div> -->
-				<div class="row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+				<div class="<?php echo "$formGroupClass"; ?>">
 
-				<div class="form-group ">
-					<label for="cycle">Current Cycle</label>
-					<select class="form-control selectpicker" id="cycle" name="cycle">
-						<option value="1">Fall-Winter</option>
-						<option value="2">Spring-Summer</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="numCoops">Current Program</label>
-					<select class="form-control selectpicker" name="numCoops">
-						<option value="1">4 Years, 1 Co-op</option>
-						<option value="2">5 Years, 3 Co-op</option>
-					</select>
-				</div>
+					<div class="form-group ">
+						<label for="cycle">Current Cycle</label>
+						<select class="form-control selectpicker" id="cycle" name="cycle">
+							<option value="1">Fall-Winter</option>
+							<option value="2">Spring-Summer</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="numCoops">Current Program</label>
+						<select class="form-control selectpicker" name="numCoops">
+							<option value="1">4 Years, 1 Co-op</option>
+							<option value="2">5 Years, 3 Co-op</option>
+						</select>
+					</div>
 
 				</div>
-				<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+				
+				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="major">Major</label>
 					<select class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
 
@@ -115,7 +118,7 @@ include('header.php')
 						    	$major_name=mysql_result($result, $i, "major_long");
 						    	$major_ident=mysql_result($result, $i, id);
 
-						    	echo "<option value=" . $major_ident . ">" . $major_name . "</option> \n";
+						    	echo "<option value=" . $major_ident . ">" . $major_name . "</option> \n\t\t\t\t\t\t";
 
 						    	$i++;
 						    }
