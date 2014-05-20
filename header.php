@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+
+if (!isset($_SESSION['user_name']))
+	$_SESSION['user_name'] = "";
+
+?>
+
 <html lang="en">
 <head>
 	<title>Coopswitch</title>

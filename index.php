@@ -200,8 +200,6 @@ include('header.php')
 
 			var passwordDiv = document.getElementById("passwordError");
 
-			//alert(hasEnteredAgain);
-
 			if (password != password2)
 			{
 				if (password2 == "" && (hasEnteredAgain == false))
@@ -238,15 +236,12 @@ include('header.php')
 
 			if (totalErrors == 0 && hasErrors == false)
 			{
-				//errorDiv.textContent = "No problems!";
-				//return "register.php";
 				return true;
 			}
 			
 			else if (hasErrors == true)
 			{
-				errorDiv.textContent = "Hey, you have a problem!";
-				//alert("You need to fix something!")
+				errorDiv.textContent = "Hey, you have a problem!"; // Probably change to recoloring the boxes later.
 				return false;
 			}
 		}

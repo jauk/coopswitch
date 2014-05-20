@@ -24,16 +24,21 @@ if ($result != 0)
 
 else
 {
+	// Declare actual variables instead of using "$_POST" everywhere. That gets freaking annoying. I hate PHP.
 	$name = test_input($_POST[name]);
 	$email = test_input($_POST[email]);
+	$cycle = $_POST[cycle];
+	$num_year_program = $_POST[numCoops];
+	$majorVal = $_POST[major];
 
 	$sql="INSERT INTO Users (name, email, cycle, major, register_date, num_year_program)
 		VALUES ('$name','$email',
-				'$_POST[cycle]','$_POST[major]',
-				'".date("Y-m-d H:i:s")."','$_POST[numCoops]'
+				'$cycle','$majorVal',
+				'".date("Y-m-d H:i:s")."','$num_year_program'
 	 )";
 
-	$_SERVER['user'] = $_POST['email'];
+	$_SESSION['user_name'] = $name; // For when implementing profiles I guess?
+	$_SESSION['user_email'] = $email;
 
 	if (!mysql_query($sql,$con))
 	  {
@@ -64,11 +69,14 @@ mysql_close($con)
 			<div class="panel-body">
 				<p>Your Drexel email address is: <?php echo $email; ?></p>
 
-			<!--
-			<p>
-			Your cycle is <?php echo $_POST["cycle"]; ?>
-			</p> 
-			-->
+				<p>
+				<?php
+					if ($num_year_program == 1)
+						echo "You are in the 4 year, 1 co-op program.";
+					else
+						echo "You are in the 5 year, 3 co-op program";
+				?>
+				</p>
 
 				<p>
 				<?php
@@ -80,8 +88,7 @@ mysql_close($con)
 				</p>
 
 				<p>
-				We need to find other <strong><?php echo "$majorName"; ?></strong> majors who
-				are willing to trade co-op cycles!
+				We need to find other <strong><?php echo "$majorName"; ?></strong> majors!
 				</p>
 			</div>
 		</div>
