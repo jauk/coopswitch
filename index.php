@@ -57,8 +57,8 @@ include('header.php')
 <!--			<form role="form" method="post" action="register.php" id="register"> 			-->
 				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="nameField">Name</label>
-					<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" onchange="validate_name()">
-					<span class="error"> <?php echo "$nameErr"; ?> </span>
+					<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()">
+					<span class="error"><div id="nameError"></div></span>
 				</div>
 
 
@@ -191,6 +191,23 @@ if (isset($_POST["submit"])) {
 
 		}
 
+		var validate_name = function () {
+
+			name = document.getElementById("user_name").value;
+			var nameDiv = document.getElementById("nameError");
+
+			if (name == "")
+			{
+				nameErr = 0;
+				nameDiv.textContent = "You need a name.";
+			}
+			else
+			{
+				nameErr = 1;
+				nameDiv.textContent = "Name exists.";
+			}
+
+		}
 
 		var validate_email = function () {
 
