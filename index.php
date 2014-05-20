@@ -57,14 +57,14 @@ include('header.php')
 <!--			<form role="form" method="post" action="register.php" id="register"> 			-->
 				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="nameField">Name</label>
-					<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+					<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" onchange="validate_name()">
 					<span class="error"> <?php echo "$nameErr"; ?> </span>
 				</div>
 
 
 				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="emailField">Email</label> 
-					<input type="text" class="form-control" id="email" name="email" placeholder="Enter your Drexel email" onchange="validate_email(this.value)">
+					<input type="text" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email()">
 					<span class="error"><div id="emailError"></div></span>					
 				</div>
 
@@ -192,7 +192,10 @@ if (isset($_POST["submit"])) {
 		}
 
 
-		var validate_email = function (email) {
+		var validate_email = function () {
+
+
+			email = document.getElementById("user_email").value;
 
 			var testForDrexel = email.search("@drexel.edu");
 
