@@ -53,7 +53,7 @@ include('header.php')
 		
 		<span class="error"><div id="formError"></div></span>
 
-			<form role="form" id="register" method="post" action="" onchange="" onsubmit="return validate_submit()" id="register">
+			<form role="form" id="register" method="post" action="register.php" onchange="" onsubmit="return validate_submit();" id="register">
 <!--			<form role="form" method="post" action="register.php" id="register"> 			-->
 				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="nameField">Name</label>
@@ -198,12 +198,12 @@ if (isset($_POST["submit"])) {
 
 			if (name == "")
 			{
-				nameErr = 0;
+				nameErr = 1;
 				nameDiv.textContent = "You need a name.";
 			}
 			else
 			{
-				nameErr = 1;
+				nameErr = 0;
 				nameDiv.textContent = "Name exists.";
 			}
 
@@ -239,10 +239,6 @@ if (isset($_POST["submit"])) {
 			var passwordDiv = document.getElementById("passwordError");
 
 			//alert(hasEnteredAgain);
-
-
-			// Boolean does not work right now.
-
 
 			if (password != password2)
 			{
@@ -281,8 +277,9 @@ if (isset($_POST["submit"])) {
 
 			if (totalErrors == 0 && hasErrors == false)
 			{
-				//errorDiv.textContent = "No problems!";
-				return "register.php";
+				errorDiv.textContent = "No problems!";
+				//return "register.php";
+				return true;
 			}
 			
 			else if (hasErrors == true)
