@@ -53,23 +53,21 @@ include('header.php')
 <!--			<form role="form" method="post" action="register.php" id="register"> 			-->
 				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="name">Name</label>
-					<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" 
-						   value="<?php test_input($name);?>">
+					<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
 					<span class="error"> <?php echo "$nameErr"; ?> </span>
 				</div>
 
 
 				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="email">Email</label> 
-					<input type="text" class="form-control" id="email" name="email" placeholder="Enter your Drexel email"
-						   value="<?php test_input($email);?>" onchange="validate_email(this.value)">
+					<input type="text" class="form-control" id="email" name="email" placeholder="Enter your Drexel email" onchange="validate_email(this.value)">
 					<span class="error"><div id="emailError"></div></span>					
 				</div>
 
 
 				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="password">Password<small><br /><em>Do not use your Drexel One password.</em></small></label> 
-					<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" value="password" onchange="validate_password()">
+					<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
 					<br><input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
 					<span class="error"><div id="passwordError"></div></span>
 				</div>
@@ -91,6 +89,7 @@ include('header.php')
 							<option value="2">Spring-Summer</option>
 						</select>
 					</div>
+
 					<div class="form-group">
 						<label for="numCoops">Current Program</label>
 						<select class="form-control selectpicker" name="numCoops">
@@ -100,7 +99,7 @@ include('header.php')
 					</div>
 
 				</div>
-				
+
 				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="major">Major</label>
 					<select class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
