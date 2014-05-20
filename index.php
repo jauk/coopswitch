@@ -10,64 +10,36 @@ include('header.php')
 
 		<?php 
 
-		$name = $nameErr = $email = $emailErr = $cycle = $cycleErr = $major = $majorErr  = $numCoops = "";
-
+		// Some global CSS variables
 		$formMainClass="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3";
 		$formGroupClass="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3";
-		// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			
-		// 	if (empty($_POST["name"])) {
-		// 		$nameErr = "Missing";
-		// 	}
-		// 	else {
-		// 		$name = $_POST["name"];
-		// 	}
-
-		// 	if (empty($_POST["email"])) {
-		// 		$emailErr = "Missing";
-		// 	}
-		// 	else {
-		// 		$email = $_POST["email"];
-		// 	}
-
-		// }
-
-		function test_input($data) {
-			$data = trim($data);
-			$data = stripslashes($data);
-			$data = htmlspecialchars($data);
-			return $data;
-		}
 
 		?>
-
-		
 
 		<div class="row col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center well">
 			<h4>Registration Form</h4>
 			<p>This is currently for <em>Freshman</em> only.</p>
 		</div>
 
-
 		<div class="<?php echo "$formMainClass"; ?>">
-		
-		<span class="error"><div id="formError"></div></span>
+			
+			<!-- Print out if there is an error with the form data. Right now it is just a universal one. Needs CSS formatting. -->
+			<span class="error"><div id="formError"></div></span>
 
+			<!-- Registration Form -->
 			<form role="form" id="register" method="post" action="register.php" onchange="" onsubmit="return validate_submit();" id="register">
-<!--			<form role="form" method="post" action="register.php" id="register"> 			-->
+
 				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="nameField">Name</label>
 					<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()">
 					<span class="error"><div id="nameError"></div></span>
 				</div>
 
-
 				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="emailField">Email</label> 
 					<input type="text" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email()">
 					<span class="error"><div id="emailError"></div></span>					
 				</div>
-
 
 				<div class="<?php echo "$formGroupClass"; ?>">
 					<label for="passwordField">Password<small><br /><em>Do not use your Drexel One password.</em></small></label> 
@@ -76,7 +48,8 @@ include('header.php')
 					<span class="error"><div id="passwordError"></div></span>
 				</div>
 
-				<!--
+				<!-- 
+				In the future, implement for other years. (IS THIS POSSIBLE FOR 5 YEAR PROGRAM?)
 				<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
 					<label for="gradyear">Graduation Year</label> 
 					<select class="form-control" name="gradyear" data-size="10">
@@ -111,7 +84,8 @@ include('header.php')
 					<label for="majorField">Major</label>
 					<select class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
 
-						<?php // Get the list of majors and display for user selection.
+						<?php
+						// Get the list of majors and display for user selection.
 
 						  include_once('connect.php');
 			
@@ -138,11 +112,14 @@ include('header.php')
 
 					</select>
 				</div>
-				<!--
+
+				<!-- In the future, will implement the "fast-track" option.
 				<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
 					<label for="payment">Payment Amount <small>(Optional)</small></label>
 					<input type="text" class="form-control" id="payment" name="payment" placeholder="Enter an amount ($5)">
-				</div> -->
+				</div> 
+				-->
+
 				<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
 					 <div id="errorFree">
 					 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-default btn-lg btn-primary">Submit</button>
@@ -152,21 +129,6 @@ include('header.php')
 			</form>
 		</div>
 	</div>
-
-<?php
-
-/* Lets try validation via javascript?
-if (isset($_POST["submit"])) {
-
-
-	echo 'User submitted.<br />';
-	echo 'Name: ' . test_input($name) . '<br />';
-	echo 'Email: ' . $email . '<br />';
-	echo 'Cycle: ' . $cycle . '<br />';
-	echo 'Major: ' . $major_ident . '';
-}
-*/
-?>
 
 <script type="text/javascript">
 
@@ -252,9 +214,9 @@ if (isset($_POST["submit"])) {
 				{
 					passwordErr = 1;
 					passwordDiv.textContent = "Passwords do not match!";	
-				}
-				
+				}	
 			}
+
 			else
 			{
 				passwordErr = 0;
@@ -262,7 +224,6 @@ if (isset($_POST["submit"])) {
 			}
 
 		}
-
 
 		var validate_submit = function () {
 
@@ -277,7 +238,7 @@ if (isset($_POST["submit"])) {
 
 			if (totalErrors == 0 && hasErrors == false)
 			{
-				errorDiv.textContent = "No problems!";
+				//errorDiv.textContent = "No problems!";
 				//return "register.php";
 				return true;
 			}
