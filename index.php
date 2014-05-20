@@ -48,29 +48,34 @@ include('header.php')
 			<p>This is currently for <em>Freshman</em> only.</p>
 		</div>
 
+
 		<div class="<?php echo "$formMainClass"; ?>">
-			<form role="form" id="register" method="post" action="" onchange="" onsubmit="this.action=validate_submit()" id="register">
+		
+		<span class="error"><div id="formError"></div></span>
+
+			<form role="form" id="register" method="post" action="" onchange="" onsubmit="return validate_submit()" id="register">
 <!--			<form role="form" method="post" action="register.php" id="register"> 			-->
 				<div class="<?php echo "$formGroupClass"; ?>">
-					<label for="name">Name</label>
+					<label for="nameField">Name</label>
 					<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
 					<span class="error"> <?php echo "$nameErr"; ?> </span>
 				</div>
 
 
 				<div class="<?php echo "$formGroupClass"; ?>">
-					<label for="email">Email</label> 
+					<label for="emailField">Email</label> 
 					<input type="text" class="form-control" id="email" name="email" placeholder="Enter your Drexel email" onchange="validate_email(this.value)">
 					<span class="error"><div id="emailError"></div></span>					
 				</div>
 
 
 				<div class="<?php echo "$formGroupClass"; ?>">
-					<label for="password">Password<small><br /><em>Do not use your Drexel One password.</em></small></label> 
+					<label for="passwordField">Password<small><br /><em>Do not use your Drexel One password.</em></small></label> 
 					<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
 					<br><input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
 					<span class="error"><div id="passwordError"></div></span>
 				</div>
+
 				<!--
 				<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
 					<label for="gradyear">Graduation Year</label> 
@@ -79,11 +84,13 @@ include('header.php')
 					// Allow users to select from the next few years.
 					?>
 					</select>
-				</div> -->
+				</div> 
+				-->
+
 				<div class="<?php echo "$formGroupClass"; ?>">
 
 					<div class="form-group ">
-						<label for="cycle">Current Cycle</label>
+						<label for="cycleField">Current Cycle</label>
 						<select class="form-control selectpicker" id="cycle" name="cycle">
 							<option value="1">Fall-Winter</option>
 							<option value="2">Spring-Summer</option>
@@ -91,7 +98,7 @@ include('header.php')
 					</div>
 
 					<div class="form-group">
-						<label for="numCoops">Current Program</label>
+						<label for="numCoopsField">Current Program</label>
 						<select class="form-control selectpicker" name="numCoops">
 							<option value="1">4 Years, 1 Co-op</option>
 							<option value="2">5 Years, 3 Co-op</option>
@@ -101,10 +108,10 @@ include('header.php')
 				</div>
 
 				<div class="<?php echo "$formGroupClass"; ?>">
-					<label for="major">Major</label>
+					<label for="majorField">Major</label>
 					<select class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
 
-						<?php
+						<?php // Get the list of majors and display for user selection.
 
 						  include_once('connect.php');
 			
@@ -173,6 +180,12 @@ if (isset($_POST["submit"])) {
 			var errors = 0;
 			window.hasEnteredAgain = false;
 
+			window.hasErrors = true; //Start at true so cannot submit blank form.
+
+			window.nameErr = 0;
+			window.emailErr = 0;
+			window.passwordErr = 0;
+
 			//document.getElementById('email').onchange = validate_email;
 			//$("submit_form").onclick = validate_data;
 
@@ -237,13 +250,27 @@ if (isset($_POST["submit"])) {
 
 		var validate_submit = function () {
 
-			if (emailErr == 0)
-				return "register.php";
+			errorDiv = document.getElementById("formError");
+
+			var totalErrors = nameErr + emailErr + passwordErr;
+
+			if (totalErrors == 0)
+				hasErrors = false;
 			else
-				{
-					alert("You need to fix something!")
-					return "index.php";
-				}
+				hasErrors = true;
+
+			if (totalErrors == 0 && hasErrors == false)
+			{
+				//errorDiv.textContent = "No problems!";
+				return "register.php";
+			}
+			
+			else if (hasErrors == true)
+			{
+				errorDiv.textContent = "Hey, you have a problem!";
+				//alert("You need to fix something!")
+				return false;
+			}
 		}
 
 
