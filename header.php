@@ -1,14 +1,17 @@
 <?php 
-session_start(); 
+//session_start(); 
+//
+//if (!isset($_SESSION['user_name']))
+//	$_SESSION['user_name'] = "";
 
-if (!isset($_SESSION['user_name']))
-	$_SESSION['user_name'] = "";
+$title = "Coopswitch";
+$slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 
 ?>
 
 <html lang="en">
 <head>
-	<title>Coopswitch</title>
+	<title><?php echo "$title"; ?></title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link href="css/bootstrap.css" rel="stylesheet">
@@ -24,8 +27,8 @@ if (!isset($_SESSION['user_name']))
 <body>
 	<div class="container-fluid"> 
 		<div class="row col-md-6 col-md-offset-3 text-center">
-			<h1>Coopswitch</h1>
-			<h4><i>Get on the right cycle!</i></h4>
+			<h1><?php echo "$title"; ?></h1>
+			<h4><i><?php echo "$slogan"; ?></i></h4>
 		</div>	
 		<div class="row col-md-6 col-md-offset-3 col-sm-12 text-center">
 			<ul class="nav nav-pills nav-justified">

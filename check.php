@@ -9,6 +9,8 @@ include('header.php')
 
 include_once('connect.php');
 
+$rowClass = "row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-center";
+
 /* Actual Work Start */
 
 // Get all the peoples not matched.
@@ -16,8 +18,7 @@ include_once('connect.php');
 $query="SELECT * FROM Users WHERE matched = 0";
 $result=mysql_query($query);
 $num=mysql_numrows($result);
-
-echo '<div class="row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-center">';
+echo '<div class="$rowClass">';
 echo "<p>There are " . $num . " people who have not been matched.</p>";
 echo "</div>";
 
@@ -25,28 +26,35 @@ echo "</div>";
 
 $x = 0; $y = 0; 
 
-while ($x < $num)
+while ($x < $num) // Where num is how many people have not been matched.
   {
-  	$majorA=mysql_result($result, $x, "major");
+
+    // Basically, start with one person. Search everyone else with that major.
+
+  	$majorA=mysql_result($result, $x, "major"); // Pick the major of the person we will be searching.
   	
-  	while ($y < $num)
+  	while ($y < $num) // Right now, go through each major for each person. Not efficient. Better way?
   	  {
-  	  	if ($y == $x)
+  	  	if ($y == $x) // Skip the person we are searching for?
   	  		$y++;
 
 
-  	  	$majorB=mysql_result($result, $y, "major");
+  	  	$majorB=mysql_result($result, $y, "major"); // Major of the second person.
 
-  	  	// Same major! Opposite cycles? 
 
-  	  	if ($majorA == $majorB)
+  	  	if ($majorA == $majorB)  // Same major! Opposite cycles? 
   	  	{  	  		
+          // Get the cycle from each person.
   	  		$cycleA=mysql_result($result, $x, "cycle");
   	  		$cycleB=mysql_result($result, $y, "cycle");
-  	  		if ($cycleA != $cycleB) 
+
+  	  		if ($cycleA != $cycleB) // If they opposite cycles (we want this).
   	  			{
-  	  				echo '<div class="row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-center">';
+
+              // Use getElementById instead of this foolishness.
+  	  				echo '<div class="$rowClass">';
   	  				echo '<p class="lead">We found a match!</p>'; 
+              echo "</div>";
 
               $userAIdent = mysql_result($result, $x, "id");
               $userBIdent = mysql_result($result, $y, "id");
@@ -70,9 +78,9 @@ while ($x < $num)
               $query = sprintf("UPDATE Users SET Matches_id='$NewMatchId' WHERE id='$userBIdent'");
               $result = mysql_query($query);
 
-  	  				echo "</div>";
-
   	  				//break;
+
+              // Maybe just use PHP or something to update JS to display crap in foreground while PHP does background stuff.
   	  			}
   	  	} 
 
@@ -97,4 +105,7 @@ include('footer.php')
 
 // Add to Matches table, set matched val to 1, connect with each other.
 // Matches table: id, personA id, personB id, isFinished val, date.
+
+// After a match is made it will show up on users profile and they will get an email.
+
 ?>
