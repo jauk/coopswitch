@@ -2,7 +2,7 @@
 	include_once('header.php');
 	include_once('connect.php');
 	
-	htmlspecialchars($_POST['email']);
+	$umail = htmlspecialchars($_POST['email']);
 	$upass = htmlspecialchars($_POST['password']);
 
 	if ($db_found) {
@@ -39,7 +39,7 @@
 
 	}
 	else {
-		$errorMessage = "Invalid Logon.";
+		$errorMessage = "Invalid Login.";
 		session_start();
 		$_SESSION['login']="";
 	}
@@ -47,5 +47,3 @@
 
 	include_once('footer.php');
 ?>
-
-<?php print $errorMessage;?>
