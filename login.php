@@ -34,9 +34,26 @@
 	//session_destroy();
 
 	if ($num_rows == 1) {
-		$errorMessage = "Logged on!";
+
+		$row = mysql_fetch_row($result);
+
+		echo "$row[0]";
+		echo "$row[1]";
+		echo "$row[2]";
+
+
+		$errorMessage = "Logged on!"; // Hooray, we are logged on.
+
+		/* Get information from user's row and save in session variables */
+
 		//session_start();
-		$_SESSION['login']="1";
+		$_SESSION['login'] = "1";
+		$_SESSION['user'] = $umail;
+		$_SESSION['user_name'] = "";
+		$_SESSION['user_major'] = "";
+
+
+
 		//echo "$_SESSION['login']";
 		header("Location: account.php");
 
