@@ -40,8 +40,8 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 				<li>
 					<a href="about.php">About</a>
 				</li>
-				<li class="disabled">
-					<a href="#">Profile</a>
+				<li>
+					<a href="account.php">Profile</a>
 				</li>
 				<li>
 					<a href="list.php">List</a>
@@ -54,7 +54,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 
 		<div class="row col-md-6 col-md-offset-3 col-sm-12 text-center">
 			<!-- <div class="panel panel-default"> <br /> -->
-				<form class="form-inline" role="form" name="login_form" method="post" action="account.php">
+				<form class="form-inline" role="form" name="login_form" method="post" action="login.php">
 					<fieldset>
 						<div class="form-group">
 					    	<label class="sr-only" for="email">Email address</label>

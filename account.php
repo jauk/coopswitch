@@ -1,42 +1,51 @@
 <?php include('header.php'); 
-	  include_once('connect.php');
+	//   include_once('connect.php');
 
-	  $umail = htmlspecialchars($_POST['email']);
-	  $upass = htmlspecialchars($_POST['password']);
+	//   $umail = htmlspecialchars($_POST['email']);
+	//   $upass = htmlspecialchars($_POST['password']);
 
-	  if ($db_found) {
+	//   if ($db_found) {
 
-	  }
-	  else {
+	//   }
+	//   else {
 
-	  	$errorMessage = "Error logging on. 1";
-	  }
+	//   	$errorMessage = "Error logging on. 1";
+	//   }
 
-	// Learn about quote_smart funcion for sql injection protection! IMPORTANT!
-	//$umail = quote_smart($uname, $con);
-	//$upass = quote_smart($upass, $con);
+	// // Learn about quote_smart funcion for sql injection protection! IMPORTANT!
+	// // $umail = quote_smart($uname, $con);
+	// // $upass = quote_smart($upass, $con);
 
-	$sql = "SELECT * FROM Users WHERE email = '$umail' AND password = '$upass'";
-	$result = mysql_query($sql);
+	// $sql = "SELECT * FROM Users WHERE email = '$umail' AND password = '$upass'";
+	// $result = mysql_query($sql);
 
 
-	if ($result){
+	// if ($result){
 
-	}
-	else {
-		die(mysql_error());
-		$errorMessage = "Error logging on. 2";
-	}
+	// }
+	// else {
+	// 	die(mysql_error());
+	// 	$errorMessage = "Error logging on. 2";
+	// }
 
-	$num_rows = mysql_num_rows($result);
+	// $num_rows = mysql_num_rows($result);
 
-	if ($num_rows > 0) {
-		$errorMessage = "Logged on!";
-	}
-	else {
-		$errorMessage = "Invalid Logon.";
-	}
-	
+	// if ($num_rows == 1) {
+	// 	$errorMessage = "Logged on!";
+	// 	session_start();
+	// 	$_SESSION['login']="1";
+	// 	header("")
+
+	// }
+	// else {
+	// 	$errorMessage = "Invalid Logon.";
+	// }
+
+
+	if ($_SESSION['login'] == "")
+		{
+			header("Location: error.php"); // Temporary I guess
+		}
 
 
 ?>
@@ -54,6 +63,6 @@
 </div>
 
 <?php 
-mysql_close($con);
+//mysql_close($con);
 include('footer.php'); 
 ?>
