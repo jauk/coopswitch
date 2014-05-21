@@ -10,6 +10,7 @@ include('header.php')
 			<tr><td><strong>Name<small>*</small></strong></td>
 				<td><strong>Cycle</strong></td>
 				<td><strong>Major</strong></td>
+				<td><strong>Number Coops</strong></td>
 				<td><strong>Matched?</strong></td>
 			</tr>
 
@@ -35,6 +36,7 @@ include('header.php')
 				$name=mysql_result($result, $i,"name");
 				$cycle=mysql_result($result, $i, "cycle");
 				$major=mysql_result($result, $i, "major");
+				$numCoops=mysql_result($result, $i, "num_year_program");
 
 				$majorName=mysql_fetch_assoc(mysql_query("SELECT major_long FROM Majors WHERE id=$major"));
 				//echo $majorName["major_long"];
@@ -53,6 +55,11 @@ include('header.php')
 
 				echo "<td>$majorName[major_long]</td>";
 
+				if ($numCoops == 1)
+					echo "<td>1 co-op (4yr)</td>";
+				else
+					echo "<td>3 co-ops (5yr)</td>";
+
 				echo "<td>";
 				if ($isMatched == 1)
 				  echo "Yes";
@@ -69,6 +76,7 @@ include('header.php')
 
 			echo '<div class="btn-group">';
 
+			// Buttons for switching the page of people if you are really that interested
 			if ($startrow > 0)
 			  echo '<a href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow-10).'" <button type="button" class="btn btn-default">Previous</button></a>';
 			if ($startrow+10 < $numRows)
