@@ -30,12 +30,12 @@
 
 	$num_rows = mysql_num_rows($result);
 
-	// if ($num_rows == 1) {
-	// 	errorMessage = "Logged on!";
-	// }
-	// else {
-	// 	errorMessage = "Invalid Logon.";
-	// }
+	if ($num_rows > 0) {
+		$errorMessage = "Logged on!";
+	}
+	else {
+		$errorMessage = "Invalid Logon.";
+	}
 	
 
 
