@@ -31,21 +31,24 @@
 
 	$num_rows = mysql_num_rows($result);
 
-	session_destroy();
+	//session_destroy();
 
 	if ($num_rows == 1) {
 		$errorMessage = "Logged on!";
-		session_start();
+		//session_start();
 		$_SESSION['login']="1";
+		//echo "$_SESSION['login']";
 		header("Location: account.php");
 
 	}
 	else {
 		$errorMessage = "Invalid Login.";
-		session_start();
+		//session_start();
 		$_SESSION['login']="";
 	}
 
+	echo "$errorMessage";
+	echo "Hi {$_SESSION['login']}";
 
 	include_once('footer.php');
 ?>

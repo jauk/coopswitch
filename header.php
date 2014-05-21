@@ -1,5 +1,5 @@
 <?php 
-//session_start(); 
+session_start(); 
 //
 //if (!isset($_SESSION['user_name']))
 //	$_SESSION['user_name'] = "";
@@ -54,6 +54,8 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 
 		<div class="row col-md-6 col-md-offset-3 col-sm-12 text-center">
 			<!-- <div class="panel panel-default"> <br /> -->
+
+				<?php if ($_SESSION['login'] == 0) { ?>
 				<form class="form-inline" role="form" name="login_form" method="post" action="login.php">
 					<fieldset>
 						<div class="form-group">
@@ -67,8 +69,19 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 				   		<button type="submit" class="btn btn-default btn-success">Sign In</button>
 				    </fieldset>
 				</form>
+				<?php } // Else logged in, display name or some greeting
+ 
+					else {
+
+						echo "<br>Hi whoever you are. Change me. LOGOUT BUTTON.";
+					}
+
+				?>
 		<!--	</div> -->
 		</div>
 	</div>
+
+	<?php // echo "Hi {$_SESSION['login']}"; ?>
+
 
 	<br />
