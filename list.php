@@ -33,6 +33,10 @@ include('header.php')
 
 			$i=0; while ($i < $num) 
 			  {
+			  	$user_info = array();
+
+			  	
+
 				$name=mysql_result($result, $i,"name");
 				$cycle=mysql_result($result, $i, "cycle");
 				$major=mysql_result($result, $i, "major");
@@ -43,31 +47,35 @@ include('header.php')
 
 				$isMatched=mysql_result($result, $i, "matched");
 
-				echo "<tr>";
+				echo "<tr>\n";
 
-				// echo "<td>$name</td>";
-				echo "<td>" . rand(1,99) . "</td>";
+				// Random number instead of name
+				echo "\t<td>" . rand(1,99) . "</td>\n";
 
+				// Co-op cycle
 				if ($cycle == 1)
-				  echo "<td>Fall-Winter</td>";
+				  echo "\t<td>Fall-Winter</td>\n";
 				else
-				  echo "<td>Spring-Summer</td>";
+				  echo "\t<td>Spring-Summer</td>\n";
 
-				echo "<td>$majorName[major_long]</td>";
+				// Major 
+				echo "\t<td>$majorName[major_long]</td>\n";
 
+				// Number of co-ops
 				if ($numCoops == 1)
-					echo "<td>1 co-op (4yr)</td>";
+					echo "\t<td>1 co-op (4yr)</td>\n";
 				else
-					echo "<td>3 co-ops (5yr)</td>";
+					echo "\t<td>3 co-ops (5yr)</td>\n";
 
-				echo "<td>";
+				// Do they have a match
+				echo "\t<td>\n";
 				if ($isMatched == 1)
 				  echo "Yes";
 				else
 					echo "No";
-				echo "</td>";
+				echo "\t</td>\n";
 
-				echo "</tr>";
+				echo "</tr>\n";
 
 				$i++;
 			  }
