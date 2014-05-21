@@ -25,17 +25,17 @@ include('header.php')
 				$startrow = (int)$_GET['startrow'];
 			}
 
-			$numRows=mysql_numrows(mysql_query("SELECT * FROM Users"));
+			$numRows=mysql_num_rows(mysql_query("SELECT * FROM Users"));
 
 			$query="SELECT * FROM Users LIMIT $startrow,10";
 			$result=mysql_query($query);
-			$num=mysql_numrows($result);
+			$num=mysql_num_rows($result);
 
 			$i=0; while ($i < $num) 
 			  {
 			  	$user_info = array();
 
-			  	
+
 
 				$name=mysql_result($result, $i,"name");
 				$cycle=mysql_result($result, $i, "cycle");

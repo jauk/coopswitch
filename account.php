@@ -9,46 +9,47 @@
 	  }
 	  else {
 
-	  	$errorMessage = "Error logging on.";
+	  	$errorMessage = "Error logging on. 1";
 	  }
 
 	// Learn about quote_smart funcion for sql injection protection! IMPORTANT!
 	//$umail = quote_smart($uname, $con);
 	//$upass = quote_smart($upass, $con);
 
-	$sql = "SELECT * FROM Users WHERE email = $umail AND password = $upass";
+	$sql = "SELECT * FROM Users WHERE email = '$umail' AND password = '$upass'";
 	$result = mysql_query($sql);
 
-	/*
 
 	if ($result){
 
 	}
 	else {
-		$errorMessage = "Error logging on.";
+		die(mysql_error());
+		$errorMessage = "Error logging on. 2";
 	}
 
 	$num_rows = mysql_num_rows($result);
 
-	if ($num_rows == 1) {
-		errorMessage = "Logged on!";
-	}
-	else {
-		errorMessage = "Invalid Logon.";
-	}
+	// if ($num_rows == 1) {
+	// 	errorMessage = "Logged on!";
+	// }
+	// else {
+	// 	errorMessage = "Invalid Logon.";
+	// }
+	
 
-	*/
 
 ?>
 
 <div class="container-fluid">
 
-	<?PHP print $errorMessage;?>
+	<?php print $errorMessage;?>
 
 	<div class="row col-md-6 col-md-offset-3 text-center">
 		<div class="panel-heading">
 			<h2>Hello, <?php echo "$umail"; ?></h2>
 		</div>
+		<?php echo "$upass"; ?>
 	</div>
 </div>
 
