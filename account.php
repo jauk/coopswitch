@@ -3,7 +3,7 @@
 
 	if ($_SESSION['login'] == "")
 		{
-			header("Location: error.php"); // Temporary I guess
+			header("Location: 404.php"); // Temporary I guess maybe add like ?error=1
 		}
 	else if ($_SESSION['login'] == "1")
 	{

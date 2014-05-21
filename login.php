@@ -31,6 +31,8 @@
 
 	$num_rows = mysql_num_rows($result);
 
+	session_destroy();
+
 	if ($num_rows == 1) {
 		$errorMessage = "Logged on!";
 		session_start();
