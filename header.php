@@ -52,15 +52,15 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 
 		<div class="row col-md-6 col-md-offset-3 col-sm-12 text-center">
 			<!-- <div class="panel panel-default"> <br /> -->
-				<form class="form-inline" role="form">
-					<fieldset disabled>
+				<form class="form-inline" role="form" name="login_form" method="post" action="account.php">
+					<fieldset>
 						<div class="form-group">
 					    	<label class="sr-only" for="email">Email address</label>
-					   		<input type="email" class="form-control" id="email" placeholder="Email">
+					   		<input type="email" class="form-control" name="email" id="email" placeholder="Email">
   						</div>
   						<div class="form-group">
 					    	<label class="sr-only" for="password">Password</label>
-					    	<input type="password" class="form-control" id="password" placeholder="Password">
+					    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
 						</div>					
 				   		<button type="submit" class="btn btn-default btn-success">Sign In</button>
 				    </fieldset>

@@ -27,18 +27,18 @@ else
 	// Declare actual variables instead of using "$_POST" everywhere. That gets freaking annoying. I hate PHP.
 	$name = test_input($_POST[name]);
 	$email = test_input($_POST[email]);
+	$password = test_input($_POST[password]);
 	$cycle = $_POST[cycle];
 	$num_year_program = $_POST[numCoops];
 	$majorVal = $_POST[major];
 
-	$sql="INSERT INTO Users (name, email, cycle, major, register_date, num_year_program)
-		VALUES ('$name','$email',
-				'$cycle','$majorVal',
-				'".date("Y-m-d H:i:s")."','$num_year_program'
+	$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
+		VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal',
+				'".date("Y-m-d H:i:s")."'
 	 )";
 
-	$_SESSION['user_name'] = $name; // For when implementing profiles I guess?
-	$_SESSION['user_email'] = $email;
+	//$_SESSION['user_name'] = $name; // For when implementing profiles I guess?
+	//$_SESSION['user_email'] = $email;
 
 	if (!mysql_query($sql,$con))
 	  {
