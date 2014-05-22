@@ -27,9 +27,19 @@
 	</div>
 
 	<div class="row-fluid col-md-6 col-md-offset-3">
+		<!-- Use Javascript with PHP to allow users to edit these fields. -->
 		<h4>Your major is <?php echo "{$_SESSION['user_major_name']}"; ?>.</h4>
-		<h4>Your cycle is <?php echo "{$_SESSION['user_cycle']}"; ?>.</h4>
-		<h4>Your program is <?php echo "{$_SESSION['user_program']}"; ?>.</h4>
+		<h4>Your cycle is <?php echo "{$_SESSION['user_cycle_name']}"; ?>.</h4>
+		<h4>Your program is <?php echo "{$_SESSION['user_program_name']}"; ?>.</h4>
+		<br>
+		<?php if ($_SESSION['user_matched'] == 0) { ?>
+		<!-- If user does not have a match, code here. -->
+
+		<?php } else { ?>
+		<!-- If user has a match, display information about it. -->
+
+		<?php } ?>
+
 	</div>
 
 
