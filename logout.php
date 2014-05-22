@@ -4,7 +4,6 @@ include_once('header.php');
 
 echo 'Session destroyed maybe. <a href="index.php">Home</a>';
 
-
 session_destroy();
 $_SESSION = array();
 //$_SESSION['login'] = "";

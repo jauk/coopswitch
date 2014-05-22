@@ -21,7 +21,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	
+
 	<?php include_once("tracking.php") ?>
 
 </head>

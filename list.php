@@ -6,6 +6,10 @@ include('header.php')
 <div class="container-fluid">
 
 	<div class="row col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center">
+
+		<p>This page needs to be updated and made more efficient.</p><hr><br> 
+		<!-- Manage user data in one big array like other pages. (check) -->
+
 		<table class="table table-striped">
 			<tr><td><strong>Name<small>*</small></strong></td>
 				<td><strong>Cycle</strong></td>

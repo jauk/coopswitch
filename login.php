@@ -13,7 +13,7 @@
 		$errorMessage = "Error logging on. 1";
 	}
 
-	// Learn about quote_smart funcion for sql injection protection! IMPORTANT!
+	/* Learn about quote_smart funcion for sql injection protection! IMPORTANT! */
 	// $umail = quote_smart($uname, $con);
 	// $upass = quote_smart($upass, $con);
 
@@ -58,7 +58,7 @@
 		$_SESSION['user_program'] = $user_data[0]['num_year_program'];
 		$_SESSION['user_matched'] = $user_data[0]['matched'];
 
-		header("Location: account.php"); // UNCOMMENT ONCE DONE TESTINF
+		header("Location: account.php"); 
 	}
 	else {
 		$errorMessage = "Invalid Login.";

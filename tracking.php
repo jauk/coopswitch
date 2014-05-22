@@ -6,5 +6,4 @@
 
   ga('create', 'UA-49130113-1', 'coopswitch.com');
   ga('send', 'pageview');
-
 </script>
