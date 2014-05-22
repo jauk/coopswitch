@@ -31,19 +31,15 @@ $num=mysql_num_rows($result);
 
 <?php
 
-$users_not_matched = array();
+$users_not_matched = array(); // Array of those who are not matched.
 
 $index = 0;
 while ($row = mysql_fetch_array($result))
 {
-  $users_not_matched[$index] = $row; // Save the users into an array.
+  $users_not_matched[$index] = $row; // Save the users into the array.
 }
 
-// Go through each person and look for a match.
-
 $x = 0; 
-$y = 0;
-
 
 while ($x < count($users_not_matched)) // Less than number of people in the array.
 //for (var $x = 0; $x < count(users_not_matched);)

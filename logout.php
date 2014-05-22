@@ -6,9 +6,8 @@ echo 'Session destroyed maybe. <a href="index.php">Home</a>';
 
 
 session_destroy();
-$_SESSION['login'] = "";
-
-
+$_SESSION = array();
+//$_SESSION['login'] = "";
 
 header("Location: index.php");
 
