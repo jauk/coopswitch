@@ -40,7 +40,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 				<li>
 					<a href="about.php">About</a>
 				</li>
-				<li>
+				<?php if ($_SESSION['login'] == 1) echo '<li>'; else echo '<li class="disabled"'; ?>
 					<a href="account.php">Profile</a>
 				</li>
 				<li>
@@ -54,6 +54,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 
 		<div class="row col-md-6 col-md-offset-3 col-sm-12 text-center">
 			<!-- <div class="panel panel-default"> <br /> -->
+		<br>
 
 				<?php if ($_SESSION['login'] == 0) { ?>
 				<form class="form-inline" role="form" name="login_form" method="post" action="login.php">
@@ -73,7 +74,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
  
 					else {
 
-						echo "<br> Hi " . $_SESSION['user_name'] . "!"; 
+						echo "Hi " . $_SESSION['user_name'] . "!"; 
 						echo '<br><a href="logout.php">Logout</a>';
 					}
 

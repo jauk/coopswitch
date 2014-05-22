@@ -10,7 +10,7 @@ include('header.php')
 			<tr><td><strong>Name<small>*</small></strong></td>
 				<td><strong>Cycle</strong></td>
 				<td><strong>Major</strong></td>
-				<td><strong>Number Coops</strong></td>
+				<td><strong>Number Co-ops</strong></td>
 				<td><strong>Matched?</strong></td>
 			</tr>
 

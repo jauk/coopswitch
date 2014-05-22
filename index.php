@@ -1,137 +1,141 @@
 <?php
 include('header.php')
 ?>
-
-<div class="container-fluid">
-	<div class="row col-md-6 col-md-offset-3 text-center">
-		<p class="lead">
-			Find someone to trade co-op cycles with!
-		</p>
-	</div>
-
 	<?php 
 
 	// Some global CSS variables
 	$formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3";
+	$notFormClass="row-fluid col-md-6 col-md-offset-3 text-center";
 
 	?>
-
+<div class="container-fluid">
 
 	<?php if ($_SESSION['login'] == "") { ?>
-	<div class="row col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center well">
-		<h4>Registration Form</h4>
-		<p>This is currently for <em>Freshman</em> only.</p>
-	</div>
-		
 
-	<!-- Print out if there is an error with the form data. Right now it is just a universal one. Needs CSS formatting. -->
-	<span class="error"><div id="formError"></div></span>
-
-	<!-- Registration Form -->
-	<form role="form" id="register" method="post" action="register.php" onchange="" onsubmit="return validate_submit();" id="register">
-
-		<div class="<?php echo "$formGroupClass"; ?>">
-			<label for="nameField">Name</label>
-			<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()">
-			<span class="error"><div id="nameError"></div></span>
+		<div class="row col-md-6 col-md-offset-3 text-center">
+			<p class="lead">
+				Find someone to trade co-op cycles with!
+			</p>
 		</div>
 
-		<div class="<?php echo "$formGroupClass"; ?>">
-			<label for="emailField">Email</label> 
-			<input type="text" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email()">
-			<span class="error"><div id="emailError"></div></span>					
+
+		<div class="row col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center well">
+			<h4>Registration Form</h4>
+			<p>This is currently for <em>Freshman</em> only.</p>
 		</div>
+			
 
-		<div class="<?php echo "$formGroupClass"; ?>">
-			<label for="passwordField">Password<small><br /><em>Do not use your Drexel One password.</em></small></label> 
-			<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
-			<br><input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
-			<span class="error"><div id="passwordError"></div></span>
-		</div>
+		<!-- Print out if there is an error with the form data. Right now it is just a universal one. Needs CSS formatting. -->
+		<span class="error"><div id="formError"></div></span>
 
-		<!-- 
-		In the future, implement for other years. (IS THIS POSSIBLE FOR 5 YEAR PROGRAM?)
-		<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-			<label for="gradyear">Graduation Year</label> 
-			<select class="form-control" name="gradyear" data-size="10">
-			<?php
-			// Allow users to select from the next few years.
-			?>
-			</select>
-		</div> 
-		-->
+		<!-- Registration Form -->
+		<form role="form" id="register" method="post" action="register.php" onchange="" onsubmit="return validate_submit();" id="register">
 
-		<div class="<?php echo "$formGroupClass"; ?>">
-
-			<div class="form-group ">
-				<label for="cycleField">Current Cycle</label>
-				<select class="form-control selectpicker" id="cycle" name="cycle">
-					<option value="1">Fall-Winter</option>
-					<option value="2">Spring-Summer</option>
-				</select>
+			<div class="<?php echo "$formGroupClass"; ?>">
+				<label for="nameField">Name</label>
+				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()">
+				<span class="error"><div id="nameError"></div></span>
 			</div>
 
-			<div class="form-group">
-				<label for="numCoopsField">Current Program</label>
-				<select class="form-control selectpicker" name="numCoops">
-					<option value="1">4 Years, 1 Co-op</option>
-					<option value="2">5 Years, 3 Co-op</option>
-				</select>
+			<div class="<?php echo "$formGroupClass"; ?>">
+				<label for="emailField">Email</label> 
+				<input type="text" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email()">
+				<span class="error"><div id="emailError"></div></span>					
 			</div>
 
-		</div>
+			<div class="<?php echo "$formGroupClass"; ?>">
+				<label for="passwordField">Password<small><br /><em>Do not use your Drexel One password.</em></small></label> 
+				<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
+				<br><input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
+				<span class="error"><div id="passwordError"></div></span>
+			</div>
 
-		<div class="<?php echo "$formGroupClass"; ?>">
-			<label for="majorField">Major</label>
-			<select class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
-
+			<!-- 
+			In the future, implement for other years. (IS THIS POSSIBLE FOR 5 YEAR PROGRAM?)
+			<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+				<label for="gradyear">Graduation Year</label> 
+				<select class="form-control" name="gradyear" data-size="10">
 				<?php
-				// Get the list of majors and display for user selection.
-
-				  include_once('connect.php');
-	
-				  $query="SELECT * FROM Majors";
-				  $result=mysql_query($query);
-				  $numMajors=mysql_num_rows($result);
-
-				  $i=0; while ($i < $numMajors)
-				    {
-				    	$major_name=mysql_result($result, $i, "major_long");
-				    	$major_ident=mysql_result($result, $i, id);
-
-				    	echo "<option value=" . $major_ident . ">" . $major_name . "</option> \n\t\t\t\t\t\t";
-
-				    	$i++;
-				    }
-
-				    $major_ident = 0;
-				    $major_name = "";
-
-				    mysql_close($con);
-
+				// Allow users to select from the next few years.
 				?>
+				</select>
+			</div> 
+			-->
 
-			</select>
+			<div class="<?php echo "$formGroupClass"; ?>">
+
+				<div class="form-group ">
+					<label for="cycleField">Current Cycle</label>
+					<select class="form-control selectpicker" id="cycle" name="cycle">
+						<option value="1">Fall-Winter</option>
+						<option value="2">Spring-Summer</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="numCoopsField">Current Program</label>
+					<select class="form-control selectpicker" name="numCoops">
+						<option value="1">4 Years, 1 Co-op</option>
+						<option value="2">5 Years, 3 Co-op</option>
+					</select>
+				</div>
+
+			</div>
+
+			<div class="<?php echo "$formGroupClass"; ?>">
+				<label for="majorField">Major</label>
+				<select class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
+
+					<?php
+					// Get the list of majors and display for user selection.
+
+					  include_once('connect.php');
+		
+					  $query="SELECT * FROM Majors";
+					  $result=mysql_query($query);
+					  $numMajors=mysql_num_rows($result);
+
+					  $i=0; while ($i < $numMajors)
+					    {
+					    	$major_name=mysql_result($result, $i, "major_long");
+					    	$major_ident=mysql_result($result, $i, id);
+
+					    	echo "<option value=" . $major_ident . ">" . $major_name . "</option> \n\t\t\t\t\t\t";
+
+					    	$i++;
+					    }
+
+					    $major_ident = 0;
+					    $major_name = "";
+
+					    mysql_close($con);
+
+					?>
+
+				</select>
+			</div>
+
+			<!-- In the future, will implement the "fast-track" option.
+			<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+				<label for="payment">Payment Amount <small>(Optional)</small></label>
+				<input type="text" class="form-control" id="payment" name="payment" placeholder="Enter an amount ($5)">
+			</div> 
+			-->
+
+			<div class="<?php echo "$formGroupClass"; ?>">
+				 <div id="errorFree">
+				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-default btn-lg btn-primary">Submit</button>
+				 </div>
+				<!-- <input type="button" name="submit_form" id="submit_form" value="Submit" /> -->
+			</div>
+		</form>
+		<?php } else { ?>
+
+		<div class="<?php echo "$notFormClass"; ?>"> <!-- Do this better why is it off center idk why are you asking me -->
+			<h4>You are already registered. Here are some narwhales playing.<br></h4>
+			<img src="http://upload.wikimedia.org/wikipedia/commons/5/5c/Narwhals_breach.jpg" width="500" height="318">
 		</div>
 
-		<!-- In the future, will implement the "fast-track" option.
-		<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-			<label for="payment">Payment Amount <small>(Optional)</small></label>
-			<input type="text" class="form-control" id="payment" name="payment" placeholder="Enter an amount ($5)">
-		</div> 
-		-->
-
-		<div class="<?php echo "$formGroupClass"; ?>">
-			 <div id="errorFree">
-			 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-default btn-lg btn-primary">Submit</button>
-			 </div>
-			<!-- <input type="button" name="submit_form" id="submit_form" value="Submit" /> -->
-		</div>
-	</form>
-	<?php } else { ?>
-
-	<div class="<?php echo "$formGroupClass"; ?>"</div>
-	<h4>Already registered. Show a moose or something.</h4>
 	<?php } ?>
 
 </div>

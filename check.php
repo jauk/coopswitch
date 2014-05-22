@@ -18,26 +18,66 @@ $rowClass = "row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-
 $query="SELECT * FROM Users WHERE matched = 0";
 $result=mysql_query($query);
 $num=mysql_numrows($result);
-echo '<div class="$rowClass">';
-echo "<p>There are " . $num . " people who have not been matched.</p>";
-echo "</div>";
+
+?>
+
+<div class="$rowClass">
+  <p>There are <?php echo $num; ?> people who have not been matched.</p>
+</div>
+
+<?php
+
+$users_not_matched = array();
+
+$index = 0;
+while ($row = mysql_fetch_array($result))
+{
+  $users_not_matched[$index] = $row; // Save the users into an array.
+}
 
 // Go through each person and look for a match.
 
-$x = 0; $y = 0; 
+$x = 0; 
+$y = 0;
 
-while ($x < $num) // Where num is how many people have not been matched.
+
+while ($x < count($users_not_matched)) // Less than number of people in the array.
   {
+    // Select people with the same major who are not the person we are searching for.
+    $queryN = "SELECT * FROM Users WHERE major = " . $users_not_matched[$x]['major'] . " AND id != " . $users_not_matched[$x]['id'] . " AND cycle != " . $users_not_matched[$x]['cycle'] . " AND num_year_program = " . $users_not_matched[$x]['num_year_program'] . "";
 
-    // Basically, start with one person. Search everyone else with that major.
+    $resultN = mysql_query($queryN);
+
+    if (mysql_num_rows($resultN) > 0)
+      {
+        echo "Looks like we found a match!\n\n";
+
+        $matched_user_data = array();
+
+        /* For right now, only need first row since matches are done first-come, first-serve. Do not need to store all matches, just the first. Loop not needed. */
+        //$index = 0;
+        //while ($row = mysql_fetch_array($resultN))
+        //{
+          $matched_user_data[$index] = $row; // Save the user's info in an array.
+        //}
+
+      }
+    else
+      echo "No one has registered with that major yet.";
+
+
+    $x += 1;
+
+    /*
+
 
   	$majorA=mysql_result($result, $x, "major"); // Pick the major of the person we will be searching.
   	
   	while ($y < $num) // Right now, go through each major for each person. Not efficient. Better way?
   	  {
+
   	  	if ($y == $x) // Skip the person we are searching for?
   	  		$y++;
-
 
   	  	$majorB=mysql_result($result, $y, "major"); // Major of the second person.
 
@@ -52,9 +92,14 @@ while ($x < $num) // Where num is how many people have not been matched.
   	  			{
 
               // Use getElementById instead of this foolishness.
-  	  				echo '<div class="$rowClass">';
-  	  				echo '<p class="lead">We found a match!</p>'; 
-              echo "</div>";
+
+              ?>
+
+  	  				<div class="$rowClass">
+  	  				<p class="lead">We found a match!</p>'
+              </div>"
+
+              <?php
 
               $userAIdent = mysql_result($result, $x, "id");
               $userBIdent = mysql_result($result, $y, "id");
@@ -89,6 +134,8 @@ while ($x < $num) // Where num is how many people have not been matched.
 	 
   	  $x++;
   	  $y=0;
+
+      */
   }
 
 /* Actual Work End */

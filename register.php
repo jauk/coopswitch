@@ -6,9 +6,6 @@ include('header.php')
 
 include_once('connect.php');
 
-$query = mysql_query("SELECT * FROM Users WHERE email = '$_POST[email]'");
-$result = mysql_fetch_array($query);
-
 function test_input($data) {
 			$data = trim($data);
 			$data = stripslashes($data);
@@ -16,7 +13,10 @@ function test_input($data) {
 			return $data;
 		}
 
-if ($result != 0)
+$query = mysql_query("SELECT * FROM Users WHERE email = '$_POST[email]'");
+$result = mysql_fetch_array($query);
+
+if ($result != 0 || ($_SESSION['login'] == 1))
 {
 	header('Location: error.php'); 
 	// Make a global "ERROR" variable that also sends to error page to choose which error to display?

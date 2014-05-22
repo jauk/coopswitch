@@ -33,9 +33,7 @@
 
 	//session_destroy();
 
-	if ($num_rows == 1) {
-
-
+	if ($num_rows == 1) { // Because there should only be one result or there is a big problem.
 
 		$user_data = array();
 
@@ -56,9 +54,11 @@
 		$_SESSION['user'] = $user_data[0]['email'];
 		$_SESSION['user_name'] = $user_data[0]['name'];
 		$_SESSION['user_major'] = $user_data[0]['major'];
+		$_SESSION['user_cycle'] = $user_data[0]['cycle'];
+		$_SESSION['user_program'] = $user_data[0]['num_year_program'];
+		$_SESSION['user_matched'] = $user_data[0]['matched'];
 
 		header("Location: account.php"); // UNCOMMENT ONCE DONE TESTINF
-
 	}
 	else {
 		$errorMessage = "Invalid Login.";
