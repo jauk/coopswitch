@@ -43,15 +43,14 @@ $num=mysql_num_rows($result); // ...It's this many
       for ($x = 0; $x < $index; $x++) // Why doesn't count() work for array?
         {
           // Select people with the same major who are not the person we are searching for. Forgot the matched = 0
+
           $query = "SELECT * FROM Users WHERE matched = 0 AND major = " . $users_not_matched[$x]['major'] . " AND id != " . $users_not_matched[$x]['id'] . " AND cycle != " . $users_not_matched[$x]['cycle'] . " AND num_year_program = " . $users_not_matched[$x]['num_year_program'] . "";
           $result = mysql_query($query);
 
-          if (mysql_num_rows($result) > 0) // We found a match.
+          if ((mysql_num_rows($result) > 0) && ($users_not_matched[$x]['matched'] != 1)) // We found a match.
             {
-              echo "Looks like we found a match!<br>";
-              echo $users_not_matched[$x]['id'] . " and " . $matched_user_data[0]['id'] . "<br>";
-
-              $matched_user_data = array();
+              echo "<hr><em>Looks like we found a match!</em><br>";
+              $matched_user_data = array(); // Reset the array.
 
               /* For right now, only need first row since matches are done first-come, first-serve. Do not need to store all matches, just the first. Loop not needed. */
               //$index = 0;
@@ -61,26 +60,36 @@ $num=mysql_num_rows($result); // ...It's this many
               $matched_user_data[0] = $row; // Save the user's info in an array. Temp for now to do stuff easier
               //}
 
+              // Testing
+              echo $users_not_matched[$x]['id'] . " and " . $matched_user_data[0]['id'] . "<br>";
+
               /* Put the users into the Matches table and set equaled to matched. */
 
               // Update both users to be matched.
-              $query = "UPDATE Users SET matched = 1 WHERE id = " . $users_not_matched[$x]['id'] . " OR id = " . $matched_user_data[0]['id'] . "";
+              //$query = "UPDATE Users SET matched = 1 WHERE id = " . $users_not_matched[$x]['id'] . " AND id = " . $matched_user_data[0]['id'] . ""; Broken
               $result = mysql_query($query);
+              echo $users_not_matched[$x]['matched'] . " and " . $matched_user_data[0]['matched'] . "<br>";
 
-              // Insert into the database. WORKS
+              // Insert into the database. 
               $query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ")");
               $result = mysql_query($query);
 
               // Grab the Id of the match from Matches table
-              $query = mysql_query("SELECT id FROM Matches WHERE userA= " . $users_not_matched[$x]['id'] . " AND userB= " . $matched_user_data[0]['id'] . "");
+              $query = mysql_query("SELECT id FROM Matches WHERE userA= " . $users_not_matched[$x]['id'] . " OR userB= " . $matched_user_data[0]['id'] . "");
               $result = mysql_fetch_array($query);
               $newMatchId = $result['id'];
+              echo "Match ID: " . $newMatchId . "<br>";
 
               // Add the Matched ID to the Users
               $query = "UPDATE Users SET Matches_id = " . $newMatchId . " WHERE id = " . $users_not_matched[$x]['id'] . " OR id = " . $matched_user_data[0]['id'] . "";
               $result = mysql_query($query);
               
             } // End If Statement (If match)
+          else
+            {
+              if ($users_not_matched[$x]['matched'] == 1)
+                echo "SKIP<br>";
+            }
         } // End For Loop
     } // End Main If Statement (If there is even a reason to run through all this code)
 
