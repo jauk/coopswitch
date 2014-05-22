@@ -32,10 +32,8 @@ include('header.php')
 			$num=mysql_num_rows($result);
 
 			$i=0; while ($i < $num) 
-			  {
+			{
 			  	$user_info = array();
-
-
 
 				$name=mysql_result($result, $i,"name");
 				$cycle=mysql_result($result, $i, "cycle");
@@ -78,11 +76,15 @@ include('header.php')
 				echo "</tr>\n";
 
 				$i++;
-			  }
+			}
 
-			echo "</table>";
+		?>
 
-			echo '<div class="btn-group">';
+			</table>
+
+			<div class="btn-group">
+
+			<?php
 
 			// Buttons for switching the page of people if you are really that interested
 			if ($startrow > 0)
@@ -94,7 +96,8 @@ include('header.php')
 
 			mysql_close($con);
 
-		?>
+			?>
+
 			<br /><br />
 
 	</div>
