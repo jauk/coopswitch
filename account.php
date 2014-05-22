@@ -19,7 +19,7 @@
 
 	<div class="row col-md-6 col-md-offset-3 text-center">
 		<div class="panel-heading">
-			<h2>Hello, <?php echo "{$_SESSION['user_name']}"; ?></h2>
+			<h2>Hello, <?php echo "{$_SESSION['user_name']}" ?>!</h2>
 		</div>
 
 
