@@ -27,7 +27,7 @@ $num=mysql_num_rows($result); // ...It's this many
 
 <?php
 
-  if ($num > 0) // If there are people not matched.
+  if ($num > 0) // If there are people not matched, run this.
    {
       $users_not_matched = array(); // Array of those who are not matched.
 
@@ -40,14 +40,24 @@ $num=mysql_num_rows($result); // ...It's this many
 
       echo "<br><br><hr>";
 
+      /*
+
+      Main issue: People are showing up twice. Need to sync both arrays or remove people. 
+                  Make sure they cannot exist in second somehow?
+
+      */
+
       for ($x = 0; $x < $index; $x++) // Why doesn't count() work for array?
         {
           // Select people with the same major who are not the person we are searching for. Forgot the matched = 0
 
+         // $IdsGoneThrough = array(); // Save the Ids gone through and do not let them be compared again? Wait no .
+
           $query = "SELECT * FROM Users WHERE matched = 0 AND major = " . $users_not_matched[$x]['major'] . " AND id != " . $users_not_matched[$x]['id'] . " AND cycle != " . $users_not_matched[$x]['cycle'] . " AND num_year_program = " . $users_not_matched[$x]['num_year_program'] . "";
           $result = mysql_query($query);
 
-          if ((mysql_num_rows($result) > 0) && ($users_not_matched[$x]['matched'] != 1)) // We found a match.
+          //  
+          if ((mysql_num_rows($result) > 0) && ($users_not_matched[$x]['matched'] != 1)) // We found people who match the guy inside $users_not_matched. NEED TO UPDATE $users_not_matched after a match is made. Remove from array after matched.
             {
               echo "<hr><em>Looks like we found a match!</em><br>";
               $matched_user_data = array(); // Reset the array.
@@ -66,9 +76,26 @@ $num=mysql_num_rows($result); // ...It's this many
               /* Put the users into the Matches table and set equaled to matched. */
 
               // Update both users to be matched.
-              //$query = "UPDATE Users SET matched = 1 WHERE id = " . $users_not_matched[$x]['id'] . " AND id = " . $matched_user_data[0]['id'] . ""; Broken
+              $query = "UPDATE Users SET matched = 1 WHERE id = " . $users_not_matched[$x]['id'] . " OR id = " . $matched_user_data[0]['id'] . ""; 
+              $users_not_matched[$x]['matched'] = 1;
+
+              // Find where $matched_user_data[0] is in $users_not_matched and set matched = 1 so that it stops dupes.
+              // Learn how to foreach loops and MAKE MORE EFFICIENT.
+
+              for ($i = 0; $i < count($users_not_matched); $i ++)
+              {
+                if ($users_not_matched[$i]['id'] == $matched_user_data[0]['id'])
+                  {
+                    $users_not_matched[$i]['matched'] = 1;
+                    break;
+                  }
+              }
+
+
+              //$query = "INSERT INTO Users (id, matched) VALUES (" . $users_not_matched[$x]['matched'] . ",1),(" . $matched_user_data[0]['id'] . ",1)";
               $result = mysql_query($query);
-              echo $users_not_matched[$x]['matched'] . " and " . $matched_user_data[0]['matched'] . "<br>";
+
+              //echo $users_not_matched[$x]['matched'] . " and " . $matched_user_data[0]['matched'] . "<br>";
 
               // Insert into the database. 
               $query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ")");
@@ -84,6 +111,8 @@ $num=mysql_num_rows($result); // ...It's this many
               $query = "UPDATE Users SET Matches_id = " . $newMatchId . " WHERE id = " . $users_not_matched[$x]['id'] . " OR id = " . $matched_user_data[0]['id'] . "";
               $result = mysql_query($query);
               
+            //  unset($users_not_matched[$x]);
+
             } // End If Statement (If match)
           else
             {
