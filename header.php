@@ -73,7 +73,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
  
 					else {
 
-						echo "<br>Hi whoever you are. Change me. LOGOUT BUTTON.";
+						echo '<br>Hi whoever you are. Change me. <a href="logout.php">Logout</a>.';
 					}
 
 				?>

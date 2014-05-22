@@ -35,27 +35,29 @@
 
 	if ($num_rows == 1) {
 
-		$row = mysql_fetch_row($result);
 
-		echo "$row[0]";
-		echo "$row[1]";
-		echo "$row[2]";
 
+		$user_data = array();
+
+		$index = 0;
+		while ($row = mysql_fetch_array($result))
+		{
+			$user_data[$index] = $row; // Save the user's info in an array.
+		}
+
+		// echo $user_data[0]['email'];
 
 		$errorMessage = "Logged on!"; // Hooray, we are logged on.
 
 		/* Get information from user's row and save in session variables */
 
-		//session_start();
 		$_SESSION['login'] = "1";
-		$_SESSION['user'] = $umail;
-		$_SESSION['user_name'] = "";
-		$_SESSION['user_major'] = "";
 
+		$_SESSION['user'] = $user_data[0]['email'];
+		$_SESSION['user_name'] = $user_data[0]['name'];
+		$_SESSION['user_major'] = $user_data[0]['major'];
 
-
-		//echo "$_SESSION['login']";
-		header("Location: account.php");
+		header("Location: account.php"); // UNCOMMENT ONCE DONE TESTINF
 
 	}
 	else {
@@ -65,7 +67,6 @@
 	}
 
 	echo "$errorMessage";
-	echo "Hi {$_SESSION['login']}";
 
 	include_once('footer.php');
 ?>

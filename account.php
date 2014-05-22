@@ -7,7 +7,7 @@
 	}
 	else if ($_SESSION['login'] == "1")
 	{
-		echo "Logged on.";
+		//echo "Logged on.";
 	}
 
 
@@ -19,9 +19,10 @@
 
 	<div class="row col-md-6 col-md-offset-3 text-center">
 		<div class="panel-heading">
-			<h2>Hello, <?php echo "$umail"; ?></h2>
+			<h2>Hello, <?php echo "{$_SESSION['user_name']}"; ?></h2>
 		</div>
-		<?php echo "$upass"; ?>
+
+
 	</div>
 </div>
 
