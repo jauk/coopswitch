@@ -51,6 +51,7 @@
 
 		$_SESSION['login'] = "1";
 
+		$_SESSION['user_id'] = $user_data[0]['id'];
 		$_SESSION['user'] = $user_data[0]['email'];
 		$_SESSION['user_name'] = $user_data[0]['name'];
 
@@ -80,6 +81,7 @@
 			$_SESSION['user_program_name'] = "3 co-ops";
 
 		$_SESSION['user_matched'] = $user_data[0]['matched']; // This will have to be updated or something when searches are done...
+		$_SESSION['user_matched_id'] = $user_data[0]['Matches_id'];
 
 		header("Location: account.php"); 
 	}

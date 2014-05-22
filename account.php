@@ -10,6 +10,8 @@
 		//echo "Logged on.";
 	}
 
+include_once('connect.php');
+
 ?>
 
 <hr>
@@ -23,7 +25,7 @@
 			<h2>Hello, <?php echo "{$_SESSION['user_name']}" ?>!</h2>
 		</div>	
 
-		<p>Welcome to your profile. Profile stuff goes here.</p>
+		<p>Welcome to your profile. Profile stuff goes here.</p><br>
 	</div>
 
 	<div class="row-fluid col-md-6 col-md-offset-3">
@@ -34,11 +36,51 @@
 		<br>
 		<?php if ($_SESSION['user_matched'] == 0) { ?>
 		<!-- If user does not have a match, code here. -->
+		<p class="lead">You do not have a match yet, but we will keep looking!</p>
 
 		<?php } else { ?>
 		<!-- If user has a match, display information about it. -->
 
-		<?php } ?>
+		<div class="row-fluid col-md-6 col-md-offset-3 text-center well">
+
+		<p class="lead">Hey, you have a match!</p>
+
+		<?php 
+
+		$query = "SELECT * FROM Matches WHERE id = " . $_SESSION['user_matched_id'] . "";
+		$result = mysql_query($query);
+
+		$matched_data = array();
+	    $row = mysql_fetch_array($result);
+	    $matched_data[0] = $row; // Save the match information into an array to pull data from
+
+	    //echo $result;
+	    //echo "{$_SESSION['user_matched_id']}";
+
+	    // Get the ID of the logged in user's match
+	    if ($matched_data[0]['userA'] == $_SESSION['user_id'])
+	    	$other_user_match_id = $matched_data[0]['userB'];
+	    else
+	    	$other_user_match_id = $matched_data[0]['userA'];
+
+
+	    $query = "SELECT * FROM Users WHERE id = " . $other_user_match_id;
+	    $result = mysql_query($query);
+
+	    $other_user_data = array();
+	    $row = mysql_fetch_array($result);
+	    $other_user_data[0] = $row;
+
+	    echo "You have matched with <strong>" . $other_user_data[0]['name'] . "</strong>.<br>";
+	    echo "You can email them at <strong>" . $other_user_data[0]['email'] . "</strong>.";
+
+	    // print("You have matched with " . other_user_data[0]['name']);
+
+
+
+		} ?>
+
+		</div>
 
 	</div>
 
@@ -47,7 +89,8 @@
 </div>
 
 <?php 
-//mysql_close($con);
+
+mysql_close($con);
 include('footer.php'); 
 ?>
 
