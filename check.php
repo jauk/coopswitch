@@ -21,7 +21,7 @@ $num=mysql_num_rows($result); // ...It's this many
 ?>
 
   <div class="<?php echo $rowClass; ?>">
-    <p>There are <?php echo $num; ?> people who have not been matched.</p>
+    <p>There are <?php echo $num; ?> people who have not been matched. <br> Will now attempt to match.</p>
     <?php if ($num == 0) echo "Hooray!" ?>
   </div>
 
@@ -30,6 +30,7 @@ $num=mysql_num_rows($result); // ...It's this many
   if ($num > 0) // If there are people not matched, run this.
    {
       $users_not_matched = array(); // Array of those who are not matched.
+      $matches = 0; // Lets see how many matches are made this round. Maybe save value later? Stats, stats, stats.
 
       $index = 0;
       while ($row = mysql_fetch_array($result))
@@ -59,7 +60,7 @@ $num=mysql_num_rows($result); // ...It's this many
           //  
           if ((mysql_num_rows($result) > 0) && ($users_not_matched[$x]['matched'] != 1)) // We found people who match the guy inside $users_not_matched. NEED TO UPDATE $users_not_matched after a match is made. Remove from array after matched.
             {
-              echo "<hr><em>Looks like we found a match!</em><br>";
+              //echo "<hr><em>Looks like we found a match!</em><br>";
               $matched_user_data = array(); // Reset the array.
 
               /* For right now, only need first row since matches are done first-come, first-serve. Do not need to store all matches, just the first. Loop not needed. */
@@ -71,7 +72,7 @@ $num=mysql_num_rows($result); // ...It's this many
               //}
 
               // Testing
-              echo $users_not_matched[$x]['id'] . " and " . $matched_user_data[0]['id'] . "<br>";
+              //echo $users_not_matched[$x]['id'] . " and " . $matched_user_data[0]['id'] . "<br>";
 
               /* Put the users into the Matches table and set equaled to matched. */
 
@@ -105,19 +106,20 @@ $num=mysql_num_rows($result); // ...It's this many
               $query = mysql_query("SELECT id FROM Matches WHERE userA= " . $users_not_matched[$x]['id'] . " OR userB= " . $matched_user_data[0]['id'] . "");
               $result = mysql_fetch_array($query);
               $newMatchId = $result['id'];
-              echo "Match ID: " . $newMatchId . "<br>";
+              //echo "Match ID: " . $newMatchId . "<br>";
 
               // Add the Matched ID to the Users
               $query = "UPDATE Users SET Matches_id = " . $newMatchId . " WHERE id = " . $users_not_matched[$x]['id'] . " OR id = " . $matched_user_data[0]['id'] . "";
               $result = mysql_query($query);
               
+
+              $matches ++;
+
             //  unset($users_not_matched[$x]);
 
             } // End If Statement (If match)
           else
             {
-              if ($users_not_matched[$x]['matched'] == 1)
-                echo "SKIP<br>";
             }
         } // End For Loop
     } // End Main If Statement (If there is even a reason to run through all this code)
@@ -125,6 +127,11 @@ $num=mysql_num_rows($result); // ...It's this many
   mysql_close($con);
 
 ?>
+
+  <div class="<?php echo $rowClass; ?>">
+    <p>There were <?php echo "$matches"; ?> matches made!</p><br>
+    <p>There are <?php echo $num - $matches; ?> people who still need to be matched.</p>
+  </div>
 
 </div>
 
