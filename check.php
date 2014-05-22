@@ -1,5 +1,7 @@
 <?php
 include('header.php')
+
+
 ?>
 
 <br />
@@ -7,9 +9,10 @@ include('header.php')
 
 <?php
 
+$rowClass = "row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-center";
+
 include_once('connect.php');
 
-$rowClass = "row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-center";
 
 /* Actual Work Start */
 
@@ -21,8 +24,9 @@ $num=mysql_num_rows($result);
 
 ?>
 
-<div class="$rowClass">
+<div class="<?php echo $rowClass; ?>">
   <p>There are <?php echo $num; ?> people who have not been matched.</p>
+  <?php if ($num == 0) echo "Hooray!" ?>
 </div>
 
 <?php
@@ -84,7 +88,7 @@ while ($x < count($users_not_matched)) // Less than number of people in the arra
 
       }
     else
-      echo "No one has registered with that major yet.";
+      echo "No match for user " . $x . ". :(";
 
 
     $x += 1;

@@ -66,7 +66,18 @@
 		$_SESSION['login']="";
 	}
 
-	echo "$errorMessage";
+?>
 
+<div class="container-fluid">
+
+	<div class="row-fluid col-md-6 col-md-offset-3 text-center">
+		<div class="panel-heading">
+			<h4><?php print "$errorMessage"; ?></h4>
+		</div>	
+	</div>
+
+</div>
+
+<?php
 	include_once('footer.php');
 ?>

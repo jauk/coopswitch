@@ -24,12 +24,15 @@ include('header.php')
 			<p>This is currently for <em>Freshman</em> only.</p>
 		</div>
 			
+		<div class="<?php echo "$notFormClass"; ?>">
+			<span class="error"><strong><div id="formError"></div></strong></span>
+		</div>
 
 		<!-- Print out if there is an error with the form data. Right now it is just a universal one. Needs CSS formatting. -->
-		<span class="error"><div id="formError"></div></span>
 
 		<!-- Registration Form -->
 		<form role="form" id="register" method="post" action="register.php" onchange="" onsubmit="return validate_submit();" id="register">
+
 
 			<div class="<?php echo "$formGroupClass"; ?>">
 				<label for="nameField">Name</label>
@@ -251,7 +254,7 @@ include('header.php')
 			
 			else if (hasErrors == true)
 			{
-				errorDiv.textContent = "Hey, you have a problem!"; // Probably change to recoloring the boxes later.
+				errorDiv.textContent = "Hey, you have a problem on your form!"; // Probably change to recoloring the boxes later.
 				return false;
 			}
 		}

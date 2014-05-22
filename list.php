@@ -80,21 +80,21 @@ include('header.php')
 
 		?>
 
-			</table>
+		</table>
 
-			<div class="btn-group">
+		<div class="btn-group">
 
 			<?php
 
-			// Buttons for switching the page of people if you are really that interested
-			if ($startrow > 0)
-			  echo '<a href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow-10).'" <button type="button" class="btn btn-default">Previous</button></a>';
-			if ($startrow+10 < $numRows)
-			  echo '<a href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+10).'" <button type="button" class="btn btn-default">Next</button></a>';
+				// Buttons for switching the page of people if you are really that interested
+				if ($startrow > 0)
+				  echo '<a href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow-10).'" <button type="button" class="btn btn-default">Previous</button></a>';
+				if ($startrow+10 < $numRows)
+				  echo '<a href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+10).'" <button type="button" class="btn btn-default">Next</button></a>';
 
-			echo '</div>';
+				echo '</div>';
 
-			mysql_close($con);
+				mysql_close($con);
 
 			?>
 
