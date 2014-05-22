@@ -16,11 +16,14 @@ include('header.php')
 
 	?>
 
+
+	<?php if ($_SESSION['login'] == "") { ?>
 	<div class="row col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center well">
 		<h4>Registration Form</h4>
 		<p>This is currently for <em>Freshman</em> only.</p>
 	</div>
 		
+
 	<!-- Print out if there is an error with the form data. Right now it is just a universal one. Needs CSS formatting. -->
 	<span class="error"><div id="formError"></div></span>
 
@@ -125,6 +128,11 @@ include('header.php')
 			<!-- <input type="button" name="submit_form" id="submit_form" value="Submit" /> -->
 		</div>
 	</form>
+	<?php } else { ?>
+
+	<div class="<?php echo "$formGroupClass"; ?>"</div>
+	<h4>Already registered. Show a moose or something.</h4>
+	<?php } ?>
 
 </div>
 

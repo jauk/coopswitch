@@ -73,8 +73,8 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
  
 					else {
 
-						echo "<br> Hi " . $_SESSION['user_name']; 
-						echo '<br><a href="logout.php">Logout</a>.';
+						echo "<br> Hi " . $_SESSION['user_name'] . "!"; 
+						echo '<br><a href="logout.php">Logout</a>';
 					}
 
 				?>

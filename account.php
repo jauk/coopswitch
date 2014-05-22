@@ -30,3 +30,8 @@
 //mysql_close($con);
 include('footer.php'); 
 ?>
+
+<!-- To Do For User Page 
+
+- Ability to change information (cycle, major, 4/5 year)
+- Other misc. I guess
