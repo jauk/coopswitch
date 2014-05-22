@@ -45,7 +45,7 @@ include_once('connect.php');
 
 		<p class="lead">Hey, you have a match!</p>
 
-		<?php 
+		<?php
 
 		$query = "SELECT * FROM Matches WHERE id = " . $_SESSION['user_matched_id'] . "";
 		$result = mysql_query($query);

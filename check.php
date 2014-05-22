@@ -38,6 +38,8 @@ $num=mysql_num_rows($result); // ...It's this many
         $index++; // KIND OF NEED THIS...
       }
 
+      echo "<br>";
+
       for ($x = 0; $x < $index; $x++) // Why doesn't count() work for array?
         {
           // Select people with the same major who are not the person we are searching for.
@@ -46,7 +48,8 @@ $num=mysql_num_rows($result); // ...It's this many
 
           if (mysql_num_rows($result) > 0) // We found a match.
             {
-              echo "Looks like we found a match!\n\n";
+              echo "Looks like we found a match!<br>";
+              echo $users_not_matched[$x]['id'] . " and " . $matched_user_data[0]['id'] . "<br>";
 
               $matched_user_data = array();
 

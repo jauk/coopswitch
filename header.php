@@ -39,7 +39,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 				<li>
 					<a href="about.php">About</a>
 				</li>
-				<?php if ($_SESSION['login'] == 1) echo '<li>'; else echo '<li class="disabled"'; ?>
+				<?php if ($_SESSION['login'] == 1) echo '<li>'; else echo '<li class="disabled">'; ?>
 					<a href="account.php">Profile</a>
 				</li>
 				<li>
