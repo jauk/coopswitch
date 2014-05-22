@@ -12,6 +12,8 @@
 
 ?>
 
+<hr>
+
 <div class="container-fluid">
 
 	<?php print $errorMessage;?>
@@ -21,12 +23,13 @@
 			<h2>Hello, <?php echo "{$_SESSION['user_name']}" ?>!</h2>
 		</div>	
 
-		<p>Profile stuff goes here.</p>
+		<p>Welcome to your profile. Profile stuff goes here.</p>
 	</div>
 
 	<div class="row-fluid col-md-6 col-md-offset-3">
-
-
+		<h4>Your major is <?php echo "{$_SESSION['user_major_name']}"; ?>.</h4>
+		<h4>Your cycle is <?php echo "{$_SESSION['user_cycle']}"; ?>.</h4>
+		<h4>Your program is <?php echo "{$_SESSION['user_program']}"; ?>.</h4>
 	</div>
 
 

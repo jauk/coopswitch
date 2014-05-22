@@ -21,7 +21,7 @@ include('header.php')
 
 		<div class="row col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center well">
 			<h4>Registration Form</h4>
-			<p>This is currently for <em>Freshman</em> only.</p>
+			<p>This is currently for <em>Drexel Freshman</em> only.</p>
 		</div>
 			
 		<div class="<?php echo "$notFormClass"; ?>">
