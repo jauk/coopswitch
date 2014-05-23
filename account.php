@@ -38,7 +38,12 @@ include_once('connect.php');
 	</div>
 
 	<?php 
+		if ($_SESSION['user_matched'] == 0)
+		{
+			$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
+		}
 
+		// If the user has a match, get the match's info and display it.
 		if ($_SESSION['user_matched'] == 1) { 
 
 			$match_info = array();
@@ -52,24 +57,13 @@ include_once('connect.php');
 	<div class="row-fluid col-md-6 col-md-offset-3 text-center well">
 		<p>You have matched with <strong> <?php echo $other_user_data[0]['name']; ?></strong>.</p>
 		<p>You can email them at <strong> <?php echo $other_user_data[0]['email']; ?></strong></p>
-	
-	<?php }
-
-	else if ($_SESSION['user_matched'] == 0) { 
-		// Get user's updated match status each time they view  their profile.
-		$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
-		
-		// If matched == 1, get Matched_id too.
-		if ($_SESSION['user_matched'] == 1)
-		{
-			$_SESSION['user_matched_id'] = mysql_get_var("SELECT Matches_id FROM Users WHERE id = " . $_SESSION['user_id']);
-			get_match_info();
-		}
-		else
-			echo '<p class="lead">You do not have a match yet, but we will keep looking!</p>';
-	} ?>
-
 	</div>
+	
+	<?php } else { // If the user does not have a match tell them they still do not. ?>
+		<div class="row-fluid col-md-6 col-md-offset-3 text-center">
+			<br><hr><p class="lead">You do not have a match yet, but we will keep looking!</p>
+		</div>
+	<?php } ?>
 
 </div>
 
