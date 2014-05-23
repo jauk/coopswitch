@@ -97,7 +97,7 @@ $num=mysql_num_rows($result); // ...It's this many
               $result = mysql_query($query);
 
 
-              /* Matches db need to add date matched, date completed. */
+              /* *** Matches db need to add date matched, date completed, major val (to compare to when change major in profile, also for stats [ie. most popular majors]) */
 
               // Insert into the Matches database.
               $query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ")");

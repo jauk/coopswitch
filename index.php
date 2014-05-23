@@ -117,7 +117,7 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 		<?php } else { ?>
 
 		<div class="<?php echo "$notFormClass"; ?>"> <!-- Do this better why is it off center idk why are you asking me -->
-			<h4>You are already registered, so here are some narwhales playing.<br></h4>
+			<h4>You are already registered, so here are some narwhales playing to fill the space.<br></h4>
 			<img src="http://upload.wikimedia.org/wikipedia/commons/5/5c/Narwhals_breach.jpg" width="500" height="318">
 		</div>
 

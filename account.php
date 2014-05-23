@@ -33,14 +33,14 @@ include_once('connect.php');
 			 Too ambitious? Naaah. YEAH I DID IT. -->
 
 
-			<h4>
-				<span>
-					Your major is
-					<div style="display: inline;" id="majorName"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
-					<a id="majorEditBtn" href="#" class="btn btn-xs btn-warning" onclick="editMajor()">Edit</a>
-				</span> 
+		<h4>
+			<span>
+				Your major is
+				<div style="display: inline;" id="majorName"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
+				<a id="majorEditBtn" href="#" class="btn btn-xs btn-warning" onclick="editMajor()">Edit</a>
+			</span> 
 
-			</h4>
+		</h4>
 	</div>
 
 	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
