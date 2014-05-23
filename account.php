@@ -22,36 +22,27 @@ include_once('connect.php');
 	<div class="row-fluid col-md-6 col-md-offset-3 text-center">
 		<div class="panel-heading">
 			<h2>Hello, <?php echo "{$_SESSION['user_name']}" ?>!</h2>
-		</div>	
-
+		</div>
 	</div>
 
+	<!-- Code for user's major -->
 	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
-		<!-- Use Javascript with PHP to allow users to edit these fields. -->
-		<!-- Have the fields clickable, when you click a dropdown box
-			 appears that allows you to change it (from register form). 
-			 Too ambitious? Naaah. YEAH I DID IT. -->
-
-
 		<h4>
+			Your major is
 			<span>
-				Your major is
-				<div style="display: inline;" id="majorName"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
-				<a id="majorEditBtn" href="#" class="btn btn-xs btn-warning" onclick="editMajor()">Edit</a>
-			</span> 
-
+			<div style="display: inline-block;" id="majorName"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
+			<a id="majorEditBtn" href="#" class="btn btn-xs btn-warning" onclick="editMajor()">Edit</a>
+			</span>
 		</h4>
 	</div>
 
-	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
+	<div class="row col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5 text-center">
 			<span id="majorSpan" style="display: none;">
-
 				<form id="majorForm" name="majorForm" method="post" action="update.php" onsubmit="return saveMajor();">
 					<input type="hidden" name="newMajorId" id="newMajorId" value="">
 					<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
 						<?php
 						  // Get the list of majors and display for user selection.
-
 						  // Have current major pre-selected? Also, confirmation on major change?
 						  print_majors();
 						?>
@@ -61,15 +52,41 @@ include_once('connect.php');
 					<a id="majorCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('major')" style="display: none;">Cancel</a>
 					</div>
 				</form>
-
 			</span>
 	</div>
 
-		<br><br>
+	<!-- Code for user's cycle -->
+	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
+		<h4>
+			Your cycle is
+			<span>
+			<div style="display: inline-block;" id="cycleName"><?php echo "{$_SESSION['user_cycle_name']}."; ?></div>
+			<a id="cycleEditBtn" href="#" class="btn btn-xs btn-warning" onclick="editCycle()">Edit</a>
+			</span>
+		</h4>
+	</div>
 
-		<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
-			<h4>Your cycle is <?php echo "{$_SESSION['user_cycle_name']}"; ?>. </h4>
-		</div>
+	<div class="row col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5 text-center">
+		<span id="cycleSpan" style="display: none;">
+			<form id="cycleForm" name="cycleForm" method="post" action="update.php" onsubmit="return saveCycle();">
+				<input type="hidden" name="newCycle" id="newCycle" value="">
+				<select id="selectCycle" class="form-control selectpicker" name="cycle" data-live-search="true" data-size="5">
+					<?php if ($_SESSION['user_cycle'] == 1) { ?>
+						<option selected="selected" value="1">Fall-Winter</option>
+						<option value="2">Spring-Summer</option>
+					<?php } else { ?>
+						<option value="1">Fall-Winter</option>
+						<option selected="selected" value="2">Spring-Summer</option>
+					<?php } ?>
+				</select>
+				<div style="padding-top: 5px;"> <!-- Tmp inline style -->
+				<button type="submit" name="cycleSaveBtn" value="Submit" id="cycleSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
+				<a id="cycleCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('cycle')" style="display: none;">Cancel</a>
+				</div>
+			</form>
+		</span>
+</div>
+
 		
 		<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
 			<h4>Your program is <?php echo "{$_SESSION['user_program_name']}"; ?>.</h4>
@@ -115,13 +132,24 @@ include('footer.php');
 
 <script type="text/javascript">
 	
+	// Major Window Vars
 	window.majorSaveBtn = document.getElementById("majorSaveBtn");
 	window.majorEditBtn = document.getElementById("majorEditBtn");
 	window.majorCancelBtn = document.getElementById("majorCancelBtn");
-
 	window.majorSpan = document.getElementById("majorSpan");
 	window.majorDiv = document.getElementById("majorName");
 	window.selectMajor = document.getElementById("selectMajor");
+
+	// Cycle Window Vars
+	window.cycleSaveBtn = document.getElementById("cycleSaveBtn");
+	window.cycleEditBtn = document.getElementById("cycleEditBtn");
+	window.cycleCancelBtn = document.getElementById("cycleCancelBtn");
+	window.cycleSpan = document.getElementById("cycleSpan");
+	window.cycleDiv = document.getElementById("cycleName");
+	window.selectCycle = document.getElementById("selectCycle");
+
+
+	
 
 	var editMajor = function () {
 		
@@ -137,29 +165,51 @@ include('footer.php');
 
 	var saveMajor = function () {
 
-
-
 		var i = window.selectMajor.selectedIndex;
 		var newId = window.selectMajor[i].value;
 
 		document.majorForm.newMajorId.value = newId;
 
-		//alert(document.majorForm.newMajorId.value);
-		//document.forms["majorForm"].submit();
+		return true;
+	}
 
+	var editCycle = function () {
+		
+		/// Make current major go away so we can show the menu in its place.
+		window.cycleDiv.style.display = 'none';
+		window.cycleSpan.style.display = '';
+
+		window.cycleEditBtn.style.display = 'none';
+		window.cycleSaveBtn.style.display = '';
+		window.cycleCancelBtn.style.display = '';
+
+	} 
+
+	var saveMajor = function () {
+
+		var i = window.selectCycle.selectedIndex;
+		var newId = window.selectCycle[i].value;
+
+		document.selectCycle.newCycle.value = newId;
+		
 		return true;
 	}
 
 	var cancelEdit = function (field) {
 
 		if (field == "major") {
-
 			window.majorSaveBtn.style.display = 'none';
 			window.majorSpan.style.display = 'none';
-			window.majorDiv.style.display = '';
+			window.majorDiv.style.display = 'inline-block';
 			window.majorCancelBtn.style.display = 'none';
 			window.majorEditBtn.style.display = '';
-
+		}
+		else if (field == "cycle") {
+			window.cycleSaveBtn.style.display = 'none';
+			window.cycleSpan.style.display = 'none';
+			window.cycleDiv.style.display = 'inline-block';
+			window.cycleCancelBtn.style.display = 'none';
+			window.cycleEditBtn.style.display = '';
 		}
 
 	}
