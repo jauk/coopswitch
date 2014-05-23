@@ -17,7 +17,7 @@ include_once('connect.php');
 
 <div class="container-fluid">
 
-	<?php print $errorMessage;?>
+	<?php // print $errorMessage;?>
 
 	<div class="row-fluid col-md-6 col-md-offset-3 text-center">
 		<div class="panel-heading">
@@ -32,8 +32,33 @@ include_once('connect.php');
 			 appears that allows you to change it (from register form). 
 			 Too ambitious? Naaah. -->
 
-		<h4>Your major is <?php echo "{$_SESSION['user_major_name']}"; ?>.</h4> 
-		<h4>Your cycle is <?php echo "{$_SESSION['user_cycle_name']}"; ?>.</h4>
+		<h4>
+			Your major is 
+			<span class="col-md-6 col-md-offset-3" id="majorName"><?php echo "{$_SESSION['user_major_name']}."; ?></span> 
+
+			<span id="majorSpan" style="display: none;">
+
+			<form id="majorForm" name="majorForm" method="post" action="update.php" onsubmit="return saveMajor();">
+				<input type="hidden" name="newMajorId" id="newMajorId" value="">
+				<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
+					<?php
+					  // Get the list of majors and display for user selection.
+					  print_majors();
+					?>
+				</select> 
+				<button type="submit" name="majorSaveBtn" value="Submit" id="majorSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
+			</form>
+
+			</span>
+
+			<a id="majorEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editMajor()">Edit</a>
+			<!-- <a id="majorCancel" href="#" class="btn btn-sm btn-info" onclick="cancelEdit(major)">Cancel</a> -->
+			
+
+		</h4>  
+		
+
+		<h4>Your cycle is <?php echo "{$_SESSION['user_cycle_name']}"; ?>. </h4>
 		<h4>Your program is <?php echo "{$_SESSION['user_program_name']}"; ?>.</h4>
 	</div>
 
@@ -72,6 +97,42 @@ include_once('connect.php');
 mysql_close($con);
 include('footer.php'); 
 ?>
+
+<script type="text/javascript">
+	
+	window.majorSaveBtn = document.getElementById("majorSaveBtn");
+	window.majorSpan = document.getElementById("majorSpan");
+	window.majorDiv = document.getElementById("majorName");
+	window.selectMajor = document.getElementById("selectMajor");
+
+	var editMajor = function () {
+		
+		/// Make current major go away so we can show the menu in its place.
+		window.majorDiv.style.display = 'none';
+		window.majorSpan.style.display = '';
+		window.majorSaveBtn.style.display = '';
+	} 
+
+	var saveMajor = function () {
+
+		//window.majorSaveBtn.style.display = 'none';
+		//window.majorSpan.style.display = 'none';
+
+		//window.majorDiv.style.display = '';
+
+		var i = window.selectMajor.selectedIndex;
+		var newId = window.selectMajor[i].value;
+
+		document.majorForm.newMajorId.value = newId;
+
+		//alert(document.majorForm.newMajorId.value);
+		//document.forms["majorForm"].submit();
+
+		return true;
+	}
+
+</script>
+
 
 <!-- To Do For User Page 
 

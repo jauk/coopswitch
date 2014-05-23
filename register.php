@@ -1,17 +1,10 @@
 <?php
-include('header.php')
-?>
-
-<?php
+include('header.php');
+include('scripts.php');
 
 include_once('connect.php');
 
-function test_input($data) {
-			$data = trim($data);
-			$data = stripslashes($data);
-			$data = htmlspecialchars($data);
-			return $data;
-		}
+
 
 $query = mysql_query("SELECT * FROM Users WHERE email = '$_POST[email]'");
 $result = mysql_fetch_array($query);
