@@ -7,14 +7,17 @@ include('connect.php');
 if (isset($_POST['newMajorId']))
 	$newUserMajor = test_input($_POST['newMajorId']);
 else
-	$newUserMajor = "-1";
+	$newUserMajor = "";
 
-
-//newCycle is not getting passed in properly
 if (isset($_POST['newCycleId']))
 	$newUserCycle = test_input($_POST['newCycleId']);
 else
-	$newUserCycle = "-1";
+	$newUserCycle = "";
+
+if (isset($_POST['newProgramId']))
+	$newUserProgram = test_input($_POST['newProgramId']);
+else
+	$newUserProgram = "";
 
 // ON ALL UPDATES UNDO THE MATCHES (For both users). IMP. Also verify major actually changes in db.
 
@@ -30,7 +33,8 @@ $user_data = array();
 $row = mysql_fetch_array($result);
 $user_data[0] = $row;
 
-if ($user_data[0]['major'] != $newUserMajor && $newUserMajor != "-1")
+// Update Majors
+if ($user_data[0]['major'] != $newUserMajor && $newUserMajor != "")
 {
 	$query = "UPDATE Users SET major = " . $newUserMajor . " WHERE id = " . $_SESSION['user_id'];
 	$_SESSION['user_major'] = $newUserMajor;
@@ -40,14 +44,12 @@ if ($user_data[0]['major'] != $newUserMajor && $newUserMajor != "-1")
 	$row = mysql_fetch_array($result);
 	$_SESSION['user_major_name'] = $row['major_long'];
 
-	//echo $_SESSION['user_major_name'];
 	header("Location: account.php"); // Send back (ACCOUNT UPDATED) message?
 }
 
-else if ($user_data[0]['cycle'] != $newUserCycle && $newUserCycle != "-1")
+// Update Cycles
+else if ($user_data[0]['cycle'] != $newUserCycle && $newUserCycle != "")
 {
-	echo "New $newUserCycle";
-
 	$query = "UPDATE Users SET cycle = " . $newUserCycle . " WHERE id = " . $_SESSION['user_id'];
 	$_SESSION['user_cycle'] = $newUserCycle;
 
@@ -56,11 +58,27 @@ else if ($user_data[0]['cycle'] != $newUserCycle && $newUserCycle != "-1")
 	else if ($newUserCycle == 2)
 		$_SESSION['user_cycle_name'] = "Spring-Summer";
 
-	//echo $_SESSION['user_cycle_name'];
+	header("Location: account.php");
+}
+
+/// Update Programs
+else if ($user_data[0]['num_year_program'] != $newUserProgram && $newUserProgram != "")
+	$query = "UPDATE Users SET num_year_program = " . $newUserProgram . " WHERE id = " . $_SESSION['user_id'];
+	$_SESSION['user_program'] = $newUserProgram;
+
+	if ($newUserProgram == 1)
+		$_SESSION['user_program_name'] = "1 co-op";
+	else if ($newUserProgram == 2)
+		$_SESSION['user_program_name'] = "3 co-ops";
 
 	header("Location: account.php");
 }
 
+// Just in case submit nothing or something.
+else
+	header("Location: account.php");
+
+//
 
 if (!mysql_query($query,$con)) {
 	die('Error: ' . mysql_error());
