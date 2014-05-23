@@ -8,9 +8,7 @@ include_once('connect.php');
 	}
 	else if ($_SESSION['login'] == "1")
 	{
-		//echo "Logged on.";
 	}
-
 ?>
 
 <hr>
@@ -124,13 +122,12 @@ include_once('connect.php');
 	<?php 
 		if ($_SESSION['user_matched'] == 0)
 		{
-			$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
+			$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id'] . "");
 		}
-
 		// If the user has a match, get the match's info and display it.
 		if ($_SESSION['user_matched'] == 1) { 
 
-			$other_user_data = array();
+			//$other_user_data = array();
 			$other_user_data = get_match_info();
 	?>
 
@@ -181,8 +178,7 @@ include('footer.php');
 	window.programCancelBtn = document.getElementById("programCancelBtn");
 	window.programSpan = document.getElementById("programSpan");
 	window.programDiv = document.getElementById("programName");
-	window.selectProgram = document.getElementById("selectProgram");
-	
+	window.selectProgram = document.getElementById("selectProgram");	
 
 	var editMajor = function () {
 		

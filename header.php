@@ -1,4 +1,7 @@
 <?php 
+// if (!isset($_SESSION['login']))
+// 	$_SESSION['login'] = "";
+
 session_start();
 include('scripts.php');
 
@@ -53,7 +56,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 			<!-- <div class="panel panel-default"> <br /> -->
 		<br>
 
-				<?php if ($_SESSION['login'] == 0) { ?>
+				<?php if ($_SESSION['login'] == "") { ?>
 				<form class="form-inline" role="form" name="login_form" method="post" action="login.php">
 					<fieldset>
 						<div class="form-group">

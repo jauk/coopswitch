@@ -36,33 +36,49 @@ function mysql_get_var($query,$y=0)
    return $rec;
 }
 
-function get_match_info()
+function get_match_info() 
 {
+
+		// Update user_matched_id
+		$_SESSION['user_matched_id'] = mysql_get_var("SELECT Matches_id FROM Users WHERE id = " . $_SESSION['user_id']);
 
 		$query = "SELECT * FROM Matches WHERE id = " . $_SESSION['user_matched_id'] . "";
 		$result = mysql_query($query);
+	    $row = mysql_fetch_array($result);
 
 		$matched_data = array();
-	    $row = mysql_fetch_array($result);
 	    $matched_data[0] = $row; // Save the match information into an array to pull data from
 
 	    //echo $result;
 	    //echo "{$_SESSION['user_matched_id']}";
 
-	   	$other_user_data = array();
+	    // Get the ID of the logged in user's match BROEKN PARTs
 
-	    // Get the ID of the logged in user's match
+	   //echo $matched_data[0]['userA'];
+
 	    if ($matched_data[0]['userA'] == $_SESSION['user_id'])
 	    	$other_user_match_id = $matched_data[0]['userB'];
-	    else
+	    else if ($matched_data[0]['userB'] == $_SESSION['user_id'])
 	    	$other_user_match_id = $matched_data[0]['userA'];
+	    else
+	    	echo "BROKEN";
+
+	   	$other_user_data = array();
 
 
 	    $query = "SELECT * FROM Users WHERE id = " . $other_user_match_id;
 	    $result = mysql_query($query);
+
+	 //    if (!$result) {
+		// 	echo "Invalid query " . mysql_error();
+		// }
+
+		//else {
+
 	    $row = mysql_fetch_array($result);
 
 	    $other_user_data[0] = $row;
+		//}
 
 		return $other_user_data;	 
 }

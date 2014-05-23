@@ -3,14 +3,17 @@ include('header.php');
 
 include_once('connect.php');
 
+
+
 $limit = 101;
-$name = "";
+$names = array("foo", "bar", "bob", "mine", "cart", "tree", "banana");
 $password = "";
 $email = "";
 
 
 for ($x = 1; $x < $limit; $x++) {
 
+	$name = $names[array_rand($names)];
 	$cycle = rand(1,2);
 	$num_year_program = rand(1,2);
 	$majorVal = rand(2,87);

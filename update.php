@@ -29,9 +29,11 @@ else
 
 $query = "SELECT * FROM Users WHERE id = " . $_SESSION['user_id'];
 $result = mysql_query($query);
+global $user_data;
 $user_data = array(); 
 $row = mysql_fetch_array($result);
 $user_data[0] = $row;
+$GLOBALS["user_data[0]"] = $user_data[0];
 
 // Update Majors
 if ($user_data[0]['major'] != $newUserMajor && $newUserMajor != "")
@@ -44,7 +46,8 @@ if ($user_data[0]['major'] != $newUserMajor && $newUserMajor != "")
 	$row = mysql_fetch_array($result);
 	$_SESSION['user_major_name'] = $row['major_long'];
 
-	header("Location: account.php"); // Send back (ACCOUNT UPDATED) message?
+	check_for_match();
+	 // Send back (ACCOUNT UPDATED) message?
 }
 
 // Update Cycles
@@ -58,7 +61,7 @@ else if ($user_data[0]['cycle'] != $newUserCycle && $newUserCycle != "")
 	else if ($newUserCycle == 2)
 		$_SESSION['user_cycle_name'] = "Spring-Summer";
 
-	header("Location: account.php");
+	check_for_match();
 }
 
 /// Update Programs
@@ -71,7 +74,7 @@ else if ($user_data[0]['num_year_program'] != $newUserProgram && $newUserProgram
 	else if ($newUserProgram == 2)
 		$_SESSION['user_program_name'] = "3 co-ops";
 
-	header("Location: account.php");
+	check_for_match();
 }
 
 // Just in case submit nothing or something.
@@ -79,6 +82,42 @@ else
 	header("Location: account.php");
 
 //
+
+function check_for_match() {
+
+	$user_data = $GLOBALS["user_data"];
+	echo "ID: " . $user_data[0]['id'] . "<hr>";
+	//echo '$GLOBALS["user_data[0]['id']"]';
+	/* Create dropped_match var for users, only let them drop one match. 
+		Warn before editing profile vals when match in progress. 
+		- If not currently matched, does not matter. */
+
+	// Should check if matched first before going through code
+	if ($user_data[0]['matched'] == 1)
+	{
+		// Get the ID of the other user.
+		$other_user_id = mysql_get_var("SELECT id FROM Users WHERE Matches_id = " . $user_data[0]['Matches_id'] . "");
+
+		// Reset the match vars for both users
+		$query = "UPDATE Users SET matched = 0 WHERE id = " . $user_data[0]['id'] . " AND id = " . $other_user_id . "";
+        $result = mysql_query($query);
+        $query = "UPDATE Users SET Matches_id WHERE id = " . $user_data[0]['id'] . " AND id = " . $other_user_id . "";
+        $result = mysql_query($query);
+
+        // Should we delete row from Matches or keep for historical purposes? Delete for now.
+       	$query = "DELETE FROM Matches WHERE id = " . $user_data[0]['Matches_id'] . "";
+       	$result = mysql_query($query);
+
+       	//Lets reset those session vars, too.
+       	$_SESSION['user_matched'] = 0;
+       	$_SESSION['Matched_id'] = 0;
+
+      	echo "<br>Matched? " . $_SESSION['user_matched'];
+	}
+
+	header("Location: account.php");
+}
+
 
 if (!mysql_query($query,$con)) {
 	die('Error: ' . mysql_error());
