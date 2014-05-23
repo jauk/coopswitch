@@ -1,7 +1,6 @@
 <?php 
 include('header.php'); 
 include_once('connect.php');
-include_once('scripts.php');
 
 	if ($_SESSION['login'] == "")
 	{
@@ -34,7 +33,16 @@ include_once('scripts.php');
 		<h4>Your cycle is <?php echo "{$_SESSION['user_cycle_name']}"; ?>.</h4>
 		<h4>Your program is <?php echo "{$_SESSION['user_program_name']}"; ?>.</h4>
 		<br>
-		<?php if ($_SESSION['user_matched'] == 0) { ?>
+		<?php if ($_SESSION['user_matched'] == 0) { 
+
+			// Get user's updated match status each time they view  their profile.
+			$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
+			
+			// If matched == 1, get Matched_id too.
+			if ($_SESSION['user_matched'] == 1)
+				$_SESSION['user_matched_id'] = mysql_get_var("SELECT Matched_id FROM Users WHERE id = " . $_SESSION['user_id']);
+
+		?>
 		<!-- If user does not have a match, code here. -->
 		<p class="lead">You do not have a match yet, but we will keep looking!</p>
 
