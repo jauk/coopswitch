@@ -265,7 +265,7 @@ include('footer.php');
 			window.cycleCancelBtn.style.display = 'none';
 			window.cycleEditBtn.style.display = '';
 		}
-		else if (field == "cycle") {
+		else if (field == "program") {
 			window.programSaveBtn.style.display = 'none';
 			window.programSpan.style.display = 'none';
 			window.programDiv.style.display = 'inline-block';
