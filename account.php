@@ -32,6 +32,9 @@ include_once('connect.php');
 		<h4>Your major is <?php echo "{$_SESSION['user_major_name']}"; ?>.</h4>
 		<h4>Your cycle is <?php echo "{$_SESSION['user_cycle_name']}"; ?>.</h4>
 		<h4>Your program is <?php echo "{$_SESSION['user_program_name']}"; ?>.</h4>
+
+		<!-- Lets let people edit those fields... -->
+		
 		<br>
 		<?php if ($_SESSION['user_matched'] == 0) { 
 
@@ -56,7 +59,6 @@ include_once('connect.php');
 
 		<?php
 
-		echo $_SESSION['user_matched_id'];
 		$query = "SELECT * FROM Matches WHERE id = " . $_SESSION['user_matched_id'] . "";
 		$result = mysql_query($query);
 

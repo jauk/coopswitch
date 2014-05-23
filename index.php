@@ -4,7 +4,7 @@ include_once('scripts.php');
 
 // Some global CSS variables
 $formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3";
-$notFormClass="row-fluid col-md-6 col-md-offset-3 text-center";
+$notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-center";
 
 ?>
 
@@ -23,9 +23,10 @@ $notFormClass="row-fluid col-md-6 col-md-offset-3 text-center";
 			<h4>Registration Form</h4>
 			<p>This is currently for <em>Drexel Freshman</em> only.</p>
 		</div>
+		<br>
 			
 		<div class="<?php echo "$notFormClass"; ?>">
-			<span class="error"><strong><div id="formError"></div></strong></span>
+			<span class="error"><strong><div class="alert alert-warning" id="formError"></div></strong></span>
 		</div>
 
 		<!-- Print out if there is an error with the form data. Right now it is just a universal one. Needs CSS formatting. -->
@@ -133,7 +134,9 @@ $notFormClass="row-fluid col-md-6 col-md-offset-3 text-center";
 		//var $ = function (id) { return document.getElementById(id); }
 
 		window.onload = function () {
-
+			
+			errorDiv = document.getElementById("formError");
+			errorDiv.style.display = 'none';
 			var errors = 0;
 			window.hasEnteredAgain = false;
 
@@ -142,6 +145,8 @@ $notFormClass="row-fluid col-md-6 col-md-offset-3 text-center";
 			window.nameErr = 1;
 			window.emailErr = 1;
 			window.passwordErr = 1;
+
+			window.errorClassVals = "alert alert-warning";
 
 			//document.getElementById('email').onchange = validate_email;
 			//$("submit_form").onclick = validate_data;
@@ -157,11 +162,14 @@ $notFormClass="row-fluid col-md-6 col-md-offset-3 text-center";
 			{
 				nameErr = 1;
 				nameDiv.textContent = "You need a name.";
+				nameDiv.style.display = '';
+				nameDiv.className = window.errorClassVals;
 			}
 			else
 			{
 				nameErr = 0;
-				nameDiv.textContent = "Name exists.";
+				//nameDiv.textContent = "Name exists.";
+				nameDiv.style.display = 'none';
 			}
 
 		}
@@ -178,12 +186,15 @@ $notFormClass="row-fluid col-md-6 col-md-offset-3 text-center";
 			if (testForDrexel != -1)
 			{
 				emailErr = 0;
-				emailDiv.textContent = "Valid email!";
+				//emailDiv.textContent = "Valid email!";
+				emailDiv.style.display = 'none';
 			}
 			else
 			{
 				emailErr = 1;
 				emailDiv.textContent = "That is not a Drexel email!";
+				emailDiv.style.display = '';
+				emailDiv.className = window.errorClassVals;
 			}
 		}
 
@@ -207,13 +218,16 @@ $notFormClass="row-fluid col-md-6 col-md-offset-3 text-center";
 				{
 					passwordErr = 1;
 					passwordDiv.textContent = "Passwords do not match!";	
+					passwordDiv.style.display = '';
+					passwordDiv.className = window.errorClassVals;
 				}	
 			}
 
 			else
 			{
 				passwordErr = 0;
-				passwordDiv.textContent = "Passwords match.";
+				//passwordDiv.textContent = "Passwords match.";
+				passwordDiv.style.display = 'none';
 			}
 
 		}
@@ -236,6 +250,7 @@ $notFormClass="row-fluid col-md-6 col-md-offset-3 text-center";
 			
 			else if (hasErrors == true)
 			{
+				errorDiv.style.display = '';
 				errorDiv.textContent = "Hey, you have a problem on your form!"; // Probably change to recoloring the boxes later.
 				return false;
 			}

@@ -32,7 +32,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 			<h1><?php echo "$title"; ?></h1>
 			<h4><i><?php echo "$slogan"; ?></i></h4>
 		</div>	
-		<div class="row col-md-6 col-md-offset-3 col-sm-12 text-center">
+		<div class="row col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 text-center">
 			<ul class="nav nav-pills nav-justified">
 				<li>
 					<a href="index.php">Home</a>
