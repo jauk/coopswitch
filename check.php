@@ -96,7 +96,10 @@ $num=mysql_num_rows($result); // ...It's this many
               //$query = "INSERT INTO Users (id, matched) VALUES (" . $users_not_matched[$x]['matched'] . ",1),(" . $matched_user_data[0]['id'] . ",1)";
               $result = mysql_query($query);
 
-              // Insert into the database. 
+
+              /* Matches db need to add date matched, date completed. */
+
+              // Insert into the Matches database.
               $query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ")");
               $result = mysql_query($query);
 
@@ -144,7 +147,7 @@ $num=mysql_num_rows($result); // ...It's this many
 
   <div class="<?php echo $rowClass; ?>">
     <p>There were <?php echo "$matches"; ?> matches made!</p><br>
-    <p>There are <?php echo $num - ($matches*2); ?> people who still need to be matched.</p>
+    <p>There are still <?php echo $num - ($matches*2); ?> people who still need to be matched.</p>
   </div>
 
 </div>

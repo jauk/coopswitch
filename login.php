@@ -95,7 +95,7 @@
 <div class="container-fluid">
 
 	<div class="row-fluid col-md-6 col-md-offset-3 text-center">
-		<div class="panel-heading">
+		<div class="panel-heading alert alert-warning">
 			<h4><?php print "$errorMessage"; ?></h4>
 		</div>	
 	</div>
