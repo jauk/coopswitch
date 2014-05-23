@@ -26,16 +26,22 @@ include_once('connect.php');
 
 	</div>
 
-	<div class="row-fluid col-md-6 col-md-offset-3 text-center">
+	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
 		<!-- Use Javascript with PHP to allow users to edit these fields. -->
 		<!-- Have the fields clickable, when you click a dropdown box
 			 appears that allows you to change it (from register form). 
-			 Too ambitious? Naaah. -->
+			 Too ambitious? Naaah. YEAH I DID IT. -->
 
-		<h4>
-			Your major is 
-			<span class="col-md-6 col-md-offset-3" id="majorName"><?php echo "{$_SESSION['user_major_name']}."; ?></span> 
+			<span>
+				<h4>
+					Your major is &nbsp;
+					<div id="majorName"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
+					<a id="majorEditBtn" href="#" class="btn btn-xs btn-warning" onclick="editMajor()">Edit</a>
+				</h4>
+			</span> 
+	</div>
 
+	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
 			<span id="majorSpan" style="display: none;">
 
 				<form id="majorForm" name="majorForm" method="post" action="update.php" onsubmit="return saveMajor();">
@@ -43,26 +49,30 @@ include_once('connect.php');
 					<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
 						<?php
 						  // Get the list of majors and display for user selection.
+
+						  // Have current major pre-selected? Also, confirmation on major change?
 						  print_majors();
 						?>
-					</select> 
+					</select>
+					<div style="padding-top: 5px;"> <!-- Tmp inline style -->
 					<button type="submit" name="majorSaveBtn" value="Submit" id="majorSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
-					
+					<a id="majorCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('major')" style="display: none;">Cancel</a>
+					</div>
 				</form>
 
 			</span>
+	</div>
 
-			<span>
-			<a id="majorEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editMajor()">Edit</a>
-			<a id="majorCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('major')" style="display: none;">Cancel</a>
-			</span>
-			
+		<br><br>
 
-		</h4>  
+		<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
+			<h4>Your cycle is <?php echo "{$_SESSION['user_cycle_name']}"; ?>. </h4>
+		</div>
 		
+		<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
+			<h4>Your program is <?php echo "{$_SESSION['user_program_name']}"; ?>.</h4>
+		</div>
 
-		<h4>Your cycle is <?php echo "{$_SESSION['user_cycle_name']}"; ?>. </h4>
-		<h4>Your program is <?php echo "{$_SESSION['user_program_name']}"; ?>.</h4>
 	</div>
 
 	<?php 
