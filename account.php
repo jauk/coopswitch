@@ -32,13 +32,15 @@ include_once('connect.php');
 			 appears that allows you to change it (from register form). 
 			 Too ambitious? Naaah. YEAH I DID IT. -->
 
-			<span>
-				<h4>
-					Your major is &nbsp;
-					<div id="majorName"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
+
+			<h4>
+				<span>
+					Your major is
+					<div style="display: inline;" id="majorName"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
 					<a id="majorEditBtn" href="#" class="btn btn-xs btn-warning" onclick="editMajor()">Edit</a>
-				</h4>
-			</span> 
+				</span> 
+
+			</h4>
 	</div>
 
 	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
