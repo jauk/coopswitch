@@ -49,7 +49,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 			</ul>
 		</div>	
 
-		<div class="row col-md-6 col-md-offset-3 col-sm-12 text-center">
+		<div class="row col-md-8 col-md-offset-2 col-sm-12 text-center">
 			<!-- <div class="panel panel-default"> <br /> -->
 		<br>
 
