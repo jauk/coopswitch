@@ -38,21 +38,24 @@ include_once('connect.php');
 
 			<span id="majorSpan" style="display: none;">
 
-			<form id="majorForm" name="majorForm" method="post" action="update.php" onsubmit="return saveMajor();">
-				<input type="hidden" name="newMajorId" id="newMajorId" value="">
-				<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
-					<?php
-					  // Get the list of majors and display for user selection.
-					  print_majors();
-					?>
-				</select> 
-				<button type="submit" name="majorSaveBtn" value="Submit" id="majorSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
-			</form>
+				<form id="majorForm" name="majorForm" method="post" action="update.php" onsubmit="return saveMajor();">
+					<input type="hidden" name="newMajorId" id="newMajorId" value="">
+					<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
+						<?php
+						  // Get the list of majors and display for user selection.
+						  print_majors();
+						?>
+					</select> 
+					<button type="submit" name="majorSaveBtn" value="Submit" id="majorSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
+					
+				</form>
 
 			</span>
 
+			<span>
 			<a id="majorEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editMajor()">Edit</a>
-			<!-- <a id="majorCancel" href="#" class="btn btn-sm btn-info" onclick="cancelEdit(major)">Cancel</a> -->
+			<a id="majorCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('major')" style="display: none;">Cancel</a>
+			</span>
 			
 
 		</h4>  
@@ -101,6 +104,9 @@ include('footer.php');
 <script type="text/javascript">
 	
 	window.majorSaveBtn = document.getElementById("majorSaveBtn");
+	window.majorEditBtn = document.getElementById("majorEditBtn");
+	window.majorCancelBtn = document.getElementById("majorCancelBtn");
+
 	window.majorSpan = document.getElementById("majorSpan");
 	window.majorDiv = document.getElementById("majorName");
 	window.selectMajor = document.getElementById("selectMajor");
@@ -110,15 +116,16 @@ include('footer.php');
 		/// Make current major go away so we can show the menu in its place.
 		window.majorDiv.style.display = 'none';
 		window.majorSpan.style.display = '';
+
+		window.majorEditBtn.style.display = 'none';
 		window.majorSaveBtn.style.display = '';
+		window.majorCancelBtn.style.display = '';
+
 	} 
 
 	var saveMajor = function () {
 
-		//window.majorSaveBtn.style.display = 'none';
-		//window.majorSpan.style.display = 'none';
 
-		//window.majorDiv.style.display = '';
 
 		var i = window.selectMajor.selectedIndex;
 		var newId = window.selectMajor[i].value;
@@ -131,10 +138,24 @@ include('footer.php');
 		return true;
 	}
 
+	var cancelEdit = function (field) {
+
+		if (field == "major") {
+
+			window.majorSaveBtn.style.display = 'none';
+			window.majorSpan.style.display = 'none';
+			window.majorDiv.style.display = '';
+			window.majorCancelBtn.style.display = 'none';
+			window.majorEditBtn.style.display = '';
+
+		}
+
+	}
+
 </script>
 
 
-<!-- To Do For User Page 
+<!-- To Do For User Page 1
 
 - Ability to change information (cycle, major, 4/5 year)
 - Other misc. I guess
