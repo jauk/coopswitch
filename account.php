@@ -40,13 +40,15 @@ include_once('connect.php');
 			
 			// If matched == 1, get Matched_id too.
 			if ($_SESSION['user_matched'] == 1)
+			{
 				$_SESSION['user_matched_id'] = mysql_get_var("SELECT Matched_id FROM Users WHERE id = " . $_SESSION['user_id']);
-
+				echo "Test";
+			}
 		?>
 		<!-- If user does not have a match, code here. -->
 		<p class="lead">You do not have a match yet, but we will keep looking!</p>
 
-		<?php } else { ?>
+		<?php } else if ($_SESSION['user_matched'] == 1) { ?>
 		<!-- If user has a match, display information about it. -->
 
 		<div class="row-fluid col-md-6 col-md-offset-3 text-center well">
@@ -55,6 +57,7 @@ include_once('connect.php');
 
 		<?php
 
+		echo $_SESSION['user_matched_id'];
 		$query = "SELECT * FROM Matches WHERE id = " . $_SESSION['user_matched_id'] . "";
 		$result = mysql_query($query);
 
