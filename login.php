@@ -20,7 +20,6 @@
 	$sql = "SELECT * FROM Users WHERE email = '$umail' AND password = '$upass'";
 	$result = mysql_query($sql);
 
-
 	if ($result){
 
 	}

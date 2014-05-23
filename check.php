@@ -3,6 +3,8 @@ include('header.php');
 include('mail.php');
 /* Have a cron job run this page every minute so checks are always done. FOR PRODUCTION SERVER. */
 
+$debug = 1;
+
 ?>
 
 <br />
@@ -61,7 +63,6 @@ $num=mysql_num_rows($result); // ...It's this many
           //  
           if ((mysql_num_rows($result) > 0) && ($users_not_matched[$x]['matched'] != 1)) // We found people who match the guy inside $users_not_matched. NEED TO UPDATE $users_not_matched after a match is made. Remove from array after matched.
             {
-              //echo "<hr><em>Looks like we found a match!</em><br>";
               $matched_user_data = array(); // Reset the array.
 
               /* For right now, only need first row since matches are done first-come, first-serve. Do not need to store all matches, just the first. Loop not needed. */
@@ -73,7 +74,6 @@ $num=mysql_num_rows($result); // ...It's this many
               //}
 
               // Testing
-              //echo $users_not_matched[$x]['id'] . " and " . $matched_user_data[0]['id'] . "<br>";
 
               /* Put the users into the Matches table and set equaled to matched. */
 
@@ -93,11 +93,8 @@ $num=mysql_num_rows($result); // ...It's this many
                   }
               }
 
-
               //$query = "INSERT INTO Users (id, matched) VALUES (" . $users_not_matched[$x]['matched'] . ",1),(" . $matched_user_data[0]['id'] . ",1)";
               $result = mysql_query($query);
-
-              //echo $users_not_matched[$x]['matched'] . " and " . $matched_user_data[0]['matched'] . "<br>";
 
               // Insert into the database. 
               $query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ")");
@@ -118,6 +115,20 @@ $num=mysql_num_rows($result); // ...It's this many
               // Send names and emails to mail script to mail users that they have been matched.
               mail_matched_users($users_not_matched[$x]['name'], $users_not_matched[$x]['email'], $matched_user_data[0]['name'], $matched_user_data[0]['email']);
 
+              if ($debug == 1)
+              {
+                 echo "<hr><em>Looks like we found a match!</em><br>";
+                 // IDs of matched people.
+                 echo $users_not_matched[$x]['id'] . " and " . $matched_user_data[0]['id'] . "<br>";
+                 // Is the matched value set?
+                 echo $users_not_matched[$x]['matched'] . " and " . $matched_user_data[0]['matched'] . "<br>";
+
+              }
+
+              // Need to update user sessions if logged in and a match happens.
+              // Best way to do that?
+
+
             } // End If Statement (If match)
           else
             {
@@ -133,7 +144,7 @@ $num=mysql_num_rows($result); // ...It's this many
 
   <div class="<?php echo $rowClass; ?>">
     <p>There were <?php echo "$matches"; ?> matches made!</p><br>
-    <p>There are <?php echo $num - $matches; ?> people who still need to be matched.</p>
+    <p>There are <?php echo $num - ($matches*2); ?> people who still need to be matched.</p>
   </div>
 
 </div>

@@ -23,7 +23,6 @@ for ($x = 1; $x < $limit; $x++) {
 
 	$resutl=mysql_query($sql);
 
-
 }
 
 mysql_close($con);

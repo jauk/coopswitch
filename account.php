@@ -1,5 +1,7 @@
-<?php include('header.php'); 
-	//   include_once('connect.php');
+<?php 
+include('header.php'); 
+include_once('connect.php');
+include_once('scripts.php');
 
 	if ($_SESSION['login'] == "")
 	{
@@ -9,8 +11,6 @@
 	{
 		//echo "Logged on.";
 	}
-
-include_once('connect.php');
 
 ?>
 
@@ -73,10 +73,6 @@ include_once('connect.php');
 
 	    echo "You have matched with <strong>" . $other_user_data[0]['name'] . "</strong>.<br>";
 	    echo "You can email them at <strong>" . $other_user_data[0]['email'] . "</strong>.";
-
-	    // print("You have matched with " . other_user_data[0]['name']);
-
-
 
 		} ?>
 

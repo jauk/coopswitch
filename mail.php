@@ -8,9 +8,6 @@
 
 function mail_matched_users($userAName, $userAEmail, $userBName, $userBEmail)
 {
-	//$emailA = $userAEmail;
-	//$emailB = $userBEmail;
-
 	$subject = "A co-op switch match has been made for you!";
 
 	$message = "Hello, a match has been made for you!

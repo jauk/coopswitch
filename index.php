@@ -1,13 +1,13 @@
 <?php
-include('header.php')
+include('header.php');
+include_once('scripts.php');
+
+// Some global CSS variables
+$formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3";
+$notFormClass="row-fluid col-md-6 col-md-offset-3 text-center";
+
 ?>
-	<?php 
 
-	// Some global CSS variables
-	$formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3";
-	$notFormClass="row-fluid col-md-6 col-md-offset-3 text-center";
-
-	?>
 <div class="container-fluid">
 
 	<?php if ($_SESSION['login'] == "") { ?>
@@ -91,27 +91,9 @@ include('header.php')
 
 					<?php
 					// Get the list of majors and display for user selection.
-
 					  include_once('connect.php');
-		
-					  $query="SELECT * FROM Majors";
-					  $result=mysql_query($query);
-					  $numMajors=mysql_num_rows($result);
-
-					  $i=0; while ($i < $numMajors)
-					    {
-					    	$major_name=mysql_result($result, $i, "major_long");
-					    	$major_ident=mysql_result($result, $i, id);
-
-					    	echo "<option value=" . $major_ident . ">" . $major_name . "</option> \n\t\t\t\t\t\t";
-
-					    	$i++;
-					    }
-
-					    $major_ident = 0;
-					    $major_name = "";
-
-					    mysql_close($con);
+					  print_majors();
+					  mysql_close($con);
 
 					?>
 
