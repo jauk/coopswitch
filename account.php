@@ -65,12 +65,12 @@ include_once('connect.php');
 			</span>
 		</h4>
 	</div>
-
 	<div class="row col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5 text-center">
 		<span id="cycleSpan" style="display: none;">
 			<form id="cycleForm" name="cycleForm" method="post" action="update.php" onsubmit="return saveCycle();">
-				<input type="hidden" name="newCycle" id="newCycle" value="">
-				<select id="selectCycle" class="form-control selectpicker" name="cycle" data-live-search="true" data-size="5">
+				<input type="hidden" name="newCycleId" id="newCycleId" value="">
+				<select id="selectCycle" class="form-control selectpicker" name="cycle"> 
+				<!-- Makes no sense but ok. -->
 					<?php if ($_SESSION['user_cycle'] == 1) { ?>
 						<option selected="selected" value="1">Fall-Winter</option>
 						<option value="2">Spring-Summer</option>
@@ -182,15 +182,14 @@ include('footer.php');
 		window.cycleEditBtn.style.display = 'none';
 		window.cycleSaveBtn.style.display = '';
 		window.cycleCancelBtn.style.display = '';
-
 	} 
 
-	var saveMajor = function () {
+	var saveCycle = function () {
 
 		var i = window.selectCycle.selectedIndex;
 		var newId = window.selectCycle[i].value;
 
-		document.selectCycle.newCycle.value = newId;
+		document.cycleForm.newCycleId.value = newId;
 		
 		return true;
 	}
