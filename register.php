@@ -1,10 +1,6 @@
 <?php
 include('header.php');
-include('scripts.php');
-
 include_once('connect.php');
-
-
 
 $query = mysql_query("SELECT * FROM Users WHERE email = '$_POST[email]'");
 $result = mysql_fetch_array($query);
