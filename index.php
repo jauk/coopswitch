@@ -18,7 +18,6 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 			</p>
 		</div>
 
-
 		<div class="row col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center well">
 			<h4>Registration Form</h4>
 			<p>This is currently for <em>Drexel Freshman</em> only.</p>

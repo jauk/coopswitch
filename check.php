@@ -3,7 +3,7 @@ include('header.php');
 include('mail.php');
 /* Have a cron job run this page every minute so checks are always done. FOR PRODUCTION SERVER. */
 
-$debug = 1;
+$debug = 0;
 
 ?>
 

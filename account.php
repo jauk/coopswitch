@@ -46,7 +46,7 @@ include_once('connect.php');
 		// If the user has a match, get the match's info and display it.
 		if ($_SESSION['user_matched'] == 1) { 
 
-			$match_info = array();
+			$other_user_data = array();
 			$other_user_data = get_match_info();
 	?>
 
