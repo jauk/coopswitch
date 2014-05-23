@@ -62,7 +62,7 @@ else if ($user_data[0]['cycle'] != $newUserCycle && $newUserCycle != "")
 }
 
 /// Update Programs
-else if ($user_data[0]['num_year_program'] != $newUserProgram && $newUserProgram != "")
+else if ($user_data[0]['num_year_program'] != $newUserProgram && $newUserProgram != "") {
 	$query = "UPDATE Users SET num_year_program = " . $newUserProgram . " WHERE id = " . $_SESSION['user_id'];
 	$_SESSION['user_program'] = $newUserProgram;
 

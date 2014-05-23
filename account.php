@@ -85,14 +85,41 @@ include_once('connect.php');
 				</div>
 			</form>
 		</span>
-</div>
-
-		
-		<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
-			<h4>Your program is <?php echo "{$_SESSION['user_program_name']}"; ?>.</h4>
-		</div>
-
 	</div>
+
+	<!-- Code for user's program -->
+	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
+		<h4>
+			Your program is
+			<span>
+			<div style="display: inline-block;" id="programName"><?php echo "{$_SESSION['user_program_name']}."; ?></div>
+			<a id="programEditBtn" href="#" class="btn btn-xs btn-warning" onclick="editProgram()">Edit</a>
+			</span>
+		</h4>
+	</div>
+	<div class="row col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5 text-center">
+		<span id="programSpan" style="display: none;">
+			<form id="programForm" name="programForm" method="post" action="update.php" onsubmit="return saveProgram();">
+				<input type="hidden" name="newProgramId" id="newProgramId" value="">
+				<select id="selectProgram" class="form-control selectpicker" name="cycle"> 
+				<!-- Makes no sense but ok. -->
+					<?php if ($_SESSION['user_program'] == 1) { ?>
+						<option selected="selected" value="1">1 co-op</option>
+						<option value="2">3 co-ops</option>
+					<?php } else { ?>
+						<option value="1">1 co-op</option>
+						<option selected="selected" value="2">3 co-ops</option>
+					<?php } ?>
+				</select>
+				<div style="padding-top: 5px;"> <!-- Tmp inline style -->
+				<button type="submit" name="programSaveBtn" value="Submit" id="programSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
+				<a id="programCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('program')" style="display: none;">Cancel</a>
+				</div>
+			</form>
+		</span>
+	</div>
+
+</div>
 
 	<?php 
 		if ($_SESSION['user_matched'] == 0)
@@ -148,7 +175,13 @@ include('footer.php');
 	window.cycleDiv = document.getElementById("cycleName");
 	window.selectCycle = document.getElementById("selectCycle");
 
-
+	// Program Window Vars
+	window.programSaveBtn = document.getElementById("programSaveBtn");
+	window.programEditBtn = document.getElementById("programEditBtn");
+	window.programCancelBtn = document.getElementById("programCancelBtn");
+	window.programSpan = document.getElementById("programSpan");
+	window.programDiv = document.getElementById("programName");
+	window.selectProgram = document.getElementById("selectProgram");
 	
 
 	var editMajor = function () {
@@ -194,6 +227,28 @@ include('footer.php');
 		return true;
 	}
 
+
+	var editProgram = function () {
+		
+		/// Make current major go away so we can show the menu in its place.
+		window.programDiv.style.display = 'none';
+		window.programSpan.style.display = '';
+
+		window.programEditBtn.style.display = 'none';
+		window.programSaveBtn.style.display = '';
+		window.programCancelBtn.style.display = '';
+	} 
+
+	var saveProgram = function () {
+
+		var i = window.selectProgram.selectedIndex;
+		var newId = window.selectProgram[i].value;
+
+		document.programForm.newProgramId.value = newId;
+		
+		return true;
+	}
+
 	var cancelEdit = function (field) {
 
 		if (field == "major") {
@@ -209,6 +264,13 @@ include('footer.php');
 			window.cycleDiv.style.display = 'inline-block';
 			window.cycleCancelBtn.style.display = 'none';
 			window.cycleEditBtn.style.display = '';
+		}
+		else if (field == "cycle") {
+			window.programSaveBtn.style.display = 'none';
+			window.programSpan.style.display = 'none';
+			window.programDiv.style.display = 'inline-block';
+			window.programCancelBtn.style.display = 'none';
+			window.programEditBtn.style.display = '';
 		}
 
 	}
