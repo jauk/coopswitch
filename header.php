@@ -39,9 +39,6 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 				<li>
 					<a href="about.php">About</a>
 				</li>
-				<?php if ($_SESSION['login'] == 1) echo '<li>'; else echo '<li class="disabled">'; ?>
-					<a href="account.php">Profile</a>
-				</li>
 				<li>
 					<a href="list.php">List</a>
 				</li>
@@ -71,11 +68,17 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 				</form>
 				<?php } // Else logged in, display name or some greeting
  
-					else {
+					else { ?>
 
-						echo "Hi " . $_SESSION['user_name'] . "!"; 
-						echo '<br><a href="logout.php">Logout</a>';
-					}
+						<div class="row col-md-6 col-md-offset-3 col-sm-12 text-center">
+							<p class="lead">
+								Hey, <?php echo $_SESSION['user_name']; ?>.&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="account.php"><button type="button" class="btn btn-primary" >Profile</button></a>
+								<a href="logout.php"><button type="button" class="btn btn-danger">Logout</button></a>
+							</p>
+						</div>
+
+					<?php }
 
 				?>
 		<!--	</div> -->
