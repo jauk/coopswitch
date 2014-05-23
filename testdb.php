@@ -3,7 +3,7 @@ include('header.php');
 
 include_once('connect.php');
 
-$limit = 101;
+$limit = 11;
 $name = "";
 $password = "";
 $email = "";

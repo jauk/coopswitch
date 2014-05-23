@@ -1,6 +1,7 @@
 <?php
-include('header.php')
-
+include('header.php');
+include('mail.php');
+/* Have a cron job run this page every minute so checks are always done. FOR PRODUCTION SERVER. */
 
 ?>
 
@@ -111,11 +112,11 @@ $num=mysql_num_rows($result); // ...It's this many
               // Add the Matched ID to the Users
               $query = "UPDATE Users SET Matches_id = " . $newMatchId . " WHERE id = " . $users_not_matched[$x]['id'] . " OR id = " . $matched_user_data[0]['id'] . "";
               $result = mysql_query($query);
-              
-
+          
               $matches ++;
 
-            //  unset($users_not_matched[$x]);
+              // Send names and emails to mail script to mail users that they have been matched.
+              mail_matched_users($users_not_matched[$x]['name'], $users_not_matched[$x]['email'], $matched_user_data[0]['name'], $matched_user_data[0]['email']);
 
             } // End If Statement (If match)
           else
@@ -123,6 +124,8 @@ $num=mysql_num_rows($result); // ...It's this many
             }
         } // End For Loop
     } // End Main If Statement (If there is even a reason to run through all this code)
+
+
 
   mysql_close($con);
 
