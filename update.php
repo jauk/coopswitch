@@ -110,9 +110,16 @@ function check_for_match() {
        	$query = "DELETE FROM Matches WHERE id = " . $user_data[0]['Matches_id'];
        	$result = mysql_query($query);
        
+       	// Add the dropped match to db for user dropping
+
+       	$query = "UPDATE Users SET dropped_matches = 1 WHERE id = " . $user_data[0]['id'];
+       	$result = mysql_query($query);
+
+
        	//Lets reset those session vars, too.
        	$_SESSION['user_matched'] = 0;
        	$_SESSION['Matched_id'] = 0;
+       	$_SESSION['user_dropped_matches'] = 1;
 
       	echo "<br>Matched? " . $_SESSION['user_matched'];
 	}
