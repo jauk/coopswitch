@@ -85,8 +85,9 @@ else
 
 function check_for_match() {
 
+	$user_data = array();
 	$user_data = $GLOBALS["user_data"];
-	echo "ID: " . $user_data[0]['id'] . "<hr>";
+	echo "ID: " . $user_data[0]['id'] . "<br>Matched? " . $user_data[0]['matched'] . "<hr>";
 	//echo '$GLOBALS["user_data[0]['id']"]';
 	/* Create dropped_match var for users, only let them drop one match. 
 		Warn before editing profile vals when match in progress. 
@@ -96,18 +97,22 @@ function check_for_match() {
 	if ($user_data[0]['matched'] == 1)
 	{
 		// Get the ID of the other user.
-		$other_user_id = mysql_get_var("SELECT id FROM Users WHERE Matches_id = " . $user_data[0]['Matches_id'] . "");
+		$other_user_id = mysql_get_var("SELECT id FROM Users WHERE Matches_id = " . $user_data[0]['Matches_id']);
 
 		// Reset the match vars for both users
-		$query = "UPDATE Users SET matched = 0 WHERE id = " . $user_data[0]['id'] . " AND id = " . $other_user_id . "";
+		$query = "UPDATE Users SET matched = 0 WHERE id = " . $user_data[0]['id'] . " OR id = " . $other_user_id;
         $result = mysql_query($query);
-        $query = "UPDATE Users SET Matches_id WHERE id = " . $user_data[0]['id'] . " AND id = " . $other_user_id . "";
+
+        $query = "UPDATE Users SET Matches_id WHERE id = " . $user_data[0]['id'] . " OR id = " . $other_user_id;
         $result = mysql_query($query);
 
         // Should we delete row from Matches or keep for historical purposes? Delete for now.
        	$query = "DELETE FROM Matches WHERE id = " . $user_data[0]['Matches_id'] . "";
        	$result = mysql_query($query);
 
+       	// Lets show both matched IDs of users just in case
+
+       
        	//Lets reset those session vars, too.
        	$_SESSION['user_matched'] = 0;
        	$_SESSION['Matched_id'] = 0;

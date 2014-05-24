@@ -33,7 +33,6 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 		<!-- Registration Form -->
 		<form role="form" id="register" method="post" action="register.php" onchange="" onsubmit="return validate_submit();" id="register">
 
-
 			<div class="<?php echo "$formGroupClass"; ?>">
 				<label for="nameField">Name</label>
 				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()">
@@ -213,6 +212,7 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 					hasEnteredAgain = true;
 					return;
 				}
+
 				else
 				{
 					passwordErr = 1;
@@ -222,11 +222,24 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 				}	
 			}
 
+			//echo "beep";
+
 			else
 			{
+				if (password.length < 6 && password.length > 0) 
+				{
+					passwordDiv.style.display = '';
+					passwordDiv.className = window.errorClassVals;
+					passwordDiv.textContent = "You should use a longer password.";
+
+				}
+				else
+				{
+					passwordDiv.style.display = 'none';
+				}
+
 				passwordErr = 0;
 				//passwordDiv.textContent = "Passwords match.";
-				passwordDiv.style.display = 'none';
 			}
 
 		}

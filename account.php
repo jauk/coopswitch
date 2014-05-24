@@ -23,6 +23,8 @@ include_once('connect.php');
 		</div>
 	</div>
 
+	<!-- Alight text left and edit buttons right eventually. -->
+
 	<!-- Code for user's major -->
 	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
 		<h4>
@@ -120,13 +122,14 @@ include_once('connect.php');
 </div>
 
 	<?php 
-		if ($_SESSION['user_matched'] == 0)
-		{
-			$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id'] . "");
-		}
+
+		// Get the latest user_matched status
+		$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id'] . "");
+
 		// If the user has a match, get the match's info and display it.
 		if ($_SESSION['user_matched'] == 1) { 
 
+			///echo "test";
 			//$other_user_data = array();
 			$other_user_data = get_match_info();
 	?>
