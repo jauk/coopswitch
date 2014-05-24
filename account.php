@@ -2,13 +2,13 @@
 include('header.php'); 
 include_once('connect.php');
 
-	if ($_SESSION['login'] == "")
-	{
-		header("Location: error.php"); // Temporary I guess maybe add like ?error=1
-	}
-	else if ($_SESSION['login'] == "1")
-	{
-	}
+if ($_SESSION['login'] == "") {
+	header("Location: error.php"); // Temporary I guess maybe add like ?error=1
+}
+
+else if ($_SESSION['login'] == "1") {
+}
+
 ?>
 
 <hr>
@@ -128,9 +128,6 @@ include_once('connect.php');
 
 		// If the user has a match, get the match's info and display it.
 		if ($_SESSION['user_matched'] == 1) { 
-
-			///echo "test";
-			//$other_user_data = array();
 			$other_user_data = get_match_info();
 	?>
 

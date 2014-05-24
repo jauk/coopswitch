@@ -17,9 +17,9 @@ else
 	$name = test_input($_POST[name]);
 	$email = test_input($_POST[email]);
 	$password = test_input($_POST[password]);
-	$cycle = $_POST[cycle];
-	$num_year_program = $_POST[numCoops];
-	$majorVal = $_POST[major];
+	$cycle = test_input($_POST[cycle]);
+	$num_year_program = test_input($_POST[numCoops]);
+	$majorVal = test_input($_POST[major]);
 
 	$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
 		VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal',

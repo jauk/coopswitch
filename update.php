@@ -26,7 +26,6 @@ else
 
 // Get the user we are talking to and save them into a local array.
 /* Probably do not need this, use session vars since they are from db. */
-
 $query = "SELECT * FROM Users WHERE id = " . $_SESSION['user_id'];
 $result = mysql_query($query);
 global $user_data;
@@ -89,6 +88,7 @@ function check_for_match() {
 	$user_data = $GLOBALS["user_data"];
 	echo "ID: " . $user_data[0]['id'] . "<br>Matched? " . $user_data[0]['matched'] . "<hr>";
 	//echo '$GLOBALS["user_data[0]['id']"]';
+
 	/* Create dropped_match var for users, only let them drop one match. 
 		Warn before editing profile vals when match in progress. 
 		- If not currently matched, does not matter. */
@@ -107,11 +107,8 @@ function check_for_match() {
         $result = mysql_query($query);
 
         // Should we delete row from Matches or keep for historical purposes? Delete for now.
-       	$query = "DELETE FROM Matches WHERE id = " . $user_data[0]['Matches_id'] . "";
+       	$query = "DELETE FROM Matches WHERE id = " . $user_data[0]['Matches_id'];
        	$result = mysql_query($query);
-
-       	// Lets show both matched IDs of users just in case
-
        
        	//Lets reset those session vars, too.
        	$_SESSION['user_matched'] = 0;
@@ -123,20 +120,17 @@ function check_for_match() {
 	header("Location: account.php");
 }
 
-
 if (!mysql_query($query,$con)) {
 	die('Error: ' . mysql_error());
 }
 
 else {
 }
-
 	// Use header location thing go back account page display "UPDATED" message
+	// Use a session var for now that resets after displaying message, not very efficient. Maybe use GET eventually
 	
 
-
 mysql_close($con);
-
 
 include('footer.php');
 ?>

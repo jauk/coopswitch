@@ -6,10 +6,8 @@
 	$upass = htmlspecialchars($_POST['password']);
 
 	if ($db_found) {
-
 	}
 	else {
-
 		$errorMessage = "Error logging on. 1";
 	}
 
@@ -81,6 +79,8 @@
 
 		$_SESSION['user_matched'] = $user_data[0]['matched']; // This will have to be updated or something when searches are done...
 		$_SESSION['user_matched_id'] = $user_data[0]['Matches_id'];
+
+		$_SESSION['user_dropped_matches'] = $user_data[0]['dropped_matches'];
 
 		header("Location: account.php"); 
 	}

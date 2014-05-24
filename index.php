@@ -271,7 +271,6 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 
 </script>
 
-
 <?php
 include('footer.php')
 ?>
