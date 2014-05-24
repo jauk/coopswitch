@@ -15,15 +15,18 @@ else if ($_SESSION['login'] == "1") {
 
 <div class="container-fluid">
 
-	<?php // print $errorMessage;?>
-
 	<div class="row-fluid col-md-6 col-md-offset-3 text-center">
 		<div class="panel-heading">
 			<h2>Hello, <?php echo "{$_SESSION['user_name']}" ?>!</h2>
 		</div>
 	</div>
 
+	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
+		<span class="error"><div id="droppedMatches"></div></span>
+	</div>
+
 	<!-- Alight text left and edit buttons right eventually. -->
+	<!-- Should I add confirmations? -->
 
 	<!-- Code for user's major -->
 	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
@@ -35,17 +38,12 @@ else if ($_SESSION['login'] == "1") {
 			</span>
 		</h4>
 	</div>
-
 	<div class="row col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5 text-center">
 			<span id="majorSpan" style="display: none;">
 				<form id="majorForm" name="majorForm" method="post" action="update.php" onsubmit="return saveMajor();">
 					<input type="hidden" name="newMajorId" id="newMajorId" value="">
 					<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
-						<?php
-						  // Get the list of majors and display for user selection.
-						  // Have current major pre-selected? Also, confirmation on major change?
-						  print_majors();
-						?>
+						<?php print_majors(); ?>
 					</select>
 					<div style="padding-top: 5px;"> <!-- Tmp inline style -->
 					<button type="submit" name="majorSaveBtn" value="Submit" id="majorSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
@@ -122,7 +120,6 @@ else if ($_SESSION['login'] == "1") {
 </div>
 
 	<?php 
-
 		// Get the latest user_matched status
 		$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id'] . "");
 
@@ -130,7 +127,6 @@ else if ($_SESSION['login'] == "1") {
 		if ($_SESSION['user_matched'] == 1) { 
 			$other_user_data = get_match_info();
 	?>
-
 	<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
 		<br><hr><p class="lead">Hey, you have a match!</p>
 	</div>
@@ -156,6 +152,12 @@ include('footer.php');
 
 <script type="text/javascript">
 	
+	window.hasDroppedMatch = "<?php echo $_SESSION['user_dropped_matches']; ?>";
+	if (hasDroppedMatch == "")
+		hasDroppedMatch = 0;
+
+	window.droppedMatches = document.getElementById("droppedMatches");
+
 	// Major Window Vars
 	window.majorSaveBtn = document.getElementById("majorSaveBtn");
 	window.majorEditBtn = document.getElementById("majorEditBtn");
@@ -180,15 +182,20 @@ include('footer.php');
 	window.programDiv = document.getElementById("programName");
 	window.selectProgram = document.getElementById("selectProgram");	
 
+	window.errorClassVals = "alert alert-warning";
+	window.droppedMatches.style.display = 'none';
+
+
 	var editMajor = function () {
 		
-		/// Make current major go away so we can show the menu in its place.
-		window.majorDiv.style.display = 'none';
-		window.majorSpan.style.display = '';
+		if (check_if_dropped()) {
+			window.majorDiv.style.display = 'none';
+			window.majorSpan.style.display = '';
 
-		window.majorEditBtn.style.display = 'none';
-		window.majorSaveBtn.style.display = '';
-		window.majorCancelBtn.style.display = '';
+			window.majorEditBtn.style.display = 'none';
+			window.majorSaveBtn.style.display = '';
+			window.majorCancelBtn.style.display = '';
+		}
 
 	} 
 
@@ -204,13 +211,15 @@ include('footer.php');
 
 	var editCycle = function () {
 		
-		/// Make current major go away so we can show the menu in its place.
-		window.cycleDiv.style.display = 'none';
-		window.cycleSpan.style.display = '';
+		if (check_if_dropped()) {
+			window.cycleDiv.style.display = 'none';
+			window.cycleSpan.style.display = '';
 
-		window.cycleEditBtn.style.display = 'none';
-		window.cycleSaveBtn.style.display = '';
-		window.cycleCancelBtn.style.display = '';
+			window.cycleEditBtn.style.display = 'none';
+			window.cycleSaveBtn.style.display = '';
+			window.cycleCancelBtn.style.display = '';
+		}
+
 	} 
 
 	var saveCycle = function () {
@@ -226,13 +235,15 @@ include('footer.php');
 
 	var editProgram = function () {
 		
-		/// Make current major go away so we can show the menu in its place.
-		window.programDiv.style.display = 'none';
-		window.programSpan.style.display = '';
+		if (check_if_dropped()) {
+			window.programDiv.style.display = 'none';
+			window.programSpan.style.display = '';
 
-		window.programEditBtn.style.display = 'none';
-		window.programSaveBtn.style.display = '';
-		window.programCancelBtn.style.display = '';
+			window.programEditBtn.style.display = 'none';
+			window.programSaveBtn.style.display = '';
+			window.programCancelBtn.style.display = '';	
+		}
+
 	} 
 
 	var saveProgram = function () {
@@ -243,6 +254,25 @@ include('footer.php');
 		document.programForm.newProgramId.value = newId;
 		
 		return true;
+	}
+
+	var check_if_dropped = function () {
+
+		if (hasDroppedMatch > 0) {
+			window.droppedMatches.textContent = "You cannot edit your profile and drop another match.";
+			window.droppedMatches.className = window.errorClassVals;
+			window.droppedMatches.style.display = '';
+			return false;
+		}
+
+		else
+		{
+			//window.droppedMatches.textContent = "";
+			window.droppedMatches.style.display = 'none';
+			return true;
+		}
+
+
 	}
 
 	var cancelEdit = function (field) {
