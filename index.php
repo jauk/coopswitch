@@ -128,7 +128,6 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 
 
 		// When the page loads, do something I guess
-
 		//var $ = function (id) { return document.getElementById(id); }
 
 		window.onload = function () {
@@ -154,6 +153,8 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 		var validate_name = function () {
 
 			name = document.getElementById("user_name").value;
+			name = name.trim();
+
 			var nameDiv = document.getElementById("nameError");
 
 			if (name == "")
@@ -167,6 +168,7 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 			{
 				nameErr = 0;
 				//nameDiv.textContent = "Name exists.";
+				document.getElementById("user_name").value = name;
 				nameDiv.style.display = 'none';
 			}
 
@@ -174,18 +176,41 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 
 		var validate_email = function () {
 
-
-			email = document.getElementById("user_email").value;
-
-			var testForDrexel = email.search("@drexel.edu");
-
 			var emailDiv = document.getElementById("emailError");
 
-			if (testForDrexel != -1)
-			{
+			var email = document.getElementById("user_email").value;
+
+			email = email.trim();
+			email = email.toLowerCase();
+
+			var drexelEmail = "@drexel.edu";
+
+		 	var hasDrexelEmail = email.search("@drexel.edu");
+			var endEmail = email.indexOf("@drexel.edu");
+
+			if (hasDrexelEmail != -1) {
 				emailErr = 0;
 				//emailDiv.textContent = "Valid email!";
 				emailDiv.style.display = 'none';
+
+				var length = endEmail+drexelEmail.length;
+				//alert(length);
+
+				emailDiv.style.display = 'none';
+
+				if (length != email.length) {
+
+					emailRemove = email.slice(length, email.length);
+					email = email.replace(emailRemove, "");
+
+					emailDiv.style.display = '';
+					emailDiv.textContent = "Extra characters removed.";
+					emailDiv.className = 'alert alert-info';
+
+					$("#emailError").fadeOut(2000);
+				}				
+
+
 			}
 			else
 			{
@@ -194,8 +219,9 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 				emailDiv.style.display = '';
 				emailDiv.className = window.errorClassVals;
 			}
-		}
 
+			document.getElementById("user_email").value = email;
+		}
 
 		var validate_password = function () {
 

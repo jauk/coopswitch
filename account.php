@@ -268,11 +268,13 @@ include('footer.php');
 		}
 
 		else if (hasDroppedMatch > 0) {
+			setTimeout(1000);
 			window.droppedMatches.textContent = "You cannot edit your profile and drop another match.";
 			window.droppedMatches.className = window.errorClassVals;
 			window.droppedMatches.style.display = '';
 			return false;
 		}
+
 		else if (window.isMatched == 1)
 		{
 			window.droppedMatches.textContent = "By editing your profile, your current match will be dropped. This can only be done once.";	
@@ -284,7 +286,6 @@ include('footer.php');
 		{
 
 		}
-
 
 	}
 
