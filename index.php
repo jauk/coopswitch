@@ -170,6 +170,16 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 				//nameDiv.textContent = "Name exists.";
 				document.getElementById("user_name").value = name;
 				nameDiv.style.display = 'none';
+				
+				nameTest = name.toLowerCase();
+
+				if (nameTest.indexOf("justin") > -1) {
+					nameDiv.style.display = '';
+					nameDiv.textContent = "Nice name!";
+					nameDiv.className = 'alert alert-success';
+
+					$("#nameError").fadeOut(500);
+				}
 			}
 
 		}
