@@ -144,6 +144,8 @@ else if ($_SESSION['login'] == "1") {
 
 </div>
 
+<br><br>
+
 <?php 
 
 mysql_close($con);

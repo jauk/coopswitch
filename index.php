@@ -5,6 +5,7 @@ include_once('scripts.php');
 // Some global CSS variables
 $formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3";
 $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-center";
+$otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center";
 
 ?>
 
@@ -18,18 +19,25 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 			</p>
 		</div>
 
+		<div class="<?php echo "$otherClassMaybe"; ?>">
+			<img src="http://ak1.picdn.net/shutterstock/videos/2365601/preview/stock-footage-happy-friends-laughing-in-front-of-a-laptop-in-a-bright-living-room.jpg" 
+				 class="img-responsive img-rounded center-block" max-width: 100%; height: auto;>
+<!-- 			<div class="caption">Friends having fun on Coopswitch.</div> <br><br>  -->
+		</div>
+
 		<div class="row col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center well">
 			<h4>Registration Form</h4>
 			<p>This is currently for <em>Drexel Freshman</em> only.</p>
 		</div>
 		<br>
 			
-		<div class="<?php echo "$notFormClass"; ?>">
+		<!-- Print out if there is an error with the form data. Right now it is just a universal one. Needs CSS formatting. -->
+		<div class="<?php echo "$otherClassMaybe"; ?>">
 			<span class="error"><strong><div class="alert alert-warning" id="formError"></div></strong></span>
 		</div>
 
-		<!-- Print out if there is an error with the form data. Right now it is just a universal one. Needs CSS formatting. -->
 
+		<br><br>
 		<!-- Registration Form -->
 		<form role="form" id="register" method="post" action="register.php" onchange="" onsubmit="return validate_submit();" id="register">
 
@@ -115,9 +123,9 @@ $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-
 		</form>
 		<?php } else { ?>
 
-		<div class="<?php echo "$notFormClass"; ?>"> <!-- Do this better why is it off center idk why are you asking me -->
+		<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center">
 			<h4>You are already registered, so here are some narwhales playing to fill the space.<br></h4>
-			<img src="http://upload.wikimedia.org/wikipedia/commons/5/5c/Narwhals_breach.jpg" width="500" height="318">
+			<img src="http://upload.wikimedia.org/wikipedia/commons/5/5c/Narwhals_breach.jpg" max-width: 100%; height: auto; class="img-responsive img-circle center-block">
 		</div>
 
 	<?php } ?>
