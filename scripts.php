@@ -109,4 +109,5 @@ function login_user($user_data) {
 		$_SESSION['user_dropped_matches'] = $user_data[0]['dropped_matches'];
 }
 
+
 ?>

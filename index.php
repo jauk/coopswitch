@@ -124,15 +124,37 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 				<!-- <input type="button" name="submit_form" id="submit_form" value="Submit" /> -->
 			</div>
 		</form>
-		<?php } else { ?>
+		<?php } else { 
+
+			// Move this to scripts later 
+			
+				$images = array(
+				"http://upload.wikimedia.org/wikipedia/commons/5/5c/Narwhals_breach.jpg",
+				"http://www.graphics99.com/wp-content/uploads/2012/07/funny-giraffe-tongue-image-for-friendster.jpg",
+				"http://www.funnyzone.org/wp-content/uploads/2009/06/635_bear-and-panda.jpg",
+					);
+
+				$descriptions = array (
+					"Here are some narwhals playing.",
+					"Here is a silly giraffe.",
+					"Here is a group of penguins",
+					);
+
+				$option = rand(0, 2);
+
+			?>
+
 
 		<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center">
-			<h4>You are already registered, so here are some narwhales playing to fill the space.<br></h4>
-			<img src="http://upload.wikimedia.org/wikipedia/commons/5/5c/Narwhals_breach.jpg" max-width: 100%; height: auto; class="img-responsive img-circle center-block">
+			<h4>You are already registered.
+			<?php echo "$descriptions[$option]"; ?>
+			<br></h4>
+			<img src="<?php echo $images[$option]; ?>" max-width: 100%; height: auto; class="img-responsive img-circle center-block">
 		</div>
 
 	<?php } ?>
 
+<!--  so here are some narwhals playing to fill the space. -->
 </div>
 
 <script type="text/javascript">
