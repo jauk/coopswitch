@@ -138,7 +138,7 @@ else if ($_SESSION['login'] == "1") {
 	
 	<?php } else { // If the user does not have a match tell them they still do not. ?>
 		<div class="row-fluid col-md-6 col-md-offset-3 text-center">
-			<br><hr><p class="lead">You do not have a match yet, but we will keep looking!</p>
+			<br><p class="lead">You do not have a match yet, but we will keep looking!</p>
 		</div>
 	<?php } ?>
 
@@ -152,9 +152,12 @@ include('footer.php');
 
 <script type="text/javascript">
 	
+	// Get some vars from PHP
 	window.hasDroppedMatch = "<?php echo $_SESSION['user_dropped_matches']; ?>";
 	if (hasDroppedMatch == "")
-		hasDroppedMatch = 0;
+		window.hasDroppedMatch = 0;
+
+	window.isMatched = "<?php echo $_SESSION['user_matched']; ?>";
 
 	window.droppedMatches = document.getElementById("droppedMatches");
 
@@ -258,18 +261,28 @@ include('footer.php');
 
 	var check_if_dropped = function () {
 
-		if (hasDroppedMatch > 0) {
+		if (window.isMatched == 0) {
+			//window.droppedMatches.textContent = "";
+			window.droppedMatches.style.display = 'none';
+			return true;
+		}
+
+		else if (hasDroppedMatch > 0) {
 			window.droppedMatches.textContent = "You cannot edit your profile and drop another match.";
 			window.droppedMatches.className = window.errorClassVals;
 			window.droppedMatches.style.display = '';
 			return false;
 		}
-
-		else
+		else if (window.isMatched == 1)
 		{
-			//window.droppedMatches.textContent = "";
-			window.droppedMatches.style.display = 'none';
+			window.droppedMatches.textContent = "By editing your profile, your current match will be dropped. This can only be done once.";	
+			window.droppedMatches.className = 'alert alert-info';
+			window.droppedMatches.style.display = '';
 			return true;
+		}
+		else 
+		{
+
 		}
 
 
@@ -299,6 +312,7 @@ include('footer.php');
 			window.programEditBtn.style.display = '';
 		}
 
+		window.droppedMatches.style.display = 'none';
 	}
 
 </script>
