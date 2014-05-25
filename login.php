@@ -2,8 +2,8 @@
 	include_once('header.php');
 	include_once('connect.php');
 	
-	$umail = htmlspecialchars($_POST['email']);
-	$upass = htmlspecialchars($_POST['password']);
+	$umail = test_input($_POST['email']);
+	$upass = test_input($_POST['password']);
 
 	if ($db_found) {
 	}
@@ -14,6 +14,9 @@
 	/* Learn about quote_smart funcion for sql injection protection! IMPORTANT! */
 	// $umail = quote_smart($uname, $con);
 	// $upass = quote_smart($upass, $con);
+
+	// Will make more secure...later.
+	$upass=md5($upass);
 
 	$sql = "SELECT * FROM Users WHERE email = '$umail' AND password = '$upass'";
 	$result = mysql_query($sql);

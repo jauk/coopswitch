@@ -17,6 +17,7 @@ else
 	$name = test_input($_POST[name]);
 	$email = test_input($_POST[email]);
 	$password = test_input($_POST[password]);
+	$password = md5($password);
 	$cycle = test_input($_POST[cycle]);
 	$num_year_program = test_input($_POST[numCoops]);
 	$majorVal = test_input($_POST[major]);
