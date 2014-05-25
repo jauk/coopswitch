@@ -3,13 +3,15 @@ include('header.php');
 include_once('scripts.php');
 
 // Some global CSS variables
-$formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3";
+$formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3";
 $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-center";
 $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center";
 
 ?>
 
 <div class="container-fluid">
+
+<hr>
 
 	<?php if ($_SESSION['login'] == "") { ?>
 
@@ -22,10 +24,11 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 		<div class="<?php echo "$otherClassMaybe"; ?>">
 			<img src="http://ak1.picdn.net/shutterstock/videos/2365601/preview/stock-footage-happy-friends-laughing-in-front-of-a-laptop-in-a-bright-living-room.jpg" 
 				 class="img-responsive img-rounded center-block" max-width: 100%; height: auto;>
-<!-- 			<div class="caption">Friends having fun on Coopswitch.</div> <br><br>  -->
+			<!-- <div class="caption">Friends having fun on Coopswitch.</div>  -->
+	 	<br><br>	
 		</div>
 
-		<div class="row col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center well">
+		<div class="row col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 text-center well">
 			<h4>Registration Form</h4>
 			<p>This is currently for <em>Drexel Freshman</em> only.</p>
 		</div>
