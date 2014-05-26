@@ -109,5 +109,14 @@ function login_user($user_data) {
 		$_SESSION['user_dropped_matches'] = $user_data[0]['dropped_matches'];
 }
 
+function get_not_matched () {
+	// Get all the peoples not matched...
+	$query="SELECT * FROM Users WHERE matched = 0";
+	$result=mysql_query($query);
+	$num=mysql_num_rows($result);
+
+	return $num;
+}
+
 
 ?>

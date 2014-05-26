@@ -5,6 +5,12 @@ include('mail.php');
 
 $debug = 0;
 
+// $test = 0;
+$run = test_input($_GET['run']);
+
+if ($test == 1)
+  echo "Test";
+
 ?>
 
 <br />
@@ -42,7 +48,7 @@ $num=mysql_num_rows($result); // ...It's this many
         $index++; // KIND OF NEED THIS...
       }
 
-      echo "<br><br><hr>";
+      echo "<br><br>";
       /*
 
       Show what majors do not have matches. Fancy bar/circle graph?    
@@ -144,8 +150,9 @@ $num=mysql_num_rows($result); // ...It's this many
 ?>
 
   <div class="<?php echo $rowClass; ?>">
-    <p>There were <?php echo "$matches"; ?> matches made!</p><br>
-    <h2>Last 10 Matches</h2>
+    <br>
+    <p class="lead">There were <?php echo "$matches"; ?> matches made!</p><br>
+
     <?php 
 
     $query = "select major from Matches ORDER BY id DESC LIMIT 10";
@@ -155,14 +162,21 @@ $num=mysql_num_rows($result); // ...It's this many
     $last_matches = array();
     $index = 0;
 
+    ?>
+
+    <ul class="list-group">
+          <h2 class="list-group-item-heading">Last 10 Matches</h2>
+    <?php
+
     while ($row = mysql_fetch_array($result))
     {
       $last_matches[$index] = $row; // Save the users into the array.
       $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
-      echo $last_matches[$index]['major_name'] . "<br>";
+      ?>
+      <li class="list-group-item"><?php echo $last_matches[$index]['major_name']; ?></li>
+      <?php 
       $index++; // KIND OF NEED THIS...
     }
-
 
 
     ?>

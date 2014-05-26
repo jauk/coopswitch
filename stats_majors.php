@@ -2,7 +2,6 @@
 include('header.php'); 
 include_once('connect.php');
 
-include_once('stats_top.php');
 // Lets get the data we need for graph.
 
 $limit = 10;
@@ -46,12 +45,13 @@ $heading_class_row = "row-fluid col-md-8 col-md-offset-1";
 ?>
 <!-- Also maybe add percentages? -->
 
-<?php include_once('stats_top.php'); ?>
 
 <script src="../amcharts/amcharts.js" type="text/javascript"></script>
 <script src="../amcharts/serial.js" type="text/javascript"></script>
 
 <div class="container-fluid">
+
+    <?php include_once('stats_top.php'); ?> 
 
     <h1 class="<?php echo $heading_class_row; ?>">Top Majors by Users</h1>
 

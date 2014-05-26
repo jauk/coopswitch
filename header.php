@@ -92,4 +92,4 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 				?>
 		<!--	</div> -->
 		</div>
-	</div>
+	<!-- </div> -->
