@@ -6,12 +6,46 @@ include('mail.php');
 $debug = 0;
 
 // $test = 0;
-$run = test_input($_GET['run']);
-
-if ($test == 1)
-  echo "Test";
+$msg = test_input($_GET['msg']);
 
 ?>
+
+<script>
+$(function(){
+    $('#generate_records').click(function(){
+        $.ajax({
+            url: 'testdb.php',
+            success: function(data) { // data is the response from your php script
+                // This function is called if your AJAX query was successful
+                //alert("Response is: " + data);
+                window.location.href = 'check.php?msg=1';
+            },
+            error: function() {
+                // This callback is called if your AJAX query has failed
+                alert("Error!");
+            }
+        });
+    });
+});
+
+$(function(){
+    $('#delete_records').click(function(){
+        $.ajax({
+            url: 'emptydb.php',
+            success: function(data) { // data is the response from your php script
+                // This function is called if your AJAX query was successful
+                //alert("Response is: " + data);
+                window.location.href = 'check.php?msg=2';
+            },
+            error: function() {
+                // This callback is called if your AJAX query has failed
+                alert("Error!");
+            }
+        });
+    });
+});
+
+</script>
 
 <br />
 <div class="container-fluid">
@@ -28,10 +62,21 @@ $result=mysql_query($query);
 $num=mysql_num_rows($result); // ...It's this many
 
 ?>
-
+  
   <div class="<?php echo $rowClass; ?>">
+    <?php 
+      if ($msg == 1) 
+          echo "<strong>Records generated.</strong><br><br>"; 
+      else if ($msg == 2) 
+          echo "<strong>Database cleared.</strong><br><br>"; 
+
+      $msg = 0;
+    ?>
     <p>There are <?php echo $num; ?> people who have not been matched. <br> Will now attempt to manually match.</p>
-    <?php if ($num == 0) echo "Hooray!" ?>
+    <?php if ($num == 0) echo "Hooray, everyone is matched!<br><br>" ?>
+
+    <button id="generate_records" type="button" class="btn btn-warning">Generate Records</button>
+    <button id="delete_records" type="button" class="btn btn-danger">Delete Records</button>
   </div>
 
 <?php
@@ -151,8 +196,14 @@ $num=mysql_num_rows($result); // ...It's this many
 
   <div class="<?php echo $rowClass; ?>">
     <br>
-    <p class="lead">There were <?php echo "$matches"; ?> matches made!</p><br>
 
+    <?php if ($matches > 0) { ?>
+    <p class="lead">There were <?php echo "$matches"; ?> matches made!</p>
+    <?php } ?>
+    
+    <p>There are still <?php echo $num - ($matches*2); ?> people who still need to be matched.</p>
+
+    <br>
     <?php 
 
     $query = "select major from Matches ORDER BY id DESC LIMIT 10";
@@ -180,8 +231,7 @@ $num=mysql_num_rows($result); // ...It's this many
 
 
     ?>
-    <br><hr>
-    <p>There are still <?php echo $num - ($matches*2); ?> people who still need to be matched.</p>
+    
   </div>
 
 </div>

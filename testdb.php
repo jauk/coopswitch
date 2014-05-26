@@ -21,7 +21,7 @@ $email = "";
 for ($x = 1; $x < $limit; $x++) {
 
 	$name = $names[array_rand($names)];
-	$password = "$x";
+	$password = md5($x);
 	$cycle = rand(1,2);
 	$num_year_program = rand(1,2);
 	$majorVal = rand(2,87);

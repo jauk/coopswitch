@@ -24,8 +24,15 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" media="screen" href="http://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css">
 	
+	<link href="http://fonts.googleapis.com/css?family=Cutive" rel="stylesheet" type="text/css">
 
-	<link href='http://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+	<style>
+		h1 {
+			font-family: 'Cutive';
+			font-size: 48px;
+		}
+
+	</style>
 	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

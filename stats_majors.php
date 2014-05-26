@@ -40,7 +40,6 @@ while ($row = mysql_fetch_array($result)) {
 }
 
 
-$heading_class_row = "row-fluid col-md-8 col-md-offset-1";
 
 ?>
 <!-- Also maybe add percentages? -->
@@ -53,15 +52,15 @@ $heading_class_row = "row-fluid col-md-8 col-md-offset-1";
 
     <?php include_once('stats_top.php'); ?> 
 
-    <h1 class="<?php echo $heading_class_row; ?>">Top Majors by Users</h1>
+    <h3 class="<?php echo $heading_class_row; ?>">Top Majors by Users</h3>
 
     <div id="chartdiv" style="width: 100%; height: 400px;"></div>
 
-    <h1 class="<?php echo $heading_class_row; ?>">Top Majors by Users - With Matches</h1>
+    <h3 class="<?php echo $heading_class_row; ?>">Top Majors by Users - With Matches</h3>
 
     <div id="top_matched_div" style="width: 100%; height: 400px;"></div>    
 
-    <h1 class="<?php echo $heading_class_row; ?>">Top Majors by Users - Without Matches</h1>
+    <h3 class="<?php echo $heading_class_row; ?>">Top Majors by Users - Without Matches</h3>
 
     <div id="top_not_matched_div" style="width: 100%; height: 400px;"></div>  
 

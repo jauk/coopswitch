@@ -127,13 +127,13 @@ else if ($_SESSION['login'] == "1") {
 		?>
 
 			<!-- <div class="row-fluid col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center"> -->
-			<div class="row-fluid col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5 text-center">
+			<div class="row-fluid col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-6 col-lg-offset-3 text-center">
 				<br><hr><p class="lead">Hey, you have a match!</p>
 				<!-- Display data for marking match as completed. 
 				Add column to Users for Match_completed, if both users are 1, set as completed in Matches table and display code. -->
 			</div>
 
-			<div class="row-fluid col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5 text-center well">
+			<div class="row-fluid col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-6 col-lg-offset-3 text-center well">
 				<p>You have matched with <strong> <?php echo $other_user_data[0]['name']; ?></strong>.</p>
 				<p>You can email them at <strong> <?php echo $other_user_data[0]['email']; ?></strong></p>
 			</div>

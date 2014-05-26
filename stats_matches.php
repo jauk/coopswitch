@@ -31,7 +31,7 @@ $result=mysql_query($query);
 $num_users_not_matched = mysql_num_rows($result);
 
 
-$heading_class_row = "row-fluid col-md-8 col-md-offset-1";
+// $heading_class_row = "row-fluid col-md-8 col-md-offset-1";
 
 ?>
 
@@ -45,13 +45,13 @@ $heading_class_row = "row-fluid col-md-8 col-md-offset-1";
 
 <div class="container-fluid">
 
-    <h1 class="<?php echo $heading_class_row; ?>">Top Matches by Major</h1>
+    <h3 class="<?php echo $heading_class_row; ?>">Top Matches by Major</h3>
 
     <!-- Also maybe add percentages? -->
 
     <div id="chartdiv" style="width: 100%; height: 400px;"></div>
 
-    <h1 class="<?php echo $heading_class_row; ?>">Percentage of Users Matched</h1>
+    <h3 class="<?php echo $heading_class_row; ?>">Percentage of Users Matched</h3>
 
     <div id="piechartdiv" style="width: 100%; height: 400px;"></div>
 
