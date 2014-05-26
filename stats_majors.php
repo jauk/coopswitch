@@ -31,11 +31,14 @@ while ($row = mysql_fetch_array($result)) {
 
 <a href="stats.php">Back</a>
 
-<h1>Most Popular Majors</h1>
+<h1>Top Majors by Users</h1>
 
 <!-- Also maybe add percentages? -->
 
 <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+
+<!-- Top majors with matches, Top majors without matches -->
+
 
 
 </div>

@@ -136,7 +136,7 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 
 				$descriptions = array (
 					"Here are some narwhals playing.",
-					"Here is a silly giraffe.",
+					"Here is a silly giraffe.", // Her favorite animal is giraffes.
 					"Here is a group of penguins.",
 					"Here is an elephant playing soccer.",
 					);
@@ -207,13 +207,13 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 				
 				nameTest = name.toLowerCase();
 
-				if (nameTest.indexOf("justin") > -1) {
-					nameDiv.style.display = '';
-					nameDiv.textContent = "Nice name!";
-					nameDiv.className = 'alert alert-success';
+				// if (nameTest.indexOf("justin") > -1) {
+				// 	nameDiv.style.display = '';
+				// 	nameDiv.textContent = "Nice name!";
+				// 	nameDiv.className = 'alert alert-success';
 
-					$("#nameError").fadeOut(500);
-				}
+				// 	$("#nameError").fadeOut(500);
+				// }
 			}
 
 		}

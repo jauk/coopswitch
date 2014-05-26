@@ -17,7 +17,7 @@
 
     <div class="row-fluid col-md-6 col-md-offset-3 text-center">
         <ul class="nav nav-pills">
-            <li><a href="stats_majors.php">Top Majors</a></li>
+            <li><a href="stats_majors.php">Majors</a></li>
  <!--            <li><a href="stats_coops.php">Cycles by Major</a></li>
             <li><a href="stats_switches.php">Popular Switches</a></li> -->
         </ul>
