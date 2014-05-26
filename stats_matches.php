@@ -91,7 +91,7 @@ $heading_class_row = "row-fluid col-md-8 col-md-offset-1";
 	    	echo "\n\t{\n";
 	    	echo "\t\t" . '"major": ' . '"' . $top_matches[$x]['major'] . '",' . "\n";
 	    	echo "\t\t" . '"count": ' . $top_matches[$x]['count'] . "\n";
-            if ($x < 8)
+            if ($x < $max-1)
 	    	echo "\t},\n";
             else
             echo "\t}\n";

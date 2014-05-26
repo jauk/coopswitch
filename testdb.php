@@ -42,6 +42,8 @@ mysql_close($con);
 
 echo "Records generated.";
 
+header('Location: update.php');
+
 ?>
 
 	</div>
