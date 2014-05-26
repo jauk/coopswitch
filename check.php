@@ -24,7 +24,7 @@ $num=mysql_num_rows($result); // ...It's this many
 ?>
 
   <div class="<?php echo $rowClass; ?>">
-    <p>There are <?php echo $num; ?> people who have not been matched. <br> Will now attempt to match.</p>
+    <p>There are <?php echo $num; ?> people who have not been matched. <br> Will now attempt to manually match.</p>
     <?php if ($num == 0) echo "Hooray!" ?>
   </div>
 
