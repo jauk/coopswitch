@@ -36,7 +36,7 @@ $heading_class_row = "row-fluid col-md-8 col-md-offset-1";
 ?>
 
 
-<?php include_once('statstop.php'); ?>
+<?php include_once('stats_top.php'); ?>
 
 <script src="../amcharts/amcharts.js" type="text/javascript"></script>
 <script src="../amcharts/serial.js" type="text/javascript"></script>
@@ -45,121 +45,119 @@ $heading_class_row = "row-fluid col-md-8 col-md-offset-1";
 
 <div class="container-fluid">
 
-<a href="stats.php">Back</a><br>
+    <h1 class="<?php echo $heading_class_row; ?>">Top Matches by Major</h1>
 
-<h1 class="<?php echo $heading_class_row; ?>">Top Matches by Major</h1>
+    <!-- Also maybe add percentages? -->
 
-<!-- Also maybe add percentages? -->
+    <div id="chartdiv" style="width: 100%; height: 400px;"></div>
 
-<div id="chartdiv" style="width: 100%; height: 400px;"></div>
+    <h1 class="<?php echo $heading_class_row; ?>">Percentage of Users Matched</h1>
 
-<h1 class="<?php echo $heading_class_row; ?>">Percentage of Users Matched</h1>
+    <div id="piechartdiv" style="width: 100%; height: 400px;"></div>
 
-<div id="piechartdiv" style="width: 100%; height: 400px;"></div>
+    </div>
 
-</div>
+    <script type="text/javascript">
 
-<script type="text/javascript">
+        
+        var pieChart;
 
-    
-    var pieChart;
+        var pieChartData = [
 
-    var pieChartData = [
-
-            {
-                "status": "Matched",
-                "value":  <?php echo $num_users_matched; ?>
-            },
-            {
-                "status": "Not Matched",
-                "value":  <?php echo $num_users_not_matched; ?>
-            }
-    ];
+                {
+                    "status": "Matched",
+                    "value":  <?php echo $num_users_matched; ?>
+                },
+                {
+                    "status": "Not Matched",
+                    "value":  <?php echo $num_users_not_matched; ?>
+                }
+        ];
 
 
 
 
-    var chart;
+        var chart;
 
-    var chartData = [ 
-	    <?php
+        var chartData = [ 
+    	    <?php
 
-        $max = sizeof($top_matches);
+            $max = sizeof($top_matches);
 
-	    for ($x=0; $x<$max; $x++) {
+    	    for ($x=0; $x<$max; $x++) {
 
-	    	echo "\n\t{\n";
-	    	echo "\t\t" . '"major": ' . '"' . $top_matches[$x]['major'] . '",' . "\n";
-	    	echo "\t\t" . '"count": ' . $top_matches[$x]['count'] . "\n";
-            if ($x < $max-1)
-	    	echo "\t},\n";
-            else
-            echo "\t}\n";
+    	    	echo "\n\t{\n";
+    	    	echo "\t\t" . '"major": ' . '"' . $top_matches[$x]['major'] . '",' . "\n";
+    	    	echo "\t\t" . '"count": ' . $top_matches[$x]['count'] . "\n";
+                if ($x < $max-1)
+    	    	echo "\t},\n";
+                else
+                echo "\t}\n";
 
-	    }
+    	    }
 
-	    ?>
-    ];
+    	    ?>
+        ];
 
-    // I want a line graph showing how match rate goes (up) over time with more users.
+        // I want a line graph showing how match rate goes (up) over time with more users.
 
 
 
-    AmCharts.ready(function () {
+        AmCharts.ready(function () {
 
-        pieChart = new AmCharts.AmPieChart();
-        pieChart.dataProvider = pieChartData;
-        pieChart.titleField = "status";
-        pieChart.valueField = "value";
-        pieChart.outlineColor = "#FFFFFF";
-        pieChart.outlineAlpha = 0.8;
-        pieChart.outlineThickness = 2;
-        pieChart.creditsPosition = "top-right";
+            pieChart = new AmCharts.AmPieChart();
+            pieChart.dataProvider = pieChartData;
+            pieChart.titleField = "status";
+            pieChart.valueField = "value";
+            pieChart.outlineColor = "#FFFFFF";
+            pieChart.outlineAlpha = 0.8;
+            pieChart.outlineThickness = 2;
+            pieChart.creditsPosition = "top-right";
 
-        // WRITE
-        pieChart.write("piechartdiv");
-    });
+            // WRITE
+            pieChart.write("piechartdiv");
+        });
 
-    // For bar graph
-    AmCharts.ready(function () {
+        // For bar graph
+        AmCharts.ready(function () {
 
-        // Bar Graph Chart
-        chart = new AmCharts.AmSerialChart();
-        chart.dataProvider = chartData;
-        chart.categoryField = "major";
-        chart.startDuration = 1;
+            // Bar Graph Chart
+            chart = new AmCharts.AmSerialChart();
+            chart.dataProvider = chartData;
+            chart.categoryField = "major";
+            chart.startDuration = 1;
 
-        // AXES
-        // category
-        var categoryAxis = chart.categoryAxis;
-        categoryAxis.labelRotation = 60;
-        categoryAxis.gridPosition = "start";
+            // AXES
+            // category
+            var categoryAxis = chart.categoryAxis;
+            categoryAxis.labelRotation = 60;
+            categoryAxis.gridPosition = "start";
 
-        // value
-        // in case you don't want to change default settings of value axis,
-        // you don't need to create it, as one value axis is created automatically.
+            // value
+            // in case you don't want to change default settings of value axis,
+            // you don't need to create it, as one value axis is created automatically.
 
-        // GRAPH
-        var graph = new AmCharts.AmGraph();
-        graph.valueField = "count";
-        graph.balloonText = "[[category]]: <b>[[value]]</b>";
-        graph.type = "column";
-        graph.lineAlpha = 0;
-        graph.fillAlphas = 0.8;
-        chart.addGraph(graph);
+            // GRAPH
+            var graph = new AmCharts.AmGraph();
+            graph.valueField = "count";
+            graph.balloonText = "[[category]]: <b>[[value]]</b>";
+            graph.type = "column";
+            graph.lineAlpha = 0;
+            graph.fillAlphas = 0.8;
+            chart.addGraph(graph);
 
-        // CURSOR
-        var chartCursor = new AmCharts.ChartCursor();
-        chartCursor.cursorAlpha = 0;
-        chartCursor.zoomable = false;
-        chartCursor.categoryBalloonEnabled = false;
-        chart.addChartCursor(chartCursor);
+            // CURSOR
+            var chartCursor = new AmCharts.ChartCursor();
+            chartCursor.cursorAlpha = 0;
+            chartCursor.zoomable = false;
+            chartCursor.categoryBalloonEnabled = false;
+            chart.addChartCursor(chartCursor);
 
-        chart.creditsPosition = "top-right";
+            chart.creditsPosition = "top-right";
 
-        chart.write("chartdiv");
-    });
-</script>
+            chart.write("chartdiv");
+        });
+    </script>
 
 <?php
 include('footer.php');
