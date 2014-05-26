@@ -43,8 +43,6 @@ $num=mysql_num_rows($result); // ...It's this many
       }
 
       echo "<br><br><hr>";
-
-
       /*
 
       Show what majors do not have matches. Fancy bar/circle graph?    
@@ -100,7 +98,8 @@ $num=mysql_num_rows($result); // ...It's this many
               /* *** Matches db need to add date matched, date completed, major val (to compare to when change major in profile, also for stats [ie. most popular majors]) */
 
               // Insert into the Matches database.
-              $query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ")");
+              $query = sprintf("INSERT INTO Matches (userA, userB, major) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ", " . $users_not_matched[$x]['major'] . ")");
+             //$query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ")");
               $result = mysql_query($query);
 
               // Grab the Id of the match from Matches table
@@ -141,12 +140,33 @@ $num=mysql_num_rows($result); // ...It's this many
 
 
 
-  mysql_close($con);
 
 ?>
 
   <div class="<?php echo $rowClass; ?>">
     <p>There were <?php echo "$matches"; ?> matches made!</p><br>
+    <h2>Last 10 Matches</h2>
+    <?php 
+
+    $query = "select major from Matches ORDER BY id DESC LIMIT 10";
+    $result = mysql_query($query) OR die(mysql_error());
+    $row = mysql_fetch_array($result);
+
+    $last_matches = array();
+    $index = 0;
+
+    while ($row = mysql_fetch_array($result))
+    {
+      $last_matches[$index] = $row; // Save the users into the array.
+      $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
+      echo $last_matches[$index]['major_name'] . "<br>";
+      $index++; // KIND OF NEED THIS...
+    }
+
+
+
+    ?>
+    <br><hr>
     <p>There are still <?php echo $num - ($matches*2); ?> people who still need to be matched.</p>
   </div>
 
@@ -154,6 +174,9 @@ $num=mysql_num_rows($result); // ...It's this many
 
 <br />
 <?php
+
+mysql_close($con);
+
 include('footer.php')
 
 // Add to Matches table, set matched val to 1, connect with each other.
