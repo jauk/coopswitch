@@ -21,7 +21,6 @@ else
 
 // ON ALL UPDATES UNDO THE MATCHES (For both users). IMP. Also verify major actually changes in db.
 
-
 //echo $newUserMajor;
 
 // Get the user we are talking to and save them into a local array.
