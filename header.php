@@ -74,6 +74,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 					   		<button type="submit" class="btn btn-default btn-success">Sign In</button>
 					    </fieldset>
 					</form>
+					<hr>
 				</div>
 				<?php } else { ?>
 
@@ -83,6 +84,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 							<a href="account.php"><button type="button" class="btn btn-primary" >Profile</button></a>
 							<a href="logout.php"><button type="button" class="btn btn-danger">Logout</button></a>
 						</p>
+						<hr>
 					</div>
 
 					<?php }

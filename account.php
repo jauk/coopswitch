@@ -11,7 +11,7 @@ else if ($_SESSION['login'] == "1") {
 
 ?>
 
-<hr>
+<!-- <hr> -->
 
 <div class="container-fluid">
 

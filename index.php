@@ -10,8 +10,8 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 
 <div class="container-fluid">
 
-<hr>
-
+<!-- <hr>
+ -->
 	<?php if ($_SESSION['login'] == "") { ?>
 
 		<div class="row col-md-6 col-md-offset-3 text-center">

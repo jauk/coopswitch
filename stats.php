@@ -1,6 +1,5 @@
 <?php include('header.php'); ?>
 
-<hr>
 <div class="container-fluid">
 
 
@@ -13,7 +12,6 @@
      Get as specific as possible, enter major to get stats for, etc.
      Make line graphs that go over time, etc. (ADD MATCHED DATE COLUMN TO Matches TABLE FOR THIS TOO)
 -->
-
 
 </div>
 
