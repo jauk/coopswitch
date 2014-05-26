@@ -355,7 +355,8 @@ include('footer.php')
 - Better emails for matches
 - Better security I guess
 - More db fields (ie. for acct confirmation)
-- Etc
+
+- * Complete match code (see accounts for more details)
 
 - Fast Track
 

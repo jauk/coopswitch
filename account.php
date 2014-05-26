@@ -129,6 +129,8 @@ else if ($_SESSION['login'] == "1") {
 	?>
 	<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
 		<br><hr><p class="lead">Hey, you have a match!</p>
+		<!-- Display data for marking match as completed. 
+		Add column to Users for Match_completed, if both users are 1, set as completed in Matches table and display code. -->
 	</div>
 
 	<div class="row-fluid col-md-6 col-md-offset-3 text-center well">
