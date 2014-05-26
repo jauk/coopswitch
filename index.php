@@ -1,12 +1,11 @@
 <?php
 include('header.php');
-include_once('scripts.php');
 
 // Some global CSS variables
 $formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3";
+
 $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-center";
 $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center";
-
 ?>
 
 <div class="container-fluid">
@@ -132,15 +131,17 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 				"http://upload.wikimedia.org/wikipedia/commons/5/5c/Narwhals_breach.jpg",
 				"http://www.graphics99.com/wp-content/uploads/2012/07/funny-giraffe-tongue-image-for-friendster.jpg",
 				"http://www.funnyzone.org/wp-content/uploads/2009/06/635_bear-and-panda.jpg",
+				"http://twistedsifter.files.wordpress.com/2012/05/funny-baby-elephant-4.jpg",
 					);
 
 				$descriptions = array (
 					"Here are some narwhals playing.",
 					"Here is a silly giraffe.",
-					"Here is a group of penguins",
+					"Here is a group of penguins.",
+					"Here is an elephant playing soccer.",
 					);
 
-				$option = rand(0, 2);
+				$option = rand(0, 3);
 
 			?>
 

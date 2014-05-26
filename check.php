@@ -44,10 +44,10 @@ $num=mysql_num_rows($result); // ...It's this many
 
       echo "<br><br><hr>";
 
+
       /*
 
-      Main issue: People are showing up twice. Need to sync both arrays or remove people. 
-                  Make sure they cannot exist in second somehow?
+      Show what majors do not have matches. Fancy bar/circle graph?    
 
       */
 

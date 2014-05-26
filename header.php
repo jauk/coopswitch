@@ -3,6 +3,8 @@
 // 	$_SESSION['login'] = "";
 
 session_start();
+session_regenerate_id(true);
+
 include('scripts.php');
 
 //
@@ -54,12 +56,12 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 			</ul>
 		</div>	
 
-		<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center">
 			<!-- <div class="panel panel-default"> <br /> -->
-		<br>
+		<br><br>
 
 				<?php if ($_SESSION['login'] == "") { ?>
-					<form class="form-inline" role="form" name="login_form" method="post" action="login.php">
+				<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center">
+					<br><form class="form-inline" role="form" name="login_form" method="post" action="login.php">
 						<fieldset>
 							<div class="form-group">
 						    	<label class="sr-only" for="email">Email address</label>
@@ -72,10 +74,11 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 					   		<button type="submit" class="btn btn-default btn-success">Sign In</button>
 					    </fieldset>
 					</form>
+				</div>
 				<?php } else { ?>
 
 					<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-						<p class="lead">
+						<br><p class="lead">
 							Hey, <?php echo $_SESSION['user_name']; ?>.&nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="account.php"><button type="button" class="btn btn-primary" >Profile</button></a>
 							<a href="logout.php"><button type="button" class="btn btn-danger">Logout</button></a>
