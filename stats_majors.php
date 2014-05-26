@@ -3,9 +3,10 @@ include('header.php');
 include_once('connect.php');
 // Lets get the data we need for graph.
 
+$limit = 10;
 
-// Grab top 10 most popular match majors.
-$result = mysql_query("SELECT major, COUNT(major) as 'count' FROM Users GROUP BY major ORDER BY COUNT(major) desc LIMIT 10");
+// Grab top X most popular match majors.
+$result = mysql_query("SELECT major, COUNT(major) as 'count' FROM Users GROUP BY major ORDER BY COUNT(major) desc LIMIT " . $limit);
 $top_majors = array();
 $index = 0;
 while ($row = mysql_fetch_array($result)) {
@@ -16,7 +17,7 @@ while ($row = mysql_fetch_array($result)) {
 }
 
 // Grab top 10 matched majors
-$result = mysql_query("SELECT major, COUNT(major) as 'count' FROM Users WHERE matched = 1 GROUP BY major ORDER BY COUNT(major) desc LIMIT 10");
+$result = mysql_query("SELECT major, COUNT(major) as 'count' FROM Users WHERE matched = 1 GROUP BY major ORDER BY COUNT(major) desc LIMIT " . $limit);
 $top_matched_majors = array();
 $index = 0;
 while ($row = mysql_fetch_array($result)) {
@@ -27,7 +28,7 @@ while ($row = mysql_fetch_array($result)) {
 }
 
 // Grab top 10 unmatched majors
-$result = mysql_query("SELECT major, COUNT(major) as 'count' FROM Users WHERE matched = 0 GROUP BY major ORDER BY COUNT(major) desc LIMIT 10");
+$result = mysql_query("SELECT major, COUNT(major) as 'count' FROM Users WHERE matched = 0 GROUP BY major ORDER BY COUNT(major) desc LIMIT " . $limit);
 $top_not_matched_majors = array();
 $index = 0;
 while ($row = mysql_fetch_array($result)) {
@@ -74,12 +75,14 @@ $heading_class_row = "row-fluid col-md-8 col-md-offset-1";
     var topMajorsChartData = [ 
 	    <?php
 
-	    for ($x=0; $x<9; $x++) {
+        $max = sizeof($top_majors);
+
+	    for ($x=0; $x<$max; $x++) {
 
 	    	echo "\n\t{\n";
 	    	echo "\t\t" . '"major": ' . '"' . $top_majors[$x]['major'] . '",' . "\n";
 	    	echo "\t\t" . '"count": ' . $top_majors[$x]['count'] . "\n";
-            if ($x < 8)
+            if ($x < $max-1)
 	    	echo "\t},\n";
             else
             echo "\t}\n";
@@ -91,12 +94,14 @@ $heading_class_row = "row-fluid col-md-8 col-md-offset-1";
     var topMatchedMajorsChartData = [ 
         <?php
 
-        for ($x=0; $x<9; $x++) {
+        $max = sizeof($top_matched_majors);
+
+        for ($x=0; $x<$max; $x++) {
 
             echo "\n\t{\n";
             echo "\t\t" . '"major": ' . '"' . $top_matched_majors[$x]['major'] . '",' . "\n";
             echo "\t\t" . '"count": ' . $top_matched_majors[$x]['count'] . "\n";
-            if ($x < 8)
+            if ($x < $max-1)
             echo "\t},\n";
             else
             echo "\t}\n";
@@ -108,12 +113,14 @@ $heading_class_row = "row-fluid col-md-8 col-md-offset-1";
     var topNotMatchedMajorsChartData = [ 
         <?php
 
-        for ($x=0; $x<9; $x++) {
+        $max = sizeof($top_not_matched_majors);
+
+        for ($x=0; $x<$max; $x++) {
 
             echo "\n\t{\n";
             echo "\t\t" . '"major": ' . '"' . $top_not_matched_majors[$x]['major'] . '",' . "\n";
             echo "\t\t" . '"count": ' . $top_not_matched_majors[$x]['count'] . "\n";
-            if ($x < 8)
+            if ($x < $max-1)
             echo "\t},\n";
             else
             echo "\t}\n";

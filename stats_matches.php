@@ -3,9 +3,11 @@ include('header.php');
 include_once('connect.php');
 // Lets get the data we need for graph.
 
+$limit = 10;
+
 // Data for bar graph
 // Grab top 10 most popular match majors that have matches.
-$result = mysql_query("SELECT major, COUNT(major) as 'count' FROM Users WHERE matched = 1 GROUP BY major ORDER BY COUNT(major) desc LIMIT 10");
+$result = mysql_query("SELECT major, COUNT(major) as 'count' FROM Users WHERE matched = 1 GROUP BY major ORDER BY COUNT(major) desc LIMIT " . $limit);
 $top_matches = array();
 
 $index = 0;
@@ -82,7 +84,9 @@ $heading_class_row = "row-fluid col-md-8 col-md-offset-1";
     var chartData = [ 
 	    <?php
 
-	    for ($x=0; $x<9; $x++) {
+        $max = sizeof($top_matches);
+
+	    for ($x=0; $x<$max; $x++) {
 
 	    	echo "\n\t{\n";
 	    	echo "\t\t" . '"major": ' . '"' . $top_matches[$x]['major'] . '",' . "\n";
