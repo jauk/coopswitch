@@ -48,7 +48,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 					<a href="about.php">About</a>
 				</li>
 				<li>
-					<a href="list.php">List</a>
+					<a href="stats.php">Stats</a>
 				</li>
 				<li>
 					<a href="check.php">Matches</a>

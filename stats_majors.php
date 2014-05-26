@@ -3,7 +3,6 @@ include('header.php');
 include_once('connect.php');
 // Lets get the data we need for graph.
 
-include_once('stats_nav.php');
 
 // Grab top 10 most popular match majors.
 $result = mysql_query("SELECT major, COUNT(major) as 'count' FROM Users GROUP BY major ORDER BY COUNT(major) desc LIMIT 10");
@@ -22,12 +21,19 @@ while ($row = mysql_fetch_array($result)) {
 
 ?>
 
+
+<?php include_once('statstop.php'); ?>
+
 <script src="../amcharts/amcharts.js" type="text/javascript"></script>
 <script src="../amcharts/serial.js" type="text/javascript"></script>
 
 <div class="container-fluid">
 
+<a href="stats.php">Back</a>
+
 <h1>Most Popular Majors</h1>
+
+<!-- Also maybe add percentages? -->
 
 <div id="chartdiv" style="width: 100%; height: 400px;"></div>
 
