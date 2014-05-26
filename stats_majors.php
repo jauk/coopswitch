@@ -132,6 +132,7 @@ while ($row = mysql_fetch_array($result)) {
             topMatchedMajorsChart = new AmCharts.AmSerialChart();
             topMatchedMajorsChart.dataProvider = topMatchedMajorsChartData;
             topMatchedMajorsChart.categoryField = "major";
+            topMatchedMajorsChart.rotate = true;
             topMatchedMajorsChart.startDuration = 1;
 
             // AXES
@@ -170,6 +171,7 @@ while ($row = mysql_fetch_array($result)) {
             topNotMatchedMajorsChart = new AmCharts.AmSerialChart();
             topNotMatchedMajorsChart.dataProvider = topNotMatchedMajorsChartData;
             topNotMatchedMajorsChart.categoryField = "major";
+            topNotMatchedMajorsChart.rotate = true;
             topNotMatchedMajorsChart.startDuration = 1;
 
             // AXES
@@ -208,6 +210,7 @@ while ($row = mysql_fetch_array($result)) {
             topMajorsChart = new AmCharts.AmSerialChart();
             topMajorsChart.dataProvider = topMajorsChartData;
             topMajorsChart.categoryField = "major";
+            topMajorsChart.rotate = true;
             topMajorsChart.startDuration = 1;
 
             // AXES

@@ -29,4 +29,4 @@
 
     </div>
 
-<?php $heading_class_row = "row-fluid col-md-8 col-md-offset-1 col-sm-11 col-sm-offset-1 "; ?>
+<?php $heading_class_row = "row-fluid col-md-8 col-sm-12"; ?>

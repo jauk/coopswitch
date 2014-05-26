@@ -117,7 +117,7 @@ else if ($_SESSION['login'] == "1") {
 		</span>
 	</div>
 
-	<?php 
+	<?php
 		// Get the latest user_matched status
 		$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id'] . "");
 
@@ -129,8 +129,13 @@ else if ($_SESSION['login'] == "1") {
 			<!-- <div class="row-fluid col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center"> -->
 			<div class="row-fluid col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-6 col-lg-offset-3 text-center">
 				<br><hr><p class="lead">Hey, you have a match!</p>
+
+
 				<!-- Display data for marking match as completed. 
-				Add column to Users for Match_completed, if both users are 1, set as completed in Matches table and display code. -->
+				Add column to Users for Match_completed, if both users are 1, set as completed in Matches table and display code. 
+				-->
+			
+
 			</div>
 
 			<div class="row-fluid col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-6 col-lg-offset-3 text-center well">

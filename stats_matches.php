@@ -125,6 +125,7 @@ $num_users_not_matched = mysql_num_rows($result);
             chart = new AmCharts.AmSerialChart();
             chart.dataProvider = chartData;
             chart.categoryField = "major";
+            chart.rotate = true;
             chart.startDuration = 1;
 
             // AXES
