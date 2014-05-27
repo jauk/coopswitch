@@ -34,7 +34,7 @@ for ($x = 1; $x < $limit; $x++) {
 		  VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal', '$dropped_matches',
 				'".date("Y-m-d H:i:s")."'
 		)";
-
+ 
 	//echo "$name $email <br>";
 
 	$resutl=mysql_query($sql);

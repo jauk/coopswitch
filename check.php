@@ -61,7 +61,7 @@ $query="SELECT * FROM Users WHERE matched = 0 ORDER BY dropped_matches ASC";
 $result=mysql_query($query);
 $num=mysql_num_rows($result); // ...It's this many
 
-?>
+?> 
   
   <div class="<?php echo $rowClass; ?>">
     <?php 
