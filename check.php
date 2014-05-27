@@ -57,7 +57,7 @@ $rowClass = "row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-
 include_once('connect.php');
 
 // Get all the peoples not matched...
-$query="SELECT * FROM Users WHERE matched = 0";
+$query="SELECT * FROM Users WHERE matched = 0 ORDER BY dropped_matches ASC";
 $result=mysql_query($query);
 $num=mysql_num_rows($result); // ...It's this many
 
@@ -80,6 +80,8 @@ $num=mysql_num_rows($result); // ...It's this many
   </div>
 
 <?php
+  
+  // I need to order both arrays by number of dropped matches? Less = first. 
 
   if ($num > 0) // If there are people not matched, run this.
    {
@@ -106,7 +108,11 @@ $num=mysql_num_rows($result); // ...It's this many
 
          // $IdsGoneThrough = array(); // Save the Ids gone through and do not let them be compared again? Wait no .
 
-          $query = "SELECT * FROM Users WHERE matched = 0 AND major = " . $users_not_matched[$x]['major'] . " AND id != " . $users_not_matched[$x]['id'] . " AND cycle != " . $users_not_matched[$x]['cycle'] . " AND num_year_program = " . $users_not_matched[$x]['num_year_program'] . "";
+          $query = " SELECT * FROM Users WHERE matched = 0 AND major = " . $users_not_matched[$x]['major'] . 
+                   " AND id != " . $users_not_matched[$x]['id'] . " AND cycle != " . $users_not_matched[$x]['cycle'] . 
+                   " AND num_year_program = " . $users_not_matched[$x]['num_year_program'] .
+                   " ORDER BY dropped_matches ASC";
+
           $result = mysql_query($query);
 
           //  
