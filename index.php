@@ -48,20 +48,20 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 			<div id="mainNameDiv" class="<?php echo "$formGroupClass"; ?>">
 				<label for="nameField">Name</label>
 				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()">
-				<span class="error"><div id="nameError"></div></span>
+				<span class="help-block error"><div id="nameError"></div></span>
 			</div>
 
 			<div id="mainEmailDiv" class="<?php echo "$formGroupClass"; ?>">
 				<label for="emailField">Email</label> 
 				<input type="text" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email()">
-				<span class="error"><div id="emailError"></div></span>					
+				<span class="help-block error"><div id="emailError"></div></span>					
 			</div>
 
 			<div id="mainPasswordDiv" class="<?php echo "$formGroupClass"; ?>">
 				<label for="passwordField">Password<small><br /><em>Do not use your Drexel One password.</em></small></label> 
 				<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
 				<br><input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
-				<span class="error"><div id="passwordError"></div></span>
+				<span class="help-block error"><div id="passwordError"></div></span>
 			</div>
 
 			<!-- 
@@ -114,9 +114,9 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 			</div> 
 			-->
 
-			<div class="<?php echo "$formGroupClass"; ?>">
+			<div class="<?php echo "$formGroupClass"; ?> text-center">
 				 <div id="errorFree">
-				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-default btn-lg btn-primary">Submit</button>
+				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-default btn-lg btn-primary">Register</button>
 				 </div>
 				<!-- <input type="button" name="submit_form" id="submit_form" value="Submit" /> -->
 			</div>
