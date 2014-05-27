@@ -35,7 +35,9 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 			
 		<!-- Print out if there is an error with the form data. Right now it is just a universal one. Needs CSS formatting. -->
 		<div class="<?php echo "$otherClassMaybe"; ?>">
-			<span class="error"><strong><div class="alert alert-warning" id="formError"></div></strong></span>
+			<span class="error">
+				<strong><div class="alert alert-warning" id="formError"></div></strong>
+			</span>
 		</div>
 
 
@@ -43,19 +45,19 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 		<!-- Registration Form -->
 		<form role="form" id="register" method="post" action="register.php" onchange="" onsubmit="return validate_submit();" id="register">
 
-			<div class="<?php echo "$formGroupClass"; ?>">
+			<div id="mainNameDiv" class="<?php echo "$formGroupClass"; ?>">
 				<label for="nameField">Name</label>
 				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()">
 				<span class="error"><div id="nameError"></div></span>
 			</div>
 
-			<div class="<?php echo "$formGroupClass"; ?>">
+			<div id="mainEmailDiv" class="<?php echo "$formGroupClass"; ?>">
 				<label for="emailField">Email</label> 
 				<input type="text" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email()">
 				<span class="error"><div id="emailError"></div></span>					
 			</div>
 
-			<div class="<?php echo "$formGroupClass"; ?>">
+			<div id="mainPasswordDiv" class="<?php echo "$formGroupClass"; ?>">
 				<label for="passwordField">Password<small><br /><em>Do not use your Drexel One password.</em></small></label> 
 				<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
 				<br><input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
@@ -75,23 +77,19 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 			-->
 
 			<div class="<?php echo "$formGroupClass"; ?>">
+				<label for="cycleField">Current Cycle</label>
+				<select class="form-control selectpicker" id="cycle" name="cycle">
+					<option value="1">Fall-Winter</option>
+					<option value="2">Spring-Summer</option>
+				</select>
+			</div>
 
-				<div class="form-group ">
-					<label for="cycleField">Current Cycle</label>
-					<select class="form-control selectpicker" id="cycle" name="cycle">
-						<option value="1">Fall-Winter</option>
-						<option value="2">Spring-Summer</option>
-					</select>
-				</div>
-
-				<div class="form-group">
-					<label for="numCoopsField">Current Program</label>
-					<select class="form-control selectpicker" name="numCoops">
-						<option value="1">4 Years, 1 Co-op</option>
-						<option value="2">5 Years, 3 Co-op</option>
-					</select>
-				</div>
-
+			<div class="<?php echo "$formGroupClass"; ?>">
+				<label for="numCoopsField">Current Program</label>
+				<select class="form-control selectpicker" name="numCoops">
+					<option value="1">4 Years, 1 Co-op</option>
+					<option value="2">5 Years, 3 Co-op</option>
+				</select>
 			</div>
 
 			<div class="<?php echo "$formGroupClass"; ?>">
@@ -168,6 +166,7 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 			
 			errorDiv = document.getElementById("formError");
 			errorDiv.style.display = 'none';
+
 			var errors = 0;
 			window.hasEnteredAgain = false;
 
@@ -179,6 +178,12 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 
 			window.errorClassVals = "alert alert-warning";
 
+			window.mainDivClass = "<?php echo $formGroupClass; ?>";
+			window.mainDivClassError = mainDivClass + " has-error";
+			window.mainDivClassValid = mainDivClass + " has-success";
+			window.mainDivClassWarning = mainDivClass + " has-warning";
+
+
 			//document.getElementById('email').onchange = validate_email;
 			//$("submit_form").onclick = validate_data;
 
@@ -187,9 +192,12 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 		var validate_name = function () {
 
 			name = document.getElementById("user_name").value;
+			mainNameDiv = document.getElementById("mainNameDiv");
+
 			name = name.trim();
 
 			var nameDiv = document.getElementById("nameError");
+			//var mainNameDiv = document.getElementById("mainNameDiv");
 
 			if (name == "")
 			{
@@ -197,6 +205,8 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 				nameDiv.textContent = "You need a name.";
 				nameDiv.style.display = '';
 				nameDiv.className = window.errorClassVals;
+
+				mainNameDiv.className = window.mainDivClassError;
 			}
 			else
 			{
@@ -204,9 +214,10 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 				//nameDiv.textContent = "Name exists.";
 				document.getElementById("user_name").value = name;
 				nameDiv.style.display = 'none';
-				
-				nameTest = name.toLowerCase();
 
+				mainNameDiv.className = window.mainDivClassValid;
+				
+				//nameTest = name.toLowerCase();
 				// if (nameTest.indexOf("justin") > -1) {
 				// 	nameDiv.style.display = '';
 				// 	nameDiv.textContent = "Nice name!";
@@ -221,6 +232,7 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 		var validate_email = function () {
 
 			var emailDiv = document.getElementById("emailError");
+			var mainEmailDiv = document.getElementById("mainEmailDiv");
 
 			var email = document.getElementById("user_email").value;
 
@@ -235,6 +247,8 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 			if (hasDrexelEmail != -1) {
 				emailErr = 0;
 				//emailDiv.textContent = "Valid email!";
+
+				//emailDiv.className = window.
 				emailDiv.style.display = 'none';
 
 				var length = endEmail+drexelEmail.length;
@@ -254,7 +268,7 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 					$("#emailError").fadeOut(2000);
 				}				
 
-
+				mainEmailDiv.className = window.mainDivClassValid;
 			}
 			else
 			{
@@ -262,6 +276,7 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 				emailDiv.textContent = "That is not a Drexel email!";
 				emailDiv.style.display = '';
 				emailDiv.className = window.errorClassVals;
+				mainEmailDiv.className = window.mainDivClassError;
 			}
 
 			document.getElementById("user_email").value = email;
@@ -273,6 +288,7 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 			var password2 = document.getElementById("user_pass_confirm").value;
 
 			var passwordDiv = document.getElementById("passwordError");
+			var mainPasswordDiv = document.getElementById("mainPasswordDiv");
 
 			if (password != password2)
 			{
@@ -289,6 +305,7 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 					passwordDiv.textContent = "Passwords do not match!";	
 					passwordDiv.style.display = '';
 					passwordDiv.className = window.errorClassVals;
+					mainPasswordDiv.className = window.mainDivClassError;
 				}	
 			}
 
@@ -301,11 +318,13 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 					passwordDiv.style.display = '';
 					passwordDiv.className = window.errorClassVals;
 					passwordDiv.textContent = "You should use a longer password.";
+					mainPasswordDiv.className = window.mainDivClassWarning;
 
 				}
 				else
 				{
 					passwordDiv.style.display = 'none';
+					mainPasswordDiv.className = window.mainDivClassValid;
 				}
 
 				passwordErr = 0;
@@ -338,7 +357,6 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 			}
 		}
 
-
 </script>
 
 <?php
@@ -368,6 +386,7 @@ How do I prevent abuse of match dropping
 - That way they are excluded from matching pool.
 
 * The more matches you decline, the lower your priority gets. - Thanks Tyler
+* This should work but should do some more testing.
 
 
 -->

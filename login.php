@@ -54,7 +54,7 @@
 		header("Location: account.php"); 
 	}
 	else {
-		$errorMessage = "Invalid Login.";
+		$errorMessage = "Invalid login. Please try again.";
 		//session_start();
 		$_SESSION['login']="";
 	}

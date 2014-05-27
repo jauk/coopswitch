@@ -6,6 +6,7 @@
     <?php include_once('stats_top.php'); ?>
 
    
+   <!-- Stats for users who receive matches as dropped_matches increase somehow. -->
 
 
 <!-- Major specific stats for everything 
