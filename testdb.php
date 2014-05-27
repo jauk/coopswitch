@@ -25,8 +25,8 @@ for ($x = 1; $x < $limit; $x++) {
 	$password = md5($x);
 	$cycle = rand(1,2);
 	$num_year_program = rand(1,2);
-	//$majorVal = rand(2,87);
-	$majorVal = rand(2,4);
+	$majorVal = rand(2,87);
+	//$majorVal = rand(2,4);
 	$email = "$name$x@drexel.edu"; 
 	$dropped_matches = rand(0, 4);
 
