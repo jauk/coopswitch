@@ -116,7 +116,7 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 
 			<div class="<?php echo "$formGroupClass"; ?> text-center">
 				 <div id="errorFree">
-				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-default btn-lg btn-primary">Register</button>
+				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
 				 </div>
 				<!-- <input type="button" name="submit_form" id="submit_form" value="Submit" /> -->
 			</div>
