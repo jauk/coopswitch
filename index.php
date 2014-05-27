@@ -126,7 +126,7 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 		<?php } else { 
 
 			// Move this to scripts later 
-			
+		
 				$images = array(
 				"http://upload.wikimedia.org/wikipedia/commons/5/5c/Narwhals_breach.jpg",
 				"http://www.graphics99.com/wp-content/uploads/2012/07/funny-giraffe-tongue-image-for-friendster.jpg",
@@ -359,5 +359,15 @@ include('footer.php')
 - * Complete match code (see accounts for more details)
 
 - Fast Track
+
+
+How do I prevent abuse of match dropping
+- If someone is locked into their second match, that hurts who they are matched with
+- Maybe after they drop two matches, they are set as matched and just not allowed 
+	to match with anyone else unless manually switched or something.
+- That way they are excluded from matching pool.
+
+* The more matches you decline, the lower your priority gets. - Thanks Tyler
+
 
 -->

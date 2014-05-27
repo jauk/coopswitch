@@ -44,7 +44,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 	<div class="container-fluid"> 
 		<div class="row col-md-6 col-md-offset-3 text-center">
 			<h1><?php echo "$title"; ?></h1>
-			<h4><i><?php echo "$slogan"; ?></i></h4>
+			<h4><?php echo "$slogan"; ?> </h4>
 		</div>	
 		<div class="row col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 text-center">
 			<ul class="nav nav-pills nav-justified">
