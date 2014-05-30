@@ -1,11 +1,14 @@
 <?php
 include('header.php');
 
-// Some global CSS variables
+// Some global CSS variables. Need to fix these names.
 $formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3";
 
 $notFormClass="row-fluid col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-center";
 $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center";
+
+$pageName = "Test";
+
 ?>
 
 <div class="container-fluid">
@@ -34,7 +37,7 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 		<br>
 			
 		<!-- Print out if there is an error with the form data. Right now it is just a universal one. Needs CSS formatting. -->
-		<div class="<?php echo "$otherClassMaybe"; ?>">
+		<div class="row col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 text-center">
 			<span class="error">
 				<strong><div class="alert alert-warning" id="formError"></div></strong>
 			</span>
@@ -308,8 +311,6 @@ $otherClassMaybe="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 co
 					mainPasswordDiv.className = window.mainDivClassError;
 				}	
 			}
-
-			//echo "beep";
 
 			else
 			{

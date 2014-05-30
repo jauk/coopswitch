@@ -281,17 +281,17 @@ include('footer.php');
 			return true;
 		}
 
-		else if (hasDroppedMatch > 0) {
-			setTimeout(1000);
-			window.droppedMatches.textContent = "You cannot edit your profile and drop another match.";
-			window.droppedMatches.className = window.errorClassVals;
-			window.droppedMatches.style.display = '';
-			return false;
-		}
+		// else if (hasDroppedMatch > 0) {
+		// 	setTimeout(1000);
+		// 	window.droppedMatches.textContent = "You cannot edit your profile and drop another match.";
+		// 	window.droppedMatches.className = window.errorClassVals;
+		// 	window.droppedMatches.style.display = '';
+		// 	return false;
+		// }
 
 		else if (window.isMatched == 1)
 		{
-			window.droppedMatches.textContent = "By editing your profile, your current match will be dropped. This can only be done once.";	
+			window.droppedMatches.textContent = "By editing your profile, your current match will be dropped. The more matches you drop, the lower you go in the queue.";	
 			window.droppedMatches.className = 'alert alert-info';
 			window.droppedMatches.style.display = '';
 			return true;

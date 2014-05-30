@@ -30,10 +30,16 @@ for ($x = 1; $x < $limit; $x++) {
 	$email = "$name$x@drexel.edu"; 
 	$dropped_matches = rand(0, 4);
 
+	$date = date('Y-m-d', strtotime("+$x days"));
+
+	// $sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, dropped_matches, register_date)
+	// 	  VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal', '$dropped_matches',
+	// 			'".date("Y-m-d H:i:s")."'
+	// 	)";
+
 	$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, dropped_matches, register_date)
-		  VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal', '$dropped_matches',
-				'".date("Y-m-d H:i:s")."'
-		)";
+		  VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal', '$dropped_matches', '$date')";
+ 
  
 	//echo "$name $email <br>";
 

@@ -18,7 +18,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 
 <html lang="en">
 <head>
-	<title><?php echo "$title"; ?></title>
+	<title><?php echo "$title $pageName"; ?></title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link href="css/bootstrap.css" rel="stylesheet">

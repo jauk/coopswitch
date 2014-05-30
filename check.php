@@ -155,7 +155,7 @@ $num=mysql_num_rows($result); // ...It's this many
               /* *** Matches db need to add date matched, date completed, major val (to compare to when change major in profile, also for stats [ie. most popular majors]) */
 
               // Insert into the Matches database.
-              $query = sprintf("INSERT INTO Matches (userA, userB, major) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ", " . $users_not_matched[$x]['major'] . ")");
+              $query = sprintf("INSERT INTO Matches (userA, userB, major, isFinished, date_matched) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ", " . $users_not_matched[$x]['major'] . ", 0, " .'date("Y-m-d H:i:s")' . " )");
              //$query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ")");
               $result = mysql_query($query);
 
