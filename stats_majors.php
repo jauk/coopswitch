@@ -45,12 +45,12 @@ while ($row = mysql_fetch_array($result)) {
 <!-- Also maybe add percentages? -->
 
 
-<script src="../lib/amcharts/amcharts.js" type="text/javascript"></script>
-<script src="../lib/amcharts/serial.js" type="text/javascript"></script>
-
 <div class="container-fluid">
 
-    <?php include_once('stats_top.php'); ?> 
+    <?php include_once('stats_top.php');
+    include('stats_bottom.php');
+ ?> 
+
 
     <h3 class="<?php echo $heading_class_row; ?>">Top Majors by Users</h3>
 
