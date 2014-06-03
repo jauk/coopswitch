@@ -1,5 +1,6 @@
 <?php
-include('header.php');
+require_once("/var/www/resources/config.php");
+require_once(TEMPLATES_PATH . "/header.php");
 include_once('connect.php');
 
 $query = mysql_query("SELECT * FROM Users WHERE email = '$_POST[email]'");
@@ -86,5 +87,5 @@ mysql_close($con)
 </div>
 
 <?php
-include('footer.php')
+require_once(TEMPLATES_PATH . "/footer.php");
 ?>

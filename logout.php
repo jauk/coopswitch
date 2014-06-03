@@ -1,6 +1,6 @@
 <?php
 
-include_once('header.php');
+//include_once('header.php');
 
 echo 'Session destroyed maybe. <a href="index.php">Home</a>';
 

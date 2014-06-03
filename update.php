@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+//include('header.php');
 include('connect.php');
 
 // Need to tell which value is being updated too.
@@ -138,5 +138,5 @@ else {
 
 mysql_close($con);
 
-include('footer.php');
+//include('footer.php');
 ?>

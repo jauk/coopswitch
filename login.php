@@ -1,5 +1,6 @@
 <?php
-	include_once('header.php');
+	require_once("/var/www/resources/config.php");
+	require_once(TEMPLATES_PATH . "/header.php");
 	include_once('connect.php');
 	
 	$umail = test_input($_POST['email']);
@@ -72,5 +73,5 @@
 </div>
 
 <?php
-	include_once('footer.php');
+require_once(TEMPLATES_PATH . "/footer.php");
 ?>

@@ -1,5 +1,6 @@
 <?php
-include('header.php')
+require_once("/var/www/resources/config.php");
+require_once(TEMPLATES_PATH . "/header.php");
 ?>
 
 <div class="container-fluid">
@@ -11,5 +12,5 @@ include('header.php')
 </div>
 
 <?php
-include('footer.php')
+require_once(TEMPLATES_PATH . "/footer.php");
 ?>

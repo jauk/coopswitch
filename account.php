@@ -1,5 +1,6 @@
 <?php 
-include('header.php'); 
+require_once("/var/www/resources/config.php");
+require_once(TEMPLATES_PATH . "/header.php");
 include_once('connect.php');
 
 if ($_SESSION['login'] == "") {
@@ -154,7 +155,7 @@ else if ($_SESSION['login'] == "1") {
 <?php 
 
 mysql_close($con);
-include('footer.php'); 
+require_once(TEMPLATES_PATH . "/footer.php");
 ?>
 
 <script type="text/javascript">

@@ -1,5 +1,6 @@
 <?php
-include('header.php');
+require_once("/var/www/resources/config.php");
+require_once(TEMPLATES_PATH . "/header.php");
 include('mail.php');
 /* Have a cron job run this page every minute so checks are always done. FOR PRODUCTION SERVER. */
 
@@ -156,7 +157,7 @@ $num=mysql_num_rows($result); // ...It's this many
 
               // Insert into the Matches database.
               $query = sprintf("INSERT INTO Matches (userA, userB, major, isFinished, date_matched) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ", " . $users_not_matched[$x]['major'] . ", 0, " .'date("Y-m-d H:i:s")' . " )");
-             //$query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ")");
+              //$query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data[0]['id'] . ")");
               $result = mysql_query($query);
 
               // Grab the Id of the match from Matches table
@@ -247,8 +248,7 @@ $num=mysql_num_rows($result); // ...It's this many
 
 mysql_close($con);
 
-include('footer.php')
-
+require_once(TEMPLATES_PATH . "/footer.php");
 // Add to Matches table, set matched val to 1, connect with each other.
 // Matches table: id, personA id, personB id, isFinished val, date.
 
