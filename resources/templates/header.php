@@ -5,7 +5,7 @@
 session_start();
 session_regenerate_id(true);
 
-include('scripts.php');
+include('../scripts.php');
 
 //
 //if (!isset($_SESSION['user_name']))
@@ -21,7 +21,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 	<title><?php echo "$title $pageName"; ?></title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="../css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" media="screen" href="http://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css">
 	
 	<link href="http://fonts.googleapis.com/css?family=Cutive" rel="stylesheet" type="text/css">
@@ -37,7 +37,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-	<?php include_once("tracking.php") ?>
+	<?php include_once("../tracking.php") ?>
 	
 </head>
 <body>
@@ -49,16 +49,16 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 		<div class="row col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 text-center">
 			<ul class="nav nav-pills nav-justified">
 				<li>
-					<a href="index.php">Home</a>
+					<a href="../index.php">Home</a>
 				</li>
 				<li>
-					<a href="about.php">About</a>
+					<a href="../about.php">About</a>
 				</li>
 				<li>
-					<a href="stats/index.php">Stats</a>
+					<a href="stats/stats.php">Stats</a>
 				</li>
 				<li>
-					<a href="check.php">Matches</a>
+					<a href="../check.php">Matches</a>
 				</li>
 			</ul>
 		</div>	

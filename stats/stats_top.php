@@ -33,6 +33,7 @@
 $heading_class_row = "row-fluid col-md-8 col-sm-12"; 
 ?>
 
-<script src="../resources/library/amcharts/amcharts.js" type="text/javascript"></script>
-<script src="../resources/library/amcharts/serial.js" type="text/javascript"></script>
-<script src="../resources/library/amcharts/pie.js" type="text/javascript"></script>
+    <script src="../resources/library/amcharts/amcharts.js" type="text/javascript"></script>
+    <script src="../resources/library/amcharts/serial.js" type="text/javascript"></script>
+    <script src="../resources/library/amcharts/pie.js" type="text/javascript"></script>
+    <script src="../resources/library/amcharts/themes/light.js" type="text/javascript"></script>

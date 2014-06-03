@@ -3,9 +3,12 @@
 <div class="container-fluid">
 		<div class="row col-md-6 col-md-offset-3 text-center">
 			<footer>
-				<small>Created by <a href="http://justinmaslin.com" target="_blank">Justin Maslin</a>.
-        <br /> <br />I have no affiliation with the Drexel Steinbright Career Development Center.
-        </small>
+  		    <p class="small">
+          Created by <a href="http://justinmaslin.com" target="_blank">Justin Maslin</a>.
+          </p>
+          <p class="small">
+          I have no affiliation with the Drexel Steinbright Career Development Center.
+          </p>
 			</footer>
 		</div>
 </div>

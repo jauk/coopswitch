@@ -1,6 +1,7 @@
 <?php
-include('header.php'); 
-include_once('connect.php');
+require_once("/var/www/resources/config.php");
+require_once(TEMPLATES_PATH . "/header.php"); 
+include("/var/www/connect.php");
 // Lets get the data we need for graph.
 
 $limit = 10;
@@ -155,6 +156,4 @@ $num_users_not_matched = mysql_num_rows($result);
         });
     </script>
 
-<?php
-include('footer.php');
-?>
+<?php require_once(TEMPLATES_PATH . "/footer.php"); ?>
