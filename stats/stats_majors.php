@@ -1,5 +1,6 @@
 <?php
-include('header.php'); 
+require_once("/var/www/resources/config.php");
+require_once(TEMPLATES_PATH . "/header.php");
 include_once('connect.php');
 
 // Lets get the data we need for graph.
@@ -246,6 +247,4 @@ while ($row = mysql_fetch_array($result)) {
 
 </script>
 
-<?php
-include('footer.php');
-?>
+<?php require_once(TEMPLATES_PATH . "/footer.php"); ?>

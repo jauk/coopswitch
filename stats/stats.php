@@ -1,4 +1,7 @@
-<?php include('header.php'); ?>
+<?php 
+require_once("/var/www/resources/config.php");
+require_once(TEMPLATES_PATH . "/header.php"); 
+?>
 
 <div class="container-fluid">
 
@@ -6,7 +9,7 @@
     <?php include_once('stats_top.php'); ?>
 
    
-   <!-- Stats for users who receive matches as dropped_matches increase somehow. -->
+<!-- Stats for users who receive matches as dropped_matches increase somehow. -->
 
 
 <!-- Major specific stats for everything 
@@ -16,4 +19,4 @@
 
 </div>
 
-<?php include('footer.php'); ?>
+<?php require_once(TEMPLATES_PATH . "/footer.php"); ?>
