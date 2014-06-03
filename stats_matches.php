@@ -38,9 +38,9 @@ $num_users_not_matched = mysql_num_rows($result);
 
 <?php include_once('stats_top.php'); ?>
 
-<script src="../amcharts/amcharts.js" type="text/javascript"></script>
-<script src="../amcharts/serial.js" type="text/javascript"></script>
-<script src="../amcharts/pie.js" type="text/javascript"></script>
+<script src="../lib/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="../lib/amcharts/serial.js" type="text/javascript"></script>
+<script src="../lib/amcharts/pie.js" type="text/javascript"></script>
 
 
 <div class="container-fluid">

@@ -45,8 +45,8 @@ while ($row = mysql_fetch_array($result)) {
 <!-- Also maybe add percentages? -->
 
 
-<script src="../amcharts/amcharts.js" type="text/javascript"></script>
-<script src="../amcharts/serial.js" type="text/javascript"></script>
+<script src="../lib/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="../lib/amcharts/serial.js" type="text/javascript"></script>
 
 <div class="container-fluid">
 
