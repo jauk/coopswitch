@@ -1,5 +1,7 @@
 <?php
-include('header.php');
+require_once("/var/www/resources/config.php");
+require_once(TEMPLATES_PATH . "/header.php");
+//include('header.php');
 
 // Some global CSS variables. Need to fix these names.
 $formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3";
@@ -360,7 +362,8 @@ $pageName = "Test";
 </script>
 
 <?php
-include('footer.php')
+require_once(TEMPLATES_PATH . "/footer.php");
+//include('footer.php')
 ?>
 
 <!--
