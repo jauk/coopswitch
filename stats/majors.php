@@ -45,7 +45,7 @@ while ($row = mysql_fetch_array($result)) {
 
 <div class="container-fluid">
 
-    <?php include_once('stats_top.php'); ?> 
+    <?php require_once(TEMPLATES_PATH . "/stats_top.php"); ?>
 
     <h3 class="<?php echo $heading_class_row; ?>">Top Majors by Users</h3>
         <div id="chartdiv" style="width: 100%; height: 400px;"></div>

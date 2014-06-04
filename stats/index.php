@@ -6,8 +6,8 @@ require_once(TEMPLATES_PATH . "/header.php");
 <div class="container-fluid">
 
 
-    <?php include_once('stats_top.php'); ?>
-
+    <?php // include_once('stats_top.php'); ?>
+    <?php require_once(TEMPLATES_PATH . "/stats_top.php"); ?>
    
 <!-- Stats for users who receive matches as dropped_matches increase somehow. -->
 

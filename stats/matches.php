@@ -37,7 +37,7 @@ $num_users_not_matched = mysql_num_rows($result);
 ?>
 
 
-<?php include_once('stats_top.php'); ?>
+<?php require_once(TEMPLATES_PATH . "/stats_top.php"); ?>
 
 <div class="container-fluid">
 

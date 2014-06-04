@@ -55,16 +55,16 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 		<div class="row col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 text-center">
 			<ul class="nav nav-pills nav-justified">
 				<li>
-					<a href="../index.php">Home</a>
+					<a href="/">Home</a>
 				</li>
 				<li>
-					<a href="../about.php">About</a>
+					<a href="/about">About</a>
 				</li>
 				<li>
-					<a href="stats/stats.php">Stats</a>
+					<a href="/stats">Stats</a>
 				</li>
 				<li>
-					<a href="../check.php">Matches</a>
+					<a href="/check">Matches</a>
 				</li>
 			</ul>
 		</div>	
