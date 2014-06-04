@@ -13,8 +13,6 @@ foreach (glob("/var/www/resources/functions/*.php") as $filename)
     include $filename;
 }
 
-
-
 //
 //if (!isset($_SESSION['user_name']))
 //	$_SESSION['user_name'] = "";
@@ -26,7 +24,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 
 <html lang="en">
 <head>
-	<title><?php echo "$title $pageName"; ?></title>
+	<title><?php echo "$title"; ?></title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link href="../css/bootstrap.css" rel="stylesheet">

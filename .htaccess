@@ -1,12 +1,10 @@
-AuthType Basic  
-AuthName "Coopswitch is under construction. Contact Justin to demo."  
-AuthUserFile /var/www/.htpasswd  
-require valid-user
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]'
+
+#AuthType Basic  
+#AuthName "Coopswitch is under construction. Contact Justin to demo."  
+#AuthUserFile /var/www/.htpasswd  
+#require valid-user
 
 #php_value include_path /var/www/resources/config.php
-
-RewriteEngine On
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !\.php$
-RewriteRule ^(.*)$ $1.php [L]

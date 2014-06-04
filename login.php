@@ -4,6 +4,12 @@
 	include_once('connect.php');
 	
 	$umail = test_input($_POST['email']);
+
+	if (!filter_var($umail, FITLER_VALIDATE_EMAIL)) {
+
+		header("Location: error.php");
+	}
+
 	$upass = test_input($_POST['password']);
 
 	if ($db_found) {
@@ -57,7 +63,7 @@
 	else {
 		$errorMessage = "Invalid login. Please try again.";
 		//session_start();
-		$_SESSION['login']="";
+		//$_SESSION['login']="";
 	}
 
 ?>
