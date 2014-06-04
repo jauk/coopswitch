@@ -6,22 +6,20 @@ include_once('connect.php');
 $query = mysql_query("SELECT * FROM Users WHERE email = '$_POST[email]'");
 $result = mysql_fetch_array($query);
 
-if ($result != 0 || ($_SESSION['login'] == 1))
-{
+if ($result != 0 || isset($_SESSION['login'])) {
 	header('Location: error.php'); 
 	// Make a global "ERROR" variable that also sends to error page to choose which error to display?
 }
 
-else
-{
+else {
 	// Declare actual variables instead of using "$_POST" everywhere. That gets freaking annoying. I hate PHP.
-	$name = test_input($_POST[name]);
-	$email = test_input($_POST[email]);
-	$password = test_input($_POST[password]);
+	$name = test_input($_POST['name']);
+	$email = test_input($_POST['email']);
+	$password = test_input($_POST['password']);
 	$password = md5($password);
-	$cycle = test_input($_POST[cycle]);
-	$num_year_program = test_input($_POST[numCoops]);
-	$majorVal = test_input($_POST[major]);
+	$cycle = test_input($_POST['cycle']);
+	$num_year_program = test_input($_POST['numCoops']);
+	$majorVal = test_input($_POST['major']);
 
 	$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
 		VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal',

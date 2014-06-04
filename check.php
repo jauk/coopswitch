@@ -68,12 +68,15 @@ $num=mysql_num_rows($result); // ...It's this many
   
   <div class="<?php echo $rowClass; ?>">
     <?php 
+    if (isset($msg)) {
       if ($msg == 1) 
           echo "<strong>Records generated.</strong><br><br>"; 
       else if ($msg == 2) 
           echo "<strong>Database cleared.</strong><br><br>"; 
 
       $msg = 0;
+    }
+
     ?>
     <p>There are <?php echo $num; ?> people who have not been matched. <br> Will now attempt to manually match.</p>
     <?php if ($num == 0) echo "Hooray, everyone is matched!<br><br>" ?>
