@@ -3,6 +3,8 @@ AuthName "Coopswitch is under construction. Contact Justin to demo."
 AuthUserFile /var/www/.htpasswd  
 require valid-user
 
+#php_value include_path /var/www/resources/config.php
+
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f

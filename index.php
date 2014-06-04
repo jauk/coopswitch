@@ -17,7 +17,7 @@ $pageName = "Test";
 
 <!-- <hr>
  -->
-	<?php if ($_SESSION['login'] == "") { ?>
+	<?php if (!isset($_SESSION['login'])) { // if ($_SESSION['login'] == "") { ?>
 
 		<div class="row col-md-6 col-md-offset-3 text-center">
 			<p class="lead">

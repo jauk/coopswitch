@@ -1,13 +1,15 @@
 <?php
 require_once("/var/www/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
-include('mail.php');
+//include('mail.php');
 /* Have a cron job run this page every minute so checks are always done. FOR PRODUCTION SERVER. */
 
 $debug = 0;
 
 // $test = 0;
-$msg = test_input($_GET['msg']);
+
+if (isset($msg))
+  $msg = test_input($_GET['msg']);
 
 ?>
 
