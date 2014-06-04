@@ -8,7 +8,7 @@ session_regenerate_id(true);
 //include('/var/www/scripts.php');
 
 
-foreach (glob("/var/www/resources/functions/*.php") as $filename)
+foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $filename)
 {
     include $filename;
 }
@@ -43,7 +43,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-	<?php include_once("/var/www/tracking.php") ?>
+	<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/tracking.php") ?>
 	
 </head>
 <body>

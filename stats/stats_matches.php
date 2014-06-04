@@ -1,7 +1,7 @@
 <?php
-require_once("/var/www/resources/config.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php"); 
-include("/var/www/connect.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/connect.php");
 // Lets get the data we need for graph.
 
 $limit = 10;
