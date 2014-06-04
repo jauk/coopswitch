@@ -5,7 +5,15 @@
 session_start();
 session_regenerate_id(true);
 
-include('../scripts.php');
+//include('/var/www/scripts.php');
+
+
+foreach (glob("/var/www/resources/functions/*.php") as $filename)
+{
+    include $filename;
+}
+
+
 
 //
 //if (!isset($_SESSION['user_name']))
@@ -37,7 +45,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-	<?php include_once("../tracking.php") ?>
+	<?php include_once("/var/www/tracking.php") ?>
 	
 </head>
 <body>
@@ -66,7 +74,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 			<!-- <div class="panel panel-default"> <br /> -->
 		<br><br>
 
-				<?php if ($_SESSION['login'] == "") { ?>
+				<?php if (!isset($_SESSION['login'])) { //if ($_SESSION['login'] == "") { ?>
 				<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center">
 					<br><form class="form-inline" role="form" name="login_form" method="post" action="login.php">
 						<fieldset>
