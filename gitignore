@@ -2,3 +2,5 @@ samples/
 testdb.php
 emptydb.php
 majors.txt
+gitignore
+gitignore~
