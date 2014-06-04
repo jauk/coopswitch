@@ -7,7 +7,7 @@
 
 	if (!filter_var($umail, FITLER_VALIDATE_EMAIL)) {
 
-		header("Location: error.php");
+		header("Location: /error.php?msg=1");
 	}
 
 	$upass = test_input($_POST['password']);
