@@ -20,6 +20,7 @@ $dateFormat = "Y-m-d";
 // Should probably redo this with sql statement, be a lot easier. WHERE date = blah, export rows as count.
 // Could send major id to Matches db too for major-specific w/e stats.   
 
+$initDate = false;
 
 $index = 0;
 $newDay = 0;
@@ -43,7 +44,11 @@ while ($row = mysql_fetch_array($result)) {
     }
 
     $dataArray[$newDay]['date'] = $date;
-    $dataArray[$newDay]['count'] += 1;
+
+    if (!isset($dataArray[$newDay]['count']))
+        $dataArray[$newDay]['count'] = 1;
+    else
+        $dataArray[$newDay]['count'] += 1;
 }
 
 for ($x=0; $x<sizeof($dataArray); $x++) {
