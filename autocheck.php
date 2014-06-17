@@ -5,9 +5,7 @@ include('mail.php');
 
 $debug = 0;
 
-include_once('connect.php');
-
-$num = get_not_matched();
+include(FUNCTION_PATH . "/connect.php");
 
 
   if ($num > 0) // If there are people not matched, run this.

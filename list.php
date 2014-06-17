@@ -20,7 +20,7 @@ include('header.php')
 
 		<?php
 
-			include_once('connect.php');
+			include(FUNCTION_PATH . "/connect.php");
 
 			if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 				$startrow=0;

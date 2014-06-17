@@ -13,7 +13,7 @@ if (isset($msg))
 $(function(){
     $('#generate_records').click(function(){
         $.ajax({
-            url: 'testdb.php',
+            url: '/resources/dev/testdb.php',
             success: function(data) { // data is the response from your php script
                 // This function is called if your AJAX query was successful
                 //alert("Response is: " + data);
@@ -30,7 +30,7 @@ $(function(){
 $(function(){
     $('#delete_records').click(function(){
         $.ajax({
-            url: 'emptydb.php',
+            url: '/resources/dev/emptydb.php',
             success: function(data) { // data is the response from your php script
                 // This function is called if your AJAX query was successful
                 //alert("Response is: " + data);
@@ -53,9 +53,8 @@ $(function(){
 
 $rowClass = "row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-center";
 
-include_once('connect.php');
+include(FUNCTION_PATH . "/connect.php");
 
-// Get all the peoples not matched...
 $query="SELECT * FROM Users WHERE matched = 0 ORDER BY dropped_matches ASC";
 $result=mysql_query($query);
 $num=mysql_num_rows($result); // ...It's this many

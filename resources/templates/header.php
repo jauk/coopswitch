@@ -7,10 +7,14 @@ session_regenerate_id(true);
 
 //include('/var/www/scripts.php');
 
-
-foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $filename)
-{
-    include $filename;
+// Include useful scripts so I do not have to on each page.
+foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $filename) {
+    
+    // Ignore connect.php because we will use it when necessary only, avoid unnecessary connections
+    if (strpos($filename, 'connect.php') !== TRUE) {
+    	include $filename;
+    }
+    // echo $filename;
 }
 
 //
@@ -43,7 +47,6 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-	<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/tracking.php") ?>
 	
 </head>
 <body>

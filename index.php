@@ -1,7 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
-//include('header.php');
 
 // Some global CSS variables. Need to fix these names.
 $formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3";
@@ -104,8 +103,7 @@ $pageName = "Test";
 
 					<?php
 					// Get the list of majors and display for user selection.
-					  include_once('connect.php');
-					  print_majors();
+					  //////include_once('connect.php');//include_once('connect.php');//include_once('connect.php');////include_once('connect.php');//include_once('connect.php');//include_once('connect.php');//include_once('connect.php');					  print_majors();
 					  mysql_close($con);
 
 					?>
