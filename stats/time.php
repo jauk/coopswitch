@@ -20,6 +20,8 @@ $dateFormat = "Y-m-d";
 // Should probably redo this with sql statement, be a lot easier. WHERE date = blah, export rows as count.
 // Could send major id to Matches db too for major-specific w/e stats.   
 
+// Matches over time vs total users
+
 $initDate = false;
 
 $index = 0;

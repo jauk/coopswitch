@@ -14,7 +14,10 @@ if (isset($_GET['msg']))
 
 		if (isset($msg)) {
 			if ($msg == 1) { 
-				$error="Invalid email.";
+				$error = "Invalid email.";
+			}
+			elseif ($msg == 2) {
+				$error = "Invalid login.";
 			}
 			else {
 				$error = "Unknown error!";

@@ -3,6 +3,11 @@
 defined("TEMPLATES_PATH")
     or define("TEMPLATES_PATH", realpath(dirname(__FILE__) . '/templates'));
 
+
+// define('DEBUG', 'false');
+
+$GLOBALS['debug'] = True;
+
 /*
 $config = array(
 	"db" => array(

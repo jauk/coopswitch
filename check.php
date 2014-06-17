@@ -4,10 +4,6 @@ require_once(TEMPLATES_PATH . "/header.php");
 //include('mail.php');
 /* Have a cron job run this page every minute so checks are always done. FOR PRODUCTION SERVER. */
 
-$debug = 0;
-
-// $test = 0;
-
 if (isset($msg))
   $msg = test_input($_GET['msg']);
 
@@ -180,15 +176,15 @@ $num=mysql_num_rows($result); // ...It's this many
               // Send names and emails to mail script to mail users that they have been matched.
               mail_matched_users($users_not_matched[$x]['name'], $users_not_matched[$x]['email'], $matched_user_data[0]['name'], $matched_user_data[0]['email']);
 
-              if ($debug == 1)
-              {
-                 echo "<hr><em>Looks like we found a match!</em><br>";
-                 // IDs of matched people.
-                 echo $users_not_matched[$x]['id'] . " and " . $matched_user_data[0]['id'] . "<br>";
-                 // Is the matched value set?
-                 echo $users_not_matched[$x]['matched'] . " and " . $matched_user_data[0]['matched'] . "<br>";
+              // if ($debug)
+              // {
+              //    echo "<hr><em>Looks like we found a match!</em><br>";
+              //    // IDs of matched people.
+              //    echo $users_not_matched[$x]['id'] . " and " . $matched_user_data[0]['id'] . "<br>";
+              //    // Is the matched value set?
+              //    echo $users_not_matched[$x]['matched'] . " and " . $matched_user_data[0]['matched'] . "<br>";
 
-              }
+              // }
 
               // Need to update user sessions if logged in and a match happens.
               // Best way to do that?
@@ -235,9 +231,16 @@ $num=mysql_num_rows($result); // ...It's this many
     {
       $last_matches[$index] = $row; // Save the users into the array.
       $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
+      $last_matches[$index]['userA'] = mysql_get_var("SELECT userA FROM Matches WHERE id = " . $last_matches[$index]['major']);
+      $last_matches[$index]['userB'] = mysql_get_var("SELECT userB FROM Matches WHERE id = " . $last_matches[$index]['major']);
       ?>
       <li class="list-group-item"><?php echo $last_matches[$index]['major_name']; ?></li>
       <?php 
+      // Show the IDs of the matched users. 
+
+      if ($debug) {
+        echo '<li class="list-group-item"> ' . $last_matches[$index]['userA'] . ' ' . $last_matches[$index]['userB'] . '</li>';
+      }
       $index++; // KIND OF NEED THIS...
     }
 

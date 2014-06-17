@@ -372,7 +372,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 - Better password security 
 - Email account confirmation (if try to login show message need to confirm)
-- Better error reportng I guess? Like the error.php page
+- Better error reportng I guess? Like the /error.php page
 - Better emails for matches
 - Better security I guess
 - More db fields (ie. for acct confirmation)

@@ -7,7 +7,7 @@ $query = mysql_query("SELECT * FROM Users WHERE email = '$_POST[email]'");
 $result = mysql_fetch_array($query);
 
 if ($result != 0 || isset($_SESSION['login'])) {
-	header('Location: error.php'); 
+	header('Location: /error.php'); 
 	// Make a global "ERROR" variable that also sends to error page to choose which error to display?
 }
 

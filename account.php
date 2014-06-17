@@ -4,7 +4,7 @@ require_once(TEMPLATES_PATH . "/header.php");
 include_once('connect.php');
 
 if ($_SESSION['login'] == "") {
-	header("Location: error.php"); // Temporary I guess maybe add like ?error=1
+	header("Location: /error.php"); // Temporary I guess maybe add like ?error=1
 }
 
 else if ($_SESSION['login'] == "1") {

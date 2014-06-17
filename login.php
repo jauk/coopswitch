@@ -58,10 +58,12 @@
 
 		login_user($user_data);
 
-		header("Location: account.php"); 
+		header("Location: /account.php"); 
 	}
 	else {
-		$errorMessage = "Invalid login. Please try again.";
+		
+		header("Location: /error.php?msg=2");
+		//$errorMessage = "Invalid login. Please try again.";
 		//session_start();
 		//$_SESSION['login']="";
 	}
