@@ -8,7 +8,7 @@ defined("TEMPLATES_PATH")
 
 $GLOBALS['debug'] = True;
 
-/*
+
 $config = array(
 	"db" => array(
 		"development" => array(
@@ -20,14 +20,14 @@ $config = array(
 		"production" => array(
 			"dbname" => "coopswitch",
 			"dbuser" => "coop",
-			"dbpass" => "switch"
+			"dbpass" => "switch",
 			"dbhost" => "justinmaslin.db"
-		)
+			),
 	),
 	"urls" => array(
 		"baseUrl" => "http://coopswitch.com"
 	)
 );
-*/
+
 
 ?>
