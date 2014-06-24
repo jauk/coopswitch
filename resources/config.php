@@ -12,6 +12,7 @@ defined("DEV_PATH")
 // define('DEBUG', 'false');
 
 $GLOBALS['debug'] = True;
+$GLOBALS['debug_login'] = False;
 
 
 $config = array(

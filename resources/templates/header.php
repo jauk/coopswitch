@@ -1,4 +1,4 @@
-<?php 
+<?php
 // if (!isset($_SESSION['login']))
 // 	$_SESSION['login'] = "";
 
@@ -22,7 +22,14 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 //	$_SESSION['user_name'] = "";
 
 $title = "Coopswitch";
-$slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
+$slogan = "A simple way to switch co-ops."; //Get on the right cycle! Ha.
+
+if ($_SESSION['login'] == 0) {
+  if ($debug_login) {
+    $_SESSION['login'] = 1;
+    $_SESSION['user_name'] = "Test User";
+  }
+}
 
 ?>
 
@@ -50,11 +57,11 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 	
 </head>
 <body>
-	<div class="container-fluid"> 
+	<div class="container-fluid">
 		<div class="row col-md-6 col-md-offset-3 text-center">
 			<h1><?php echo "$title"; ?></h1>
 			<h4><?php echo "$slogan"; ?> </h4>
-		</div>	
+		</div>
 		<div class="row col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 text-center">
 			<ul class="nav nav-pills nav-justified">
 				<li>
@@ -70,7 +77,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 					<a href="/check">Matches</a>
 				</li>
 			</ul>
-		</div>	
+		</div>
 
 			<!-- <div class="panel panel-default"> <br /> -->
 		<br><br>
@@ -86,7 +93,7 @@ $slogan = "A simple way to switch co-ops." //Get on the right cycle! Ha.
 	  						<div class="form-group">
 						    	<label class="sr-only" for="password">Password</label>
 						    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
-							</div>					
+							</div>
 					   		<button type="submit" class="btn btn-default btn-success">Sign In</button>
 					    </fieldset>
 					</form>
