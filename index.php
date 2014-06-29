@@ -26,7 +26,9 @@ $pageName = "Test";
 
 <div class="container-fluid">
 
-<!-- <hr> -->
+	  
+	<!-- IF NOT LOGGED IN -->
+	
 	<?php if (!isset($_SESSION['login'])) { // if ($_SESSION['login'] == "") { ?>
 
 		<div class="row">
@@ -138,25 +140,26 @@ $pageName = "Test";
   			</div>
       </div>
       
-
-      
   			<!-- In the future, will implement the "fast-track" option.
   			<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
   				<label for="payment">Payment Amount <small>(Optional)</small></label>
   				<input type="text" class="form-control" id="payment" name="payment" placeholder="Enter an amount ($5)">
   			</div>
   			-->
+  			
       <br>
+      
       <div class="row">
   			<div class="<?php echo "$formElementClass"; ?> text-center">
   				 <div id="errorFree">
   				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
   				 </div>
-  				<!-- <input type="button" name="submit_form" id="submit_form" value="Submit" /> -->
   			</div>
       </div>
       
 		</form>
+		
+		<!-- USER IS LOGGED IN, MAKE THIS BETTER -->
 		
 		<?php } else {
 
@@ -180,27 +183,27 @@ $pageName = "Test";
 			?>
 
 
-		<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center">
-			<h4>You are already registered.
-			<?php echo "$descriptions[$option]"; ?>
-			<br></h4>
-			<img src="<?php echo $images[$option]; ?>" max-width: 100%; height: auto; class="img-responsive img-circle center-block">
+    <div class="row">
+  		<div class="<?php echo $typicalRowClass; ?>">
+  			<h4>You are already registered.
+  			<?php echo "$descriptions[$option]"; ?>
+  			<br></h4>
+  			<img src="<?php echo $images[$option]; ?>" max-width: 100%; height: auto; class="img-responsive img-circle center-block">
+  		</div>
 		</div>
 
 	<?php } ?>
 
-<!--  so here are some narwhals playing to fill the space. -->
 </div>
 
 <script type="text/javascript">
 
-
 		// When the page loads, do something I guess
-		//var $ = function (id) { return document.getElementById(id); }
-
+		//var $ = function (id) { return $(id); }\
+		
 		window.onload = function () {
 			
-			errorDiv = document.getElementById("formError");
+			errorDiv = $("formError");
 			errorDiv.style.display = 'none';
 
 			var errors = 0;
@@ -220,20 +223,20 @@ $pageName = "Test";
 			window.mainDivClassWarning = mainDivClass + " has-warning";
 
 
-			//document.getElementById('email').onchange = validate_email;
+			//$('email').onchange = validate_email;
 			//$("submit_form").onclick = validate_data;
 
 		}
 
 		var validate_name = function () {
 
-			name = document.getElementById("user_name").value;
-			mainNameDiv = document.getElementById("mainNameDiv");
+			name = $("user_name").value;
+			mainNameDiv = $("mainNameDiv");
 
 			name = name.trim();
 
-			var nameDiv = document.getElementById("nameError");
-			//var mainNameDiv = document.getElementById("mainNameDiv");
+			var nameDiv = $("nameError");
+			//var mainNameDiv = $("mainNameDiv");
 
 			if (name == "")
 			{
@@ -248,7 +251,7 @@ $pageName = "Test";
 			{
 				nameErr = 0;
 				//nameDiv.textContent = "Name exists.";
-				document.getElementById("user_name").value = name;
+				$("user_name").value = name;
 				nameDiv.style.display = 'none';
 
 				mainNameDiv.className = window.mainDivClassValid;
@@ -267,10 +270,10 @@ $pageName = "Test";
 
 		var validate_email = function () {
 
-			var emailDiv = document.getElementById("emailError");
-			var mainEmailDiv = document.getElementById("mainEmailDiv");
+			var emailDiv = $("emailError");
+			var mainEmailDiv = $("mainEmailDiv");
 
-			var email = document.getElementById("user_email").value;
+			var email = $("user_email").value;
 
 			email = email.trim();
 			email = email.toLowerCase();
@@ -315,16 +318,16 @@ $pageName = "Test";
 				mainEmailDiv.className = window.mainDivClassError;
 			}
 
-			document.getElementById("user_email").value = email;
+			$("user_email").value = email;
 		}
 
 		var validate_password = function () {
 
-			var password = document.getElementById("user_pass").value;
-			var password2 = document.getElementById("user_pass_confirm").value;
+			var password = $("user_pass").value;
+			var password2 = $("user_pass_confirm").value;
 
-			var passwordDiv = document.getElementById("passwordError");
-			var mainPasswordDiv = document.getElementById("mainPasswordDiv");
+			var passwordDiv = $("passwordError");
+			var mainPasswordDiv = $("mainPasswordDiv");
 
 			if (password != password2)
 			{
@@ -369,7 +372,7 @@ $pageName = "Test";
 
 		var validate_submit = function () {
 
-			errorDiv = document.getElementById("formError");
+			errorDiv = $("formError");
 
 			var totalErrors = nameErr + emailErr + passwordErr;
 
