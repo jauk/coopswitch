@@ -35,6 +35,7 @@ if ($_SESSION['login'] == 0) {
 
 <html lang="en">
 <head>
+
 	<title><?php echo "$title"; ?></title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
