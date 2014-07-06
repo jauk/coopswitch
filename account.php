@@ -38,112 +38,125 @@ $majorBeginEditClass = "";
 
 	<!-- Alight text left and edit buttons right eventually. -->
 	
-	<!-- Should I add confirmations? -->
+	<!-- Add MAIN EDIT btn which shows the indivd edit buttons and realigns elements so centered.
+	      Different centering for diff modes due to btns
+	      Get rid of indivd save/cancel buttons? Would make things easier...?
+	      
+	      * Ie. if user changes two fields, maybe just have one main save/cancel button, indivd edit btns.
+	      
+	      * Js to go to location to stop jumping, may not be necessary with master edit btn
+	      
+	      Left/right align
+	 
+	 -->
+	      
+	<!-- Should I add confirmations? "Sure you want to change/drop match, sure you want to change. Nice popup. Learn jquery -->
 
-	<!-- Code for user's major -->
+	<!-- MAJOR FIELD -->
 	<div class="row">
 	
-	<!-- Need to change class widths for when edit mode enabled. Set names via php and use js to switch.
-	      Just for majorBeginText?
-	 -->
-	
-	<!-- Name major and text -->
+	    <!-- Major Begin Text -->
   	<div id="majorBeginText" class="col-sm-2 col-sm-offset-3" style="padding-right: 0px; text-align: right;">
   		<h4>Your major is</h4>
   	</div>
   	
+  	  <!-- Major Name -->
   	<div id="majorNameText" class="col-sm-2" style="text-align: left; padding-left: 5px;">
   	  <h4>
   	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
   		</h4>
   	</div>
 
-	<!-- User Major Field Editable -->
+	    <!-- Major Field Editable -->
     <form id="majorForm" name="majorForm" method="post" action="update.php" onsubmit="return saveMajor();">
       <!-- Dropdown of majors -->
     	<div id="majorSpan" style="display: none; padding-left: 5px;" class="col-sm-3">
-  				<input type="hidden" name="newMajorId" id="newMajorId" value="">
-  				<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
-  					<?php print_majors(); ?>
-  				</select>
+				<input type="hidden" name="newMajorId" id="newMajorId" value="">
+				<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
+					<?php print_majors(); ?>
+				</select>
       </div>
       
-      <!-- Major Edit Btn or Save/Cancel -->
+        <!-- Major Btns -->
       <div id="majorBtns" class="col-sm-2" style="text-align: left">
-        	<a id="majorEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editMajor()">Edit</a>
-    			<button type="submit" name="majorSaveBtn" value="Submit" id="majorSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
-    			<a id="majorCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('major')" style="display: none;">Cancel</a>
+      	<a id="majorEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editMajor()">Edit</a>
+  			<button type="submit" name="majorSaveBtn" value="Submit" id="majorSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
+  			<a id="majorCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('major')" style="display: none;">Cancel</a>
     	</div>
   	</form>
   	
 	</div>
 
-	<!-- User Cycle Field -->
+	<!-- CYCLE FIELD -->
 	<div class="row">
-  	<div class="col-sm-6 col-sm-offset-3 text-center">
-  		<h4>
-  			Your cycle is
-  			<span>
-  			<div style="display: inline-block;" id="cycleName"><?php echo "{$_SESSION['user_cycle_name']}."; ?></div>
-  			<a id="cycleEditBtn" href="#" class="btn btn-xs btn-warning" onclick="editCycle()">Edit</a>
-  			</span>
+	
+	  <div id="cycleBeginText" class="col-sm-2 col-sm-offset-3" style="padding-right: 0px; text-align: right;">
+  		<h4>Your cycle is</h4>
+  	</div>
+  	
+  	<div id="cycleNameText" class="col-sm-2" style="text-align: left; padding-left: 5px;">
+  	  <h4>
+  	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_cycle_name']}."; ?></div>
   		</h4>
   	</div>
-  	<div class="col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5 text-center">
-  		<span id="cycleSpan" style="display: none;">
-  			<form id="cycleForm" name="cycleForm" method="post" action="update.php" onsubmit="return saveCycle();">
-  				<input type="hidden" name="newCycleId" id="newCycleId" value="">
-  				<select id="selectCycle" class="form-control selectpicker" name="cycle">
-  				<!-- Makes no sense but ok. -->
-  					<?php if ($_SESSION['user_cycle'] == 1) { ?>
-  						<option selected="selected" value="1">Fall-Winter</option>
-  						<option value="2">Spring-Summer</option>
-  					<?php } else { ?>
-  						<option value="1">Fall-Winter</option>
-  						<option selected="selected" value="2">Spring-Summer</option>
-  					<?php } ?>
-  				</select>
-  				<div style="padding-top: 5px;"> <!-- Tmp inline style -->
-  				<button type="submit" name="cycleSaveBtn" value="Submit" id="cycleSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
-  				<a id="cycleCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('cycle')" style="display: none;">Cancel</a>
-  				</div>
-  			</form>
-  		</span>
-  	</div>
+  	
+    <form id="cycleForm" name="cycleForm" method="post" action="update.php" onsubmit="return saveCycle();">
+    	<div id="cycleSpan" style="display: none; padding-left: 5px;" class="col-sm-2">
+				<input type="hidden" name="newCycleId" id="newCycleId" value="">
+				<select id="selectCycle" class="form-control selectpicker" name="cycle" data-live-search="true" data-size="5">
+					<?php if ($_SESSION['user_cycle'] == 1) { ?>
+						<option selected="selected" value="1">Fall-Winter</option>
+						<option value="2">Spring-Summer</option>
+					<?php } else { ?>
+						<option value="1">Fall-Winter</option>
+						<option selected="selected" value="2">Spring-Summer</option>
+					<?php } ?>
+				</select>
+      </div>
+      
+      <div id="cycleBtns" class="col-sm-2" style="text-align: left">
+      	<a id="cycleEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editCycle()">Edit</a>
+  			<button type="submit" name="cycleSaveBtn" value="Submit" id="cycleSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
+  			<a id="cycleCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('cycle')" style="display: none;">Cancel</a>
+    	</div>
+  	</form>
+  	
 	</div>
 
 	<!-- User Program Field -->
 	<div class="row">
-  	<div class="row-fluid col-sm-6 col-sm-offset-3 text-center">
-  		<h4>
-  			Your program is
-  			<span>
-  			<div style="display: inline-block;" id="programName"><?php echo "{$_SESSION['user_program_name']}."; ?></div>
-  			<a id="programEditBtn" href="#" class="btn btn-xs btn-warning" onclick="editProgram()">Edit</a>
-  			</span>
+	
+	 <div id="programBeginText" class="col-sm-2 col-sm-offset-3" style="padding-right: 0px; text-align: right;">
+  		<h4>You will have</h4>
+  	</div>
+  	
+  	<div id="programNameText" class="col-sm-2" style="text-align: left; padding-left: 5px;">
+  	  <h4>
+  	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_program_name']}."; ?></div>
   		</h4>
   	</div>
-  	<div class="row col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5 text-center">
-  		<span id="programSpan" style="display: none;">
-  			<form id="programForm" name="programForm" method="post" action="update.php" onsubmit="return saveProgram();">
-  				<input type="hidden" name="newProgramId" id="newProgramId" value="">
-  				<select id="selectProgram" class="form-control selectpicker" name="cycle">
-  				<!-- Makes no sense but ok. -->
-  					<?php if ($_SESSION['user_program'] == 1) { ?>
-  						<option selected="selected" value="1">1 co-op</option>
-  						<option value="2">3 co-ops</option>
-  					<?php } else { ?>
-  						<option value="1">1 co-op</option>
-  						<option selected="selected" value="2">3 co-ops</option>
-  					<?php } ?>
-  				</select>
-  				<div style="padding-top: 5px;"> <!-- Tmp inline style -->
-  				<button type="submit" name="programSaveBtn" value="Submit" id="programSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
-  				<a id="programCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('program')" style="display: none;">Cancel</a>
-  				</div>
-  			</form>
-  		</span>
-	  </div>
+  	
+    <form id="programForm" name="programForm" method="post" action="update.php" onsubmit="return saveProgram();">
+    	<div id="programSpan" style="display: none; padding-left: 5px;" class="col-sm-2">
+				<input type="hidden" name="newProgramId" id="newProgramId" value="">
+				<select id="selectProgram" class="form-control selectpicker" name="program" data-live-search="true" data-size="5">
+					<?php if ($_SESSION['user_program'] == 1) { ?>
+						<option selected="selected" value="1">1 co-op</option>
+						<option value="2">3 co-ops</option>
+					<?php } else { ?>
+						<option value="1">1 co-op</option>
+						<option selected="selected" value="2">3 co-ops</option>
+					<?php } ?>
+				</select>
+      </div>
+      
+      <div id="programBtns" class="col-sm-2" style="text-align: left">
+      	<a id="programEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editProgram()">Edit</a>
+  			<button type="submit" name="programSaveBtn" value="Submit" id="programSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
+  			<a id="programCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('program')" style="display: none;">Cancel</a>
+    	</div>
+  	</form>
+
   </div>
   
 	<?php
@@ -211,7 +224,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 	window.cycleEditBtn = $("cycleEditBtn");
 	window.cycleCancelBtn = $("cycleCancelBtn");
 	window.cycleSpan = $("cycleSpan");
-	window.cycleDiv = $("cycleName");
+	window.cycleDiv = $("cycleNameText");
 	window.selectCycle = $("selectCycle");
 
 	// Program Window Vars
@@ -219,7 +232,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 	window.programEditBtn = $("programEditBtn");
 	window.programCancelBtn = $("programCancelBtn");
 	window.programSpan = $("programSpan");
-	window.programDiv = $("programName");
+	window.programDiv = $("programNameText");
 	window.selectProgram = $("selectProgram");
 
 	window.errorClassVals = "alert alert-warning";
@@ -245,9 +258,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 	// Replace each individ. save function is the hope, also so users can submit more than one edit.
 	var saveValues = function () {
-
-
-
+	
 	}
 
 	var saveMajor = function () {
