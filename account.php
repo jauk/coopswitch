@@ -16,6 +16,9 @@ $userFieldClass = "col-sm-2 col-sm-offset-4 text-center";
 $majorBeginClass = "";
 $majorBeginEditClass = "";
 
+$beginTextClass = "col-sm-4";
+$beginTextStyle = "padding-right: 0px; text-align: justify;";
+
 ?>
 
 <!-- <hr> -->
@@ -30,13 +33,7 @@ $majorBeginEditClass = "";
   	</div>
   </div>
   
-  <div class="row">
-    <div class="col-sm-2 col-sm-offset-5">
-      <button id="editMainBtn" class="btn btn-warning btn-sm" onclick="editProfile()">Edit</button>
-      <button id="saveMainBtn" class="btn btn-success btn-sm" onclick="submitChanges()">Save</button>
-      <button id=cancelMainBtn class="btn btn-info btn-sm" onclick="cancelChanges()">Cancel</button>
-    </div>
-  </div>
+ 
 
   <br>
   
@@ -46,137 +43,115 @@ $majorBeginEditClass = "";
   	</div>
   </div>
 
-	<!-- Alight text left and edit buttons right eventually. -->
-	
-	<!-- Add MAIN EDIT btn which shows the indivd edit buttons and realigns elements so centered.
-	      Different centering for diff modes due to btns
-	      Get rid of indivd save/cancel buttons? Would make things easier...?
-	      
-	      * Ie. if user changes two fields, maybe just have one main save/cancel button, indivd edit btns.
-	      
-	      * Js to go to location to stop jumping, may not be necessary with master edit btn
-	      
+	<!--
+	     * Js to go to location to stop jumping, may not be necessary with master edit btn
 	      Left/right align
-	 
 	 -->
 	      
 	<!-- Should I add confirmations? "Sure you want to change/drop match, sure you want to change. Nice popup. Learn jquery -->
 
-	<!-- MAJOR FIELD -->
-	<div class="row">
-	
-	    <!-- Major Begin Text -->
-  	<div id="majorBeginText" class="col-sm-2 col-sm-offset-3" style="padding-right: 0px; text-align: right;">
-  		<h4>Your major is</h4>
-  	</div>
-  	
-  	  <!-- Major Name -->
-  	<div id="majorNameText" class="col-sm-2" style="text-align: left; padding-left: 5px;">
-  	  <h4>
-  	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
-  		</h4>
-  	</div>
-
-	    <!-- Major Field Editable -->
-    <form id="majorForm" name="majorForm" method="post" action="update.php" onsubmit="return saveMajor();">
-      <!-- Dropdown of majors -->
-    	<div id="majorSpan" style="display: none; padding-left: 5px;" class="col-sm-3">
-				<input type="hidden" name="newMajorId" id="newMajorId" value="">
-				<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
-					<?php print_majors(); ?>
-				</select>
-      </div>
-      
-        <!-- Major Btns
-      <div id="majorBtns" class="col-sm-2" style="text-align: left">
-      	<a id="majorEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editMajor()">Edit</a>
-  			<button type="submit" name="majorSaveBtn" value="Submit" id="majorSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
-  			<a id="majorCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('major')" style="display: none;">Cancel</a>
-    	</div>
-    	-->
-    	
-  	</form>
-  	
-	</div>
-
-	<!-- CYCLE FIELD -->
-	<div class="row">
-	
-	  <div id="cycleBeginText" class="col-sm-2 col-sm-offset-3" style="padding-right: 0px; text-align: right;">
-  		<h4>Your cycle is</h4>
-  	</div>
-  	
-  	<div id="cycleNameText" class="col-sm-2" style="text-align: left; padding-left: 5px;">
-  	  <h4>
-  	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_cycle_name']}."; ?></div>
-  		</h4>
-  	</div>
-  	
-    <form id="cycleForm" name="cycleForm" method="post" action="update.php" onsubmit="return saveCycle();">
-    	<div id="cycleSpan" style="display: none; padding-left: 5px;" class="col-sm-2">
-				<input type="hidden" name="newCycleId" id="newCycleId" value="">
-				<select id="selectCycle" class="form-control selectpicker" name="cycle" data-live-search="true" data-size="5">
-					<?php if ($_SESSION['user_cycle'] == 1) { ?>
-						<option selected="selected" value="1">Fall-Winter</option>
-						<option value="2">Spring-Summer</option>
-					<?php } else { ?>
-						<option value="1">Fall-Winter</option>
-						<option selected="selected" value="2">Spring-Summer</option>
-					<?php } ?>
-				</select>
-      </div>
-      
-      <!--
-      <div id="cycleBtns" class="col-sm-2" style="text-align: left">
-      	<a id="cycleEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editCycle()">Edit</a>
-  			<button type="submit" name="cycleSaveBtn" value="Submit" id="cycleSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
-  			<a id="cycleCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('cycle')" style="display: none;">Cancel</a>
-    	</div>
-    	-->
-    	
-  	</form>
-  	
-	</div>
-
-	<!-- User Program Field -->
-	<div class="row">
-	
-	 <div id="programBeginText" class="col-sm-2 col-sm-offset-3" style="padding-right: 0px; text-align: right;">
-  		<h4>You will have</h4>
-  	</div>
-  	
-  	<div id="programNameText" class="col-sm-2" style="text-align: left; padding-left: 5px;">
-  	  <h4>
-  	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_program_name']}"; ?></div>
-  		</h4>
-  	</div>
-  	
-    <form id="programForm" name="programForm" method="post" action="update.php" onsubmit="return saveProgram();">
-    	<div id="programSpan" style="display: none; padding-left: 5px;" class="col-sm-2">
-				<input type="hidden" name="newProgramId" id="newProgramId" value="">
-				<select id="selectProgram" class="form-control selectpicker" name="program" data-live-search="true" data-size="5">
-					<?php if ($_SESSION['user_program'] == 1) { ?>
-						<option selected="selected" value="1">1 co-op</option>
-						<option value="2">3 co-ops</option>
-					<?php } else { ?>
-						<option value="1">1 co-op</option>
-						<option selected="selected" value="2">3 co-ops</option>
-					<?php } ?>
-				</select>
-      </div>
-      
-      <!--
-      <div id="programBtns" class="col-sm-2" style="text-align: left">
-      	<a id="programEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editProgram()">Edit</a>
-  			<button type="submit" name="programSaveBtn" value="Submit" id="programSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
-  			<a id="programCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('program')" style="display: none;">Cancel</a>
-    	</div>
-    	-->
-    	
-  	</form>
-
-  </div>
+  <!-- Profile Fields Containter -->
   
+ <form id="profileForm" name="profileForm" method="post" action="update.php" onsubmit="return saveChanges()">
+  
+  	<div id="profileFields" name="profileFields" class="container-fluid col-sm-4 col-sm-offset-4" style="border: 0px solid black; padding: 5px;">
+  	
+    	<div class="row"> <!-- Major -->
+  
+      	<div id="majorBeginText" class="<?php echo $beginTextClass; ?>" style="<?php echo $beginTextStyle; ?>">
+      		<h4>Your major is</h4>
+      	</div>
+      	
+      	<div id="majorNameText" class="col-sm-5" style="text-align: left; padding-left: 5px;">
+      	  <h4>
+      	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
+      		</h4>
+      	</div>
+    
+       <!-- <form id="majorForm" name="majorForm" method="post" action="update.php" onsubmit="return saveMajor();"> -->
+        	<div id="majorSpan" style="display: none; padding-left: 5px;" class="col-sm-6">
+    				<input type="hidden" name="newMajorId" id="newMajorId" value="">
+    				<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
+    					<?php print_majors(); ?>
+    				</select>
+          </div>
+        <!-- </form> -->
+      	
+    	</div>
+    
+    	<div class="row"> <!-- Cycle -->
+    	
+    	  <div id="cycleBeginText" class="<?php echo $beginTextClass; ?>" style="<?php echo $beginTextStyle; ?>">
+      		<h4>Your cycle is</h4>
+      	</div>
+      	
+      	<div id="cycleNameText" class="col-sm-5" style="text-align: left; padding-left: 5px;">
+      	  <h4>
+      	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_cycle_name']}."; ?></div>
+      		</h4>
+      	</div>
+      	
+       <!-- <form id="cycleForm" name="cycleForm" method="post" action="update.php" onsubmit="return saveCycle();"> -->
+        	<div id="cycleSpan" style="display: none; padding-left: 5px;" class="col-sm-6">
+    				<input type="hidden" name="newCycleId" id="newCycleId" value="">
+    				<select id="selectCycle" class="form-control selectpicker" name="cycle" data-live-search="true" data-size="5">
+    					<?php if ($_SESSION['user_cycle'] == 1) { ?>
+    						<option selected="selected" value="1">Fall-Winter</option>
+    						<option value="2">Spring-Summer</option>
+    					<?php } else { ?>
+    						<option value="1">Fall-Winter</option>
+    						<option selected="selected" value="2">Spring-Summer</option>
+    					<?php } ?>
+    				</select>
+          </div>
+      <!-- </form> -->
+      	
+    	</div>
+    
+    	<div class="row"> <!-- Program -->
+    	
+    	 <div id="programBeginText" class="<?php echo $beginTextClass; ?>" style="<?php echo $beginTextStyle; ?>">
+      		<h4>You will have</h4>
+      	</div>
+      	
+      	<div id="programNameText" class="col-sm-5" style="text-align: left; padding-left: 5px;">
+      	  <h4>
+      	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_program_name']}"; ?>.</div>
+      		</h4>
+      	</div>
+      	
+        <!-- <form id="programForm" name="programForm" method="post" action="update.php" onsubmit="return saveProgram();"> -->
+        	<div id="programSpan" style="display: none; padding-left: 5px;" class="col-sm-6">
+    				<input type="hidden" name="newProgramId" id="newProgramId" value="">
+    				<select id="selectProgram" class="form-control selectpicker" name="program" data-live-search="true" data-size="5">
+    					<?php if ($_SESSION['user_program'] == 1) { ?>
+    						<option selected="selected" value="1">1 co-op</option>
+    						<option value="2">3 co-ops</option>
+    					<?php } else { ?>
+    						<option value="1">1 co-op</option>
+    						<option selected="selected" value="2">3 co-ops</option>
+    					<?php } ?>
+    				</select>
+          </div>
+      <!-- </form> -->
+      </div>
+      
+    </div> <!-- End profile field div begin btn container -->
+  
+    <div id="editBtns" class="container col-sm-1" style="border: 0px solid black; padding: 5px; padding-top: 10px;">
+      <div class="row" style="padding-bottom: 5px;">
+        <button id="saveMainBtn" class="btn btn-success btn-sm" style="width: 75%;" onclick="saveChanges()">Save</button>
+      </div>
+      <div class="row">
+        <button type="button" id="editMainBtn" class="btn btn-warning btn-sm" style="width: 75%;" onclick="editProfile()">Edit</button>
+      </div>
+      <div class="row">
+        <button type="button" id=cancelMainBtn class="btn btn-info btn-sm" style="width: 75%;" onclick="cancelChanges()">Cancel</button>
+      </div>
+    </div>
+ </form>
+
+    
 	<?php
 		// Get the latest user_matched status
 		$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
@@ -215,6 +190,7 @@ $majorBeginEditClass = "";
 mysql_close($con);
 require_once(TEMPLATES_PATH . "/footer.php");
 ?>
+
 
 <script type="text/javascript">
 	
@@ -268,6 +244,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
   var editProfile = function () {
     
+    window.editMainBtn.style.display ='none';
     window.saveMainBtn.style.display = '';
     window.cancelMainBtn.style.display = '';
     
@@ -275,14 +252,28 @@ require_once(TEMPLATES_PATH . "/footer.php");
     editCycle();
     editProgram();
     
+    return false;
+    
   }
   
   var cancelChanges = function () {
     
+    window.editMainBtn.style.display = '';
     window.saveMainBtn.style.display = 'none';
     window.cancelMainBtn.style.display = 'none';
     
     cancelEdit();
+    
+  }
+  
+  var saveChanges = function () {
+    
+    
+    saveMajor();
+    saveCycle();
+    saveProgram();
+    
+    //alert("Test");
     
   }
 
@@ -297,7 +288,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 		// 	window.majorSaveBtn.style.display = '';
 		// 	window.majorCancelBtn.style.display = '';
 			
-			window.majorBeginText.className = 'col-sm-2 col-sm-offset-3';
+		//	window.majorBeginText.className = 'col-sm-2 col-sm-offset-3';
 			
 		}
 
@@ -308,9 +299,11 @@ require_once(TEMPLATES_PATH . "/footer.php");
 		var i = window.selectMajor.selectedIndex;
 		var newId = window.selectMajor[i].value;
 
-		document.majorForm.newMajorId.value = newId;
+		//document.majorForm.newCycleId.value = newId;
+		//document.profileForm.newMajorId.value = newId;
+		$("newMajorId").value = newId;
 
-		return true;
+		//return true;
 	}
 
 	var editCycle = function () {
@@ -331,9 +324,11 @@ require_once(TEMPLATES_PATH . "/footer.php");
 		var i = window.selectCycle.selectedIndex;
 		var newId = window.selectCycle[i].value;
 
-		document.cycleForm.newCycleId.value = newId;
-		
-		return true;
+		//document.cycleForm.newCycleId.value = newId;
+		//document.profileForm.newCycleId.value = newId;
+    $("newCycleId").vaule = newId;
+    
+		//return true;
 	}
 
 
@@ -355,9 +350,11 @@ require_once(TEMPLATES_PATH . "/footer.php");
 		var i = window.selectProgram.selectedIndex;
 		var newId = window.selectProgram[i].value;
 
-		document.programForm.newProgramId.value = newId;
-		
-		return true;
+		//document.programForm.newProgramId.value = newId;
+		//document.profileForm.newProgramId.value = newId;
+		$("newProgramId").value = newId;
+
+		//return true;
 	}
 
 	var check_if_dropped = function () {
