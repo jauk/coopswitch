@@ -6,9 +6,16 @@ function print_majors() {
 	$query="SELECT * FROM Majors";
 	$result=mysql_query($query);
 	$numMajors=mysql_num_rows($result);
+	
+	//Debug
+	$numMajors = 10;
 
 	$i=0; while ($i < $numMajors) {
 		$major_name=mysql_result($result, $i, "major_long");
+		
+		//Debug (no db here)
+		$major_name = "Major " . $i;
+		
 		$major_ident=mysql_result($result, $i, id);
 
 		if ($_SESSION['user_major'] == $major_ident)
@@ -59,7 +66,7 @@ function get_match_info() {
 	$other_user_data = array();
 	$other_user_data[0] = $row;
 
-	return $other_user_data;	 
+	return $other_user_data;
 }
 
 function test_input($data) {

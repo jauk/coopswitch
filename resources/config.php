@@ -12,7 +12,9 @@ defined("DEV_PATH")
 // define('DEBUG', 'false');
 
 $GLOBALS['debug'] = True;
-$GLOBALS['debug_login'] = False;
+
+// If want to simulate logged in user.
+$GLOBALS['debug_login'] = True;
 
 
 $config = array(

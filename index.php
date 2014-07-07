@@ -427,4 +427,6 @@ How do I prevent abuse of match dropping
 * This should work but should do some more testing.
 
 
+* Email other user if match dropped to warn them still looking
+
 -->

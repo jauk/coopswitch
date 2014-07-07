@@ -3,7 +3,8 @@
 	require_once(TEMPLATES_PATH . "/header.php");
 	include(FUNCTION_PATH . "/connect.php");
 
-	// Need to tell which value is being updated too.
+	// Need to tell which value is being updated too
+	// Update for one master form soon
 
 	if (isset($_POST['newMajorId']))
 		$newUserMajor = test_input($_POST['newMajorId']);
@@ -29,7 +30,7 @@
 	$query = "SELECT * FROM Users WHERE id = " . $_SESSION['user_id'];
 	$result = mysql_query($query);
 	global $user_data;
-	$user_data = array(); 
+	$user_data = array();
 	$row = mysql_fetch_array($result);
 	$user_data[0] = $row;
 	$GLOBALS["user_data[0]"] = $user_data[0];
@@ -89,8 +90,8 @@
 		echo "ID: " . $user_data[0]['id'] . "<br>Matched? " . $user_data[0]['matched'] . "<hr>";
 		//echo '$GLOBALS["user_data[0]['id']"]';
 
-		/* Create dropped_match var for users, only let them drop one match. 
-			Warn before editing profile vals when match in progress. 
+		/* Create dropped_match var for users, only let them drop one match.
+			Warn before editing profile vals when match in progress.
 			- If not currently matched, does not matter. */
 
 		// Should check if matched first before going through code

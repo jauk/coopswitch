@@ -24,9 +24,6 @@ else {
 				'".date("Y-m-d H:i:s")."'
 	 )";
 
-	//$_SESSION['user_name'] = $name; // For when implementing profiles I guess?
-	//$_SESSION['user_email'] = $email;
-
 	if (!mysql_query($sql,$con)) {
 	  	die('Error: ' . mysql_error());
 	  }
@@ -65,7 +62,7 @@ mysql_close($con);
 
 				<p>
 				<?php
-					if ($_POST["cycle"] == 1)
+					if ($cycle == 1)
 						echo "You <strong>want</strong> a Spring-Summer co-op cycle.";
 					else
 						echo "You <strong>want</strong> a Fall-Winter co-op cycle.";

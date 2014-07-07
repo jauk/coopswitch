@@ -17,10 +17,6 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
     // echo $filename;
 }
 
-//
-//if (!isset($_SESSION['user_name']))
-//	$_SESSION['user_name'] = "";
-
 $title = "Coopswitch";
 $slogan = "A simple way to switch co-ops."; //Get on the right cycle! Ha.
 
@@ -28,6 +24,9 @@ if ($_SESSION['login'] == 0) {
   if ($debug_login) {
     $_SESSION['login'] = 1;
     $_SESSION['user_name'] = "Test User";
+  	$_SESSION['user_major_name'] = "Computer Science";
+  	$_SESSION['user_cycle_name'] = "Spring-Summer";
+  	$_SESSION['user_program_name'] = "3 co-ops";
   }
 }
 
@@ -49,7 +48,6 @@ if ($_SESSION['login'] == 0) {
 			font-family: 'Cutive';
 			font-size: 48px;
 		}
-
 	</style>
 	
 	<script src="../js/global.js"></script>
@@ -57,8 +55,8 @@ if ($_SESSION['login'] == 0) {
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-	
 </head>
+
 <body>
 	<div class="container-fluid">
 		<div class="row col-md-6 col-md-offset-3 text-center">
@@ -86,22 +84,22 @@ if ($_SESSION['login'] == 0) {
 		<br><br>
 
 				<?php if (!isset($_SESSION['login'])) { //if ($_SESSION['login'] == "") { ?>
-				<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center">
-					<br><form class="form-inline" role="form" name="login_form" method="post" action="/login.php">
-						<fieldset>
-							<div class="form-group">
-						    	<label class="sr-only" for="email">Email address</label>
-						   		<input type="email" class="form-control" name="email" id="email" placeholder="Email">
-	  						</div>
-	  						<div class="form-group">
-						    	<label class="sr-only" for="password">Password</label>
-						    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
-							</div>
-					   		<button type="submit" class="btn btn-default btn-success">Sign In</button>
-					    </fieldset>
-					</form>
-					<hr>
-				</div>
+  				<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center">
+  					<br><form class="form-inline" role="form" name="login_form" method="post" action="/login.php">
+  						<fieldset>
+  							<div class="form-group">
+  						    	<label class="sr-only" for="email">Email address</label>
+  						   		<input type="email" class="form-control" name="email" id="email" placeholder="Email">
+  	  						</div>
+  	  						<div class="form-group">
+  						    	<label class="sr-only" for="password">Password</label>
+  						    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+  							</div>
+  					   		<button type="submit" class="btn btn-default btn-success">Sign In</button>
+  					    </fieldset>
+  					</form>
+  					<hr>
+  				</div>
 				<?php } else { ?>
 
 					<div class="row-fluid col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
@@ -113,9 +111,8 @@ if ($_SESSION['login'] == 0) {
 						<hr>
 					</div>
 
-					<?php }
-
-				?>
+				<?php } ?>
+				
 		<!--	</div> -->
 		</div>
 	<!-- </div> -->
