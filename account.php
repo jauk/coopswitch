@@ -29,7 +29,17 @@ $majorBeginEditClass = "";
   		</div>
   	</div>
   </div>
+  
+  <div class="row">
+    <div class="col-sm-2 col-sm-offset-5">
+      <button id="editMainBtn" class="btn btn-warning btn-sm" onclick="editProfile()">Edit</button>
+      <button id="saveMainBtn" class="btn btn-success btn-sm" onclick="submitChanges()">Save</button>
+      <button id=cancelMainBtn class="btn btn-info btn-sm" onclick="cancelChanges()">Cancel</button>
+    </div>
+  </div>
 
+  <br>
+  
   <div class="row">
   	<div class="<?php echo $rowClass; ?>">
   		<span class="error"><div id="droppedMatches"></div></span>
@@ -77,12 +87,14 @@ $majorBeginEditClass = "";
 				</select>
       </div>
       
-        <!-- Major Btns -->
+        <!-- Major Btns
       <div id="majorBtns" class="col-sm-2" style="text-align: left">
       	<a id="majorEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editMajor()">Edit</a>
   			<button type="submit" name="majorSaveBtn" value="Submit" id="majorSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
   			<a id="majorCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('major')" style="display: none;">Cancel</a>
     	</div>
+    	-->
+    	
   	</form>
   	
 	</div>
@@ -114,11 +126,14 @@ $majorBeginEditClass = "";
 				</select>
       </div>
       
+      <!--
       <div id="cycleBtns" class="col-sm-2" style="text-align: left">
       	<a id="cycleEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editCycle()">Edit</a>
   			<button type="submit" name="cycleSaveBtn" value="Submit" id="cycleSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
   			<a id="cycleCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('cycle')" style="display: none;">Cancel</a>
     	</div>
+    	-->
+    	
   	</form>
   	
 	</div>
@@ -132,7 +147,7 @@ $majorBeginEditClass = "";
   	
   	<div id="programNameText" class="col-sm-2" style="text-align: left; padding-left: 5px;">
   	  <h4>
-  	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_program_name']}."; ?></div>
+  	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_program_name']}"; ?></div>
   		</h4>
   	</div>
   	
@@ -150,18 +165,21 @@ $majorBeginEditClass = "";
 				</select>
       </div>
       
+      <!--
       <div id="programBtns" class="col-sm-2" style="text-align: left">
       	<a id="programEditBtn" href="#" class="btn btn-sm btn-warning" onclick="editProgram()">Edit</a>
   			<button type="submit" name="programSaveBtn" value="Submit" id="programSaveBtn" class="btn btn-sm btn-success" style="display: none;">Save</button>
   			<a id="programCancelBtn" href="#" class="btn btn-sm btn-info" onclick="cancelEdit('program')" style="display: none;">Cancel</a>
     	</div>
+    	-->
+    	
   	</form>
 
   </div>
   
 	<?php
 		// Get the latest user_matched status
-		$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id'] . "");
+		$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
 
 		// If the user has a match, get the match's info and display it.
 		if ($_SESSION['user_matched'] == 1) {
@@ -194,7 +212,6 @@ $majorBeginEditClass = "";
 </div>
 
 <?php
-
 mysql_close($con);
 require_once(TEMPLATES_PATH . "/footer.php");
 ?>
@@ -203,14 +220,26 @@ require_once(TEMPLATES_PATH . "/footer.php");
 	
 	// Get some vars from PHP
 	window.hasDroppedMatch = "<?php echo $_SESSION['user_dropped_matches']; ?>";
-	if (hasDroppedMatch == "")
+	if (hasDroppedMatch == "") {
 		window.hasDroppedMatch = 0;
+	}
 
 	window.isMatched = "<?php echo $_SESSION['user_matched']; ?>";
 
 	window.droppedMatches = $("droppedMatches");
+	window.droppedMatches.style.display = 'none';
+
+  // Main Profile Buttons
+  
+  window.editMainBtn = $("editMainBtn");
+  window.saveMainBtn = $("saveMainBtn");
+  window.cancelMainBtn = $("cancelMainBtn");
+  
+  window.saveMainBtn.style.display = 'none';
+  window.cancelMainBtn.style.display = 'none';
 
 	// Major Window Vars
+	
 	window.majorSaveBtn = $("majorSaveBtn");
 	window.majorEditBtn = $("majorEditBtn");
 	window.majorCancelBtn = $("majorCancelBtn");
@@ -236,8 +265,26 @@ require_once(TEMPLATES_PATH . "/footer.php");
 	window.selectProgram = $("selectProgram");
 
 	window.errorClassVals = "alert alert-warning";
-	window.droppedMatches.style.display = 'none';
 
+  var editProfile = function () {
+    
+    window.saveMainBtn.style.display = '';
+    window.cancelMainBtn.style.display = '';
+    
+    editMajor();
+    editCycle();
+    editProgram();
+    
+  }
+  
+  var cancelChanges = function () {
+    
+    window.saveMainBtn.style.display = 'none';
+    window.cancelMainBtn.style.display = 'none';
+    
+    cancelEdit();
+    
+  }
 
 	var editMajor = function () {
 		
@@ -246,19 +293,14 @@ require_once(TEMPLATES_PATH . "/footer.php");
 			//window.majorDiv.innerHTML = "";
 			window.majorSpan.style.display = '';
 
-			window.majorEditBtn.style.display = 'none';
-			window.majorSaveBtn.style.display = '';
-			window.majorCancelBtn.style.display = '';
+		// 	window.majorEditBtn.style.display = 'none';
+		// 	window.majorSaveBtn.style.display = '';
+		// 	window.majorCancelBtn.style.display = '';
 			
 			window.majorBeginText.className = 'col-sm-2 col-sm-offset-3';
 			
 		}
 
-	}
-
-	// Replace each individ. save function is the hope, also so users can submit more than one edit.
-	var saveValues = function () {
-	
 	}
 
 	var saveMajor = function () {
@@ -277,11 +319,11 @@ require_once(TEMPLATES_PATH . "/footer.php");
 			window.cycleDiv.style.display = 'none';
 			window.cycleSpan.style.display = '';
 
-			window.cycleEditBtn.style.display = 'none';
-			window.cycleSaveBtn.style.display = '';
-			window.cycleCancelBtn.style.display = '';
+		// 	window.cycleEditBtn.style.display = 'none';
+		// 	window.cycleSaveBtn.style.display = '';
+		// 	window.cycleCancelBtn.style.display = '';
 		}
-
+		
 	}
 
 	var saveCycle = function () {
@@ -301,9 +343,9 @@ require_once(TEMPLATES_PATH . "/footer.php");
 			window.programDiv.style.display = 'none';
 			window.programSpan.style.display = '';
 
-			window.programEditBtn.style.display = 'none';
-			window.programSaveBtn.style.display = '';
-			window.programCancelBtn.style.display = '';
+		// 	window.programEditBtn.style.display = 'none';
+		// 	window.programSaveBtn.style.display = '';
+		// 	window.programCancelBtn.style.display = '';
 		}
 
 	}
@@ -334,43 +376,41 @@ require_once(TEMPLATES_PATH . "/footer.php");
 		// 	return false;
 		// }
 
-		else if (window.isMatched == 1)
-		{
+		else if (window.isMatched == 1) {
 			window.droppedMatches.textContent = "By editing your profile, your current match will be dropped. The more matches you drop, the lower you go in the queue.";
 			window.droppedMatches.className = 'alert alert-info';
 			window.droppedMatches.style.display = '';
 			return true;
 		}
-		else
-		{
+		else {
 
 		}
 
 	}
 
-	var cancelEdit = function (field) {
+	var cancelEdit = function () {
 
-		if (field == "major") {
-			window.majorSaveBtn.style.display = 'none';
+		//if (field == "major") {
+		//window.majorSaveBtn.style.display = 'none';
 			window.majorSpan.style.display = 'none';
 			window.majorDiv.style.display = 'inline-block';
-			window.majorCancelBtn.style.display = 'none';
-			window.majorEditBtn.style.display = '';
-		}
-		else if (field == "cycle") {
-			window.cycleSaveBtn.style.display = 'none';
+		// 	window.majorCancelBtn.style.display = 'none';
+		// 	window.majorEditBtn.style.display = '';
+		//}
+		//else if (field == "cycle") {
+	  //window.cycleSaveBtn.style.display = 'none';
 			window.cycleSpan.style.display = 'none';
 			window.cycleDiv.style.display = 'inline-block';
-			window.cycleCancelBtn.style.display = 'none';
-			window.cycleEditBtn.style.display = '';
-		}
-		else if (field == "program") {
-			window.programSaveBtn.style.display = 'none';
+		// 	window.cycleCancelBtn.style.display = 'none';
+		// 	window.cycleEditBtn.style.display = '';
+		//}
+		//else if (field == "program") {
+		//window.programSaveBtn.style.display = 'none';
 			window.programSpan.style.display = 'none';
 			window.programDiv.style.display = 'inline-block';
-			window.programCancelBtn.style.display = 'none';
-			window.programEditBtn.style.display = '';
-		}
+		// 	window.programCancelBtn.style.display = 'none';
+		// 	window.programEditBtn.style.display = '';
+		//}
 
 		window.droppedMatches.style.display = 'none';
 	}
