@@ -41,7 +41,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   <div class="row">
   	<div class="<?php echo $rowClass; ?>">
   		<div class="panel-heading">
-  			<h2>Hello, <?php echo "{$_SESSION['user_name']}" ?>!</h2>
+  			<h2>Hello, <div style="display: inline-block;" class="text-primary"><?php echo "{$_SESSION['user_name']}" ?></div></h2>
   		</div>
   	</div>
   </div>
@@ -169,20 +169,31 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 		// If the user has a match, get the match's info and display it.
 		if ($_SESSION['user_matched'] == 1) {
 			$other_user_data = get_match_info();
+			if ($debug_login) {
+        $other_user_data[0]['name'] = "John Fry";
+        $other_user_data[0]['email'] = "fry@drexel.edu";
+			}
 		?>
       
+    <div class="container col-sm-6 col-sm-offset-3">
+      
+      <hr>
       <div class="row">
-  			<div class="row-fluid col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-6 col-lg-offset-3 text-center">
-  				<br><hr><p class="lead">Hey, you have a match!</p>
+  			<div class="col-sm-6 col-sm-offset-3 text-center">
+  				<h3>You have a match!</h3>
   			</div>
       </div>
+      <br>
       
       <div class="row">
-  			<div class="row-fluid col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-6 col-lg-offset-3 text-center well">
-  				<p>You have matched with <strong> <?php echo $other_user_data[0]['name']; ?></strong>.</p>
-  				<p>You can email them at <strong> <?php echo $other_user_data[0]['email']; ?></strong></p>
+  			<div class="col-sm-8 col-sm-offset-2 well text-center">
+  				<p class="lead">You have matched with <strong class="text-info"> <?php echo $other_user_data[0]['name']; ?></strong>.</p>
+  				<br>
+  				<p>You can email them at <strong class="text-info"> <?php echo $other_user_data[0]['email']; ?></strong>.</p>
   			</div>
-			</div>
+  		</div>
+  		
+		</div>
 	
 	<?php } else { // If the user does not have a match tell them they still do not. ?>
 			
@@ -384,7 +395,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 		// }
 
 		else if (window.isMatched == 1) {
-			window.droppedMatches.textContent = "By editing your profile, your current match will be dropped. The more matches you drop, the lower you go in the queue.";
+			window.droppedMatches.textContent = "By editing your profile, your current match will be dropped. The more matches you drop, the lower you go in the queue."
 			window.droppedMatches.className = 'alert alert-info';
 			window.droppedMatches.style.display = '';
 			return true;
