@@ -16,7 +16,7 @@ $userFieldClass = "col-sm-2 col-sm-offset-4 text-center";
 $majorBeginClass = "";
 $majorBeginEditClass = "";
 
-$beginTextClass = "col-sm-4";
+$beginTextClass = "col-sm-4 col-sm-offset-2";
 $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 ?>
@@ -25,6 +25,19 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 <div class="container-fluid">
 
+
+  <!-- Make sure user has validated their email, else display this. -->
+  <!-- Cool message saying "Email sent." Limit amount of times it can be sent. -->
+  <?php if ($_SESSION['user_email_verified'] == 0) { ?>
+    <div class="row">
+      <div class="<?php echo $rowClass; ?>">
+        <p class="lead text-danger">Your email has not been verified. You are not eligible for a switch.</p>
+        <button class="btn btn-info btn-sm">Resend Email</button>
+      </div>
+    </div>
+    
+  <?php } ?>
+
   <div class="row">
   	<div class="<?php echo $rowClass; ?>">
   		<div class="panel-heading">
@@ -32,10 +45,6 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   		</div>
   	</div>
   </div>
-  
- 
-
-  <br>
   
   <div class="row">
   	<div class="<?php echo $rowClass; ?>">
@@ -51,7 +60,6 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 	<!-- Should I add confirmations? "Sure you want to change/drop match, sure you want to change. Nice popup. Learn jquery -->
 
   <!-- Profile Fields Containter -->
-  
  <form id="profileForm" name="profileForm" method="post" action="update.php" onsubmit="return saveChanges()">
   
   	<div id="profileFields" name="profileFields" class="container-fluid col-sm-4 col-sm-offset-4" style="border: 0px solid black; padding: 5px;">
@@ -138,7 +146,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
       
     </div> <!-- End profile field div begin btn container -->
   
-    <div id="editBtns" class="container col-sm-1" style="border: 0px solid black; padding: 5px; padding-top: 10px;">
+    <div id="editBtns" class="container col-sm-1" style="border: 0px solid black; padding: 5px; padding-top: 8px; margin-left: 20px;">
       <div class="row" style="padding-bottom: 5px;">
         <button id="saveMainBtn" class="btn btn-success btn-sm" style="width: 75%;" onclick="saveChanges()">Save</button>
       </div>
@@ -149,12 +157,14 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
         <button type="button" id=cancelMainBtn class="btn btn-info btn-sm" style="width: 75%;" onclick="cancelChanges()">Cancel</button>
       </div>
     </div>
+    
  </form>
 
     
 	<?php
 		// Get the latest user_matched status
-		$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
+		if (!$debug_login)
+	  	$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
 
 		// If the user has a match, get the match's info and display it.
 		if ($_SESSION['user_matched'] == 1) {
