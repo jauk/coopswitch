@@ -27,18 +27,23 @@ if ($_SESSION['login'] == 0) {
   	$_SESSION['user_major_name'] = "Computer Science";
   	$_SESSION['user_cycle_name'] = "Spring-Summer";
   	$_SESSION['user_program_name'] = "3 co-ops";
+  	$_SESSION['user_matched'] = 1;
   }
 }
 
 ?>
 
 <html lang="en">
+
 <head>
 
 	<title><?php echo "$title"; ?></title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta content="utf-8" http-equiv="encoding">
 	<link href="../css/bootstrap.css" rel="stylesheet">
+	<link href="../css/other.css" rel="stylesheet">
+	
 	<link rel="stylesheet" type="text/css" media="screen" href="http://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css">
 	
 	<link href="http://fonts.googleapis.com/css?family=Cutive" rel="stylesheet" type="text/css">
@@ -51,6 +56,7 @@ if ($_SESSION['login'] == 0) {
 	</style>
 	
 	<script src="../js/global.js"></script>
+	<script src="../js/bootstrap-select.js"></script>
 	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
