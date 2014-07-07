@@ -14,7 +14,7 @@ function print_majors() {
 		$major_name=mysql_result($result, $i, "major_long");
 		
 		//Debug (no db here)
-		$major_name = "Major " . $i;
+		$major_name = "Computer Science";
 		
 		$major_ident=mysql_result($result, $i, id);
 

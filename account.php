@@ -21,10 +21,11 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 ?>
 
+<!-- Work on edit button location -->
+
 <!-- <hr> -->
 
 <div class="container-fluid">
-
 
   <!-- Make sure user has validated their email, else display this. -->
   <!-- Cool message saying "Email sent." Limit amount of times it can be sent. -->
@@ -48,7 +49,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   
   <div class="row">
   	<div class="<?php echo $rowClass; ?>">
-  		<span class="error"><div id="droppedMatches"></div></span>
+  		<span><div id="droppedMatches"></div></span>
   	</div>
   </div>
 
@@ -396,7 +397,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 		else if (window.isMatched == 1) {
 			window.droppedMatches.textContent = "By editing your profile, your current match will be dropped. The more matches you drop, the lower you go in the queue."
-			window.droppedMatches.className = 'alert alert-info';
+			window.droppedMatches.className = 'alert alert-warning lead';
 			window.droppedMatches.style.display = '';
 			return true;
 		}

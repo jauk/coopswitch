@@ -59,15 +59,15 @@ $query="SELECT * FROM Users WHERE matched = 0 ORDER BY dropped_matches ASC";
 $result=mysql_query($query);
 $num=mysql_num_rows($result); // ...It's this many
 
-?> 
+?>
   
   <div class="<?php echo $rowClass; ?>">
-    <?php 
+    <?php
     if (isset($msg)) {
-      if ($msg == 1) 
-          echo "<strong>Records generated.</strong><br><br>"; 
-      else if ($msg == 2) 
-          echo "<strong>Database cleared.</strong><br><br>"; 
+      if ($msg == 1)
+          echo "<strong>Records generated.</strong><br><br>";
+      else if ($msg == 2)
+          echo "<strong>Database cleared.</strong><br><br>";
 
       $msg = 0;
     }
@@ -75,14 +75,14 @@ $num=mysql_num_rows($result); // ...It's this many
     ?>
     <p>There are <?php echo $num; ?> people who have not been matched. <br> Will now attempt to manually match.</p>
     <?php if ($num == 0) echo "Hooray, everyone is matched!<br><br>" ?>
-
+  
     <button id="generate_records" type="button" class="btn btn-warning">Generate Records</button>
     <button id="delete_records" type="button" class="btn btn-danger">Delete Records</button>
   </div>
 
 <?php
   
-  // I need to order both arrays by number of dropped matches? Less = first. 
+  // I need to order both arrays by number of dropped matches? Less = first.
 
   if ($num > 0) // If there are people not matched, run this.
    {
@@ -99,7 +99,7 @@ $num=mysql_num_rows($result); // ...It's this many
       echo "<br><br>";
       /*
 
-      Show what majors do not have matches. Fancy bar/circle graph?    
+      Show what majors do not have matches. Fancy bar/circle graph?
 
       */
 
@@ -109,14 +109,14 @@ $num=mysql_num_rows($result); // ...It's this many
 
          // $IdsGoneThrough = array(); // Save the Ids gone through and do not let them be compared again? Wait no .
 
-          $query = " SELECT * FROM Users WHERE matched = 0 AND major = " . $users_not_matched[$x]['major'] . 
-                   " AND id != " . $users_not_matched[$x]['id'] . " AND cycle != " . $users_not_matched[$x]['cycle'] . 
+          $query = " SELECT * FROM Users WHERE matched = 0 AND major = " . $users_not_matched[$x]['major'] .
+                   " AND id != " . $users_not_matched[$x]['id'] . " AND cycle != " . $users_not_matched[$x]['cycle'] .
                    " AND num_year_program = " . $users_not_matched[$x]['num_year_program'] .
                    " ORDER BY dropped_matches ASC";
 
           $result = mysql_query($query);
 
-          //  
+          //
           if ((mysql_num_rows($result) > 0) && ($users_not_matched[$x]['matched'] != 1)) // We found people who match the guy inside $users_not_matched. NEED TO UPDATE $users_not_matched after a match is made. Remove from array after matched.
             {
               $matched_user_data = array(); // Reset the array.
@@ -134,7 +134,7 @@ $num=mysql_num_rows($result); // ...It's this many
               /* Put the users into the Matches table and set equaled to matched. */
 
               // Update both users to be matched.
-              $query = "UPDATE Users SET matched = 1 WHERE id = " . $users_not_matched[$x]['id'] . " OR id = " . $matched_user_data[0]['id'] . ""; 
+              $query = "UPDATE Users SET matched = 1 WHERE id = " . $users_not_matched[$x]['id'] . " OR id = " . $matched_user_data[0]['id'] . "";
               $users_not_matched[$x]['matched'] = 1;
 
               // Find where $matched_user_data[0] is in $users_not_matched and set matched = 1 so that it stops dupes.
@@ -211,7 +211,7 @@ $num=mysql_num_rows($result); // ...It's this many
     <p>There are still <?php echo $num - ($matches*2); ?> people who still need to be matched.</p>
 
     <br>
-    <?php 
+    <?php
 
     $query = "select major from Matches ORDER BY id DESC LIMIT 10";
     $result = mysql_query($query) OR die(mysql_error());
@@ -234,8 +234,8 @@ $num=mysql_num_rows($result); // ...It's this many
       $last_matches[$index]['userB'] = mysql_get_var("SELECT userB FROM Matches WHERE id = " . $last_matches[$index]['major']);
       ?>
       <li class="list-group-item"><?php echo $last_matches[$index]['major_name']; ?></li>
-      <?php 
-      // Show the IDs of the matched users. 
+      <?php
+      // Show the IDs of the matched users.
 
       if ($debug) {
         echo '<li class="list-group-item"> ' . $last_matches[$index]['userA'] . ' ' . $last_matches[$index]['userB'] . '</li>';

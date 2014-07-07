@@ -28,6 +28,7 @@ if ($_SESSION['login'] == 0) {
   	$_SESSION['user_cycle_name'] = "Spring-Summer";
   	$_SESSION['user_program_name'] = "3 co-ops";
   	$_SESSION['user_matched'] = 1;
+    $_SESSION['user_email_verified'] = 1;
   }
 }
 
