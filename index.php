@@ -12,19 +12,20 @@ $otherClassMaybe="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col
 $typicalRowClass = "col-sm-6 col-sm-offset-3 text-center";
 
 // Form specific
-$formHeaderClass = "col-sm-4 col-sm-offset-4 text-center well";
-$formElementClass = "col-sm-4 col-sm-offset-4 text-center";
+//$formHeaderClass = "col-sm-4 col-sm-offset-4 text-center well";
+//$formElementClass = "col-sm-4 col-sm-offset-4 text-center";
+$formHeaderClass = " col-sm-10 col-sm-offset-1 text-center well";
+$formElementClass = "col-sm-10 col-sm-offset-1 text-center";
 
-$formMainErrClass = "col-sm-4 col-sm-offset-4 text-center";
+$formMainErrClass = "col-sm-10 col-sm-offset-1 text-center";
 $formElementErrClass = "";
 
 
 $pageName = "Test";
 
-
 ?>
 
-<div class="container-fluid">
+<div class="container">
 
 	  
 	<!-- IF NOT LOGGED IN -->
@@ -49,135 +50,126 @@ $pageName = "Test";
   	</div>
   	
   	<!-- REGISTER FORM START -->
-
-    <div class="row">
-  		<div class="<?php echo $formHeaderClass; ?> well">
-  			<h4>Registration Form</h4>
-  			<p>This is currently for <em>Drexel Freshman</em> only.</p>
-  		</div>
-  	</div>
-	
-		<!-- Print out if there is an error with the form data. -->
+	<div class="container col-sm-6 col-sm-offset-3">
+	    <div class="row">
+	  		<div class="<?php echo $formHeaderClass; ?> well">
+	  			<h3>Registration Form</h3>
+	  			<p>This is currently for <em>Drexel Freshman</em> only.</p>
+	  		</div>
+	  	</div>
+		
+			<!-- Print out if there is an error with the form data. -->
 		<div class="row">
-  		<div class="<?php echo $formMainErrClass; ?>">
-  			<span class="error">
-  				<strong><div class="alert alert-warning" id="formError"></div></strong>
-  			</span>
-  		</div>
-  	</div>
+	  		<div class="<?php echo $formMainErrClass; ?>">
+	  			<span class="error">
+	  				<strong><div class="alert alert-warning lead" id="formError"></div></strong>
+	  			</span>
+	  		</div>
+	  	</div>
 
-		<!-- Registration Form -->
+			<!-- Registration Form -->
 		<form role="form" id="register" method="post" action="register.php" onchange="" onsubmit="return validate_submit();" id="register">
 
-      <div class="row">
-  			<div id="mainNameDiv" class="<?php echo "$formElementClass"; ?>">
-  				<label for="nameField">Name</label>
-  				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()">
-  				<span class="help-block error"><div id="nameError"></div></span>
-  			</div>
-  		</div>
-  
-      <div class="row">
-  			<div id="mainEmailDiv" class="<?php echo "$formElementClass"; ?>">
-  				<label for="emailField">Email</label>
-  				<input type="text" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email()">
-  				<span class="help-block error"><div id="emailError"></div></span>
-  			</div>
-  		</div>
-  
-      <div class="row">
-  			<div id="mainPasswordDiv" class="<?php echo "$formElementClass"; ?>">
-  				<label for="passwordField">Password<small><br /><em>Do not use your Drexel One password.</em></small></label>
-  			</div>
-  		</div>
-  		
-  		<div class="row">
-  		  <div class="col-sm-2 col-sm-offset-4">
-  				<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
-  			</div>
-  			<div class="col-sm-2">
-  				<input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
-  			</div>
-  			<div class="<?php echo "$formElementClass"; ?>">
-  			  <span class="help-block error"><div id="passwordError"></div></span>
-        </div>
-      </div>
+			<div id="userElements" class="">
+		     	<div class="row">
+		  			<div id="mainNameDiv" class="<?php echo "$formElementClass"; ?>">
+		  				<label for="nameField">Name</label>
+		  				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()">
+		  				<span class="help-block error"><div id="nameError"></div></span>
+		  			</div>
+		  		</div>
+		  
+		     	 <div class="row">
+		  			<div id="mainEmailDiv" class="<?php echo "$formElementClass"; ?>">
+		  				<label for="emailField">Email</label>
+		  				<input type="text" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email()">
+		  				<span class="help-block error"><div id="emailError"></div></span>
+		  			</div>
+		  		</div>
+		  
+		     	 <div class="row">
+		  			<div id="mainPasswordDiv" class="<?php echo "$formElementClass"; ?>">
+		  				<label for="passwordField">Password<small><br /><em>Do not use your Drexel One password.</em></small></label>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="row">
+		  		  <div class="col-sm-5 col-sm-offset-1">
+		  				<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
+		  			</div>
+		  			<div class="col-sm-5">
+		  				<input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
+		  			</div>
+		  			<div class="<?php echo "$formElementClass"; ?>">
+		  				<span class="help-block error"><div id="passwordError"></div></span>
+		        	</div>
+		      	</div>
+		    </div>
 
-      <div class="row">
-  			<div class="<?php echo "$formElementClass"; ?>">
-  				<label for="majorField">Major</label>
-  				<select class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
-  
-  					<?php
-  					// Get the list of majors and display for user selection.
-  					  
-  					  print_majors();
-  					  mysql_close($con);
-  
-  					?>
-  
-  				</select>
-  			</div>
-      </div>
-      
-      <br>
+	      	<div id="profileElements" class="">
+		      	<div class="row">
+		  			<div class="<?php echo "$formElementClass"; ?>">
+		  				<label for="majorField">Major</label>
+		  				<select class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
+		  					<?php
+		  					// Get the list of majors and display for user selection.
+		  					  print_majors();
+		  					  mysql_close($con);
+		  					?>
+		  				</select>
+		  			</div>
+		      	</div>
+		      
+		      <br>
 
-      <div class="row">
-  			<div class="col-sm-2 col-sm-offset-4 text-center">
-  				<label for="cycleField">Current Cycle</label>
-  				<select class="form-control selectpicker" id="cycle" name="cycle">
-  					<option value="1">Fall-Winter</option>
-  					<option value="2">Spring-Summer</option>
-  				</select>
-  			</div>
+		      	<div class="row">
+		  			<div class="col-sm-5 col-sm-offset-1 text-center">
+		  				<label for="cycleField">Current Cycle</label>
+		  				<select class="form-control selectpicker" id="cycle" name="cycle">
+		  					<option value="1">Fall-Winter</option>
+		  					<option value="2">Spring-Summer</option>
+		  				</select>
+		  			</div>
 
-  			<div class="col-sm-2 text-center">
-  				<label for="numCoopsField">Current Program</label>
-  				<select class="form-control selectpicker" name="numCoops">
-  					<option value="1">4 Years, 1 Co-op</option>
-  					<option value="2">5 Years, 3 Co-op</option>
-  				</select>
-  			</div>
-      </div>
-      
-  			<!-- In the future, will implement the "fast-track" option.
-  			<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-  				<label for="payment">Payment Amount <small>(Optional)</small></label>
-  				<input type="text" class="form-control" id="payment" name="payment" placeholder="Enter an amount ($5)">
-  			</div>
-  			-->
-  			
-      <br>
-      
-      <div class="row">
-  			<div class="<?php echo "$formElementClass"; ?> text-center">
-  				 <div id="errorFree">
-  				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
-  				 </div>
-  			</div>
-      </div>
-      
+		  			<div class="col-sm-5 text-center">
+		  				<label for="numCoopsField">Current Program</label>
+		  				<select class="form-control selectpicker" name="numCoops">
+		  					<option value="1">4 Years, 1 Co-op</option>
+		  					<option value="2">5 Years, 3 Co-op</option>
+		  				</select>
+		  			</div>
+		      	</div>
+	      	</div>
+	  			<!-- In the future, will implement the "fast-track" option.
+	  			<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+	  				<label for="payment">Payment Amount <small>(Optional)</small></label>
+	  				<input type="text" class="form-control" id="payment" name="payment" placeholder="Enter an amount ($5)">
+	  			</div>
+	  			-->
+	  			
+	      <br>
+	      
+	      	<div class="row">
+	  			<div class="<?php echo "$formElementClass"; ?> text-center">
+	  				 <div id="errorFree">
+	  				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
+	  				 </div>
+	  			</div>
+	     	</div>
+	      
 		</form>
+	</div>
 		
 		<!-- USER IS LOGGED IN, MAKE THIS BETTER -->
 		
 		<?php } else {
-
-			// Move this to scripts later
 		
-				$images = array(
-				"http://upload.wikimedia.org/wikipedia/commons/5/5c/Narwhals_breach.jpg",
-				"http://www.graphics99.com/wp-content/uploads/2012/07/funny-giraffe-tongue-image-for-friendster.jpg",
-				"http://www.funnyzone.org/wp-content/uploads/2009/06/635_bear-and-panda.jpg",
-				"http://twistedsifter.files.wordpress.com/2012/05/funny-baby-elephant-4.jpg",
-					);
-
-				$descriptions = array (
-					"Here are some narwhals playing.",
-					"Here is a silly giraffe.", // Her favorite animal is giraffes.
-					"Here is a group of penguins.",
-					"Here is an elephant playing soccer.",
-					);
+			$fun = array(
+				array("http://upload.wikimedia.org/wikipedia/commons/5/5c/Narwhals_breach.jpg", "Here are some narwhals playing."),
+				array("http://www.graphics99.com/wp-content/uploads/2012/07/funny-giraffe-tongue-image-for-friendster.jpg", "Here is a silly giraffe."),
+				array("http://www.funnyzone.org/wp-content/uploads/2009/06/635_bear-and-panda.jpg", "Here is a group of penguins."),
+				array("http://twistedsifter.files.wordpress.com/2012/05/funny-baby-elephant-4.jpg", "Here is an elephant playing soccer.")
+			);
 
 				$option = rand(0, 3);
 			?>
@@ -186,12 +178,11 @@ $pageName = "Test";
     <div class="row">
   		<div class="<?php echo $typicalRowClass; ?>">
   			<h4>You are already registered.
-  			<?php echo "$descriptions[$option]"; ?>
+  			<?php echo $fun[$option][1]; ?>
   			<br></h4>
-  			<img src="<?php echo $images[$option]; ?>" max-width: 100%; height: auto; class="img-responsive img-circle center-block">
+  			<img src="<?php echo $fun[$option][0]; ?>" max-width: 100%; height: auto; class="img-responsive img-circle center-block">
   		</div>
-		</div>
-
+	</div> 
 	<?php } ?>
 
 </div>
@@ -199,11 +190,11 @@ $pageName = "Test";
 <script type="text/javascript">
 
 		// When the page loads, do something I guess
-		//var $ = function (id) { return $(id); }\
+		//var $ = function (id) { return id(id); }\
 		
 		window.onload = function () {
 			
-			errorDiv = $("formError");
+			errorDiv = id("formError");
 			errorDiv.style.display = 'none';
 
 			var errors = 0;
@@ -217,26 +208,26 @@ $pageName = "Test";
 
 			window.errorClassVals = "alert alert-warning";
 
-			window.mainDivClass = "<?php echo $formGroupClass; ?>";
+			window.mainDivClass = "<?php echo $formElementClass; ?>";
 			window.mainDivClassError = mainDivClass + " has-error";
 			window.mainDivClassValid = mainDivClass + " has-success";
 			window.mainDivClassWarning = mainDivClass + " has-warning";
 
 
-			//$('email').onchange = validate_email;
-			//$("submit_form").onclick = validate_data;
+			//id('email').onchange = validate_email;
+			//id("submit_form").onclick = validate_data;
 
 		}
 
 		var validate_name = function () {
 
-			name = $("user_name").value;
-			mainNameDiv = $("mainNameDiv");
+			name = id("user_name").value;
+			mainNameDiv = id("mainNameDiv");
 
 			name = name.trim();
 
-			var nameDiv = $("nameError");
-			//var mainNameDiv = $("mainNameDiv");
+			var nameDiv = id("nameError");
+			//var mainNameDiv = id("mainNameDiv");
 
 			if (name == "")
 			{
@@ -251,7 +242,7 @@ $pageName = "Test";
 			{
 				nameErr = 0;
 				//nameDiv.textContent = "Name exists.";
-				$("user_name").value = name;
+				id("user_name").value = name;
 				nameDiv.style.display = 'none';
 
 				mainNameDiv.className = window.mainDivClassValid;
@@ -262,7 +253,7 @@ $pageName = "Test";
 				// 	nameDiv.textContent = "Nice name!";
 				// 	nameDiv.className = 'alert alert-success';
 
-				// 	$("#nameError").fadeOut(500);
+				// 	id("#nameError").fadeOut(500);
 				// }
 			}
 
@@ -270,10 +261,10 @@ $pageName = "Test";
 
 		var validate_email = function () {
 
-			var emailDiv = $("emailError");
-			var mainEmailDiv = $("mainEmailDiv");
+			var emailDiv = id("emailError");
+			var mainEmailDiv = id("mainEmailDiv");
 
-			var email = $("user_email").value;
+			var email = id("user_email").value;
 
 			email = email.trim();
 			email = email.toLowerCase();
@@ -304,7 +295,7 @@ $pageName = "Test";
 					emailDiv.textContent = "Extra characters removed.";
 					emailDiv.className = 'alert alert-info';
 
-					$("#emailError").fadeOut(2000);
+					id("#emailError").fadeOut(2000);
 				}
 
 				mainEmailDiv.className = window.mainDivClassValid;
@@ -318,16 +309,16 @@ $pageName = "Test";
 				mainEmailDiv.className = window.mainDivClassError;
 			}
 
-			$("user_email").value = email;
+			id("user_email").value = email;
 		}
 
 		var validate_password = function () {
 
-			var password = $("user_pass").value;
-			var password2 = $("user_pass_confirm").value;
+			var password = id("user_pass").value;
+			var password2 = id("user_pass_confirm").value;
 
-			var passwordDiv = $("passwordError");
-			var mainPasswordDiv = $("mainPasswordDiv");
+			var passwordDiv = id("passwordError");
+			var mainPasswordDiv = id("mainPasswordDiv");
 
 			if (password != password2)
 			{
@@ -372,7 +363,7 @@ $pageName = "Test";
 
 		var validate_submit = function () {
 
-			errorDiv = $("formError");
+			errorDiv = id("formError");
 
 			var totalErrors = nameErr + emailErr + passwordErr;
 
