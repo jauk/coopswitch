@@ -13,6 +13,12 @@
         case 2:
             $error = "Invalid login.";
             break;
+        case 3:
+            $error = "No data sent.";
+            break;
+        case 4:
+            $error = "Already logged in.";
+            break;
         default:
             $error = "Unknown error.";
             break;
