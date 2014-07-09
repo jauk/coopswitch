@@ -23,7 +23,7 @@ function getHeaders() {
 
 function mail_matched_users($userAName, $userAEmail, $userBName, $userBEmail) {
 	$subject = "A co-op switch match has been made for you!";
-	$toAccount = "http://coopswitch.com/account"
+	$toAccount = "http://coopswitch.com/account";
 
 	$message = '
 
