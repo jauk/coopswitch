@@ -23,9 +23,27 @@ function getHeaders() {
 
 function mail_matched_users($userAName, $userAEmail, $userBName, $userBEmail) {
 	$subject = "A co-op switch match has been made for you!";
+	$toAccount = "http://coopswitch.com/account"
 
-	$message = "Hello, a match has been made for you!
-				\nLogin to view it!";
+	$message = '
+
+	<h1>Coopswitch</h1>
+	<hr>
+	<br>
+	Hi ' . $name . '! <br><br>
+
+	We have found someone to trade cycles with! <br><br>
+
+	Please login to see their information, or click below. <br>
+
+	<a href="'. $toAccount . '">Click Here</a> <br><br>
+
+	Good luck, <br><br>
+
+	Justin <br>
+	Coopswitch Founder
+
+	';
 
 	$headers = getHeaders();
 
@@ -42,14 +60,22 @@ function send_init_email($name, $email, $verifyLink) {
 	$headers = getHeaders();
 
 	$message = '
-	
-	Hi ' . $name . '! 
 
-	Thank you for registering.
+	<h1>Coopswitch</h1>
+	<hr>
+	<br>
+	Hi ' . $name . '! <br><br>
 
-	Please use the following link to verify your email so you are entered into the matching queue.
+	Thank you for registering. <br><br>
 
-	<a href="'. $verifyLink . '">Click Here</a>
+	Please use the following link to verify your email so you are entered into the matching queue. <br>
+
+	<a href="'. $verifyLink . '">Click Here</a> <br><br>
+
+	Good luck, <br><br>
+
+	Justin <br>
+	Coopswitch Founder
 
 	';
 
