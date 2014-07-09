@@ -34,11 +34,11 @@ else if ($userHash == $submitHash) {
     	}
     }
 
-	echo "Verified.";
+    header("Location: account.php");
 }
 
 else {
-	echo "Invalid.";
+	header("Location: error.php?msg=5");	
 }
 
 mysql_close($con);
