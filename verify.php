@@ -19,7 +19,7 @@ $userHash = hash('sha256', $combo);
 
 if ($user['verified'] == 1) {
 
-	die("Email already verified.");
+	header("Location: error.php?msg=5");	
 }
 
 else if ($userHash == $submitHash) {
@@ -29,16 +29,16 @@ else if ($userHash == $submitHash) {
 
     if (isset($_SESSION['login'])) {
 
-    	if ($_SESSION['email'] == $email) {
+    	if ($_SESSION['user'] == $email) {
     		$_SESSION['user_email_verified'] = 1;
     	}
     }
 
-    header("Location: account.php");
+   	header("Location: account.php");
 }
 
 else {
-	header("Location: error.php?msg=5");	
+	header("Location: error.php?msg=6");	
 }
 
 mysql_close($con);
