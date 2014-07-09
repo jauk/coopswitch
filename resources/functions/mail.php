@@ -6,21 +6,40 @@
 
 /* On profile have option to decline match (change mind). Do this later. */
 
+function getHeaders() {
+
+	global $headers;
+
+	$coopMail = "justin@coopswitch.com";
+
+	$headers  = "From: " . $coopMail . " \r\n";
+	$headers .= "Reply-To: " . $coopMail . "\r\n";
+	$headers .= "BCC: justin@localhost\r\n"; // This line temporary for testing!
+	$headers .= "MIME-Version: 1.0\r\n";
+	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+	return $headers;
+}
+
 function mail_matched_users($userAName, $userAEmail, $userBName, $userBEmail) {
 	$subject = "A co-op switch match has been made for you!";
 
 	$message = "Hello, a match has been made for you!
 				\nLogin to view it!";
 
+	$headers = getHeaders();
+
 	//mail($userAEmail, $subject, $message);
 	//mail($userBEmail, $subject, $message);
-	mail('justin@localhost', $subject, $message);
+	mail('justin@localhost', $subject, $message, $headers);
 
 }
 
 function send_init_email($name, $email, $verifyLink) {
 
 	$subject = "Welcome to Coopswitch!";
+
+	$headers = getHeaders();
 
 	$message = '
 	
@@ -35,7 +54,7 @@ function send_init_email($name, $email, $verifyLink) {
 	';
 
 
-	mail('justin@localhost', $subject, $message);
+	mail('justin@localhost', $subject, $message, $headers);
 	// Include verify link
 }
 
