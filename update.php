@@ -8,18 +8,18 @@
 
 	if (isset($_POST['newMajorId']))
 		$newUserMajor = test_input($_POST['newMajorId']);
-	else
-		$newUserMajor = "";
+	// else
+	// 	$newUserMajor = "";
 
 	if (isset($_POST['newCycleId']))
 		$newUserCycle = test_input($_POST['newCycleId']);
-	else
-		$newUserCycle = "";
+	// else
+	// 	$newUserCycle = "";
 
 	if (isset($_POST['newProgramId']))
 		$newUserProgram = test_input($_POST['newProgramId']);
-	else
-		$newUserProgram = "";
+	// else
+	// 	$newUserProgram = "";
 
 	// ON ALL UPDATES UNDO THE MATCHES (For both users). IMP. Also verify major actually changes in db.
 
@@ -36,7 +36,7 @@
 	$GLOBALS["user_data[0]"] = $user_data[0];
 
 	// Update Majors
-	if ($user_data[0]['major'] != $newUserMajor && $newUserMajor != "")
+	if (isset($newUserMajor) && ($user_data[0]['major'] != $newUserMajor))
 	{
 		$query = "UPDATE Users SET major = " . $newUserMajor . " WHERE id = " . $_SESSION['user_id'];
 		$_SESSION['user_major'] = $newUserMajor;
@@ -51,7 +51,7 @@
 	}
 
 	// Update Cycles
-	else if ($user_data[0]['cycle'] != $newUserCycle && $newUserCycle != "")
+	else if (isset($newUserCycle) && ($user_data[0]['cycle'] != $newUserCycle))
 	{
 		$query = "UPDATE Users SET cycle = " . $newUserCycle . " WHERE id = " . $_SESSION['user_id'];
 		$_SESSION['user_cycle'] = $newUserCycle;
@@ -65,7 +65,7 @@
 	}
 
 	/// Update Programs
-	else if ($user_data[0]['num_year_program'] != $newUserProgram && $newUserProgram != "") {
+	else if (isset($newUserProgram) && ($user_data[0]['num_year_program'] != $newUserProgram)) {
 		$query = "UPDATE Users SET num_year_program = " . $newUserProgram . " WHERE id = " . $_SESSION['user_id'];
 		$_SESSION['user_program'] = $newUserProgram;
 

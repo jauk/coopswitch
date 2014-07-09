@@ -40,7 +40,9 @@
 
 	mysql_close($con);
 
+	echo '<div class="text-center">';
 	echo "Records generated.";
+	echo '</div>';
 
 	require_once(TEMPLATES_PATH . "/footer.php");
 ?>

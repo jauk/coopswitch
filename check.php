@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
+require_once(__DIR__ . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
 //include('mail.php');
 /* Have a cron job run this page every minute so checks are always done. FOR PRODUCTION SERVER. */
@@ -55,9 +55,14 @@ $rowClass = "row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-
 
 include(FUNCTION_PATH . "/connect.php");
 
+$query = "SELECT * FROM Users WHERE matched = 1";
+$usersMatched = mysql_num_rows(mysql_query($query));
+
 $query="SELECT * FROM Users WHERE matched = 0 ORDER BY dropped_matches ASC";
 $result=mysql_query($query);
 $num=mysql_num_rows($result); // ...It's this many
+$notMatched = $num;
+
 
 ?>
   
@@ -208,7 +213,7 @@ $num=mysql_num_rows($result); // ...It's this many
     <p class="lead">There were <?php echo "$matches"; ?> matches made!</p>
     <?php } ?>
     
-    <p>There are still <?php echo $num - ($matches*2); ?> people who still need to be matched.</p>
+    <p>There are still <?php echo $num - ($matches*2); ?> people who still need to be matched, or <?php echo ($notMatched/($notMatched+$usersMatched)*100) ?>% of <div style="display: inline" class="">verified</div> users.</p>
 
     <br>
     <?php

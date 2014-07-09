@@ -1,5 +1,5 @@
 // Shorthand for getting elements
-function $(input) {
+function id(input) {
 
 	output = document.getElementById(input);
 	return output;

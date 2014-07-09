@@ -3,7 +3,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
 include(FUNCTION_PATH . "/connect.php");
 
-
 if ($_SERVER['CONTENT_LENGTH'] == 0) {
 	header('Location: /error.php?msg=3');
 	// Make a global "ERROR" variable that also sends to error page to choose which error to display?
@@ -13,8 +12,11 @@ if (isset($_SESSION['login'])) {
 	header('Location: /error.php?msg=4');
 }
 
+// Check against email existing, how have I not done this already oops.
+
 else {
-	// Declare actual variables instead of using "$_POST" everywhere.
+
+	// Sanitize post data
 	$name = test_input($_POST['name']);
 	$email = test_input($_POST['email']);
 	$password = test_input($_POST['password']);
@@ -23,20 +25,28 @@ else {
 	$num_year_program = test_input($_POST['numCoops']);
 	$majorVal = test_input($_POST['major']);
 
+	$majorName = getMajorName($majorVal);
+
 	$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
 		VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal',
 				'".date("Y-m-d H:i:s")."'
 	 )";
+
+	//$registerLinkBase = "http://coopswitch.com/verify?a=$email&b=";
+	$registerLinkBase = "http://coop.localhost/verify?a=$email&b=";
+
+	$combo = $name . $email . $cycle;
+	$link = hash('sha256', $combo);
+
+	$verifyLink = $registerLinkBase . $link;
 
 	if (!mysql_query($sql,$con)) {
 	  	die('Error: ' . mysql_error());
 	  }
 
 	else {
-		 $query = mysql_query("SELECT major_long FROM Majors WHERE id='$_POST[major]'");
-		 $result = mysql_fetch_array($query);
-		 $majorName = $result['major_long'];
-	  }
+		send_init_email($name, $email, $verifyLink); // Success, user has been created.
+	}
 
 }
 

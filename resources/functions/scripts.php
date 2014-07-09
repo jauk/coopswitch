@@ -8,13 +8,13 @@ function print_majors() {
 	$numMajors=mysql_num_rows($result);
 	
 	//Debug
-	$numMajors = 10;
+	//$numMajors = 10;
 
 	$i=0; while ($i < $numMajors) {
 		$major_name=mysql_result($result, $i, "major_long");
 		
 		//Debug (no db here)
-		$major_name = "Computer Science";
+		//$major_name = "Computer Science";
 		
 		$major_ident=mysql_result($result, $i, id);
 
@@ -37,6 +37,14 @@ function mysql_get_var($query,$y=0) {
    mysql_free_result($res);
    $rec = $row[$y];
    return $rec;
+}
+
+function getMajorName($id) {
+
+	$query = "SELECT major_long FROM Majors WHERE id='$id'";
+	$majorName = mysql_get_var($query);
+
+	return $majorName;
 }
 
 function get_match_info() {

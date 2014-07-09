@@ -1,8 +1,8 @@
 <?php
 // if (!isset($_SESSION['login']))
 // 	$_SESSION['login'] = "";
-error_reporting(0);
-@ini_set('display_errors', 0);
+// error_reporting(0);
+// @ini_set('display_errors', 0);
 
 session_start();
 session_regenerate_id(true);
@@ -25,12 +25,14 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 <head>
 
-	<title><?php echo "$title"; ?></title>
+	<?php $pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); ?>
+
+	<title><?php echo SITE_NAME . " | $pageName"; ?></title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta content="utf-8" http-equiv="encoding">
-	<link href="../css/bootstrap.css" rel="stylesheet">
-	<link href="../css/other.css" rel="stylesheet">
+	<link href="/css/bootstrap.css" rel="stylesheet">
+	<link href="/css/other.css" rel="stylesheet">
 	
 	<link rel="stylesheet" type="text/css" media="screen" href="http://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css">
 	
@@ -43,11 +45,10 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 		}
 	</style>
 	
-	<script src="../js/global.js"></script>
 	<!-- <script src="../js/bootstrap-select.js"></script> -->
 	
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<!-- <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
 
 </head>
 

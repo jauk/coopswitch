@@ -12,6 +12,9 @@
   		$_SESSION['user'] = $user_data[0]['email'];
   		$_SESSION['user_name'] = $user_data[0]['name'];
   
+      // See if user is verified
+      $_SESSION['user_email_verified'] = $user_data[0]['verified'];
+
   		// Get the actual major name not the numerical representation
   		$result = mysql_query("SELECT major_long FROM Majors WHERE id= " . $user_data[0]['major']);
   		$row = mysql_fetch_array($result);

@@ -189,201 +189,224 @@ $pageName = "Test";
 
 <script type="text/javascript">
 
-		// When the page loads, do something I guess
-		//var $ = function (id) { return id(id); }\
+	// When the page loads, do something I guess
+	//var $ = function (id) { return id(id); }\
+	
+	window.onload = function () {
 		
-		window.onload = function () {
-			
-			errorDiv = id("formError");
-			errorDiv.style.display = 'none';
+		errorDiv = id("formError");
+		errorDiv.style.display = 'none';
 
-			var errors = 0;
-			window.hasEnteredAgain = false;
+		var errors = 0;
+		window.hasEnteredAgain = false;
 
-			window.hasErrors = true; //Start at true so cannot submit blank form.
+		window.hasErrors = true; //Start at true so cannot submit blank form.
 
-			window.nameErr = 1;
-			window.emailErr = 1;
-			window.passwordErr = 1;
+		window.nameErr = 1;
+		window.emailErr = 1;
+		window.passwordErr = 1;
 
-			window.errorClassVals = "alert alert-warning";
+		window.errorClassVals = "alert alert-warning";
 
-			window.mainDivClass = "<?php echo $formElementClass; ?>";
-			window.mainDivClassError = mainDivClass + " has-error";
-			window.mainDivClassValid = mainDivClass + " has-success";
-			window.mainDivClassWarning = mainDivClass + " has-warning";
+		window.mainDivClass = "<?php echo $formElementClass; ?>";
+		window.mainDivClassError = mainDivClass + " has-error";
+		window.mainDivClassValid = mainDivClass + " has-success";
+		window.mainDivClassWarning = mainDivClass + " has-warning";
 
 
-			//id('email').onchange = validate_email;
-			//id("submit_form").onclick = validate_data;
+		//id('email').onchange = validate_email;
+		//id("submit_form").onclick = validate_data;
 
+	}
+
+	var validate_name = function () {
+
+		name = id("user_name").value;
+		mainNameDiv = id("mainNameDiv");
+
+		name = name.trim();
+
+		var nameDiv = id("nameError");
+		//var mainNameDiv = id("mainNameDiv");
+
+		if (name == "")
+		{
+			nameErr = 1;
+			nameDiv.textContent = "You need a name.";
+			nameDiv.style.display = '';
+			nameDiv.className = window.errorClassVals;
+
+			mainNameDiv.className = window.mainDivClassError;
+		}
+		else
+		{
+			nameErr = 0;
+			//nameDiv.textContent = "Name exists.";
+			id("user_name").value = name;
+			nameDiv.style.display = 'none';
+
+			mainNameDiv.className = window.mainDivClassValid;
 		}
 
-		var validate_name = function () {
+	}
 
-			name = id("user_name").value;
-			mainNameDiv = id("mainNameDiv");
 
-			name = name.trim();
+	var validate_email = function () {
 
-			var nameDiv = id("nameError");
-			//var mainNameDiv = id("mainNameDiv");
+		var emailDiv = id("emailError");
+		var mainEmailDiv = id("mainEmailDiv");
 
-			if (name == "")
-			{
-				nameErr = 1;
-				nameDiv.textContent = "You need a name.";
-				nameDiv.style.display = '';
-				nameDiv.className = window.errorClassVals;
+		var email = id("user_email").value;
 
-				mainNameDiv.className = window.mainDivClassError;
-			}
-			else
-			{
-				nameErr = 0;
-				//nameDiv.textContent = "Name exists.";
-				id("user_name").value = name;
-				nameDiv.style.display = 'none';
+		email = email.trim();
+		email = email.toLowerCase();
 
-				mainNameDiv.className = window.mainDivClassValid;
-				
-				//nameTest = name.toLowerCase();
-				// if (nameTest.indexOf("justin") > -1) {
-				// 	nameDiv.style.display = '';
-				// 	nameDiv.textContent = "Nice name!";
-				// 	nameDiv.className = 'alert alert-success';
+		var drexelEmail = "@drexel.edu";
 
-				// 	id("#nameError").fadeOut(500);
-				// }
-			}
+	 	var hasDrexelEmail = email.search("@drexel.edu");
+		var endEmail = email.indexOf("@drexel.edu");
 
-		}
+		if (hasDrexelEmail != -1) {
+			emailErr = 0;
+			//emailDiv.textContent = "Valid email!";
 
-		var validate_email = function () {
+			//emailDiv.className = window.
+			emailDiv.style.display = 'none';
 
-			var emailDiv = id("emailError");
-			var mainEmailDiv = id("mainEmailDiv");
+			var length = endEmail + drexelEmail.length;
+			//alert(length);
 
-			var email = id("user_email").value;
+			emailDiv.style.display = 'none';
 
-			email = email.trim();
-			email = email.toLowerCase();
+			if (length != email.length) {
 
-			var drexelEmail = "@drexel.edu";
+				emailRemove = email.slice(length, email.length);
+				email = email.replace(emailRemove, "");
 
-		 	var hasDrexelEmail = email.search("@drexel.edu");
-			var endEmail = email.indexOf("@drexel.edu");
-
-			if (hasDrexelEmail != -1) {
-				emailErr = 0;
-				//emailDiv.textContent = "Valid email!";
-
-				//emailDiv.className = window.
-				emailDiv.style.display = 'none';
-
-				var length = endEmail+drexelEmail.length;
-				//alert(length);
-
-				emailDiv.style.display = 'none';
-
-				if (length != email.length) {
-
-					emailRemove = email.slice(length, email.length);
-					email = email.replace(emailRemove, "");
-
-					emailDiv.style.display = '';
-					emailDiv.textContent = "Extra characters removed.";
-					emailDiv.className = 'alert alert-info';
-
-					id("#emailError").fadeOut(2000);
-				}
-
-				mainEmailDiv.className = window.mainDivClassValid;
-			}
-			else
-			{
-				emailErr = 1;
-				emailDiv.textContent = "That is not a Drexel email!";
 				emailDiv.style.display = '';
-				emailDiv.className = window.errorClassVals;
-				mainEmailDiv.className = window.mainDivClassError;
+				emailDiv.textContent = "Extra characters removed.";
+				emailDiv.className = 'alert alert-info';
+
+				$("#emailError").fadeOut(2000);
 			}
 
-			id("user_email").value = email;
+			mainEmailDiv.className = window.mainDivClassValid;
+		}
+		else
+		{
+			email = "email";
+			error = "That is not a valid Drexel email.";
+
+			//setError(email, error);
+			emailErr = 1;
+			emailDiv.textContent = "That is not a Drexel email!";
+			emailDiv.style.display = '';
+			emailDiv.className = window.errorClassVals;
+			mainEmailDiv.className = window.mainDivClassError;
 		}
 
-		var validate_password = function () {
+		id("user_email").value = email;
+	}
 
-			var password = id("user_pass").value;
-			var password2 = id("user_pass_confirm").value;
+	var setError = function (field, error) {
 
-			var passwordDiv = id("passwordError");
-			var mainPasswordDiv = id("mainPasswordDiv");
+		divName = field+"Div";
+		divErr = field+"Err";
 
-			if (password != password2)
+		var fieldDiv = id(divName);
+		var fieldDivErr = id(divErr);
+
+		divErr = 1;
+
+		alert(id(divName));
+
+		id(divName).style.display = '';
+		// this['divName'].value.className = window.errorClassVals;
+
+
+
+		alert(fieldDiv);
+	}
+
+	var validate_password = function () {
+
+		var password = id("user_pass").value;
+		var password2 = id("user_pass_confirm").value;
+
+		var passwordDiv = id("passwordError");
+		var mainPasswordDiv = id("mainPasswordDiv");
+
+		if (password == "" && password2 == "") {
+			passwordErr = 1;
+		}
+
+		if (password != password2)
+		{
+			if (password2 == "" && (hasEnteredAgain == false))
 			{
-				if (password2 == "" && (hasEnteredAgain == false))
-				{
-					//alert("Test");
-					hasEnteredAgain = true;
-					return;
-				}
-
-				else
-				{
-					passwordErr = 1;
-					passwordDiv.textContent = "Passwords do not match!";
-					passwordDiv.style.display = '';
-					passwordDiv.className = window.errorClassVals;
-					mainPasswordDiv.className = window.mainDivClassError;
-				}
+				hasEnteredAgain = true;
+				return;
 			}
 
 			else
 			{
-				if (password.length < 6 && password.length > 0)
-				{
-					passwordDiv.style.display = '';
-					passwordDiv.className = window.errorClassVals;
-					passwordDiv.textContent = "You should use a longer password.";
-					mainPasswordDiv.className = window.mainDivClassWarning;
-
-				}
-				else
-				{
-					passwordDiv.style.display = 'none';
-					mainPasswordDiv.className = window.mainDivClassValid;
-				}
-
-				passwordErr = 0;
-				//passwordDiv.textContent = "Passwords match.";
+				passwordErr = 1;
+				passwordDiv.textContent = "Passwords do not match!";
+				passwordDiv.style.display = '';
+				passwordDiv.className = window.errorClassVals;
+				mainPasswordDiv.className = window.mainDivClassError;
 			}
-
 		}
 
-		var validate_submit = function () {
+		else
+		{
+			if (password.length < 6 && password.length > 0)
+			{
+				passwordDiv.style.display = '';
+				passwordDiv.className = window.errorClassVals;
+				passwordDiv.textContent = "You should use a longer password.";
+				mainPasswordDiv.className = window.mainDivClassWarning;
 
-			errorDiv = id("formError");
-
-			var totalErrors = nameErr + emailErr + passwordErr;
-
-			if (totalErrors == 0)
-				hasErrors = false;
+			}
 			else
-				hasErrors = true;
+			{
+				passwordDiv.style.display = 'none';
+				mainPasswordDiv.className = window.mainDivClassValid;
+			}
 
-			if (totalErrors == 0 && hasErrors == false)
-			{
-				return true;
-			}
-			
-			else if (hasErrors == true)
-			{
-				errorDiv.style.display = '';
-				errorDiv.textContent = "Hey, you have a problem on your form!"; // Probably change to recoloring the boxes later.
-				return false;
-			}
+			passwordErr = 0;
+			//passwordDiv.textContent = "Passwords match.";
 		}
+
+	}
+
+	var validate_submit = function () {
+
+		errorDiv = id("formError");
+
+		validate_name();
+		validate_email();
+		validate_password();
+
+		var totalErrors = nameErr + emailErr + passwordErr;
+
+		if (totalErrors == 0)
+			hasErrors = false;
+		else
+			hasErrors = true;
+
+		if (totalErrors == 0 && hasErrors == false)
+		{
+			return true;
+		}
+		
+		else if (hasErrors == true)
+		{
+			errorDiv.style.display = '';
+			errorDiv.textContent = "Hey, you have a problem on your form!"; // Probably change to recoloring the boxes later.
+			return false;
+		}
+	}
 
 </script>
 

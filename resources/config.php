@@ -9,12 +9,14 @@ defined("FUNCTION_PATH")
 defined("DEV_PATH")
 	or define("DEV_PATH", realpath(dirname(__FILE__) . '/dev'));
 
+define('SITE_NAME', 'Coopswitch');
+define('SITE_SLOGAN', 'A simple way to switch co-ops.');
 // define('DEBUG', 'false');
 
 $GLOBALS['debug'] = True;
 
 // If want to simulate logged in user.
-$GLOBALS['debug_login'] = True;
+$GLOBALS['debug_login'] = False;
 
 
 $config = array(
