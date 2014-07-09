@@ -12,13 +12,22 @@ if (isset($_SESSION['login'])) {
 	header('Location: /error.php?msg=4');
 }
 
+$email = test_input($_POST['email']);
+
+$query = 'SELECT * FROM Users WHERE email = "' .$email. '"';
+$result = mysql_query($query);
+
+if (mysql_num_rows($result) != 0) {
+
+	die("Email already registered.");
+}
+
 // Check against email existing, how have I not done this already oops.
 
 else {
 
 	// Sanitize post data
 	$name = test_input($_POST['name']);
-	$email = test_input($_POST['email']);
 	$password = test_input($_POST['password']);
 	$password = md5($password);
 	$cycle = test_input($_POST['cycle']);
