@@ -9,6 +9,7 @@ if (isset($msg))
 
 ?>
 
+
 <script>
 $(function(){
     $('#generate_records').click(function(){
@@ -55,12 +56,17 @@ $rowClass = "row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-
 
 include(FUNCTION_PATH . "/connect.php");
 
+// Filter out not verifieds.
+
+// How many users have a match:
 $query = "SELECT * FROM Users WHERE matched = 1";
 $usersMatched = mysql_num_rows(mysql_query($query));
 
-$query="SELECT * FROM Users WHERE matched = 0 ORDER BY dropped_matches ASC";
+// How many users do not have a match:
+$query="SELECT * FROM Users WHERE matched = 0 AND verified = 1 ORDER BY dropped_matches ASC";
 $result=mysql_query($query);
 $num=mysql_num_rows($result); // ...It's this many
+
 $notMatched = $num;
 
 
@@ -114,7 +120,7 @@ $notMatched = $num;
 
          // $IdsGoneThrough = array(); // Save the Ids gone through and do not let them be compared again? Wait no .
 
-          $query = " SELECT * FROM Users WHERE matched = 0 AND major = " . $users_not_matched[$x]['major'] .
+          $query = " SELECT * FROM Users WHERE matched = 0 AND verified = 1 AND major = " . $users_not_matched[$x]['major'] .
                    " AND id != " . $users_not_matched[$x]['id'] . " AND cycle != " . $users_not_matched[$x]['cycle'] .
                    " AND num_year_program = " . $users_not_matched[$x]['num_year_program'] .
                    " ORDER BY dropped_matches ASC";

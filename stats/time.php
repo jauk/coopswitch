@@ -82,19 +82,21 @@ for ($x=0; $x<sizeof($dataArray); $x++) {
 
         var chart;
 
-        var chartData = [ 
+        window.chartData = [ 
             <?php
 
-            $max = sizeof($matches);
+            $max = sizeof($dataArray);
 
 
-            for ($x=1; $x<$max; $x++) {
+            // for ($x=1; $x<$max; $x++) {
 
-                $count += $matches_dates[$x]['count'];
+            for ($x=0; $x<sizeof($dataArray); $x++) {
+
+              //  $count += $matches_dates[$x]['count'];
 
                 echo "\n\t{\n";
-                echo "\t\t" . '"count": ' . '"' . $count . '",' . "\n";
-                echo "\t\t" . '"day": ' . $matches_dates[$x]['day'] . "\n";
+                echo "\t\t" . '"count": ' . '"' . $dataArray[$x]['count'] . '",' . "\n";
+                echo "\t\t" . '"day": ' . $dataArray[$x]['date'] . "\n";
                 if ($x < $max-1)
                 echo "\t},\n";
                 else
@@ -110,28 +112,7 @@ var chart = AmCharts.makeChart("chartdiv", {
     "theme": "none",
     "marginLeft": 20,
     "pathToImages": "http://www.amcharts.com/lib/3/images/",
-    "dataProvider":
-     [
-        <?php
-
-            $max = sizeof($matches);
-
-            for ($x=1; $x<$max; $x++) {
-
-                $count += $matches_dates[$x]['count'];
-
-                echo "\n\t{\n";
-                echo "\t\t" . '"count": ' . '"' . $count . '",' . "\n";
-                echo "\t\t" . '"day": ' . $matches_dates[$x]['day'] . "\n";
-                if ($x < $max-1)
-                echo "\t},\n";
-                else
-                echo "\t}\n";
-
-            }
-
-        ?>
-     ],
+    "dataProvider": window.chartData,
     "valueAxes": [{
         "axisAlpha": 0,
         "inside": true,

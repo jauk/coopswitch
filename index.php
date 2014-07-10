@@ -420,9 +420,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 == To Do ==
 
 - Better password security
-- Email account confirmation (if try to login show message need to confirm)
 - Better error reportng I guess? Like the /error.php page
-- Better emails for matches
 - Better security I guess
 - More db fields (ie. for acct confirmation)
 
@@ -439,7 +437,6 @@ How do I prevent abuse of match dropping
 
 * The more matches you decline, the lower your priority gets. - Thanks Tyler
 * This should work but should do some more testing.
-
 
 * Email other user if match dropped to warn them still looking
 

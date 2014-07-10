@@ -364,7 +364,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 		//document.cycleForm.newCycleId.value = newId;
 		//document.profileForm.newCycleId.value = newId;
-    id("newCycleId").vaule = newId;
+    	id("newCycleId").value = newId;
     
 		//return true;
 	}

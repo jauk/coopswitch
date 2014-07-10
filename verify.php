@@ -34,7 +34,12 @@ else if ($userHash == $submitHash) {
     	}
     }
 
-   	header("Location: account.php");
+    if (isset($_SESSION['login']) && $_SESSION['user'] == $email) {
+        header("Location: account.php");
+    }
+    else {
+        header("Location: index.php");
+    }
 }
 
 else {

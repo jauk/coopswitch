@@ -13,7 +13,7 @@ define('SITE_NAME', 'Coopswitch');
 define('SITE_SLOGAN', 'A simple way to switch co-ops.');
 // define('DEBUG', 'false');
 
-$GLOBALS['debug'] = True;
+$GLOBALS['debug'] = False;
 
 // If want to simulate logged in user.
 $GLOBALS['debug_login'] = False;

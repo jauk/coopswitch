@@ -12,6 +12,8 @@ if (isset($_SESSION['login'])) {
 	header('Location: /error.php?msg=4');
 }
 
+global $email;
+
 $email = test_input($_POST['email']);
 
 $query = 'SELECT * FROM Users WHERE email = "' .$email. '"';
@@ -19,7 +21,7 @@ $result = mysql_query($query);
 
 if (mysql_num_rows($result) != 0) {
 
-	die("Email already registered.");
+	header("Location: error.php?msg=1");
 }
 
 // Check against email existing, how have I not done this already oops.
@@ -71,6 +73,9 @@ mysql_close($con);
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<p class="lead">Hi, <?php echo $name; ?>!</p>
+				</div>
+				<div class="text-info bg-info lead" style="padding: 10px;">
+					<p>Please check your email to verify your account.</p>
 				</div>
 				<div class="panel-body">
 					<p>Your Drexel email address is: <?php echo $email; ?></p>
