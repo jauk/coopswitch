@@ -3,6 +3,14 @@
 	require_once(TEMPLATES_PATH . "/header.php");
 	include(FUNCTION_PATH . "/connect.php");
 
+	// Get the user we are talking to and save them into a local array.
+	/* Probably do not need this, use session vars since they are from db. */
+	$query = "SELECT * FROM Users WHERE id = " . $_SESSION['user_id'];
+	$result = mysql_query($query);
+	$row = mysql_fetch_array($result);
+
+	$user_data = $row;
+
 	// Need to tell which value is being updated too
 	// Update for one master form soon
 
@@ -26,22 +34,12 @@
 
 	// ON ALL UPDATES UNDO THE MATCHES (For both users). IMP. Also verify major actually changes in db.
 
-	//echo $newUserMajor;
-
-	// Get the user we are talking to and save them into a local array.
-	/* Probably do not need this, use session vars since they are from db. */
-	$query = "SELECT * FROM Users WHERE id = " . $_SESSION['user_id'];
-	$result = mysql_query($query);
-
-	global $user_data;
-	$user_data = array();
-	$row = mysql_fetch_array($result);
-	$user_data = $row;
-	$GLOBALS["user_data"] = $user_data;
-
 	check_for_match();
+	header("Location: account.php");
 
 	function updateField($field, $newFieldVal) {
+
+		global $user_data;
 
 		// Update the field.
 		if ($user_data[$field] != $newFieldVal) {
@@ -71,6 +69,49 @@
 					break;
 			endswitch;	
 		}
+	}
+
+	function check_for_match() {
+
+		$user_data = array();
+		$user_data = $GLOBALS["user_data"];
+		//echo "ID: " . $user_data['id'] . "<br>Matched? " . $user_data['matched'] . "<hr>";
+		//echo '$GLOBALS["user_data['id']"]';
+
+		/* Create dropped_match var for users, only let them drop one match.
+			Warn before editing profile vals when match in progress.
+			- If not currently matched, does not matter. */
+
+		// Should check if matched first before going through code
+		if ($user_data['matched'] == 1) {
+			// Get the ID of the other user.
+			$other_user_id = mysql_get_var("SELECT id FROM Users WHERE Matches_id = " . $user_data['Matches_id'] . " AND id != " . $user_data['id']);
+
+			// Reset the match vars for both users
+			$query = "UPDATE Users SET matched = 0 WHERE id = " . $user_data['id'] . " OR id = " . $other_user_id;
+		    $result = mysql_query($query);
+
+		    $query = "UPDATE Users SET Matches_id = 0 WHERE id = " . $user_data['id'] . " OR id = " . $other_user_id;
+		    $result = mysql_query($query);
+
+		    // Should we delete row from Matches or keep for historical purposes? Delete for now.
+		   	$query = "DELETE FROM Matches WHERE id = " . $user_data['Matches_id'];
+		   	$result = mysql_query($query);
+		   
+		   	// Add the dropped match to db for user dropping (add to current)
+		   	$query = "UPDATE Users SET dropped_matches = " . ($user_data['dropped_matches']+1) . " WHERE id = " . $user_data['id'];
+		   	$result = mysql_query($query);
+
+		   	//Lets reset those session vars, too.
+
+		   	$_SESSION['user_matched'] = 0;
+		   	$_SESSION['Matched_id'] = 0;
+		   	$_SESSION['user_dropped_matches'] += 1;
+
+		   	echo "Match dropped.";
+		  	//echo "<br>Matched? " . $_SESSION['user_matched'];
+		}
+
 	}
 
 
@@ -116,50 +157,7 @@
 	*/
 
 
-	function check_for_match() {
 
-		$user_data = array();
-		$user_data = $GLOBALS["user_data"];
-		//echo "ID: " . $user_data['id'] . "<br>Matched? " . $user_data['matched'] . "<hr>";
-		//echo '$GLOBALS["user_data['id']"]';
-
-		/* Create dropped_match var for users, only let them drop one match.
-			Warn before editing profile vals when match in progress.
-			- If not currently matched, does not matter. */
-
-		// Should check if matched first before going through code
-		if ($user_data['matched'] == 1)
-		{
-			// Get the ID of the other user.
-			$other_user_id = mysql_get_var("SELECT id FROM Users WHERE Matches_id = " . $user_data['Matches_id'] . "AND id != " . $user_data['id']);
-
-			// Reset the match vars for both users
-			$query = "UPDATE Users SET matched = 0 WHERE id = " . $user_data['id'] . " OR id = " . $other_user_id;
-	        $result = mysql_query($query);
-
-	        $query = "UPDATE Users SET Matches_id = 0 WHERE id = " . $user_data['id'] . " OR id = " . $other_user_id;
-	        $result = mysql_query($query);
-
-	        // Should we delete row from Matches or keep for historical purposes? Delete for now.
-	       	$query = "DELETE FROM Matches WHERE id = " . $user_data['Matches_id'];
-	       	$result = mysql_query($query);
-	       
-	       	// Add the dropped match to db for user dropping (add to current)
-	       	$query = "UPDATE Users SET dropped_matches = " . ($user_data['dropped_matches']+1) . " WHERE id = " . $user_data['id'];
-	       	$result = mysql_query($query);
-
-	       	//Lets reset those session vars, too.
-
-	       	$_SESSION['user_matched'] = 0;
-	       	$_SESSION['Matched_id'] = 0;
-	       	$_SESSION['user_dropped_matches'] += 1;
-
-	       	echo "Match dropped.";
-	      	//echo "<br>Matched? " . $_SESSION['user_matched'];
-		}
-
-		//header("Location: account.php");
-	}
 
 	if (!mysql_query($query,$con)) {
 		die('Error: ' . mysql_error());

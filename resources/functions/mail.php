@@ -30,7 +30,7 @@ function mail_matched_users($userAName, $userAEmail, $userBName, $userBEmail) {
 	<h1>Coopswitch</h1>
 	<hr>
 	<br>
-	Hi ' . $name . '! <br><br>
+	Hi ' . $userAName . '! <br><br>
 
 	We have found someone to trade cycles with! <br><br>
 

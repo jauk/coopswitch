@@ -59,13 +59,15 @@ function get_match_info() {
 	$matched_data[0] = $row; // Save the match information into an array to pull data from
 
 	// Get the ID of the logged in user's match.
+	$other_user_match_id = "";
 
 	if ($matched_data[0]['userA'] == $_SESSION['user_id'])
 		$other_user_match_id = $matched_data[0]['userB'];
 	else if ($matched_data[0]['userB'] == $_SESSION['user_id'])
 		$other_user_match_id = $matched_data[0]['userA'];
-	else
-		echo "BROKEN";
+	else {
+		print("BROKEN");
+	}
 
 	$query = "SELECT * FROM Users WHERE id = " . $other_user_match_id;
 	$result = mysql_query($query);

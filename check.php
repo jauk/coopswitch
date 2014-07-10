@@ -108,11 +108,6 @@ $notMatched = $num;
       }
 
       echo "<br><br>";
-      /*
-
-      Show what majors do not have matches. Fancy bar/circle graph?
-
-      */
 
       for ($x = 0; $x < $index; $x++) // Why doesn't count() work for array?
         {
@@ -184,7 +179,7 @@ $notMatched = $num;
               $matches ++;
 
               // Send names and emails to mail script to mail users that they have been matched.
-              mail_matched_users($users_not_matched[$x]['name'], $users_not_matched[$x]['email'], $matched_user_data[0]['name'], $matched_user_data[0]['email']);
+              //mail_matched_users($users_not_matched[$x]['name'], $users_not_matched[$x]['email'], $matched_user_data[0]['name'], $matched_user_data[0]['email']);
 
               // if ($debug)
               // {

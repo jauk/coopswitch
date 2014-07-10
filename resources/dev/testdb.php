@@ -28,9 +28,8 @@
 		// 			'".date("Y-m-d H:i:s")."'
 		// 	)";
 
-		$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, dropped_matches, register_date)
-			  VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal', '$dropped_matches', '$date')";
-	 
+		$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, dropped_matches, register_date, verified)
+			  VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal', '$dropped_matches', '$date', '1')";
 	 
 		//echo "$name $email <br>";
 

@@ -49,3 +49,18 @@ else {
 mysql_close($con);
 
 ?>
+
+<!-- Check the following conditions:
+
+- Confirm email not logged in
+- Confirm email logged in wrong account
+- Confirm email logged in same account
+
+- Try and match with unconfirmed email
+- Try same conditions with confirmed email
+
+- Change profile confirm match drops correctly (update.php acting weird)
+
+- Create test accounts with pre-registered email.
+
+-->
