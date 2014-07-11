@@ -29,11 +29,16 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
   <!-- Make sure user has validated their email, else display this. -->
   <!-- Cool message saying "Email sent." Limit amount of times it can be sent. -->
+
+<!-- Use ajax to call send page -->
+
   <?php if ($_SESSION['user_email_verified'] == 0) { ?>
     <div class="row">
       <div class="<?php echo $rowClass; ?>">
-        <p class="lead text-danger">Your email has not been verified. You are not eligible for a switch.</p>
-        <button class="btn btn-info btn-sm">Resend Email</button>
+        <p class="lead text-danger">
+        	Your email has not been verified. You are not eligible for a switch.
+        	<a href="resendverify.php"><button class="btn btn-info btn-sm">Resend Email</button></a>
+        </p>
       </div>
     </div>
     

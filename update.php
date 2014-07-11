@@ -34,6 +34,9 @@
 
 	// ON ALL UPDATES UNDO THE MATCHES (For both users). IMP. Also verify major actually changes in db.
 
+	//echo $newUserMajor;
+
+
 	check_for_match();
 	header("Location: account.php");
 
@@ -75,14 +78,8 @@
 
 		$user_data = array();
 		$user_data = $GLOBALS["user_data"];
-		//echo "ID: " . $user_data['id'] . "<br>Matched? " . $user_data['matched'] . "<hr>";
-		//echo '$GLOBALS["user_data['id']"]';
 
-		/* Create dropped_match var for users, only let them drop one match.
-			Warn before editing profile vals when match in progress.
-			- If not currently matched, does not matter. */
-
-		// Should check if matched first before going through code
+		// If user is matched, drop the match
 		if ($user_data['matched'] == 1) {
 			// Get the ID of the other user.
 			$other_user_id = mysql_get_var("SELECT id FROM Users WHERE Matches_id = " . $user_data['Matches_id'] . " AND id != " . $user_data['id']);
@@ -110,61 +107,15 @@
 
 		   	echo "Match dropped.";
 		  	//echo "<br>Matched? " . $_SESSION['user_matched'];
+
+		   	// Email both users to let them know.
+		   	mail_user_dropper();
+		   	mail_user_dropped();
+
 		}
 
 	}
 
-
-	// Update Majors
-	/*
-	if (isset($newUserMajor) && ($user_data['major'] != $newUserMajor))
-	{
-		$query = "UPDATE Users SET major = " . $newUserMajor . " WHERE id = " . $_SESSION['user_id'];
-		$_SESSION['user_major'] = $newUserMajor;
-
-		// Update user's major name too. OLD WAY
-		$result = mysql_query("SELECT major_long FROM Majors WHERE id = " . $_SESSION['user_major']);
-		$row = mysql_fetch_array($result);
-		$_SESSION['user_major_name'] = $row['major_long'];
-
-		 // Send back (ACCOUNT UPDATED) message?
-	}
-
-	// Update Cycles
-	else if (isset($newUserCycle) && ($user_data['cycle'] != $newUserCycle))
-	{
-		$query = "UPDATE Users SET cycle = " . $newUserCycle . " WHERE id = " . $_SESSION['user_id'];
-		$_SESSION['user_cycle'] = $newUserCycle;
-
-		if ($newUserCycle == 1)
-			$_SESSION['user_cycle_name'] = "Fall-Winter";
-		else if ($newUserCycle == 2)
-			$_SESSION['user_cycle_name'] = "Spring-Summer";
-
-	}
-
-	/// Update Programs
-	else if (isset($newUserProgram) && ($user_data['num_year_program'] != $newUserProgram)) {
-		$query = "UPDATE Users SET num_year_program = " . $newUserProgram . " WHERE id = " . $_SESSION['user_id'];
-		$_SESSION['user_program'] = $newUserProgram;
-
-		if ($newUserProgram == 1)
-			$_SESSION['user_program_name'] = "1 co-op";
-		else if ($newUserProgram == 2)
-			$_SESSION['user_program_name'] = "3 co-ops";
-
-	}
-	*/
-
-
-
-
-	if (!mysql_query($query,$con)) {
-		die('Error: ' . mysql_error());
-	}
-
-	else {
-	}
 
 	// Use header location thing go back account page display "UPDATED" message
 	// Use a session var for now that resets after displaying message, not very efficient. Maybe use GET eventually

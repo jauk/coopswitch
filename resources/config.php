@@ -18,6 +18,9 @@ $GLOBALS['debug'] = False;
 // If want to simulate logged in user.
 $GLOBALS['debug_login'] = False;
 
+// Stop match mail spam while testing
+$GLOBALS['send_match_mail'] = False;
+
 
 $config = array(
 	"db" => array(

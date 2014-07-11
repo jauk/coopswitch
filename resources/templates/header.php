@@ -3,6 +3,9 @@
 // 	$_SESSION['login'] = "";
 // error_reporting(0);
 // @ini_set('display_errors', 0);
+// Same as error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
+
 
 session_start();
 session_regenerate_id(true);
@@ -13,7 +16,7 @@ session_regenerate_id(true);
 foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $filename) {
     
     // Ignore connect.php because we will use it when necessary only, avoid unnecessary connections
-    if (strpos($filename, 'connect.php') !== TRUE) {
+    if (strpos($filename, 'connect.php') != TRUE) {
     	include $filename;
     }
     // echo $filename;
@@ -35,7 +38,8 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 	<link href="/css/other.css" rel="stylesheet">
 	
 	<link rel="stylesheet" type="text/css" media="screen" href="http://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css">
-	
+	<script src="/js/jquery-2.1.1.js"></script>
+
 	<link href="http://fonts.googleapis.com/css?family=Cutive" rel="stylesheet" type="text/css">
 
 	<style>

@@ -44,12 +44,8 @@ else {
 	 )";
 
 	//$registerLinkBase = "http://coopswitch.com/verify?a=$email&b=";
-	$registerLinkBase = "http://coop.localhost/verify?a=$email&b=";
 
-	$combo = $name . $email . $cycle;
-	$link = hash('sha256', $combo);
-
-	$verifyLink = $registerLinkBase . $link;
+	$verifyLink = getVerifyLink($name, $email, $cycle);
 
 	if (!mysql_query($sql,$con)) {
 	  	die('Error: ' . mysql_error());

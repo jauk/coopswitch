@@ -25,7 +25,10 @@ $con = mysql_connect(
 				$config['db'][$db_in_use]['dbpass']
 			);
 
-//$con = new PDO("mysql:host=$host;dbname=$database", "$dbuser", "dbpass");
+// $con = new PDO("mysql:host = $config['db'][$db_in_use]['dbhost']; 
+// 				dbname= "$config['db'][$db_in_use]['dbname']", 
+// 				"$config['db'][$db_in_use]['dbuser']", "$config['db'][$db_in_use]['dbpass']
+// 			");
 
 
 if (!$con)
@@ -34,6 +37,5 @@ if (!$con)
   }
 
 $db_found = mysql_select_db($config['db'][$db_in_use]['dbname'], $con);
-
 
 ?>

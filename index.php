@@ -1,6 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
+include_once(FUNCTION_PATH . "/connect.php");
 
 // Some global CSS variables. Need to fix these names, organize, move to separate class file
 $formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3";
@@ -110,7 +111,7 @@ $pageName = "Test";
 		      	<div class="row">
 		  			<div class="<?php echo "$formElementClass"; ?>">
 		  				<label for="majorField">Major</label>
-		  				<select class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
+		  				<select class="form-control selectpicker" id="major" name="major" data-live-search="true" data-size="5">
 		  					<?php
 		  					// Get the list of majors and display for user selection.
 		  					  print_majors();

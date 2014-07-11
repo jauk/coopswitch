@@ -7,7 +7,7 @@ owners.
 
 Loads tables from text files in various formats.  The base name of the
 text file must be the name of the table that should be used.
-If one uses sockets to connect to the MySQL server, the server will open and
+If one uses sockets to connect to the mysql server, the server will open and
 read the text file directly. In other cases the client will open the text
 file. The SQL command 'LOAD DATA INFILE' is used to import the rows.
 
@@ -61,7 +61,7 @@ The following options may be given as the first argument:
                       not given it's asked from the tty.
   --plugin-dir=name   Directory for client-side plugins.
   -P, --port=#        Port number to use for connection or 0 for default to, in
-                      order of preference, my.cnf, $MYSQL_TCP_PORT,
+                      order of preference, my.cnf, $mysql_TCP_PORT,
                       /etc/services, built-in default (3306).
   --protocol=name     The protocol to use for connection (tcp, socket, pipe,
                       memory).

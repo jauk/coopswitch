@@ -21,6 +21,27 @@ function getHeaders() {
 	return $headers;
 }
 
+function messageTemplate($content) {
+
+	$message = '
+
+	<h1>Coopswitch</h1>
+	<hr>
+	<br>
+	Hi ' . $userAName . '! <br><br>'
+
+	. $content . 
+
+	'<br><br>Good luck, <br><br>
+
+	Justin <br>
+	Coopswitch Founder
+
+	';
+
+
+}
+
 function mail_matched_users($userAName, $userAEmail, $userBName, $userBEmail) {
 	$subject = "A co-op switch match has been made for you!";
 	$toAccount = "http://coopswitch.com/account";
@@ -84,5 +105,14 @@ function send_init_email($name, $email, $verifyLink) {
 	// Include verify link
 }
 
+function mail_user_dropper() {
+
+
+}
+
+function mail_user_dropped() {
+
+	
+}
 
 ?>

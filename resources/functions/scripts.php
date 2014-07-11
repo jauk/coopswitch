@@ -3,6 +3,7 @@
 /* Lets store scripts here to make our code more efficient. */
 
 function print_majors() {
+
 	$query="SELECT * FROM Majors";
 	$result=mysql_query($query);
 	$numMajors=mysql_num_rows($result);
@@ -94,6 +95,18 @@ function get_not_matched () {
 	$num=mysql_num_rows($result);
 
 	return $num;
+}
+
+function getVerifyLink ($name, $email, $cycle) {
+
+	$registerLinkBase = "http://coop.localhost/verify?a=$email&b=";
+
+	$combo = $name . $email . $cycle;
+	$link = hash('sha256', $combo);
+
+	$verifyLink = $registerLinkBase . $link;
+
+	return $verifyLink;
 }
 
 
