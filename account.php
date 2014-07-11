@@ -177,7 +177,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
    			
    			<h2>Match Status</h2>
 
-		<?php
+			<?php
 			// Get the latest user_matched status
 			if (!$debug_login)
 		  	$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);

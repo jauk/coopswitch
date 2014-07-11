@@ -18,7 +18,6 @@
 
 <!-- <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
 
-<script src="/js/bootstrap.js"></script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>

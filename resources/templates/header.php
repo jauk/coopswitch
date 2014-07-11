@@ -39,6 +39,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 	
 	<link rel="stylesheet" type="text/css" media="screen" href="http://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css">
 	<script src="/js/jquery-2.1.1.js"></script>
+	<script src="/js/bootstrap.js"></script>
 
 	<link href="http://fonts.googleapis.com/css?family=Cutive" rel="stylesheet" type="text/css">
 

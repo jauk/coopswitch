@@ -26,6 +26,14 @@ $pageName = "Test";
 
 ?>
 
+<script>
+
+	$('#user_name').tooltip({
+    placement: "right",
+    trigger: "focus"
+});
+</script>
+
 <div class="container">
 
 	  
@@ -59,9 +67,9 @@ $pageName = "Test";
   	<!-- REGISTER FORM START -->
 	<div id="registerForm" class="container col-sm-6 col-sm-offset-3">
 	    <div class="row">
-	  		<div class="<?php echo $formHeaderClass; ?>">
+	  		<div class="<?php echo $formHeaderClass; ?>" style="padding: 20px;">
 	  			<h3><strong>Registration Form</strong></h3>
-	  			<p>This is currently for <em>Drexel Freshman</em> only.</p>
+	  			<!-- <p>This is currently for <em>Drexel Freshman</em> only.</p> -->
 	  		</div>
 	  	</div>
 		
@@ -81,7 +89,7 @@ $pageName = "Test";
 		     	<div class="row">
 		  			<div id="mainNameDiv" class="<?php echo "$formElementClass"; ?>">
 		  				<label for="nameField">Name</label>
-		  				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onclick="showInfo(name)" onchange="validate_name()">
+		  				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()" data-toggle="tooltip" title="Info">
 		  				<span class="help-block error"><div id="nameError"></div></span>
 		  			</div>
 		  		</div>
@@ -195,10 +203,7 @@ $pageName = "Test";
 </div>
 
 <script type="text/javascript">
-
 	// When the page loads, do something I guess
-	//var $ = function (id) { return id(id); }\
-
 	window.onload = function () {
 		
 		errorDiv = id("formError");
@@ -232,8 +237,6 @@ $pageName = "Test";
 		// Tooltips should be used (to right with arrows look nice)
 		// Make form look nicer, bigger labels, better font
 
-		if (type == "name")
-			id("nameInfo").st
 	}
 
 	var expandForm = function () {
