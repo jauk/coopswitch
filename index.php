@@ -15,7 +15,7 @@ $typicalRowClass = "col-sm-6 col-sm-offset-3 text-center";
 // Form specific
 //$formHeaderClass = "col-sm-4 col-sm-offset-4 text-center well";
 //$formElementClass = "col-sm-4 col-sm-offset-4 text-center";
-$formHeaderClass = " col-sm-10 col-sm-offset-1 text-center well";
+$formHeaderClass = " col-sm-10 col-sm-offset-1 text-center bg-info lead text-info";
 $formElementClass = "col-sm-10 col-sm-offset-1 text-center";
 
 $formMainErrClass = "col-sm-10 col-sm-offset-1 text-center";
@@ -33,15 +33,13 @@ $pageName = "Test";
 	
 	<?php if (!isset($_SESSION['login'])) { // if ($_SESSION['login'] == "") { ?>
 
-		<div class="row">
-		  <div class="<?php echo $typicalRowClass; ?>">
-  			<p class="lead">
-  				Find someone to trade co-op cycles with!
-  			</p>
-  		</div>
-		</div>
+	<div id="startText" class="row">
+		<div class="<?php echo $typicalRowClass; ?>">
+				<p class="lead">Find someone to trade co-op cycles with!</p>
+			</div>
+	</div>
 
-    <div class="row">
+    <div id="stockPhoto" class="row">
   		<div class="<?php echo $typicalRowClass; ?>">
   			<img src="http://ak1.picdn.net/shutterstock/videos/2365601/preview/stock-footage-happy-friends-laughing-in-front-of-a-laptop-in-a-bright-living-room.jpg"
   				 class="img-responsive img-rounded center-block" max-width: 100%; height: auto;>
@@ -49,12 +47,20 @@ $pageName = "Test";
   	 	<br><br>
   		</div>
   	</div>
-  	
+
+  	<div class="row">
+  		<div class="<?php echo $typicalRowClass; ?>">
+  			<button class="btn btn-lg btn-success" id="getStarted" onclick="expandForm()" style="width: 85%;"><h2>Get Started</h2></button>
+  		</div>
+  	</div>
+
+  	<br>
+
   	<!-- REGISTER FORM START -->
-	<div class="container col-sm-6 col-sm-offset-3">
+	<div id="registerForm" class="container col-sm-6 col-sm-offset-3">
 	    <div class="row">
-	  		<div class="<?php echo $formHeaderClass; ?> well">
-	  			<h3>Registration Form</h3>
+	  		<div class="<?php echo $formHeaderClass; ?>">
+	  			<h3><strong>Registration Form</strong></h3>
 	  			<p>This is currently for <em>Drexel Freshman</em> only.</p>
 	  		</div>
 	  	</div>
@@ -75,7 +81,7 @@ $pageName = "Test";
 		     	<div class="row">
 		  			<div id="mainNameDiv" class="<?php echo "$formElementClass"; ?>">
 		  				<label for="nameField">Name</label>
-		  				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()">
+		  				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onclick="showInfo(name)" onchange="validate_name()">
 		  				<span class="help-block error"><div id="nameError"></div></span>
 		  			</div>
 		  		</div>
@@ -192,7 +198,7 @@ $pageName = "Test";
 
 	// When the page loads, do something I guess
 	//var $ = function (id) { return id(id); }\
-	
+
 	window.onload = function () {
 		
 		errorDiv = id("formError");
@@ -214,10 +220,29 @@ $pageName = "Test";
 		window.mainDivClassValid = mainDivClass + " has-success";
 		window.mainDivClassWarning = mainDivClass + " has-warning";
 
+		id("registerForm").style.display = 'none';
 
 		//id('email').onchange = validate_email;
 		//id("submit_form").onclick = validate_data;
 
+	}
+
+	var showInfo = function(type) {
+
+		// Tooltips should be used (to right with arrows look nice)
+		// Make form look nicer, bigger labels, better font
+
+		if (type == "name")
+			id("nameInfo").st
+	}
+
+	var expandForm = function () {
+
+		id("getStarted").style.display = 'none';
+		id("registerForm").style.display = '';
+		id("stockPhoto").style.display = 'none';
+		id("startText").style.display = 'none';
+		// Scroll to form on page and have it fade in/down or something.
 	}
 
 	var validate_name = function () {

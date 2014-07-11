@@ -19,7 +19,7 @@ function print_majors() {
 		
 		$major_ident=mysql_result($result, $i, id);
 
-		if ($_SESSION['user_major'] == $major_ident)
+		if (isset($_SESSION['login']) && $_SESSION['user_major'] == $major_ident)
 			echo '<option selected="selected" value=' . $major_ident . '>' . $major_name . '</option> \n\t\t\t\t\t\t';
 		else
 			echo "<option value=" . $major_ident . ">" . $major_name . "</option> \n\t\t\t\t\t\t";
@@ -31,7 +31,7 @@ function print_majors() {
 	$major_name = "";
 }
 
-// Not my function
+// Useful function found online
 function mysql_get_var($query,$y=0) {
    $res = mysql_query($query);
    $row = mysql_fetch_array($res);

@@ -4,7 +4,7 @@
 // error_reporting(0);
 // @ini_set('display_errors', 0);
 // Same as error_reporting(E_ALL);
-ini_set('error_reporting', E_ALL);
+//ini_set('error_reporting', E_ALL);
 
 
 session_start();
@@ -43,7 +43,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 	<link href="http://fonts.googleapis.com/css?family=Cutive" rel="stylesheet" type="text/css">
 
 	<style>
-		h1 {
+		.page-title {
 			font-family: 'Cutive';
 			font-size: 48px;
 		}
@@ -62,7 +62,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 		<!-- Site Title -->
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
-				<h1><?php echo SITE_NAME; ?></h1>
+				<h1 class="page-title"><?php echo SITE_NAME; ?></h1>
 				<h4><?php echo SITE_SLOGAN; ?> </h4>
 			</div>
 		</div>
