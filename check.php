@@ -105,8 +105,10 @@ if ($result) {
         </p>
     <?php } ?>
 
+    <?php if ($debug_db) { ?>
     <button id="generate_records" type="button" class="btn btn-warning">Generate Records</button>
     <button id="delete_records" type="button" class="btn btn-danger">Delete Records</button>
+    <?php } ?>
   </div>
 
 <?php
