@@ -234,6 +234,8 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 
 <script type="text/javascript">
+
+$('.selectpicker').selectpicker();
 	
 	// $('#userName').tooltip();
 
