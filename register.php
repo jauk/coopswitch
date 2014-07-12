@@ -3,13 +3,21 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
 include(FUNCTION_PATH . "/connect.php");
 
+echo $_SERVER['CONTENT_LENGTH'];
 if ($_SERVER['CONTENT_LENGTH'] == 0) {
 	header('Location: /error.php?msg=3');
+	break;
 	// Make a global "ERROR" variable that also sends to error page to choose which error to display?
 }
 
-if (isset($_SESSION['login'])) {
+else if (isset($_SESSION['login'])) {
 	header('Location: /error.php?msg=4');
+	break;
+}
+
+else if (!isset($_POST['name']) || !isset($_POST['password']) || !isset($_POST['email'])) {
+	header("Locaion: /error.php?msg=4");
+	break;
 }
 
 global $email;
@@ -22,7 +30,9 @@ $result = mysql_query($query);
 if (mysql_num_rows($result) != 0) {
 
 	header("Location: error.php?msg=1");
+	break;
 }
+
 
 // Check against email existing, how have I not done this already oops.
 
