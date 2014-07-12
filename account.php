@@ -114,7 +114,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
        <!-- <form id="cycleForm" name="cycleForm" method="post" action="update.php" onsubmit="return saveCycle();"> -->
         	<div id="cycleSpan" style="display: none; padding-left: 5px;" class="col-sm-6">
 				<input type="hidden" name="newCycleId" id="newCycleId" value="">
-				<select id="selectCycle" class="form-control selectpicker" name="cycle" data-live-search="true" data-size="5">
+				<select id="selectCycle" class="form-control selectpicker" name="cycle">
 					<?php if ($_SESSION['user_cycle'] == 1) { ?>
 						<option selected="selected" value="1">Fall-Winter</option>
 						<option value="2">Spring-Summer</option>
@@ -143,13 +143,13 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
         <!-- <form id="programForm" name="programForm" method="post" action="update.php" onsubmit="return saveProgram();"> -->
         	<div id="programSpan" style="display: none; padding-left: 5px;" class="col-sm-6">
 				<input type="hidden" name="newProgramId" id="newProgramId" value="">
-				<select id="selectProgram" class="form-control selectpicker" name="program" data-live-search="true" data-size="5">
+				<select id="selectProgram" class="form-control selectpicker" showSubtext="true" name="program">
 					<?php if ($_SESSION['user_program'] == 1) { ?>
-						<option selected="selected" value="1">1 co-op</option>
-						<option value="2">3 co-ops</option>
+						<option selected="selected" value="1" data-subtext="4 years">1 co-op</option>
+						<option value="2" data-subtext="5 years">3 co-ops</option>
 					<?php } else { ?>
-						<option value="1">1 co-op</option>
-						<option selected="selected" value="2">3 co-ops</option>
+						<option value="1" data-subtext="4 years">1 co-op</option>
+						<option selected="selected" value="2" data-subtext="5 years">3 co-ops</option>
 					<?php } ?>
 				</select>
         	</div>
@@ -157,20 +157,22 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
       	</div>
       
     </div> <!-- End profile field div begin btn container -->
+
+    <?php $btnRowClass = "col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3"; ?>
   
     <div id="editBtns" class="container col-md-2 col-sm-12 col-xs-12" style="border: 0px solid black; padding: 5px; padding-top: 8px; margin-left: 20px;">
 		<div class="row" style="padding-bottom: 5px;">
-			<div class="col-xs-8 col-xs-offset-2">
+			<div class="<?php echo $btnRowClass; ?>">
 				<button id="saveMainBtn" class="btn btn-success btn-sm" style="width: 75%;" onclick="saveChanges()">Save</button>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
+			<div class="<?php echo $btnRowClass; ?>">
 				<button type="button" id="editMainBtn" class="btn btn-warning btn-sm" style="width: 75%;" onclick="editProfile()">Edit</button>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2">
+			<div class="<?php echo $btnRowClass; ?>">
 				<button type="button" id="cancelMainBtn" class="btn btn-info btn-sm" style="width: 75%;" onclick="cancelChanges()">Cancel</button>
 			</div>
 		</div>
