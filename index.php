@@ -49,7 +49,7 @@ $pageName = "Test";
 
   	<div class="row">
   		<div class="<?php echo $typicalRowClass; ?>">
-  			<button class="btn btn-lg btn-success" id="getStarted" onclick="expandForm()" style="width: 85%;"><h2>Get Started</h2></button>
+  			<button disabled class="btn btn-lg btn-success" id="getStarted" onclick="expandForm()" style="width: 85%;"><h2>Get Started</h2></button>
   		</div>
   	</div>
 

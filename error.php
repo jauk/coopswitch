@@ -44,7 +44,7 @@
         <?php if ($msg == 2) { ?>
             <br>
             <h4>Forgot your password?</h4>
-            <a href="#"><button class="btn btn-info btn-lg">Reset Password</button></a>
+            <a href="#"><button disabled class="btn btn-info btn-lg">Reset Password</button></a>
         <?php } ?>
 	
 	</div>

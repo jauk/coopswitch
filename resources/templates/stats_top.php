@@ -18,7 +18,7 @@
         <ul class="nav nav-justified">
             <li><button onclick="location.href='majors'" type="button" class="btn btn-lg btn-info">Majors</button></li>
             <li><button onclick="location.href='matches'" type="button" class="btn btn-lg btn-info">Matches</button></li>
-            <li><button onclick="location.href='time'" type="button" class="btn btn-lg btn-info">Time</button></li>
+            <li><button disabled onclick="location.href='time'" type="button" class="btn btn-lg btn-info">Time</button></li>
             <?php if (!stripos($_SERVER['REQUEST_URI'], 'stats.php')) { ?>
             <li><button onclick="location.href='/stats'" type="button" class="btn btn-lg btn-info">Back</button></li>
             <?php } ?> 
