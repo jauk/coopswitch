@@ -3,7 +3,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
 include(FUNCTION_PATH . "/connect.php");
 
-echo $_SERVER['CONTENT_LENGTH'];
 if ($_SERVER['CONTENT_LENGTH'] == 0) {
 	header('Location: /error.php?msg=3');
 	break;

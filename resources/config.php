@@ -13,7 +13,7 @@ define('SITE_NAME', 'Coopswitch');
 define('SITE_SLOGAN', 'A simple way to switch co-ops.');
 // define('DEBUG', 'false');
 
-$GLOBALS['debug'] = False;
+$GLOBALS['debug'] = True;
 
 // If want to simulate logged in user.
 $GLOBALS['debug_login'] = False;
@@ -21,7 +21,7 @@ $GLOBALS['debug_login'] = False;
 // Stop match mail spam while testing
 $GLOBALS['send_match_mail'] = False;
 
-$GLOBALS['debug_db'] = False;
+$GLOBALS['debug_db'] = True;
 
 
 $config = array(

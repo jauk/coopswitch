@@ -169,11 +169,14 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 			<button type="button" id=cancelMainBtn class="btn btn-info btn-sm" style="width: 75%;" onclick="cancelChanges()">Cancel</button>
 		</div>
     </div>
-    
+
  </form>
+
 
    	<div class="container">
 	  	<div class="<?php echo $rowClass; ?>">
+   			
+   			<hr>
    			
    			<h2>Match Status</h2>
 
@@ -203,10 +206,10 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 		    <br>
 	      
 	      	<div class="row">
-	  			<div class="col-sm-8 col-sm-offset-2 well text-center">
-	  				<p class="lead">You have matched with <strong class="text-info"> <?php echo $other_user_data[0]['name']; ?></strong>.</p>
+	  			<div class="col-sm-8 col-sm-offset-2 well text-center" style="padding: 15px;">
+	  				<p class="lead">You have matched with <strong class="text-primary"> <?php echo $other_user_data[0]['name']; ?></strong></p>
 	  					<br>
-	  				<p>You can email them at <strong class="text-info"> <?php echo $other_user_data[0]['email']; ?></strong>.</p>
+	  				<p class="lead">You can email them at <strong class="text-primary"> <?php echo $other_user_data[0]['email']; ?></strong></p>
 	  			</div>
 	  		</div>
   		
