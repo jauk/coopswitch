@@ -4,20 +4,20 @@ require_once(TEMPLATES_PATH . "/header.php");
 include(FUNCTION_PATH . "/connect.php");
 
 if ($_SERVER['CONTENT_LENGTH'] == 0) {
-	header("Location: /error.php?msg=3");
+	header("Location: " . $_SERVER['SERVER_NAME'] . "/error.php?msg=3");
 	die();
 	//break;
 	// Make a global "ERROR" variable that also sends to error page to choose which error to display?
 }
 
 else if (isset($_SESSION['login'])) {
-	header("Location: /error.php?msg=4");
+	header("Location: " . $_SERVER['SERVER_NAME'] . "/error.php?msg=4");
 	die();
 	//break;
 }
 
 else if (!isset($_POST['name']) || !isset($_POST['password']) || !isset($_POST['email'])) {
-	header("Locaion: /error.php?msg=4");
+	header("Location: " . $_SERVER['SERVER_NAME'] . "/error.php?msg=4");
 	die();
 	//break;
 }
@@ -31,7 +31,7 @@ $result = mysql_query($query);
 
 if (mysql_num_rows($result) != 0) {
 
-	header("Location: error.php?msg=1");
+	header("Location: " . $_SERVER['SERVER_NAME'] . "/error.php?msg=1");
 	die();
 	//break;
 }
