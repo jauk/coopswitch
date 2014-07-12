@@ -16,7 +16,7 @@ $userFieldClass = "col-sm-2 col-sm-offset-4 text-center";
 $majorBeginClass = "";
 $majorBeginEditClass = "";
 
-$beginTextClass = "col-sm-3 col-sm-offset-3";
+$beginTextClass = "col-sm-3 col-sm-offset-3 col-xs-12";
 $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 ?>
@@ -74,7 +74,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   <!-- Profile Fields Containter -->
  <form id="profileForm" name="profileForm" method="post" action="update.php" onsubmit="return saveChanges()">
   
-  	<div id="profileFields" name="profileFields" class="container col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12" style="border: 0px solid black; padding: 5px;">
+  	<div id="profileFields" name="profileFields" class="container col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-1 col-xs-6 col-xs-offset-3" style="border: 0px solid black; padding: 5px;">
   	
     	<div class="row"> <!-- Major -->
   
@@ -82,7 +82,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 	      		<h4>Your major is</h4>
 	      	</div>
 	      	
-	      	<div id="majorNameText" class="col-sm-5" style="text-align: left; padding-left: 5px;">
+	      	<div id="majorNameText" class="col-sm-5 col-xs-7" style="text-align: left; padding-left: 5px;">
 	      	  <h4>
 	      	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
 	      		</h4>
@@ -158,22 +158,28 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
       
     </div> <!-- End profile field div begin btn container -->
   
-    <div id="editBtns" class="container col-sm-1 col-md-1" style="border: 0px solid black; padding: 5px; padding-top: 8px; margin-left: 20px;">
+    <div id="editBtns" class="container col-md-2 col-sm-12 col-xs-12" style="border: 0px solid black; padding: 5px; padding-top: 8px; margin-left: 20px;">
 		<div class="row" style="padding-bottom: 5px;">
-			<button id="saveMainBtn" class="btn btn-success btn-sm" style="width: 75%;" onclick="saveChanges()">Save</button>
+			<div class="col-xs-8 col-xs-offset-2">
+				<button id="saveMainBtn" class="btn btn-success btn-sm" style="width: 75%;" onclick="saveChanges()">Save</button>
+			</div>
 		</div>
 		<div class="row">
-			<button type="button" id="editMainBtn" class="btn btn-warning btn-sm" style="width: 75%;" onclick="editProfile()">Edit</button>
+			<div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
+				<button type="button" id="editMainBtn" class="btn btn-warning btn-sm" style="width: 75%;" onclick="editProfile()">Edit</button>
+			</div>
 		</div>
 		<div class="row">
-			<button type="button" id=cancelMainBtn class="btn btn-info btn-sm" style="width: 75%;" onclick="cancelChanges()">Cancel</button>
+			<div class="col-xs-8 col-xs-offset-2">
+				<button type="button" id="cancelMainBtn" class="btn btn-info btn-sm" style="width: 75%;" onclick="cancelChanges()">Cancel</button>
+			</div>
 		</div>
     </div>
 
  </form>
 
 
-   	<div class="container">
+   	<div class="container col-xs-12">
 	  	<div class="<?php echo $rowClass; ?>">
    			
    			<hr>
