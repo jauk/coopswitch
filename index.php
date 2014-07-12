@@ -15,7 +15,7 @@ $typicalRowClass = "col-sm-6 col-sm-offset-3 text-center";
 // Form specific
 //$formHeaderClass = "col-sm-4 col-sm-offset-4 text-center well";
 //$formElementClass = "col-sm-4 col-sm-offset-4 text-center";
-$formHeaderClass = " col-sm-10 col-sm-offset-1 text-center bg-info lead text-info";
+$formHeaderClass = " col-sm-12 text-center bg-info lead text-info";
 $formElementClass = "col-sm-10 col-sm-offset-1 text-center";
 
 $formMainErrClass = "col-sm-10 col-sm-offset-1 text-center";
@@ -26,17 +26,8 @@ $pageName = "Test";
 
 ?>
 
-<script>
-
-	$('#user_name').tooltip({
-    placement: "right",
-    trigger: "focus"
-});
-</script>
-
 <div class="container">
-
-	  
+  
 	<!-- IF NOT LOGGED IN -->
 	
 	<?php if (!isset($_SESSION['login'])) { // if ($_SESSION['login'] == "") { ?>
@@ -62,7 +53,10 @@ $pageName = "Test";
   		</div>
   	</div>
 
+</div>
   	<br>
+
+<div class="container">
 
   	<!-- REGISTER FORM START -->
 	<div id="registerForm" class="container col-sm-6 col-sm-offset-3">
@@ -77,19 +71,23 @@ $pageName = "Test";
 		<div class="row">
 	  		<div class="<?php echo $formMainErrClass; ?>">
 	  			<span class="error">
-	  				<strong><div class="alert alert-warning lead" id="formError"></div></strong>
+	  				<strong>
+	  					<div class="alert alert-warning lead" id="formError">
+	  						<!-- <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+	  					</div>
+	  				</strong>
 	  			</span>
 	  		</div>
 	  	</div>
 
 			<!-- Registration Form -->
-		<form role="form" id="register" method="post" action="register.php" onchange="" onsubmit="return validate_submit();" id="register">
+		<form role="form" id="register" method="post" action="register.php" onsubmit="return validate_submit();" id="register">
 
 			<div id="userElements" class="">
 		     	<div class="row">
 		  			<div id="mainNameDiv" class="<?php echo "$formElementClass"; ?>">
 		  				<label for="nameField">Name</label>
-		  				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()" data-toggle="tooltip" title="Info">
+		  				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()" data-toggle="tooltip" data-trigger="click" data-placement="right" title="">
 		  				<span class="help-block error"><div id="nameError"></div></span>
 		  			</div>
 		  		</div>
@@ -104,13 +102,13 @@ $pageName = "Test";
 		  
 		     	 <div class="row">
 		  			<div id="mainPasswordDiv" class="<?php echo "$formElementClass"; ?>">
-		  				<label for="passwordField">Password<small><br /><em>Do not use your Drexel One password.</em></small></label>
+		  				<label for="passwordField">Password<!-- <small><br /><em>Do not use your Drexel One password.</em></small> --></label>
 		  			</div>
 		  		</div>
 		  		
 		  		<div class="row">
 		  		  <div class="col-sm-5 col-sm-offset-1">
-		  				<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
+		  				<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()"  data-toggle="popover" data-trigger="" data-placement="auto" title="Warning" data-content="Please do not use your Drexel One password.">
 		  			</div>
 		  			<div class="col-sm-5">
 		  				<input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
@@ -174,7 +172,6 @@ $pageName = "Test";
 	      
 		</form>
 	</div>
-		
 		<!-- USER IS LOGGED IN, MAKE THIS BETTER -->
 		
 		<?php } else {
@@ -203,6 +200,11 @@ $pageName = "Test";
 </div>
 
 <script type="text/javascript">
+
+$('.selectpicker').selectpicker();
+$('#user_name').tooltip();
+$('#user_pass').popover();
+
 	// When the page loads, do something I guess
 	window.onload = function () {
 		
@@ -227,6 +229,7 @@ $pageName = "Test";
 
 		id("registerForm").style.display = 'none';
 
+
 		//id('email').onchange = validate_email;
 		//id("submit_form").onclick = validate_data;
 
@@ -245,6 +248,8 @@ $pageName = "Test";
 		id("registerForm").style.display = '';
 		id("stockPhoto").style.display = 'none';
 		id("startText").style.display = 'none';
+
+		//id("formInfo").style.display = '';
 		// Scroll to form on page and have it fade in/down or something.
 	}
 
@@ -323,12 +328,17 @@ $pageName = "Test";
 		}
 		else
 		{
-			email = "email";
-			error = "That is not a valid Drexel email.";
+			if (email == "") {
+				error = "You need an email.";
+			}
+			//email = "email";
+			else {
+				error = "That is not a valid Drexel email.";
+			}
 
 			//setError(email, error);
 			emailErr = 1;
-			emailDiv.textContent = "That is not a Drexel email!";
+			emailDiv.textContent = error;
 			emailDiv.style.display = '';
 			emailDiv.className = window.errorClassVals;
 			mainEmailDiv.className = window.mainDivClassError;
@@ -347,14 +357,12 @@ $pageName = "Test";
 
 		divErr = 1;
 
-		alert(id(divName));
-
 		id(divName).style.display = '';
 		// this['divName'].value.className = window.errorClassVals;
 
 
 
-		alert(fieldDiv);
+		//alert(fieldDiv);
 	}
 
 	var validate_password = function () {
@@ -365,11 +373,14 @@ $pageName = "Test";
 		var passwordDiv = id("passwordError");
 		var mainPasswordDiv = id("mainPasswordDiv");
 
-		if (password == "" && password2 == "") {
+		if (password == "" || password2 == "") {
 			passwordErr = 1;
+			passwordDiv.textContent = "You need a password.";
+			passwordDiv.style.display = '';
+			passwordDiv.className = window.errorClassVals;
 		}
 
-		if (password != password2)
+		else if (password != password2)
 		{
 			if (password2 == "" && (hasEnteredAgain == false))
 			{
@@ -380,9 +391,10 @@ $pageName = "Test";
 			else
 			{
 				passwordErr = 1;
-				passwordDiv.textContent = "Passwords do not match!";
+
 				passwordDiv.style.display = '';
 				passwordDiv.className = window.errorClassVals;
+				passwordDiv.textContent = "Passwords do not match!";
 				mainPasswordDiv.className = window.mainDivClassError;
 			}
 		}
@@ -397,6 +409,7 @@ $pageName = "Test";
 				mainPasswordDiv.className = window.mainDivClassWarning;
 
 			}
+
 			else
 			{
 				passwordDiv.style.display = 'none';
@@ -419,8 +432,9 @@ $pageName = "Test";
 
 		var totalErrors = nameErr + emailErr + passwordErr;
 
-		if (totalErrors == 0)
+		if (totalErrors == 0) {
 			hasErrors = false;
+		}
 		else
 			hasErrors = true;
 
@@ -435,6 +449,8 @@ $pageName = "Test";
 			errorDiv.textContent = "Hey, you have a problem on your form!"; // Probably change to recoloring the boxes later.
 			return false;
 		}
+
+		return false;
 	}
 
 </script>
