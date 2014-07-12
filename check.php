@@ -84,9 +84,22 @@ $notMatched = $num;
     }
 
     ?>
-    <p>There are <?php echo $num; ?> people who have not been matched. <br> Will now attempt to manually match.</p>
-    <?php if ($num == 0) echo "Hooray, everyone is matched!<br><br>" ?>
-  
+    <p><!-- There are <?php echo $num; ?> people who have not been matched. --> <br> </p>
+    <?php 
+
+    $percentNotMatched = $notMatched/($notMatched+$usersMatched)*100;
+    $percentNotMatched = number_format((float)$percentNotMatched, 2, '.', '');
+
+      if ($num == 0) echo "Hooray, everyone is matched!<br><br>";
+      else { ?>
+        <p>
+          There are still <?php echo $notMatched ?> people who still need to be matched, or <?php echo $percentNotMatched ?>% of <div style="display: inline" class="">verified</div> users.
+        </p>
+        <p class="lead">
+        Will now attempt to manually match.
+        </p>
+    <?php } ?>
+
     <button id="generate_records" type="button" class="btn btn-warning">Generate Records</button>
     <button id="delete_records" type="button" class="btn btn-danger">Delete Records</button>
   </div>
@@ -190,8 +203,6 @@ $notMatched = $num;
     <?php if ($matches > 0) { ?>
     <p class="lead">There were <?php echo "$matches"; ?> matches made!</p>
     <?php } ?>
-    
-    <p>There are still <?php echo $num - ($matches*2); ?> people who still need to be matched, or <?php echo ($notMatched/($notMatched+$usersMatched)*100) ?>% of <div style="display: inline" class="">verified</div> users.</p>
 
     <br>
     <?php
