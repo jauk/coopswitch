@@ -5,7 +5,7 @@ include(FUNCTION_PATH . "/connect.php");
 
 if ($_SERVER['CONTENT_LENGTH'] == 0) {
 	header('Location: /error.php?msg=3');
-	break;
+	//break;
 	// Make a global "ERROR" variable that also sends to error page to choose which error to display?
 }
 
