@@ -21,14 +21,14 @@ function getHeaders() {
 	return $headers;
 }
 
-function messageTemplate($content) {
+function messageTemplate($name, $content) {
 
 	$message = '
 
 	<h1>Coopswitch</h1>
 	<hr>
 	<br>
-	Hi ' . $userAName . '! <br><br>'
+	Hi ' . $name . '! <br><br>'
 
 	. $content . 
 
@@ -39,6 +39,7 @@ function messageTemplate($content) {
 
 	';
 
+	return $message;
 
 }
 
@@ -68,9 +69,9 @@ function mail_matched_users($userAName, $userAEmail, $userBName, $userBEmail) {
 
 	$headers = getHeaders();
 
-	//mail($userAEmail, $subject, $message);
-	//mail($userBEmail, $subject, $message);
-	mail('justin@localhost', $subject, $message, $headers);
+	mail($userAEmail, $subject, $message);
+	mail($userBEmail, $subject, $message);
+	//mail('justin@localhost', $subject, $message, $headers);
 
 }
 
@@ -101,18 +102,45 @@ function send_init_email($name, $email, $verifyLink) {
 	';
 
 
-	mail('justin@localhost', $subject, $message, $headers);
+	mail($email, $subject, $message, $headers);
 	// Include verify link
 }
 
-function mail_user_dropper() {
+function mail_user_dropper($name, $email) {
 
+	$subject = "Your Coopswitch match was dropped.";
+
+	$headers = getHeaders();
+
+	$content = '
+
+	Your match has been successfully dropped. The more you do this, the lower your odds of 
+	finding a match will be.
+
+	';
+
+	$message = messageTemplate($name, $content);
+
+	mail($email, $subject, $message, $headers);
 
 }
 
-function mail_user_dropped() {
+function mail_user_dropped($name, $email) {
 
-	
+	$subject = "Your Coopswitch match was dropped.";
+
+	$headers = getHeaders();
+
+	$content = '
+
+	The user you have matched with has dropped your match, and you have been entered back into the queue.
+	Sorry about that, this should not happen often!
+
+	';
+
+	$message = messageTemplate($name, $content);
+
+	mail($email, $subject, $message, $headers);
 }
 
 ?>

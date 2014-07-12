@@ -4,7 +4,6 @@
 	include(FUNCTION_PATH . "/connect.php");
 
 	// Get the user we are talking to and save them into a local array.
-	/* Probably do not need this, use session vars since they are from db. */
 	$query = "SELECT * FROM Users WHERE id = " . $_SESSION['user_id'];
 	$result = mysql_query($query);
 	$row = mysql_fetch_array($result);
@@ -81,14 +80,22 @@
 
 		// If user is matched, drop the match
 		if ($user_data['matched'] == 1) {
+
+
 			// Get the ID of the other user.
 			$other_user_id = mysql_get_var("SELECT id FROM Users WHERE Matches_id = " . $user_data['Matches_id'] . " AND id != " . $user_data['id']);
 
+			$query = "SELECT * FROM Users WHERE id = " . $other_user_id;
+			$result = mysql_query($query);
+			$row = mysql_fetch_array($result);
+
+			$other_user_data = $row;
+
 			// Reset the match vars for both users
-			$query = "UPDATE Users SET matched = 0 WHERE id = " . $user_data['id'] . " OR id = " . $other_user_id;
+			$query = "UPDATE Users SET matched = 0 WHERE id = " . $user_data['id'] . " OR id = " . $other_user_data['id'];
 		    $result = mysql_query($query);
 
-		    $query = "UPDATE Users SET Matches_id = 0 WHERE id = " . $user_data['id'] . " OR id = " . $other_user_id;
+		    $query = "UPDATE Users SET Matches_id = 0 WHERE id = " . $user_data['id'] . " OR id = " . $other_user_data['id'];
 		    $result = mysql_query($query);
 
 		    // Should we delete row from Matches or keep for historical purposes? Delete for now.
@@ -109,8 +116,8 @@
 		  	//echo "<br>Matched? " . $_SESSION['user_matched'];
 
 		   	// Email both users to let them know.
-		   	mail_user_dropper();
-		   	mail_user_dropped();
+		   	mail_user_dropper($user_data['name'], $user_data['email']);
+		   	mail_user_dropped($other_user_data['name'], $other_user_data['email']);
 
 		}
 
