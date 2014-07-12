@@ -47,7 +47,6 @@ $(function(){
 
 </script>
 
-<br />
 <div class="container-fluid">
 
 <?php
@@ -97,8 +96,8 @@ if ($result) {
 
       if ($num == 0) echo "Hooray, everyone is matched!<br><br>";
       else { ?>
-        <p>
-          There are still <?php echo $notMatched ?> people who still need to be matched, or <?php echo $percentNotMatched ?>% of <div style="display: inline" class="">verified</div> users.
+        <p class="lead">
+          There are still <?php echo $notMatched ?> people who still need to be matched, or <?php echo $percentNotMatched ?>% of verified users.
         </p>
         <p class="lead">
         Will now attempt to manually match.
@@ -214,9 +213,9 @@ if ($result) {
     <br>
     <?php
 
-    $query = "select major from Matches ORDER BY id DESC LIMIT 10";
+    $query = "select * from Matches ORDER BY id DESC LIMIT 10";
     $result = mysql_query($query) OR die(mysql_error());
-    $row = mysql_fetch_array($result);
+    //$row = mysql_fetch_array($result);
 
     $last_matches = array();
     $index = 0;
@@ -231,15 +230,15 @@ if ($result) {
     {
       $last_matches[$index] = $row; // Save the users into the array.
       $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
-      $last_matches[$index]['userA'] = mysql_get_var("SELECT userA FROM Matches WHERE id = " . $last_matches[$index]['major']);
-      $last_matches[$index]['userB'] = mysql_get_var("SELECT userB FROM Matches WHERE id = " . $last_matches[$index]['major']);
+      // $last_matches[$index]['userA'] = mysql_get_var("SELECT userA FROM Matches WHERE id = " . $last_matches[$index]['id']);
+      // $last_matches[$index]['userB'] = mysql_get_var("SELECT userB FROM Matches WHERE id = " . $last_matches[$index]['id']);
       ?>
       <li class="list-group-item"><?php echo $last_matches[$index]['major_name']; ?></li>
       <?php
       // Show the IDs of the matched users.
 
       if ($debug) {
-        echo '<li class="list-group-item"> ' . $last_matches[$index]['userA'] . ' ' . $last_matches[$index]['userB'] . '</li>';
+        echo '<li class="list-group-item"> ' . $last_matches[$index]['id'] .' ' . $last_matches[$index]['userA'] . ' ' . $last_matches[$index]['userB'] . '</li>';
       }
       $index++; // KIND OF NEED THIS...
     }
