@@ -99,7 +99,7 @@ function get_not_matched () {
 
 function getVerifyLink ($name, $email, $cycle) {
 
-	$registerLinkBase = "http://coop.localhost/verify?a=$email&b=";
+	$registerLinkBase = $_SERVER['SERVER_NAME'] . "/verify?a=$email&b=";
 
 	$combo = $name . $email . $cycle;
 	$link = hash('sha256', $combo);
