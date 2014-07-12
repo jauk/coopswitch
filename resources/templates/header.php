@@ -73,7 +73,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 		<!-- Site Nav Main -->
 		<div class="row">
-			<div class="col-sm-6 col-sm-offset-3 text-center">
+			<div class="col-sm-6 col-sm-offset-3 col-xs-12 text-center">
 				<ul class="nav nav-pills nav-justified lead">
 					<li>
 						<a href="/">Home</a>
@@ -94,24 +94,25 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 		<div class="row">
 			<div class="text-center" style="padding-top: 20px;">
+				<div class="">
+					<?php if (!isset($_SESSION['login'])) { ?>
 
-				<?php if (!isset($_SESSION['login'])) { ?>
+					<form class="form-inline" role="form" name="login_form" method="post" action="/login.php">
+						<fieldset>
+							<div class="form-group">
+						    	<label class="sr-only" for="email">Email address</label>
+						   		<input type="email" class="form-control" name="email" id="email" placeholder="Email">
+	  						</div>
+	  						<div class="form-group">
+						    	<label class="sr-only" for="password">Password</label>
+						    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+							</div>
+					   		<button type="submit" class="btn btn-default btn-success">Sign In</button>
+					    </fieldset>
+					</form>
 
-				<form class="form-inline" role="form" name="login_form" method="post" action="/login.php">
-					<fieldset>
-						<div class="form-group">
-					    	<label class="sr-only" for="email">Email address</label>
-					   		<input type="email" class="form-control" name="email" id="email" placeholder="Email">
-  						</div>
-  						<div class="form-group">
-					    	<label class="sr-only" for="password">Password</label>
-					    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
-						</div>
-				   		<button type="submit" class="btn btn-default btn-success">Sign In</button>
-				    </fieldset>
-				</form>
-
-				<?php } else { ?>
+					<?php } else { ?>
+				</div>
 
 				<p class="lead">
 					Hey, <?php echo $_SESSION['user_name']; ?>.&nbsp;&nbsp;&nbsp;&nbsp;

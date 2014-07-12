@@ -223,7 +223,7 @@ if ($result) {
     ?>
 
     <ul class="list-group">
-          <h2 class="list-group-item-heading">Last 10 Matches</h2>
+          <h2 class="list-group-item-heading" style="padding-bottom: 10px;">Last 10 Matches</h2>
     <?php
 
     while ($row = mysql_fetch_array($result))

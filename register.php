@@ -58,7 +58,7 @@ else {
 
 	if (!mysql_query($sql,$con)) {
 	  	die('Error: ' . mysql_error());
-	  }
+	}
 
 	else {
 		send_init_email($name, $email, $verifyLink); // Success, user has been created.

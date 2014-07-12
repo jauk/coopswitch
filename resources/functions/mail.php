@@ -5,7 +5,6 @@
    This promotes website use, too. Can havve pre-written message on site to send. */
 
 /* On profile have option to decline match (change mind). Do this later. */
-
 function getHeaders() {
 
 	global $headers;

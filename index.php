@@ -26,7 +26,7 @@ $pageName = "Test";
 
 ?>
 
-<div class="container">
+<!-- <div class="container"> -->
   
 	<!-- IF NOT LOGGED IN -->
 	
@@ -56,7 +56,7 @@ $pageName = "Test";
 </div>
   	<br>
 
-<div class="container">
+<!-- <div class="container"> -->
 
   	<!-- REGISTER FORM START -->
 	<div id="registerForm" class="container col-sm-6 col-sm-offset-3">
@@ -147,8 +147,8 @@ $pageName = "Test";
 		  			<div class="col-sm-5 text-center">
 		  				<label for="numCoopsField">Current Program</label>
 		  				<select class="form-control selectpicker" name="numCoops">
-		  					<option value="1">4 Years, 1 Co-op</option>
-		  					<option value="2">5 Years, 3 Co-op</option>
+		  					<option value="1">1 co-op</option>
+		  					<option value="2">3 co-ops</option>
 		  				</select>
 		  			</div>
 		      	</div>
@@ -189,15 +189,18 @@ $pageName = "Test";
 
     <div class="row">
   		<div class="<?php echo $typicalRowClass; ?>">
-  			<h4>You are already registered.
+  			<p class="lead">
+  			Coopswitch switches more co-op cycles than any other website.
+  			</p>
+  			<!-- <h4>You are already registered.
   			<?php echo $fun[$option][1]; ?>
   			<br></h4>
-  			<img src="<?php echo $fun[$option][0]; ?>" max-width: 100%; height: auto; class="img-responsive img-circle center-block">
+  			<img src="<?php echo $fun[$option][0]; ?>" max-width: 100%; height: auto; class="img-responsive img-circle center-block"> -->
   		</div>
 	</div> 
 	<?php } ?>
 
-</div>
+<!-- </div> -->
 
 <script type="text/javascript">
 

@@ -109,5 +109,4 @@ function getVerifyLink ($name, $email, $cycle) {
 	return $verifyLink;
 }
 
-
 ?>
