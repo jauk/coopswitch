@@ -65,9 +65,12 @@ $usersMatched = mysql_num_rows(mysql_query($query));
 // How many users do not have a match:
 $query="SELECT * FROM Users WHERE matched = 0 AND verified = 1 ORDER BY dropped_matches ASC";
 $result=mysql_query($query);
-$num=mysql_num_rows($result); // ...It's this many
 
-$notMatched = $num;
+if ($result) {
+  $num=mysql_num_rows($result); // ...It's this many
+  $notMatched = $num; 
+}
+
 
 
 ?>
@@ -87,8 +90,10 @@ $notMatched = $num;
     <p><!-- There are <?php echo $num; ?> people who have not been matched. --> <br> </p>
     <?php 
 
-    $percentNotMatched = $notMatched/($notMatched+$usersMatched)*100;
-    $percentNotMatched = number_format((float)$percentNotMatched, 2, '.', '');
+    if ($notMatched+$usersMatched > 0) {
+      $percentNotMatched = $notMatched/($notMatched+$usersMatched)*100;
+      $percentNotMatched = number_format((float)$percentNotMatched, 2, '.', '');
+    }
 
       if ($num == 0) echo "Hooray, everyone is matched!<br><br>";
       else { ?>
