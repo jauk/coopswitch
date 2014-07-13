@@ -33,9 +33,18 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 	$pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
 
+    $restOfURL = $_SERVER['REQUEST_URI'];
+    $restOfURL = trim($restOfURL, "/");
+
+    if ($pageName == "Index" && $restOfURL == "") {
+    	$pageName = "Home";
+    }
+    else if (strpos($restOfURL,"stats") !== false) {
+    	$pageName = "Stats";
+    }
 
 	?>
-
+ 
 	<title><?php echo SITE_NAME . " | $pageName"; ?></title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,7 +57,6 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 	<script src="/js/bootstrap.js"></script>
 	<script src="/js/bootstrap-select.js"></script>
 	<script src="/js/global.js"></script>
-
 
 	<link href="http://fonts.googleapis.com/css?family=Cutive" rel="stylesheet" type="text/css">
 
@@ -66,7 +74,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 </head>
 
-<body>
+<body style="">
 	<div class="container">
 
 		<!-- Site Title -->
@@ -81,16 +89,16 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3 col-xs-12 text-center">
 				<ul class="nav nav-pills nav-justified lead">
-					<li>
+					<li <?php if ($pageName == "Home") echo 'class="active"'; ?> >
 						<a href="/">Home</a>
 					</li>
-					<li>
+					<li <?php if ($pageName == "About") echo 'class="active"'; ?> >
 						<a href="/about">About</a>
 					</li>
-					<li>
+					<li <?php if ($pageName == "Stats") echo 'class="active"'; ?> >
 						<a href="/stats">Stats</a>
 					</li>
-					<li>
+					<li <?php if ($pageName == "Check") echo 'class="active"'; ?> >
 						<a href="/check">Matches</a>
 					</li>
 				</ul>
@@ -129,7 +137,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 				<?php } ?>
 
 			</div>
-			<hr>
+			<hr class="">
 
 		</div>
 	
