@@ -124,8 +124,10 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 				<?php } ?>
 
 			</div>
+			<hr>
+
 		</div>
 	
-		<hr>
+		<!-- <hr> -->
 
 	</div> <!-- End Header Container -->

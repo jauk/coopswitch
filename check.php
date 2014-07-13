@@ -233,7 +233,7 @@ if ($result) {
       // $last_matches[$index]['userA'] = mysql_get_var("SELECT userA FROM Matches WHERE id = " . $last_matches[$index]['id']);
       // $last_matches[$index]['userB'] = mysql_get_var("SELECT userB FROM Matches WHERE id = " . $last_matches[$index]['id']);
       ?>
-      <li class="list-group-item"><?php echo $last_matches[$index]['major_name']; ?></li>
+      <li class="list-group-item lastMatch" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<?php echo $last_matches[$index]['date_matched']; ?>"><?php echo $last_matches[$index]['major_name']; ?></li>
       <?php
       // Show the IDs of the matched users.
 
@@ -262,3 +262,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 // After a match is made it will show up on users profile and they will get an email.
 
 ?>
+
+<script>
+  $('.lastMatch').tooltip();
+</script>

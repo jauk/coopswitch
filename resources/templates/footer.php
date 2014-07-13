@@ -1,7 +1,8 @@
 <div class="container">
     <div class="row">
-    <hr>
         <div class="col-sm-8 col-sm-offset-2 text-center">
+            <hr>
+
             <footer>
                 <p class="small">
                 Coopswitch has no affiliation with the Drexel Steinbright Career Development Center.

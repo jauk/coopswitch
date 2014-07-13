@@ -26,11 +26,11 @@ $pageName = "Test";
 
 ?>
 
-<!-- <div class="container"> -->
+<div class="container" id="begin">
   
 	<!-- IF NOT LOGGED IN -->
 	
-	<?php if (!isset($_SESSION['login'])) { // if ($_SESSION['login'] == "") { ?>
+<?php if (!isset($_SESSION['login'])) { // if ($_SESSION['login'] == "") { ?>
 
 	<div id="startText" class="row">
 		<div class="<?php echo $typicalRowClass; ?>">
@@ -49,12 +49,12 @@ $pageName = "Test";
 
   	<div class="row">
   		<div class="<?php echo $typicalRowClass; ?>">
-  			<button class="btn btn-lg btn-success" id="getStarted" onclick="expandForm()" style="width: 85%;"><h2>Get Started</h2></button>
-  		</div>
+  			<button class="btn btn-lg btn-success" id="getStarted" style="width: 85%;"><h2>Get Started</h2></button>
+  		</div> 
   	</div>
-
+<!-- onclick="expandForm()"  -->
 </div>
-  	<br>
+  	<!-- <br> -->
 
 <!-- <div class="container"> -->
 
@@ -148,7 +148,7 @@ $pageName = "Test";
 		  				<label for="numCoopsField">Current Program</label>
 		  				<select class="form-control selectpicker" name="numCoops">
 		  					<option value="1">1 co-op</option>
-		  					<option value="2">3 co-ops</option>
+		  					<option value="2">3 o-ops</option>
 		  				</select>
 		  			</div>
 		      	</div>
@@ -201,6 +201,21 @@ $pageName = "Test";
 	<?php } ?>
 
 <!-- </div> -->
+<script>
+id("registerForm").style.display = 'none';
+
+// $("#getStarted").click(function(e) {
+// 	$(".starter").fadeOut('slow', funct);
+// 	$("#registerForm").fadeIn('fast');
+// });
+
+$('#getStarted').click(function(e){    
+    $('#begin').fadeOut('fast', function(){
+        $('#registerForm').fadeIn('slow');
+    });
+});
+
+</script>
 
 <script type="text/javascript">
 
@@ -230,7 +245,7 @@ $('#user_pass').popover();
 		window.mainDivClassValid = mainDivClass + " has-success";
 		window.mainDivClassWarning = mainDivClass + " has-warning";
 
-		id("registerForm").style.display = 'none';
+		//id("registerForm").style.display = 'none';
 
 
 		//id('email').onchange = validate_email;
