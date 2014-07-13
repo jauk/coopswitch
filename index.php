@@ -23,9 +23,6 @@ $formMainErrClass = $formElementClass;
 
 $formElementErrClass = "";
 
-
-$pageName = "Test";
-
 ?>
 
 <div class="container" id="begin">
@@ -42,7 +39,7 @@ $pageName = "Test";
 
     <div id="stockPhoto" class="row">
   		<div class="<?php echo $typicalRowClass; ?>">
-  			<img src="http://download.fotolia.com/Content/CompImage500/FotoliaComp_39759463_X1I2SAWNQT15VAJ5pqSWoNOwOnBW5p3S"
+  			<img src="/img/stockphoto.jpeg"
   				 class="img-responsive img-rounded center-block" max-width: 100%; height: auto;>
   			<!-- <div class="caption">Friends having fun on Coopswitch.</div>  -->
   	 	<br><br>

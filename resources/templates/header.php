@@ -29,7 +29,12 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 <head>
 
-	<?php $pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); ?>
+	<?php 
+
+	$pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
+
+
+	?>
 
 	<title><?php echo SITE_NAME . " | $pageName"; ?></title>
 
