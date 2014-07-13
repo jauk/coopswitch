@@ -86,7 +86,7 @@ if ($result) {
     }
 
     ?>
-    <p><!-- There are <?php echo $num; ?> people who have not been matched. --> <br> </p>
+    <p class="lead">
     <?php 
 
     if ($notMatched+$usersMatched > 0) {
@@ -96,12 +96,11 @@ if ($result) {
 
       if ($num == 0) echo "Hooray, everyone is matched!<br><br>";
       else { ?>
-        <p class="lead">
           There are still <?php echo $notMatched ?> people who still need to be matched, or <?php echo $percentNotMatched ?>% of verified users.
-        </p>
-        <p class="lead">
-        Will now attempt to manually match.
-        </p>
+    </p>
+    <p class="lead">
+    Will now attempt to manually match.
+    </p>
     <?php } ?>
 
     <?php if ($debug_db) { ?>
@@ -226,22 +225,27 @@ if ($result) {
           <h2 class="list-group-item-heading" style="padding-bottom: 10px;">Last 10 Matches</h2>
     <?php
 
-    while ($row = mysql_fetch_array($result))
-    {
-      $last_matches[$index] = $row; // Save the users into the array.
-      $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
-      // $last_matches[$index]['userA'] = mysql_get_var("SELECT userA FROM Matches WHERE id = " . $last_matches[$index]['id']);
-      // $last_matches[$index]['userB'] = mysql_get_var("SELECT userB FROM Matches WHERE id = " . $last_matches[$index]['id']);
-      ?>
-      <li class="list-group-item lastMatch" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<?php echo $last_matches[$index]['date_matched']; ?>"><?php echo $last_matches[$index]['major_name']; ?></li>
-      <?php
-      // Show the IDs of the matched users.
+    if (!$result) { ?>
+    <p class="lead">No recent matches found.</p>
 
-      if ($debug) {
-        echo '<li class="list-group-item"> ' . $last_matches[$index]['id'] .' ' . $last_matches[$index]['userA'] . ' ' . $last_matches[$index]['userB'] . '</li>';
+    <?php
+    else
+      while ($row = mysql_fetch_array($result))
+      {
+        $last_matches[$index] = $row; // Save the users into the array.
+        $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
+        // $last_matches[$index]['userA'] = mysql_get_var("SELECT userA FROM Matches WHERE id = " . $last_matches[$index]['id']);
+        // $last_matches[$index]['userB'] = mysql_get_var("SELECT userB FROM Matches WHERE id = " . $last_matches[$index]['id']);
+        ?>
+        <li class="list-group-item lastMatch" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<?php echo $last_matches[$index]['date_matched']; ?>"><?php echo $last_matches[$index]['major_name']; ?></li>
+        <?php
+        // Show the IDs of the matched users.
+
+        if ($debug) {
+          echo '<li class="list-group-item"> ' . $last_matches[$index]['id'] .' ' . $last_matches[$index]['userA'] . ' ' . $last_matches[$index]['userB'] . '</li>';
+        }
+        $index++; // KIND OF NEED THIS...
       }
-      $index++; // KIND OF NEED THIS...
-    }
 
 
     ?>
