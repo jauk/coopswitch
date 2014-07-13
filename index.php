@@ -15,10 +15,12 @@ $typicalRowClass = "col-sm-6 col-sm-offset-3 text-center";
 // Form specific
 //$formHeaderClass = "col-sm-4 col-sm-offset-4 text-center well";
 //$formElementClass = "col-sm-4 col-sm-offset-4 text-center";
-$formHeaderClass = " col-sm-12 text-center bg-info lead text-info";
-$formElementClass = "col-sm-10 col-sm-offset-1 text-center";
 
-$formMainErrClass = "col-sm-10 col-sm-offset-1 text-center";
+$formElementClass = "col-md-10 col-md-offset-1 col-sm-12 text-center";
+$formHeaderClass = $formElementClass . " bg-info lead text-info";
+
+$formMainErrClass = $formElementClass;
+
 $formElementErrClass = "";
 
 
@@ -40,7 +42,7 @@ $pageName = "Test";
 
     <div id="stockPhoto" class="row">
   		<div class="<?php echo $typicalRowClass; ?>">
-  			<img src="http://ak1.picdn.net/shutterstock/videos/2365601/preview/stock-footage-happy-friends-laughing-in-front-of-a-laptop-in-a-bright-living-room.jpg"
+  			<img src="http://download.fotolia.com/Content/CompImage500/FotoliaComp_39759463_X1I2SAWNQT15VAJ5pqSWoNOwOnBW5p3S"
   				 class="img-responsive img-rounded center-block" max-width: 100%; height: auto;>
   			<!-- <div class="caption">Friends having fun on Coopswitch.</div>  -->
   	 	<br><br>
@@ -107,10 +109,10 @@ $pageName = "Test";
 		  		</div>
 		  		
 		  		<div class="row">
-		  		  <div class="col-sm-5 col-sm-offset-1">
+		  		  <div class="col-md-5 col-md-offset-1 col-sm-6">
 		  				<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()"  data-toggle="popover" data-trigger="" data-placement="auto" title="Warning" data-content="Please do not use your Drexel One password.">
 		  			</div>
-		  			<div class="col-sm-5">
+		  			<div class="col-md-5 col-sm-6">
 		  				<input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
 		  			</div>
 		  			<div class="<?php echo "$formElementClass"; ?>">
@@ -136,7 +138,7 @@ $pageName = "Test";
 		      <br>
 
 		      	<div class="row">
-		  			<div class="col-sm-5 col-sm-offset-1 text-center">
+		  			<div class="col-md-5 col-md-offset-1 col-sm-6 text-center">
 		  				<label for="cycleField">Current Cycle</label>
 		  				<select class="form-control selectpicker" id="cycle" name="cycle">
 		  					<option value="1">Fall-Winter</option>
@@ -144,7 +146,7 @@ $pageName = "Test";
 		  				</select>
 		  			</div>
 
-		  			<div class="col-sm-5 text-center">
+		  			<div class="col-md-5 col-sm-6 text-center">
 		  				<label for="numCoopsField">Current Program</label>
 		  				<select class="form-control selectpicker" name="numCoops">
 		  					<option value="1">1 co-op</option>
