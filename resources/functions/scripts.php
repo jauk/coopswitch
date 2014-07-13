@@ -82,13 +82,11 @@ function get_match_info() {
 
 function test_input($data) {
 
-	include_once("../connect.php");	
 	$data = trim($data);
 	$data = stripslashes($data);
 	$data = htmlspecialchars($data);
-	$data = mysql_real_escape_string($data);
+	//$data = mysql_real_escape_string($data);
 
-	mysql_close($con);
 	return $data;
 }
 
