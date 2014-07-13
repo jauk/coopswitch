@@ -228,7 +228,7 @@ if ($result) {
     if (!$result) { ?>
     <p class="lead">No recent matches found.</p>
 
-    <?php
+    <?php }
     else
       while ($row = mysql_fetch_array($result))
       {
