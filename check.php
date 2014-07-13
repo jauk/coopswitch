@@ -225,7 +225,7 @@ if ($result) {
           <h2 class="list-group-item-heading" style="padding-bottom: 10px;">Last 10 Matches</h2>
     <?php
 
-    if ( !$result ) { ?>
+    if ( empty(mysql_fetch_array($result)) ) { ?>
     <p class="lead">No recent matches found.</p>
 
     <?php }
