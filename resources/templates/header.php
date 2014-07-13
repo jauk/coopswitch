@@ -5,7 +5,7 @@
 // @ini_set('display_errors', 0);
 // Same as error_reporting(E_ALL);
 //ini_set('error_reporting', E_ALL);
-@ob_start();
+ob_start();
 
 session_start();
 session_regenerate_id(true);
