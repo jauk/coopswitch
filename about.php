@@ -18,7 +18,7 @@ require_once(TEMPLATES_PATH . "/header.php");
 	</div>
 
 	<div class="row">	
-		<div class="bg-info text-center" style="padding: 20px;">
+		<div class="bg-info text-center" style="padding: 20px; font-size: 135%; line-height: 200%;">
 			<p>Coopswitch was created to help Drexel students quickly and easily find someone to switch co-op cycles with.</p>
 			<br>
 			<p>As more people register, the match frequency will be higher.</p>
