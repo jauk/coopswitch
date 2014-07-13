@@ -148,7 +148,7 @@ $pageName = "Test";
 		  				<label for="numCoopsField">Current Program</label>
 		  				<select class="form-control selectpicker" name="numCoops">
 		  					<option value="1">1 co-op</option>
-		  					<option value="2">3 o-ops</option>
+		  					<option value="2">3 co-ops</option>
 		  				</select>
 		  			</div>
 		      	</div>
