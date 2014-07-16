@@ -51,7 +51,7 @@ $(function(){
 
 <?php
 
-$rowClass = "row-fluid col-md-6 col-md-6-offset-3 col-sm-6 col-sm-offset-3 text-center";
+$rowClass = "col-sm-6 col-sm-offset-3 text-center";
 
 include(FUNCTION_PATH . "/connect.php");
 
@@ -75,43 +75,42 @@ else {
   $matches = 0;
 }
 
-
-
 ?>
-  
-  <div class="<?php echo $rowClass; ?>">
-    <?php
-    if (isset($msg)) {
-      if ($msg == 1)
-          echo "<strong>Records generated.</strong><br><br>";
-      else if ($msg == 2)
-          echo "<strong>Database cleared.</strong><br><br>";
 
-      $msg = 0;
-    }
+  <div class="row">
+    <div class="<?php echo $rowClass; ?>">
+      <?php
+      if (isset($msg)) {
+        if ($msg == 1)
+            echo "<strong>Records generated.</strong><br><br>";
+        else if ($msg == 2)
+            echo "<strong>Database cleared.</strong><br><br>";
 
-    ?>
-    <p class="lead">
-    <?php 
+        $msg = 0;
+      }
 
-    if ($notMatched+$usersMatched > 0) {
-      $percentNotMatched = $notMatched/($notMatched+$usersMatched)*100;
-      $percentNotMatched = number_format((float)$percentNotMatched, 2, '.', '');
-    }
+      ?>
+      <p class="lead">
+      <?php 
+      if ($notMatched+$usersMatched > 0) {
+        $percentNotMatched = $notMatched/($notMatched+$usersMatched)*100;
+        $percentNotMatched = number_format((float)$percentNotMatched, 2, '.', '');
+      }
 
-      if ($num == 0) echo "Hooray, everyone is matched!<br><br>";
-      else { ?>
-          There are still <?php echo $notMatched ?> people who still need to be matched, or <?php echo $percentNotMatched ?>% of verified users.
-    </p>
-    <p class="lead">
-    Will now attempt to manually match.
-    </p>
-    <?php } ?>
+        if ($num == 0) echo "Hooray, everyone is matched!<br><br>";
+        else { ?>
+            There are still <span class="text-info"><?php echo $notMatched ?></span> people who still need to be matched, or <span class="text-info"><?php echo $percentNotMatched ?>%</span> of verified users.
+      </p>
+      <p class="lead">
+      Will now attempt to manually match.
+      </p>
+      <?php } ?>
 
-    <?php if ($debug_db) { ?>
-    <button id="generate_records" type="button" class="btn btn-warning">Generate Records</button>
-    <button id="delete_records" type="button" class="btn btn-danger">Delete Records</button>
-    <?php } ?>
+      <?php if ($debug_db) { ?>
+      <button id="generate_records" type="button" class="btn btn-warning">Generate Records</button>
+      <button id="delete_records" type="button" class="btn btn-danger">Delete Records</button>
+      <?php } ?>
+    </div>
   </div>
 
 <?php
@@ -130,7 +129,7 @@ else {
         $index++; // KIND OF NEED THIS...
       }
 
-      echo "<br><br>";
+      //echo "<br><br>";
 
       for ($x = 0; $x < $index; $x++) {// Why doesn't count() work for array?
 
@@ -207,54 +206,77 @@ else {
 
 ?>
 
-  <div class="<?php echo $rowClass; ?>">
+  <div class="row">
+    <div class="<?php echo $rowClass; ?> bg-info">
     <br>
 
-    <?php if ($matches > 0) { ?>
-    <p class="lead">There were <?php echo "$matches"; ?> matches made!</p>
-    <?php } ?>
+      <?php 
 
-    <br>
-    <?php
+        $query = "select * from Matches ORDER BY id DESC LIMIT 10";
+        $result = mysql_query($query) OR die(mysql_error());
+        //$row = mysql_fetch_array($result);
 
-    $query = "select * from Matches ORDER BY id DESC LIMIT 10";
-    $result = mysql_query($query) OR die(mysql_error());
-    //$row = mysql_fetch_array($result);
+        $last_matches = array();
+        $index = 0;
 
-    $last_matches = array();
-    $index = 0;
+        while ($row = mysql_fetch_array($result)) {
 
-    ?>
+            $last_matches[$index] = $row; // Save the users into the array.
+            $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
 
-    <ul class="list-group">
-          <h2 class="list-group-item-heading" style="padding-bottom: 10px;">Last 10 Matches</h2>
-    <?php
-
-    if ( empty(mysql_fetch_array($result)) ) { ?>
-    <p class="lead">No recent matches found.</p>
-
-    <?php }
-    else
-      while ($row = mysql_fetch_array($result))
-      {
-        $last_matches[$index] = $row; // Save the users into the array.
-        $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
-        // $last_matches[$index]['userA'] = mysql_get_var("SELECT userA FROM Matches WHERE id = " . $last_matches[$index]['id']);
-        // $last_matches[$index]['userB'] = mysql_get_var("SELECT userB FROM Matches WHERE id = " . $last_matches[$index]['id']);
-        ?>
-        <li class="list-group-item lastMatch" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<?php echo $last_matches[$index]['date_matched']; ?>"><?php echo $last_matches[$index]['major_name']; ?></li>
-        <?php
-        // Show the IDs of the matched users.
-
-        if ($debug) {
-          echo '<li class="list-group-item"> ' . $last_matches[$index]['id'] .' ' . $last_matches[$index]['userA'] . ' ' . $last_matches[$index]['userB'] . '</li>';
+            if ($index == 0) {
+              $lastMatch = $last_matches[$index]['date_matched'];
+            }
+            
+            $index++;
         }
-        $index++; // KIND OF NEED THIS...
-      }
 
 
-    ?>
-    
+
+        if ($matches > 0) {
+        echo '<p class="lead">There were ' . $matches . ' matches made!</p>';
+        } else {
+        echo '<p class="lead">No matches were made. The last match was on <span class="text-info">' . $lastMatch . '</span>.</p>';
+        } 
+
+
+
+
+      ?>
+
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 35px;">
+    <div class="<?php echo $rowClass; ?>">
+
+      <ul class="list-group">
+            <h2 class="list-group-item-heading" style="padding-bottom: 10px;">Last 10 Matches</h2>
+
+            <?php
+
+            $max = sizeof($last_matches);
+            if ( $max == 0) { 
+            echo '<p class="lead">No recent matches found.</p>';
+            }
+            else {
+
+              for ($x = 0; $x < $max; $x++) {
+                echo '<li class="list-group-item lastMatch" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="' . $last_matches[$x]['date_matched'] . '">' . $last_matches[$x]['major_name'] . '</li>';
+                if ($debug) {
+                  echo '<li class="list-group-item"> ' . $last_matches[$x]['id'] .' ' . $last_matches[$x]['userA'] . ' ' . $last_matches[$x]['userB'] . '</li>'; 
+                }
+              }
+            //   for ($i = 0; $i < $max, $i++) {
+            //    
+            //     
+            //   }
+            }
+
+            ?>
+      
+      </ul>
+    </div>
   </div>
 
 </div>
