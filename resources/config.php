@@ -9,6 +9,10 @@ defined("FUNCTION_PATH")
 defined("DEV_PATH")
 	or define("DEV_PATH", realpath(dirname(__FILE__) . '/dev'));
 
+defined("LIB_PATH")
+	or define("LIB_PATH", realpath(dirname(__FILE__) . '/library'));
+
+
 define('SITE_NAME', 'Coopswitch');
 define('SITE_SLOGAN', 'A simple way to switch co-ops.');
 // define('DEBUG', 'false');
