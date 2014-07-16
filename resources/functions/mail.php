@@ -114,8 +114,6 @@ function send_init_email($name, $email, $verifyLink) {
 	';
 
 	sendEmail($name, $email, $subject, $message);
-	//mail($email, $subject, $message, $headers);
-	// Include verify link
 }
 
 function mail_user_dropper($name, $email) {
