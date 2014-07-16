@@ -69,6 +69,11 @@ if ($result) {
   $num=mysql_num_rows($result); // ...It's this many
   $notMatched = $num; 
 }
+else {
+  $notMatched = 0;
+  $num = 0;
+  $matches = 0;
+}
 
 
 

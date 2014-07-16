@@ -210,7 +210,7 @@ id("registerForm").style.display = 'none';
 
 $('#getStarted').click(function(e){    
     $('#begin').fadeOut('fast', function(){
-        $('#registerForm').fadeIn('slow');
+        $('#registerForm').fadeIn('fast');
     });
 });
 

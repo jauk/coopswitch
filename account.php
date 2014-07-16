@@ -20,6 +20,8 @@ $beginTextClass = "col-sm-3 col-sm-offset-3 col-xs-12";
 $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 ?>
+ <!-- On profile have option to decline (drop) match (change mind about switching cycles). Do this later. -->
+
 
 <!-- Work on edit button location -->
 
@@ -64,11 +66,6 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   	</div>
   </div>
 
-	<!--
-	     * Js to go to location to stop jumping, may not be necessary with master edit btn
-	      Left/right align
-	 -->
-	      
 	<!-- Should I add confirmations? "Sure you want to change/drop match, sure you want to change. Nice popup. Learn jquery -->
 
   <!-- Profile Fields Containter -->
@@ -469,9 +466,3 @@ $('.selectpicker').selectpicker();
 	}
 
 </script>
-
-
-<!-- To Do For User Page 1
-
-- Ability to change information (cycle, major, 4/5 year)
-- Other misc. I guess

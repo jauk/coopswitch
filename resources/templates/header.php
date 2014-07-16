@@ -1,6 +1,5 @@
 <?php
-// if (!isset($_SESSION['login']))
-// 	$_SESSION['login'] = "";
+
 // error_reporting(0);
 // @ini_set('display_errors', 0);
 // Same as error_reporting(E_ALL);
@@ -137,8 +136,13 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 				<?php } ?>
 
 			</div>
-			<hr class="">
 
+		</div>
+
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<hr class="style-one">
+			</div>
 		</div>
 	
 		<!-- <hr> -->
