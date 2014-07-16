@@ -201,9 +201,6 @@ else {
         } // End For Loop
     } // End Main If Statement (If there is even a reason to run through all this code)
 
-
-
-
 ?>
 
   <div class="row">
@@ -214,7 +211,6 @@ else {
 
         $query = "select * from Matches ORDER BY id DESC LIMIT 10";
         $result = mysql_query($query) OR die(mysql_error());
-        //$row = mysql_fetch_array($result);
 
         $last_matches = array();
         $index = 0;
@@ -231,16 +227,12 @@ else {
             $index++;
         }
 
-
-
         if ($matches > 0) {
-        echo '<p class="lead">There were ' . $matches . ' matches made!</p>';
-        } else {
-        echo '<p class="lead">No matches were made. The last match was on <span class="text-info">' . $lastMatch . '</span>.</p>';
+          echo '<p class="lead">There were ' . $matches . ' matches made!</p>';
         } 
-
-
-
+        else {
+          echo '<p class="lead">No matches were made. The last match was on <span class="text-info">' . $lastMatch . '</span>.</p>';
+        } 
 
       ?>
 
@@ -253,24 +245,24 @@ else {
       <ul class="list-group">
             <h2 class="list-group-item-heading" style="padding-bottom: 10px;">Last 10 Matches</h2>
 
-            <?php
+              <?php
 
-            $max = sizeof($last_matches);
-            if ( $max == 0) { 
-            echo '<p class="lead">No recent matches found.</p>';
-            }
-            else {
+              $max = sizeof($last_matches);
+              if ( $max == 0) { 
+              echo '<p class="lead">No recent matches found.</p>';
+              }
+              else {
 
-              for ($x = 0; $x < $max; $x++) {
-                echo '<li class="list-group-item lastMatch" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="' . $last_matches[$x]['date_matched'] . '">' . $last_matches[$x]['major_name'] . '</li>';
-                if ($debug) {
-                  echo '<li class="list-group-item"> ' . $last_matches[$x]['id'] .' ' . $last_matches[$x]['userA'] . ' ' . $last_matches[$x]['userB'] . '</li>'; 
+                for ($x = 0; $x < $max; $x++) {
+                  echo '<li class="list-group-item lastMatch" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="' . $last_matches[$x]['date_matched'] . '">' . $last_matches[$x]['major_name'] . '</li>';
+                  if ($debug) {
+                    echo '<li class="list-group-item"> ' . $last_matches[$x]['id'] .' ' . $last_matches[$x]['userA'] . ' ' . $last_matches[$x]['userB'] . '</li>'; 
+                  }
                 }
+
               }
 
-            }
-
-            ?>
+              ?>
       
       </ul>
     </div>
@@ -284,11 +276,6 @@ else {
 mysql_close($con);
 
 require_once(TEMPLATES_PATH . "/footer.php");
-// Add to Matches table, set matched val to 1, connect with each other.
-// Matches table: id, personA id, personB id, isFinished val, date.
-
-// After a match is made it will show up on users profile and they will get an email.
-
 ?>
 
 <script>
