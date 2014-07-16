@@ -1,10 +1,62 @@
 <?php
 
-/* Send both users an email that they have beenn matched. 
-   For now, just tell them to check profile for user information.
-   This promotes website use, too. Can havve pre-written message on site to send. */
+// TO DO: MUCH BETTER SECURITY.
 
-/* On profile have option to decline match (change mind). Do this later. */
+/*
+Username: justin@coopswitch.com
+
+Password: coop_switch_mailer
+
+Incoming/outgoing servers name: mail.privateemail.com
+
+Incoming server type: IMAP or POP3
+
+Outgoing server (SMTP): 465 port for SSL, 25 or 26 for TLS.
+
+Incoming server (IMAP): 993 port for SSL, 143 for TLS.
+
+Incoming server (POP3): 995 port for SSL 110 for TLS.
+
+Outgoing server authentication should be switched on, SPA (secure password authentication) must be disabled.    
+*/
+
+require_once LIB_PATH . '/PHPMailer/PHPMailerAutoload.php';
+
+function sendEmail($name, $email, $subject, $message) {
+
+	$mail = new PHPMailer;
+
+	$mail -> isSMTP();
+	$mail->Host = "mail.privateemail.com";
+	$mail->SMTPAuth = true;
+	$mail->Username = 'justin@coopswitch.com';
+	$mail->Password = 'coop_switch_mailer';
+
+	$mail->Port = 465;
+	$mail->SMTPSecure = 'ssl';
+
+	$mail->From = 'justin@coopswitch.com';
+	$mail->FromName = 'Coopswitch';
+	$mail->addReplyTo('justin@coopswitch.com', 'Coopswitch');
+
+	$mail->WordWrap = 50;
+	$mail->isHTML(true);
+
+	$mail->Subject = $subject;
+	$mail->Body = $message;
+	$mail->addAddress($email, $name);
+
+	if(!$mail->send()) {
+	    echo 'Message could not be sent.';
+	    echo 'Mailer Error: ' . $mail->ErrorInfo;
+	}
+	else {
+		//echo 'Message sent.';
+	}
+
+}
+
+
 function getHeaders() {
 
 	global $headers;
@@ -68,8 +120,11 @@ function mail_matched_users($userAName, $userAEmail, $userBName, $userBEmail) {
 
 	$headers = getHeaders();
 
-	mail($userAEmail, $subject, $message);
-	mail($userBEmail, $subject, $message);
+	sendEmail($userAName, $userAEmail, $subject, $message);
+	sendEmail($userBName, $userBEmail, $subject, $message);
+
+	// mail($userAEmail, $subject, $message);
+	// mail($userBEmail, $subject, $message);
 	//mail('justin@localhost', $subject, $message, $headers);
 
 }
@@ -100,8 +155,8 @@ function send_init_email($name, $email, $verifyLink) {
 
 	';
 
-
-	mail($email, $subject, $message, $headers);
+	sendEmail($name, $email, $subject, $message);
+	//mail($email, $subject, $message, $headers);
 	// Include verify link
 }
 
@@ -143,3 +198,4 @@ function mail_user_dropped($name, $email) {
 }
 
 ?>
+
