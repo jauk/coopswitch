@@ -1,24 +1,6 @@
 <?php
 
-// TO DO: MUCH BETTER SECURITY.
-
-/*
-Username: justin@coopswitch.com
-
-Password: coop_switch_mailer
-
-Incoming/outgoing servers name: mail.privateemail.com
-
-Incoming server type: IMAP or POP3
-
-Outgoing server (SMTP): 465 port for SSL, 25 or 26 for TLS.
-
-Incoming server (IMAP): 993 port for SSL, 143 for TLS.
-
-Incoming server (POP3): 995 port for SSL 110 for TLS.
-
-Outgoing server authentication should be switched on, SPA (secure password authentication) must be disabled.    
-*/
+// TO DO: Better way of storing password.
 
 require_once LIB_PATH . '/PHPMailer/PHPMailerAutoload.php';
 
