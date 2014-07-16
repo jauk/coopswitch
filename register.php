@@ -38,6 +38,13 @@ if (mysql_num_rows($result) != 0) {
 	//break;
 }
 
+else if (!$result) { // May not actually work since its not supposed to return results. Check when have db.
+
+	header("Location: " . $url . "/error.php");
+	die();
+}
+
+
 
 // Check against email existing, how have I not done this already oops.
 
