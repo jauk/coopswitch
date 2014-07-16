@@ -231,7 +231,11 @@ else {
           echo '<p class="lead">There were ' . $matches . ' matches made!</p>';
         } 
         else {
-          echo '<p class="lead">No matches were made. The last match was on <span class="text-info">' . $lastMatch . '</span>.</p>';
+          echo '<p class="lead">No matches were made.';
+          if (isset($lastMatch)) { 
+            echo 'The last match was on <span class="text-info">' . $lastMatch . '</span>.'; 
+          }
+          echo '</p>';
         } 
 
       ?>
