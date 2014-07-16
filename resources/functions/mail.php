@@ -38,22 +38,6 @@ function sendEmail($name, $email, $subject, $message) {
 
 }
 
-
-function getHeaders() {
-
-	global $headers;
-
-	$coopMail = "justin@coopswitch.com";
-
-	$headers  = "From: " . $coopMail . " \r\n";
-	$headers .= "Reply-To: " . $coopMail . "\r\n";
-	$headers .= "BCC: justin@localhost\r\n"; // This line temporary for testing!
-	$headers .= "MIME-Version: 1.0\r\n";
-	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-	return $headers;
-}
-
 function messageTemplate($name, $content) {
 
 	$message = '
@@ -77,6 +61,7 @@ function messageTemplate($name, $content) {
 }
 
 function mail_matched_users($userAName, $userAEmail, $userBName, $userBEmail) {
+
 	$subject = "A co-op switch match has been made for you!";
 	$toAccount = "http://coopswitch.com/account";
 
@@ -100,22 +85,13 @@ function mail_matched_users($userAName, $userAEmail, $userBName, $userBEmail) {
 
 	';
 
-	$headers = getHeaders();
-
 	sendEmail($userAName, $userAEmail, $subject, $message);
 	sendEmail($userBName, $userBEmail, $subject, $message);
-
-	// mail($userAEmail, $subject, $message);
-	// mail($userBEmail, $subject, $message);
-	//mail('justin@localhost', $subject, $message, $headers);
-
 }
 
 function send_init_email($name, $email, $verifyLink) {
 
 	$subject = "Welcome to Coopswitch!";
-
-	$headers = getHeaders();
 
 	$message = '
 
@@ -146,9 +122,7 @@ function mail_user_dropper($name, $email) {
 
 	$subject = "Your Coopswitch match was dropped.";
 
-	$headers = getHeaders();
-
-	$content = '
+	$message = '
 
 	Your match has been successfully dropped. The more you do this, the lower your odds of 
 	finding a match will be.
@@ -156,6 +130,8 @@ function mail_user_dropper($name, $email) {
 	';
 
 	$message = messageTemplate($name, $content);
+
+	sendEmail($name, $email, $subject, $message);
 
 	mail($email, $subject, $message, $headers);
 
@@ -165,9 +141,7 @@ function mail_user_dropped($name, $email) {
 
 	$subject = "Your Coopswitch match was dropped.";
 
-	$headers = getHeaders();
-
-	$content = '
+	$message = '
 
 	The user you have matched with has dropped your match, and you have been entered back into the queue.
 	Sorry about that, this should not happen often!
@@ -176,7 +150,7 @@ function mail_user_dropped($name, $email) {
 
 	$message = messageTemplate($name, $content);
 
-	mail($email, $subject, $message, $headers);
+	sendEmail($name, $email, $subject, $message);
 }
 
 ?>
