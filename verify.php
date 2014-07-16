@@ -17,8 +17,8 @@ $user = mysql_fetch_array($result);
 $combo = $user['name'] . $user['email'] . $user['cycle'];
 $userHash = hash('sha256', $combo);
 
-if ($user['verified'] == 1) {
 
+if ($user['verified'] == 1) {
 	header("Location: error.php?msg=5");	
 }
 
@@ -26,6 +26,13 @@ else if ($userHash == $submitHash) {
 
 	$sql = 'UPDATE Users SET verified = 1 WHERE email = "' . $email . '"';
     $result = mysql_query($sql);
+
+    if (!$result) {
+        header("Location: error.php?msg=7");    
+        die();
+    }
+
+    //$_SESSION['user_email_verified'] = 1;
 
     if (isset($_SESSION['login'])) {
 
