@@ -267,10 +267,7 @@ else {
                   echo '<li class="list-group-item"> ' . $last_matches[$x]['id'] .' ' . $last_matches[$x]['userA'] . ' ' . $last_matches[$x]['userB'] . '</li>'; 
                 }
               }
-            //   for ($i = 0; $i < $max, $i++) {
-            //    
-            //     
-            //   }
+
             }
 
             ?>
