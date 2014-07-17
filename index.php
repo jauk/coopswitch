@@ -23,6 +23,18 @@ $formMainErrClass = $formElementClass;
 
 $formElementErrClass = "";
 
+/*
+
+== To Do ==
+
+- Better password security
+- Better error reportng I guess? Like the /error.php page
+- Password resets
+- Contact form
+- Privacy policy?
+
+*/
+
 ?>
 
 <div class="container" id="begin">
@@ -477,29 +489,3 @@ require_once(TEMPLATES_PATH . "/footer.php");
 //include('footer.php')
 ?>
 
-<!--
-
-== To Do ==
-
-- Better password security
-- Better error reportng I guess? Like the /error.php page
-- Better security I guess
-- More db fields (ie. for acct confirmation)
-
-- * Complete match code (see accounts for more details)
-
-- Fast Track
-
-
-How do I prevent abuse of match dropping
-- If someone is locked into their second match, that hurts who they are matched with
-- Maybe after they drop two matches, they are set as matched and just not allowed
-	to match with anyone else unless manually switched or something.
-- That way they are excluded from matching pool.
-
-* The more matches you decline, the lower your priority gets. - Thanks Tyler
-* This should work but should do some more testing.
-
-* Email other user if match dropped to warn them still looking
-
--->
