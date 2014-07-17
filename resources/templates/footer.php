@@ -10,7 +10,7 @@
             <div class="col-sm-8 col-sm-offset-2 text-center">
                 <footer>
                     <p class="small">
-                    Coopswitch has no affiliation with the Drexel Steinbright Career Development Center.
+                    Coopswitch has no affiliation with the Drexel University or the Steinbright Career Development Center.
                     </p>
                     <p class="tiny">
                     Created by <a href="http://justinmaslin.com" target="_blank">Justin Maslin</a>.
