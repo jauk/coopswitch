@@ -76,6 +76,13 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 <body style="">
 	<div class="container">
 
+		<!-- Page Alert: Span width and gradient, have X or disappear on own? On top of title, etc. -->
+		<div id="pageAlert" style="display: none; position: fixed;" class="row">
+			<div class="text-center bg-warning text-warning lead" style="padding: 25px;">
+				Testing Error 123
+			</div>
+		</div>
+
 		<!-- Site Title -->
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
@@ -87,7 +94,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 		<!-- Site Nav Main -->
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3 col-xs-12 text-center">
-				<ul class="nav nav-pills nav-justified lead">
+				<ul class="nav nav-justified lead">
 					<li <?php if ($pageName == "Home") echo 'class="active"'; ?> >
 						<a href="/">Home</a>
 					</li>

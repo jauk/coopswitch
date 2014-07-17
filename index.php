@@ -256,6 +256,8 @@ $('#user_pass').popover();
 		window.mainDivClassValid = mainDivClass + " has-success";
 		window.mainDivClassWarning = mainDivClass + " has-warning";
 
+		window.pageAlert = id("pageAlert");
+
 		//id("registerForm").style.display = 'none';
 
 
