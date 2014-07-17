@@ -130,9 +130,6 @@ function mail_user_dropper($name, $email) {
 	$message = messageTemplate($name, $content);
 
 	sendEmail($name, $email, $subject, $message);
-
-	mail($email, $subject, $message, $headers);
-
 }
 
 function mail_user_dropped($name, $email) {
