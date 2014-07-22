@@ -30,17 +30,17 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 	<?php 
 
-	$pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
+		$pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
 
-    $restOfURL = $_SERVER['REQUEST_URI'];
-    $restOfURL = trim($restOfURL, "/");
+	    $restOfURL = $_SERVER['REQUEST_URI'];
+	    $restOfURL = trim($restOfURL, "/");
 
-    if ($pageName == "Index" && $restOfURL == "") {
-    	$pageName = "Home";
-    }
-    else if (strpos($restOfURL,"stats") !== false) {
-    	$pageName = "Stats";
-    }
+	    if ($pageName == "Index" && $restOfURL == "") {
+	    	$pageName = "Home";
+	    }
+	    else if (strpos($restOfURL,"stats") !== false) {
+	    	$pageName = "Stats";
+	    }
 
 	?>
  
@@ -51,7 +51,10 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 	<link href="/css/bootstrap.css" rel="stylesheet">
 	<link href="/css/other.css" rel="stylesheet">
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="http://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css">
+	<!-- Get local bootstrap-select  via git? -->
+	<!-- <link rel="stylesheet" type="text/css" media="screen" href="http://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css"> -->
+	<link href="/css/bootstrap-select.css" rel="stylesheet" media="screen">
+
 	<script src="/js/jquery-2.1.1.js"></script>
 	<script src="/js/bootstrap.js"></script>
 	<script src="/js/bootstrap-select.js"></script>
@@ -66,11 +69,6 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 		}
 	</style>
 	
-	<!-- <script src="../js/bootstrap-select.js"></script> -->
-	
-	<!-- <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
-
 </head>
 
 <body style="">

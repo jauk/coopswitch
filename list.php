@@ -14,11 +14,11 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 			<table class="table table-striped">
 				<tr>
-					<td><strong>User</strong></td>
-					<td><strong>Cycle</strong></td>
-					<td><strong>Major</strong></td>
-					<td><strong>Program</strong></td>
-					<td><strong>Switched</strong></td>
+					<td><strong><a href="#">User</a></strong></td>
+					<td><strong><a href="#">Cycle</a></strong></td>
+					<td><strong><a href="#">Major</a></strong></td>
+					<td><strong><a href="#">Program</a></strong></td>
+					<td><strong><a href="#">Switched</a></strong></td>
 				</tr>
 
 			<?php
@@ -30,6 +30,8 @@ include_once(FUNCTION_PATH . "/connect.php");
 				else {
 					$startrow = (int)$_GET['startrow'];
 				}
+
+				// Should we sort the table?
 				if (!isset($_GET['sort']) or !is_numeric($_GET['sort'])) {
 					$sort = "id";
 				}

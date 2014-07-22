@@ -77,12 +77,6 @@ function mail_matched_users($userAName, $userAEmail, $userBName, $userBEmail) {
 	Please login to see their information, or click below. <br>
 
 	<a href="'. $toAccount . '">Click Here</a> <br><br>
-
-	Good luck, <br><br>
-
-	Justin <br>
-	Coopswitch Founder
-
 	';
 
 	sendEmail($userAName, $userAEmail, $subject, $message);
@@ -105,11 +99,6 @@ function send_init_email($name, $email, $verifyLink) {
 	Please use the following link to verify your email so you are entered into the matching queue. <br>
 
 	<a href="'. $verifyLink . '">Click Here</a> <br><br>
-
-	Good luck, <br><br>
-
-	Justin <br>
-	Coopswitch Founder
 
 	';
 
@@ -144,6 +133,24 @@ function mail_user_dropped($name, $email) {
 	';
 
 	$message = messageTemplate($name, $content);
+
+	sendEmail($name, $email, $subject, $message);
+}
+
+function reset_pass_email($name, $email) {
+
+	$subject = "Coopswitch Password Reset";
+
+	$resetLink = "";
+
+	$message = '
+
+	Please use the following link to reset your password: <br><br>'
+
+	. $resetLink . '<br><br>
+
+	If you did not request this, please ignore this email.
+	';
 
 	sendEmail($name, $email, $subject, $message);
 }
