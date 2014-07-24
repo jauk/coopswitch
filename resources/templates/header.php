@@ -99,9 +99,11 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 					<li <?php if ($pageName == "About") echo 'class="active"'; ?> >
 						<a href="/about">About</a>
 					</li>
-					<li <?php if ($pageName == "Stats") echo 'class="active"'; ?> >
+					<!--
+			 		<li <?php if ($pageName == "Stats") echo 'class="active"'; ?> >
 						<a href="/stats">Stats</a>
-					</li>
+					</li> 
+					-->
 					<li <?php if ($pageName == "Check") echo 'class="active"'; ?> >
 						<a href="/check">Matches</a>
 					</li>
