@@ -4,8 +4,18 @@ require_once(TEMPLATES_PATH . "/header.php");
 //include('mail.php');
 /* Have a cron job run this page every minute so checks are always done. FOR PRODUCTION SERVER. */
 
-if (isset($msg))
+if (isset($_GET['msg'])) {
   $msg = test_input($_GET['msg']);
+}
+
+if (isset($_GET['check'])) {
+  $check = test_input($_GET['check']);
+}
+else {
+  $check = 0;
+}
+
+$matches = 0;
 
 ?>
 
@@ -101,9 +111,11 @@ else {
         else { ?>
             There are still <span class="text-info"><?php echo $notMatched ?></span> people who still need to be matched, or <span class="text-info"><?php echo $percentNotMatched ?>%</span> of verified users.
       </p>
-      <p class="lead">
-      Will now attempt to manually match.
-      </p>
+        <?php if ($check) { ?>
+          <p class="lead">
+          Will now attempt to manually match.
+          </p>
+        <?php } ?>
       <?php } ?>
 
       <?php if ($debug_db) { ?>
@@ -117,7 +129,7 @@ else {
   
   // I need to order both arrays by number of dropped matches? Less = first.
 
-  if ($num > 0) {// If there are people not matched, run this.
+  if ($num > 0 && $check == 1) {// If there are people not matched, run this.
    
       $users_not_matched = array(); // Array of those who are not matched.
       $matches = 0; // Lets see how many matches are made this round. Maybe save value later? Stats, stats, stats.
@@ -203,29 +215,33 @@ else {
 
 ?>
 
+  <?php 
+
+    $query = "select * from Matches ORDER BY id DESC LIMIT 10";
+    $result = mysql_query($query) OR die(mysql_error());
+
+    $last_matches = array();
+    $index = 0;
+
+    while ($row = mysql_fetch_array($result)) {
+
+        $last_matches[$index] = $row; // Save the users into the array.
+        $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
+
+        if ($index == 0) {
+          $lastMatch = $last_matches[$index]['date_matched'];
+        }
+        
+        $index++;
+    }
+  ?>
+
+  <?php if ($check == 1) { ?>
   <div class="row">
     <div class="<?php echo $rowClass; ?> bg-info">
     <br>
 
       <?php 
-
-        $query = "select * from Matches ORDER BY id DESC LIMIT 10";
-        $result = mysql_query($query) OR die(mysql_error());
-
-        $last_matches = array();
-        $index = 0;
-
-        while ($row = mysql_fetch_array($result)) {
-
-            $last_matches[$index] = $row; // Save the users into the array.
-            $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
-
-            if ($index == 0) {
-              $lastMatch = $last_matches[$index]['date_matched'];
-            }
-            
-            $index++;
-        }
 
         if ($matches > 0) {
           echo '<p class="lead">There were ' . $matches . ' matches made!</p>';
@@ -242,7 +258,11 @@ else {
 
     </div>
   </div>
+  <?php } ?>
 
+
+
+  <!-- Show last 10 matches completed. -->
   <div class="row" style="margin-top: 35px;">
     <div class="<?php echo $rowClass; ?>">
 
@@ -269,6 +289,14 @@ else {
               ?>
       
       </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="<?php echo $rowClass; ?>">
+
+      <a href="?check=1"><button class="btn">Check Matches</button></a>
+
     </div>
   </div>
 
