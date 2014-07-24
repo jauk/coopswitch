@@ -105,7 +105,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 					</li> 
 					-->
 					<li <?php if ($pageName == "Check") echo 'class="active"'; ?> >
-						<a href="/check">Matches</a>
+						<a href="/switch">Switch</a>
 					</li>
 				</ul>
 			</div>

@@ -66,7 +66,8 @@
             </div>
             <div id="submitEmail" class="modal-body">
                 <p class="lead">Please enter your email address.</p>
-                <form id="resetForm" role="form" method="post" action="resetpass">
+                <p id="isValidEmail" class="text-warning lead" style="display: none;">That is not a valid email.</p>
+                <form id="resetForm" role="form" method="post" action="resetpass" onsubmit="return validateInput()">
                     <input type="text" class="form-control" name="email" id="email" placeholder="Email">
                 </form>
             </div>
@@ -110,6 +111,42 @@
 
     goHome = function () {
         window.location.href = 'index.php';
+    }
+
+    validateInput = function () {
+
+        // email = id("email").value;
+
+        // email = email.trim();
+        // email = email.toLowerCase();
+
+        // var drexelEmail = "@drexel.edu";
+
+        // var hasDrexelEmail = email.search("@drexel.edu");
+        // var endEmail = email.indexOf("@drexel.edu");
+
+        // if (hasDrexelEmail != -1) {
+
+        //     var length = endEmail + drexelEmail.length;
+
+        //     if (length != email.length) {
+
+        //         emailRemove = email.slice(length, email.length);
+        //         email = email.replace(emailRemove, "");
+        //     }
+
+        //     id("isValidEmail").style.display = 'none';
+        //     alert("Test");
+        //     return true;
+        // }
+        // else {
+        //     id("email").value = "Not valid."
+        // }
+
+        // id("email").value = email;
+        // id("isValidEmail").style.display = '';
+
+        // return false;
     }
 
 

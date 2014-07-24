@@ -137,11 +137,9 @@ function mail_user_dropped($name, $email) {
 	sendEmail($name, $email, $subject, $message);
 }
 
-function reset_pass_email($name, $email) {
+function reset_pass_email($name, $email, $resetLink) {
 
 	$subject = "Coopswitch Password Reset";
-
-	$resetLink = "";
 
 	$message = '
 

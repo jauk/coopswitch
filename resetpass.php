@@ -4,25 +4,27 @@ require_once(TEMPLATES_PATH . "/header.php");
 include_once(FUNCTION_PATH . "/connect.php");
 
 
-
-
 if (isset($_POST['email'])) {
 	
-	echo $_POST['email'];
-
 	$email = test_input($_POST['email']);
-
 	$name = mysql_get_var('SELECT name FROM Users WHERE email = ' . $email);
 
 	if (isset($name) && $name != "") {
-		reset_pass_email($name, $email);
+
+		$thisDate = getdate();
+
+		
+
+
+
+		reset_pass_email($name, $email, $resetLink);
 	}
 	else {
-
+		// No name associated with email, therefore does not exist.
 	}
 
 }
 
-header("Location: error.php?action=resetsent"); // Also have "Email sent message"
+header("Location: error.php?action=resetsent");
 
 ?>

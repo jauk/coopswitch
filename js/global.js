@@ -4,3 +4,4 @@ function id(input) {
 	output = document.getElementById(input);
 	return output;
 }
+
