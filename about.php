@@ -3,6 +3,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
 
 $rowClass = "col-sm-6 col-sm-offset-3";
+
+
+if (isset($_GET['msg'])) {
+	$msg = test_input($_GET['msg']);
+}
+
 ?>
 
 <div class="container">
@@ -104,8 +110,31 @@ $rowClass = "col-sm-6 col-sm-offset-3";
 		</div>
 </div>
 
+<div class="modal fade" id="emailSent" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h2 class="modal-title">Form Feedback</h2>
+            </div>
+            <div id="emailSubmitted" class="modal-body">
+                <p class="lead">Email sent, thank you!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
      $('.selectpicker').selectpicker();
+
+     msg = "<?php echo $msg; ?>";
+
+     if (msg == 1) {
+     	$('#emailSent').modal('show');
+     }
 
 	$('#infoTab a').click(function (e) {
 		e.preventDefault()

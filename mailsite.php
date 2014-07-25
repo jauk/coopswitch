@@ -13,6 +13,6 @@ $replyTo = "'" . $email . "', '" . $name . "'";
 
 web_form_mail($replyTo, $subject, $message);
 
-header("Location: about.php#about?msg=sent");
+header("Location: about.php?msg=1#contact");
 
 ?>
