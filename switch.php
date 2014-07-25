@@ -113,7 +113,7 @@ else {
       </p>
         <?php if ($check) { ?>
           <p class="lead">
-          Will now attempt to manually match.
+          <!-- Will now attempt to manually match. -->
           </p>
         <?php } ?>
       <?php } ?>
@@ -237,27 +237,38 @@ else {
   ?>
 
   <?php if ($check == 1) { ?>
-  <div class="row">
-    <div class="<?php echo $rowClass; ?> bg-info">
-    <br>
 
-      <?php 
+  <div class="modal fade" id="checkmatches" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h2 class="modal-title">Manual Switch Check</h2>
+          </div>
+          <div class="modal-body">
 
-        if ($matches > 0) {
-          echo '<p class="lead">There were ' . $matches . ' matches made!</p>';
-        } 
-        else {
-          echo '<p class="lead">No matches were made. ';
-          if (isset($lastMatch)) { 
-            echo 'The last match was on <span class="text-info">' . $lastMatch . '</span>.'; 
-          }
-          echo '</p>';
-        } 
+              <?php 
 
-      ?>
+                if ($matches > 0) {
+                  echo '<p class="lead">There were ' . $matches . ' switches made!</p>';
+                } 
+                else {
+                  echo '<p class="lead">No switches were made.</p>';
+                  if (isset($lastMatch)) { 
+                    echo '<p class="lead">The last switch was on <span class="text-info">' . $lastMatch . '</span>.</p>'; 
+                  }
+                } 
 
-    </div>
+              ?>
+
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
   </div>
+ 
   <?php } ?>
 
 
@@ -310,6 +321,15 @@ mysql_close($con);
 require_once(TEMPLATES_PATH . "/footer.php");
 ?>
 
+
 <script>
+
+  manualCheck = "<?php echo $check; ?>";
+
+  if (manualCheck == 1) {
+      $('#checkmatches').modal('show');
+  }
+
+
   $('.lastMatch').tooltip();
 </script>
