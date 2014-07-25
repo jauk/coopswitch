@@ -7,7 +7,7 @@ $email = test_input($_POST['email']);
 $subject = test_input($_POST['subject']);
 $message = test_input($_POST['message']);
 
-$subject = $subject . " | WebForm";
+$subject = $subject . " | Coopswitch WebForm";
 
 $replyTo = "'" . $email . "', '" . $name . "'";
 

@@ -4,7 +4,7 @@
 
 require_once LIB_PATH . '/PHPMailer/PHPMailerAutoload.php';
 
-$localMail = "coop@justinmaslin.com";
+$localMail = "justin@coopswitch.com";
 $localName = "Web Form";
 
 function sendEmail($name, $email, $subject, $message, $replyTo = "'justin@coopswitch.com', 'Coopswitch'") {
