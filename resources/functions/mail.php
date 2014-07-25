@@ -4,11 +4,14 @@
 
 require_once LIB_PATH . '/PHPMailer/PHPMailerAutoload.php';
 
-function sendEmail($name, $email, $subject, $message) {
+$localMail = "coop@justinmaslin.com";
+$localName = "Web Form";
+
+function sendEmail($name, $email, $subject, $message, $replyTo = "'justin@coopswitch.com', 'Coopswitch'") {
 
 	$mail = new PHPMailer;
 
-	$mail -> isSMTP();
+	$mail->isSMTP();
 	$mail->Host = "mail.privateemail.com";
 	$mail->SMTPAuth = true;
 	$mail->Username = 'justin@coopswitch.com';
@@ -19,7 +22,7 @@ function sendEmail($name, $email, $subject, $message) {
 
 	$mail->From = 'justin@coopswitch.com';
 	$mail->FromName = 'Coopswitch';
-	$mail->addReplyTo('justin@coopswitch.com', 'Coopswitch');
+	$mail->addReplyTo($replyTo);
 
 	$mail->WordWrap = 50;
 	$mail->isHTML(true);
@@ -151,6 +154,14 @@ function reset_pass_email($name, $email, $resetLink) {
 	';
 
 	sendEmail($name, $email, $subject, $message);
+}
+
+function web_form_mail($replyTo, $subject, $message) {
+
+	global $localName;
+	global $localMail;
+
+	sendEmail($localName, $localMail, $subject, $message, $replyTo);
 }
 
 ?>

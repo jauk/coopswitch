@@ -127,7 +127,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 						    	<label class="sr-only" for="password">Password</label>
 						    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
 							</div>
-					   		<button type="submit" class="btn btn-default btn-success">Sign In</button>
+					   		<button type="submit" class="btn btn-default btn-primary">Sign In</button>
 					    </fieldset>
 					</form>
 

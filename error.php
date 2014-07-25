@@ -62,7 +62,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal" onclick="goHome()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h2 class="modal-title">Reset Password</h2>
             </div>
             <div id="submitEmail" class="modal-body">
@@ -98,6 +98,7 @@
             id("submitEmail").style.display='none';
             id("emailSubmitted").style.display = '';
             id("submitBtn").style.display = 'none';
+            $('$restPassModal').modal({backdrop: 'static'});
 
         }
 

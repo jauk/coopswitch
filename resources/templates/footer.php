@@ -6,18 +6,19 @@
                 <hr class="style-one">
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <footer>
+        <footer>
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text-center">
                     <p class="small">
-                    Coopswitch has no affiliation with the Drexel University or the Steinbright Career Development Center.
+                    Coopswitch has no affiliation with Drexel University or the Steinbright Career Development Center.
                     </p>
                     <p class="tiny">
                     Created by <a href="http://justinmaslin.com" target="_blank">Justin Maslin</a>.
                     </p>
-                </footer>
+                </div>
             </div>
-        </div>
+        </footer>
+
     </div>
 
 <!-- </div> -->
