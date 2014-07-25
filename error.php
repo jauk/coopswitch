@@ -62,7 +62,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Reset Password</h2>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h2 class="modal-title">Reset Password</h2>
             </div>
             <div id="submitEmail" class="modal-body">
                 <p class="lead">Please enter your email address.</p>
