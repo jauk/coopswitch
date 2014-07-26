@@ -488,6 +488,4 @@ $('#user_pass').popover();
 
 <?php
 require_once(TEMPLATES_PATH . "/footer.php");
-//include('footer.php')
 ?>
-

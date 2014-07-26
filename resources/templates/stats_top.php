@@ -20,7 +20,7 @@
     <div class="row-fluid col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 text-center">
         <ul class="nav nav-justified">
             <li><button onclick="location.href='majors'" type="button" class="btn btn-lg btn-info">Majors</button></li>
-            <li><button onclick="location.href='matches'" type="button" class="btn btn-lg btn-info">Matches</button></li>
+            <li><button onclick="location.href='switches'" type="button" class="btn btn-lg btn-info">Switches</button></li>
             <li><button disabled onclick="location.href='time'" type="button" class="btn btn-lg btn-info">Time</button></li>
             <?php if (!stripos($_SERVER['REQUEST_URI'], 'stats.php')) { ?>
             <li><button onclick="location.href='/stats'" type="button" class="btn btn-lg btn-info">Back</button></li>

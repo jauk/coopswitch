@@ -109,7 +109,7 @@ else {
 
         if ($num == 0) echo "Hooray, everyone is matched!<br><br>";
         else { ?>
-            There are still <span class="text-info"><?php echo $notMatched ?></span> people who still need to be matched, or <span class="text-info"><?php echo $percentNotMatched ?>%</span> of verified users.
+            There are still <span class="text-info"><?php echo $notMatched ?></span> people who still need to be switched, or <span class="text-info"><?php echo $percentNotMatched ?>%</span> of verified users.
       </p>
         <?php if ($check) { ?>
           <p class="lead">
@@ -306,7 +306,7 @@ else {
   <div class="row">
     <div class="<?php echo $rowClass; ?>">
 
-      <a href="?check=1"><button class="btn">Check Matches</button></a>
+      <a href="?check=1"><button class="btn">Manual Switch Check</button></a>
 
     </div>
   </div>
@@ -329,7 +329,6 @@ require_once(TEMPLATES_PATH . "/footer.php");
   if (manualCheck == 1) {
       $('#checkmatches').modal('show');
   }
-
 
   $('.lastMatch').tooltip();
 </script>

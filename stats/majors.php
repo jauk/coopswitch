@@ -50,10 +50,10 @@ while ($row = mysql_fetch_array($result)) {
     <h3 class="<?php echo $heading_class_row; ?>">Top Majors by Users</h3>
         <div id="chartdiv" style="width: 100%; height: 400px;"></div>
 
-    <h3 class="<?php echo $heading_class_row; ?>">Top Majors by Users - With Matches</h3>
+    <h3 class="<?php echo $heading_class_row; ?>">Top Majors by Users - With Switches</h3>
         <div id="top_matched_div" style="width: 100%; height: 400px;"></div>    
 
-    <h3 class="<?php echo $heading_class_row; ?>">Top Majors by Users - Without Matches</h3>
+    <h3 class="<?php echo $heading_class_row; ?>">Top Majors by Users - Without Switches</h3>
         <div id="top_not_matched_div" style="width: 100%; height: 400px;"></div>  
 
 </div>

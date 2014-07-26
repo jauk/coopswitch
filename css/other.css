@@ -15,7 +15,7 @@
 
 }
 
-li.active {
+#mainNav.li.active {
 	text-decoration: underline;
 }
 

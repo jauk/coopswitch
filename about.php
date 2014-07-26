@@ -8,6 +8,9 @@ $rowClass = "col-sm-6 col-sm-offset-3";
 if (isset($_GET['msg'])) {
 	$msg = test_input($_GET['msg']);
 }
+else {
+	$msg = "0";
+}
 
 ?>
 
@@ -15,7 +18,7 @@ if (isset($_GET['msg'])) {
 
 		<div class="row":>
 			<div class="<?php echo $rowClass; ?> text-center">
-				<ul class="nav nav-tabs nav-justified" role="tablist" id="aboutTabs" data-tabs="tab">
+				<ul class="nav nav-tabs nav-justified" role="tablist" id="aboutTabs" data-tabs="tabs">
 					<li class="active" role="tab" id="infoTab" data-toggle="tab"><a href="#info">Info</a></li>
 					<li role="tab" id="contactTab" data-toggle="tab"><a href="#contact">Contact</a></li>
 				</ul>
@@ -46,7 +49,7 @@ if (isset($_GET['msg'])) {
 						<div class="bg-info text-center" style="padding: 20px; font-size: 135%; line-height: 200%;">
 							<p>Coopswitch was created to help Drexel students quickly and easily find someone to switch co-op cycles with.</p>
 							<br>
-							<p>As more people register, the match frequency will be higher.</p>
+							<p>As more people register, the switch frequency will be higher.</p>
 						</div>
 					</div>
 				</div>
@@ -128,13 +131,7 @@ if (isset($_GET['msg'])) {
 </div>
 
 <script>
-     $('.selectpicker').selectpicker();
-
-     msg = "<?php echo $msg; ?>";
-
-     if (msg == 1) {
-     	$('#emailSent').modal('show');
-     }
+    $('.selectpicker').selectpicker();
 
 	$('#infoTab a').click(function (e) {
 		e.preventDefault()
@@ -144,6 +141,21 @@ if (isset($_GET['msg'])) {
 		e.preventDefault()
 		$(this).tab('show')
 	})
+
+	msg = "<?php echo $msg; ?>";
+
+	if (msg == 1) {
+		$('#emailSent').modal('show');
+	}
+
+	var validate = function (field) = {
+
+		if (field == "name") {
+
+		}
+
+	}
+
 </script>
 
 <br>

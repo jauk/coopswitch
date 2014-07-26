@@ -41,13 +41,13 @@ $num_users_not_matched = mysql_num_rows($result);
 
 <div class="container-fluid">
 
-    <h3 class="<?php echo $heading_class_row; ?>">Top Matches by Major</h3>
+    <h3 class="<?php echo $heading_class_row; ?>">Top Switches by Major</h3>
 
     <!-- Also maybe add percentages? -->
 
     <div id="chartdiv" style="width: 100%; height: 400px;"></div>
 
-    <h3 class="<?php echo $heading_class_row; ?>">Percentage of Users Matched</h3>
+    <h3 class="<?php echo $heading_class_row; ?>">Percentage of Users Switched</h3>
 
     <div id="piechartdiv" style="width: 100%; height: 400px;"></div>
 

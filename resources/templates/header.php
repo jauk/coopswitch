@@ -92,7 +92,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 		<!-- Site Nav Main -->
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3 col-xs-12 text-center">
-				<ul class="nav nav-justified lead">
+				<ul id="mainNav" class="nav nav-justified lead">
 					<li <?php if ($pageName == "Home") echo 'class="active"'; ?> >
 						<a href="/">Home</a>
 					</li>
