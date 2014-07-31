@@ -73,9 +73,9 @@
 		}
 	}
 
-	function check_for_match($user_data = '', $withdraw = '0') {
+	function check_for_match($user_data = NULL, $withdraw = NULL) {
 
-		if ($user_data = '') {
+		if ($user_data == NULL) {
 			$user_data = array();
 			$user_data = $GLOBALS["user_data"];
 		}

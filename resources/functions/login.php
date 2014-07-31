@@ -44,7 +44,9 @@
   		$_SESSION['user_matched_id'] = $user_data[0]['Matches_id'];
   		$_SESSION['user_dropped_matches'] = $user_data[0]['dropped_matches'];
 
+      // Dealing with user withdraws or re-enables
       $_SESSION['withdraw'] = $user_data[0]['withdraw'];
+      $_SESSION['user_reactivated_date'] = $user_data[0]['new_date'];
 
       $_GLOBALS['login'] = True;
   		

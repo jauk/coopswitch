@@ -278,7 +278,27 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 	</div>
 </div>
 
+<div class="modal fade" id="activate" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="goHome()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h2 class="modal-title">Reactivate Account</h2>
+			</div>
+			<div class="modal-body">
+				<p class="lead">Are you sure you want to reactivate your account?</p>
+				<p>You will be entered back into the switching queue.</p> 
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-success" data-dismiss="modal" onclick="reactivate()">Reactivate</button>				
+			</div>
+		</div>
+	</div>
+</div>
+
 <?php
+echo $_SESSION['user_reactivated_date'];
 mysql_close($con);
 require_once(TEMPLATES_PATH . "/footer.php");
 ?>
@@ -286,58 +306,64 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 <script type="text/javascript">
 
+withdraw = "<?php echo $_SESSION['withdraw']; ?>";
 
 $('.selectpicker').selectpicker();
 	
 	// $('#userName').tooltip();
 
 	// Get some vars from PHP
-	window.hasDroppedMatch = "<?php echo $_SESSION['user_dropped_matches']; ?>";
-	if (hasDroppedMatch == "") {
-		window.hasDroppedMatch = 0;
+
+	if (withdraw != 1) {
+
+		window.hasDroppedMatch = "<?php echo $_SESSION['user_dropped_matches']; ?>";
+		if (hasDroppedMatch == "") {
+			window.hasDroppedMatch = 0;
+		}
+
+		window.isMatched = "<?php echo $_SESSION['user_matched']; ?>";
+
+		window.droppedMatches = id("droppedMatches");
+		window.droppedMatches.style.display = 'none';
+
+		// Main Profile Buttons
+
+		window.editMainBtn = id("editMainBtn");
+		window.saveMainBtn = id("saveMainBtn");
+		window.cancelMainBtn = id("cancelMainBtn");
+
+		window.saveMainBtn.style.display = 'none';
+		window.cancelMainBtn.style.display = 'none';
+
+		// Major Window Vars
+
+		window.majorSaveBtn = id("majorSaveBtn");
+		window.majorEditBtn = id("majorEditBtn");
+		window.majorCancelBtn = id("majorCancelBtn");
+		window.majorSpan = id("majorSpan");
+		window.majorDiv = id("majorNameText");
+		window.selectMajor = id("selectMajor");
+		window.majorBeginText = id("majorBeginText");
+
+		// Cycle Window Vars
+		window.cycleSaveBtn = id("cycleSaveBtn");
+		window.cycleEditBtn = id("cycleEditBtn");
+		window.cycleCancelBtn = id("cycleCancelBtn");
+		window.cycleSpan = id("cycleSpan");
+		window.cycleDiv = id("cycleNameText");
+		window.selectCycle = id("selectCycle");
+
+		// Program Window Vars
+		window.programSaveBtn = id("programSaveBtn");
+		window.programEditBtn = id("programEditBtn");
+		window.programCancelBtn = id("programCancelBtn");
+		window.programSpan = id("programSpan");
+		window.programDiv = id("programNameText");
+		window.selectProgram = id("selectProgram");
+
+		window.errorClassVals = "alert alert-warning";
+
 	}
-
-	window.isMatched = "<?php echo $_SESSION['user_matched']; ?>";
-
-	window.droppedMatches = id("droppedMatches");
-	window.droppedMatches.style.display = 'none';
-
-  // Main Profile Buttons
-  
-  window.editMainBtn = id("editMainBtn");
-  window.saveMainBtn = id("saveMainBtn");
-  window.cancelMainBtn = id("cancelMainBtn");
-  
-  window.saveMainBtn.style.display = 'none';
-  window.cancelMainBtn.style.display = 'none';
-
-	// Major Window Vars
-	
-	window.majorSaveBtn = id("majorSaveBtn");
-	window.majorEditBtn = id("majorEditBtn");
-	window.majorCancelBtn = id("majorCancelBtn");
-	window.majorSpan = id("majorSpan");
-	window.majorDiv = id("majorNameText");
-	window.selectMajor = id("selectMajor");
-	window.majorBeginText = id("majorBeginText");
-
-	// Cycle Window Vars
-	window.cycleSaveBtn = id("cycleSaveBtn");
-	window.cycleEditBtn = id("cycleEditBtn");
-	window.cycleCancelBtn = id("cycleCancelBtn");
-	window.cycleSpan = id("cycleSpan");
-	window.cycleDiv = id("cycleNameText");
-	window.selectCycle = id("selectCycle");
-
-	// Program Window Vars
-	window.programSaveBtn = id("programSaveBtn");
-	window.programEditBtn = id("programEditBtn");
-	window.programCancelBtn = id("programCancelBtn");
-	window.programSpan = id("programSpan");
-	window.programDiv = id("programNameText");
-	window.selectProgram = id("selectProgram");
-
-	window.errorClassVals = "alert alert-warning";
 
   var editProfile = function () {
     
@@ -511,8 +537,12 @@ $('.selectpicker').selectpicker();
 
 	var withdraw = function () {
 
-		window.location.href = 'withdraw.php';
+		window.location.href = 'withdraw.php?act=withdraw';
+	}
 
+	var reactivate = function () {
+
+		window.location.href = 'withdraw.php?act=rejoin';
 	}
 
 </script>
