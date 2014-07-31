@@ -75,6 +75,11 @@ else {
 
 	else {
 		send_init_email($name, $email, $verifyLink); // Success, user has been created.
+
+		// Log in user for first time auto
+		// $id = mysql_get_var("SELECT id FROM Users WHERE email = " . $email);
+		// $user_data = getUserDataFromId($id);
+		// login_user($user_data);
 	}
 
 }
