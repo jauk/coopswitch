@@ -298,7 +298,6 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 </div>
 
 <?php
-echo $_SESSION['user_reactivated_date'];
 mysql_close($con);
 require_once(TEMPLATES_PATH . "/footer.php");
 ?>

@@ -76,7 +76,7 @@ else {
 
 							<div class="row">
 				  				<label for="nameField">Name</label>
-				  				<?php if (isset($_SESSION['login']) && $_SESSION['login'] == "1") { ?>
+				  				<?php if ($_SESSION['login'] == "1") { ?>
 				  				<input disabled class="form-control" id="name" name="name" value="<?php echo $_SESSION['user_name']; ?>">
 				  				<?php } else { ?>
 				  				<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" onchange="validate(name)">
@@ -86,7 +86,7 @@ else {
 
 							<div class="row">
 				  				<label for="emailField">Email</label>
-				  				<?php if (isset($_SESSION['login']) && $_SESSION['login'] == "1") { ?>
+				  				<?php if ($_SESSION['login'] == "1") { ?>
 				  				<input disabled type="text" class="form-control" id="name" name="name" value="<?php echo $_SESSION['user']; ?>">
 				  				<? } else { ?>
 				  				<input type="text" class="form-control" id="email" name="email" placeholder="Enter your contact email" onchange="validate(email)">
