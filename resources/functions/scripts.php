@@ -111,4 +111,16 @@ function getVerifyLink ($name, $email, $cycle) {
 	return $verifyLink;
 }
 
+function getUserDataFromId ($id) {
+
+	// Get the user we are talking to and save them into a local array.
+	$query = "SELECT * FROM Users WHERE id = " . $id;
+	$result = mysql_query($query);
+	$row = mysql_fetch_array($result);
+
+	$user_data = $row;
+
+	return $user_data;
+}
+
 ?>

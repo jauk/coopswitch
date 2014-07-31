@@ -4,11 +4,11 @@
 	include(FUNCTION_PATH . "/connect.php");
 
 	// Get the user we are talking to and save them into a local array.
-	$query = "SELECT * FROM Users WHERE id = " . $_SESSION['user_id'];
-	$result = mysql_query($query);
-	$row = mysql_fetch_array($result);
+	// $query = "SELECT * FROM Users WHERE id = " . $_SESSION['user_id'];
+	// $result = mysql_query($query);
+	// $row = mysql_fetch_array($result);
 
-	$user_data = $row;
+	$user_data = getUserDataFromId($_SESSION['user_id']);
 
 	// Need to tell which value is being updated too
 	// Update for one master form soon
@@ -73,14 +73,15 @@
 		}
 	}
 
-	function check_for_match() {
+	function check_for_match($user_data = '', $withdraw = '0') {
 
-		$user_data = array();
-		$user_data = $GLOBALS["user_data"];
+		if ($user_data = '') {
+			$user_data = array();
+			$user_data = $GLOBALS["user_data"];
+		}
 
 		// If user is matched, drop the match
 		if ($user_data['matched'] == 1) {
-
 
 			// Get the ID of the other user.
 			$other_user_id = mysql_get_var("SELECT id FROM Users WHERE Matches_id = " . $user_data['Matches_id'] . " AND id != " . $user_data['id']);
@@ -116,8 +117,15 @@
 		  	//echo "<br>Matched? " . $_SESSION['user_matched'];
 
 		   	// Email both users to let them know.
-		   	mail_user_dropper($user_data['name'], $user_data['email']);
-		   	mail_user_dropped($other_user_data['name'], $other_user_data['email']);
+		   	if ($withdraw == 0) {
+			   	mail_user_dropper($user_data['name'], $user_data['email']);
+			   	mail_user_dropped($other_user_data['name'], $other_user_data['email']);		   		
+		   	}
+		   	else if ($withdraw == 1) {
+		   		// Email the user who is getting dropped. User withdrawing will get different email.
+
+
+		   	}
 
 		}
 

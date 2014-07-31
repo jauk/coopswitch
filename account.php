@@ -69,6 +69,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 	<!-- Should I add confirmations? "Sure you want to change/drop match, sure you want to change. Nice popup. Learn jquery -->
 
   <!-- Profile Fields Containter -->
+ <?php if ($_SESSION['withdraw'] == 0) { ?>
  <form id="profileForm" name="profileForm" method="post" action="update.php" onsubmit="return saveChanges()">
   
   	<div id="profileFields" name="profileFields" class="container col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-1 col-xs-6 col-xs-offset-3" style="border: 0px solid black; padding: 5px;">
@@ -230,9 +231,51 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 			
 	<?php } ?>
 
+ <?php } else { // If the user has withdrawed from website. ?>
+
+ 		<div class="row">
+ 			<div class="<?php echo $rowClass; ?>">
+ 				<p class="lead">Your profile has been deactivated.</p>
+ 			</div>
+ 		</div>
+
+ <?php } ?>
+
+		<div class="row">
+			<div class="<?php echo $rowClass; ?>">
+
+				<?php if ($_SESSION['withdraw'] != 1) { ?>
+					<button class="btn btn-danger" data-toggle="modal" data-target="#withdraw">Withdraw Account</button>
+				<?php } else { ?>
+					<button class="btn btn-success" data-toggle="modal" data-target="#activate">Reactivate Account</button>
+				<?php } ?>
+			</div>
+		</div>
+
+
 	  	</div>
 	</div>
 
+</div>
+
+<div class="modal fade" id="withdraw" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="goHome()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h2 class="modal-title">Withdraw from Coopswitch</h2>
+			</div>
+			<div class="modal-body">
+				<p class="lead">Are you sure you want to withdraw?</p>
+				<p>Withdrawing will remove you from the queue and drop any switches.</p> 
+				<p>If you choose to reactivate your account, you will be put in the queue with that date.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="withdraw()">Withdraw</button>				
+			</div>
+		</div>
+	</div>
 </div>
 
 <?php
@@ -242,6 +285,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 
 <script type="text/javascript">
+
 
 $('.selectpicker').selectpicker();
 	
@@ -463,6 +507,12 @@ $('.selectpicker').selectpicker();
 		//}
 
 		window.droppedMatches.style.display = 'none';
+	}
+
+	var withdraw = function () {
+
+		window.location.href = 'withdraw.php';
+
 	}
 
 </script>

@@ -44,6 +44,8 @@
   		$_SESSION['user_matched_id'] = $user_data[0]['Matches_id'];
   		$_SESSION['user_dropped_matches'] = $user_data[0]['dropped_matches'];
 
+      $_SESSION['withdraw'] = $user_data[0]['withdraw'];
+
       $_GLOBALS['login'] = True;
   		
   }

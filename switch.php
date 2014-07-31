@@ -145,7 +145,7 @@ else {
 
       for ($x = 0; $x < $index; $x++) {// Why doesn't count() work for array?
 
-          // Select people with the same major who are not the person we are searching for. Forgot the matched = 0
+        // Select people with the same major who are not the person we are searching for. Forgot the matched = 0
 
          // $IdsGoneThrough = array(); // Save the Ids gone through and do not let them be compared again? Wait no .
 
