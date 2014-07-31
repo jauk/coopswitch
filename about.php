@@ -100,7 +100,7 @@ else {
 		  							<option value="Comment">Comment</option>
 		  							<option value="Question">Question</option>
 		  							<option value="Site Problem">Site Problem</option>
-		  							<option value="Advertising">Advertising</option>
+		  							<!-- <option value="Advertising">Advertising</option> -->
 		  							<option value="Other">Other</option>
 		  						</select>
 		  					</div>
