@@ -88,7 +88,7 @@ else {
 				  				<label for="emailField">Email</label>
 				  				<?php if ($_SESSION['login'] == "1") { ?>
 				  				<input disabled type="text" class="form-control" id="name" name="name" value="<?php echo $_SESSION['user']; ?>">
-				  				<? } else { ?>
+				  				<?php } else { ?>
 				  				<input type="text" class="form-control" id="email" name="email" placeholder="Enter your contact email" onchange="validate(email)">
 				  				<?php } ?>
 				  				<span class="help-block error"><div id="errorEmail"></div></span>
