@@ -231,6 +231,8 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 			
 	<?php } ?>
 
+			<hr>
+
  <?php } else { // If the user has withdrawed from website. ?>
 
  		<div class="row">
@@ -243,12 +245,13 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 		<div class="row">
 			<div class="<?php echo $rowClass; ?>">
-
+				<div style="margin-top: 30px;">
 				<?php if ($_SESSION['withdraw'] != 1) { ?>
 					<button class="btn btn-danger" data-toggle="modal" data-target="#withdraw">Withdraw Account</button>
 				<?php } else { ?>
 					<button class="btn btn-success" data-toggle="modal" data-target="#activate">Reactivate Account</button>
 				<?php } ?>
+				</div>
 			</div>
 		</div>
 
