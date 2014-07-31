@@ -183,7 +183,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
    			
    			<hr>
    			
-   			<h2>Match Status</h2>
+   			<h2>Switch Status</h2>
 
 			<?php
 			// Get the latest user_matched status
@@ -204,7 +204,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 		     <div class="row">
 		  		<div id="matchStatusTrue">
-		  			<h3>You have a match!</h3>
+		  			<h3>You have a switch!</h3>
 		  		</div>
 		    </div>
 		    
@@ -212,7 +212,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 	      
 	      	<div class="row">
 	  			<div class="col-sm-8 col-sm-offset-2 well text-center" style="padding: 15px;">
-	  				<p class="lead">You have matched with <strong class="text-primary"> <?php echo $other_user_data[0]['name']; ?></strong></p>
+	  				<p class="lead">You have switched with <strong class="text-primary"> <?php echo $other_user_data[0]['name']; ?></strong></p>
 	  					<br>
 	  				<p class="lead">You can email them at <strong class="text-primary"> <?php echo $other_user_data[0]['email']; ?></strong></p>
 	  			</div>
@@ -224,7 +224,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 			
 			<div class="row">
 	  			<div id="matchStatusFalse">
-	  				<br><p class="lead">You do not have a match yet, but we will keep looking!</p>
+	  				<br><p class="lead">You do not have a switch yet, but we will keep looking!</p>
 	  			</div>
 			</div>
 			
