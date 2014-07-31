@@ -72,7 +72,7 @@ $query = "SELECT * FROM Users WHERE matched = 1";
 $usersMatched = mysql_num_rows(mysql_query($query));
 
 // How many users do not have a match:
-$query="SELECT * FROM Users WHERE matched = 0 AND verified = 1 ORDER BY dropped_matches ASC";
+$query="SELECT * FROM Users WHERE matched = 0 AND verified = 1 AND withdraw != 1 ORDER BY dropped_matches ASC, new_date ASC";
 $result=mysql_query($query);
 
 if ($result) {
@@ -145,9 +145,11 @@ else {
 
       for ($x = 0; $x < $index; $x++) {// Why doesn't count() work for array?
 
-        // Select people with the same major who are not the person we are searching for. Forgot the matched = 0
-
-         // $IdsGoneThrough = array(); // Save the Ids gone through and do not let them be compared again? Wait no .
+      /* 
+      Select people with the same major who are not the person we are searching for.
+      Criteria: Not switched, email verified, not withdrawn, same major, not the same ID, opposite cycle.
+      Order: First by dropped matches, then by new_date (users who have not redrawn have no new date).
+      */
 
           $query = " SELECT * FROM Users WHERE matched = 0 AND verified = 1 AND withdraw != 1 AND major = " . $users_not_matched[$x]['major'] .
                    " AND id != " . $users_not_matched[$x]['id'] . " AND cycle != " . $users_not_matched[$x]['cycle'] .
@@ -156,7 +158,6 @@ else {
 
           $result = mysql_query($query);
 
-          //
           if ((mysql_num_rows($result) > 0) && ($users_not_matched[$x]['matched'] != 1)) {// We found people who match the guy inside $users_not_matched. NEED TO UPDATE $users_not_matched after a match is made. Remove from array after matched.
         
               $matched_user_data = array(); // Reset the array.
@@ -215,28 +216,29 @@ else {
 
 ?>
 
-  <?php 
+<?php 
 
-    $query = "select * from Matches ORDER BY id DESC LIMIT 10";
-    $result = mysql_query($query) OR die(mysql_error());
+  $query = "select * from Matches ORDER BY id DESC LIMIT 10";
+  $result = mysql_query($query) OR die(mysql_error());
 
-    $last_matches = array();
-    $index = 0;
+  $last_matches = array();
+  $index = 0;
 
-    while ($row = mysql_fetch_array($result)) {
+  while ($row = mysql_fetch_array($result)) {
 
-        $last_matches[$index] = $row; // Save the users into the array.
-        $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
+      $last_matches[$index] = $row; // Save the users into the array.
+      $last_matches[$index]['major_name'] = mysql_get_var("SELECT major_long from Majors WHERE id = " . $last_matches[$index]['major']);
 
-        if ($index == 0) {
-          $lastMatch = $last_matches[$index]['date_matched'];
-        }
-        
-        $index++;
-    }
-  ?>
+      if ($index == 0) {
+        $lastMatch = $last_matches[$index]['date_matched'];
+      }
+      
+      $index++;
+  }
 
-  <?php if ($check == 1) { ?>
+?>
+
+<?php if ($check == 1) { ?>
 
   <div class="modal fade" id="checkmatches" tabindex="-1" role="dialog">
       <div class="modal-dialog">
@@ -269,7 +271,7 @@ else {
       </div>
   </div>
  
-  <?php } ?>
+<?php } ?>
 
   <!-- Show last 10 switches completed. -->
   <div class="row" style="margin-top: 35px;">
@@ -280,20 +282,20 @@ else {
 
               <?php
 
-              $max = sizeof($last_matches);
-              if ( $max == 0) { 
-              echo '<p class="lead">No recent switches found.</p>';
-              }
-              else {
-
-                for ($x = 0; $x < $max; $x++) {
-                  echo '<li class="list-group-item lastMatch" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="' . $last_matches[$x]['date_matched'] . '">' . $last_matches[$x]['major_name'] . '</li>';
-                  if ($debug) {
-                    echo '<li class="list-group-item"> ' . $last_matches[$x]['id'] .' ' . $last_matches[$x]['userA'] . ' ' . $last_matches[$x]['userB'] . '</li>'; 
-                  }
+                $max = sizeof($last_matches);
+                if ( $max == 0) { 
+                echo '<p class="lead">No recent switches found.</p>';
                 }
+                else {
 
-              }
+                  for ($x = 0; $x < $max; $x++) {
+                    echo '<li class="list-group-item lastMatch" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="' . $last_matches[$x]['date_matched'] . '">' . $last_matches[$x]['major_name'] . '</li>';
+                    if ($debug) {
+                      echo '<li class="list-group-item"> ' . $last_matches[$x]['id'] .' ' . $last_matches[$x]['userA'] . ' ' . $last_matches[$x]['userB'] . '</li>'; 
+                    }
+                  }
+
+                }
 
               ?>
       
@@ -312,11 +314,10 @@ else {
 </div>
 
 <br />
+
 <?php
-
-mysql_close($con);
-
-require_once(TEMPLATES_PATH . "/footer.php");
+  mysql_close($con);
+  require_once(TEMPLATES_PATH . "/footer.php");
 ?>
 
 
@@ -329,4 +330,5 @@ require_once(TEMPLATES_PATH . "/footer.php");
   }
 
   $('.lastMatch').tooltip();
+
 </script>
