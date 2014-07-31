@@ -268,7 +268,11 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 			<div class="modal-body">
 				<p class="lead">Are you sure you want to withdraw?</p>
 				<p>Withdrawing will remove you from the queue and drop any switches.</p> 
-				<p>If you choose to reactivate your account, you will be put in the queue with that date.</p>
+				<p>If you choose to reactivate your account, you will be put in the queue with the later date.</p>
+				<p><strong>Some reasons to withdraw:</strong></p>
+				<ul>
+					<li>You are no longer interested in switching your coop cycle.</li>
+					<li>You have found a switch outside the system (friend, classmate, etc.)
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
