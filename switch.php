@@ -107,7 +107,7 @@ else {
         $percentNotMatched = number_format((float)$percentNotMatched, 2, '.', '');
       }
 
-        if ($num == 0) echo "Hooray, everyone is matched!<br><br>";
+        if ($num == 0) echo "No switches need to be made.<br><br>";
         else { ?>
             There are still <span class="text-info"><?php echo $notMatched ?></span> people who still need to be switched, or <span class="text-info"><?php echo $percentNotMatched ?>%</span> of verified users.
       </p>

@@ -10,7 +10,7 @@ include_once(FUNCTION_PATH . "/connect.php");
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1 text-center">
 
-			<p>This page needs to be updated and made more efficient.</p><hr><br> 
+			<!-- <p>This page needs to be updated and made more efficient.</p><hr><br>  -->
 
 			<table class="table table-striped">
 				<tr>
@@ -52,7 +52,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 				while ($row = mysql_fetch_array($result)) {
 					$user[$i] = $row;
 					$user[$i]['majorName'] = mysql_get_var("SELECT major_long FROM Majors WHERE id = " . $user[$i]['major']);
-					
 					$i++;
 
 					// How to sort php arrays?
