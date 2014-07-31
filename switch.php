@@ -271,20 +271,18 @@ else {
  
   <?php } ?>
 
-
-
-  <!-- Show last 10 matches completed. -->
+  <!-- Show last 10 switches completed. -->
   <div class="row" style="margin-top: 35px;">
     <div class="<?php echo $rowClass; ?>">
 
       <ul class="list-group">
-            <h2 class="list-group-item-heading" style="padding-bottom: 10px;">Last 10 Matches</h2>
+            <h2 class="list-group-item-heading" style="padding-bottom: 10px;">Last 10 Switches</h2>
 
               <?php
 
               $max = sizeof($last_matches);
               if ( $max == 0) { 
-              echo '<p class="lead">No recent matches found.</p>';
+              echo '<p class="lead">No recent switches found.</p>';
               }
               else {
 
