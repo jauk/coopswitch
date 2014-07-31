@@ -1,25 +1,25 @@
 <!-- <div class="bottom"> -->
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <hr class="style-one">
-            </div>
-        </div>
-        <footer>
+        <div class="container">
             <div class="row">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
-                    <p class="small">
-                    Coopswitch has no affiliation with Drexel University or the Steinbright Career Development Center.
-                    </p>
-                    <p class="tiny">
-                    Created by <a href="http://justinmaslin.com" target="_blank">Justin Maslin</a>.
-                    </p>
+                <div class="col-sm-8 col-sm-offset-2">
+                    <hr class="style-one">
                 </div>
             </div>
-        </footer>
+            <footer>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text-center">
+                        <p class="small">
+                        Coopswitch has no affiliation with Drexel University or the Steinbright Career Development Center.
+                        </p>
+                        <p class="tiny">
+                        Created by <a href="http://justinmaslin.com" target="_blank">Justin Maslin</a>.
+                        </p>
+                    </div>
+                </div>
+            </footer>
 
-    </div>
+        </div>
 
 <!-- </div> -->
 
@@ -32,5 +32,5 @@
 <!-- <script src="http://silviomoreto.github.io/bootstrap-select/javascripts/bootstrap-select.js"></script> -->
 
 
-</body>
+    </body>
 </html>

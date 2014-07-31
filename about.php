@@ -46,7 +46,7 @@ else {
 
 				<div class="row">	
 					<div class="<?php echo $rowClass; ?>">
-						<div class="bg-info text-center" style="padding: 20px; font-size: 135%; line-height: 200%;">
+						<div clsudo apt-get install ubuntu-restricted-extras avvass="bg-info text-center" style="padding: 20px; font-size: 135%; line-height: 200%;">
 							<p>Coopswitch was created to help Drexel students quickly and easily find someone to switch co-op cycles with.</p>
 							<br>
 							<p>As more people register, the switch frequency will be higher.</p>
@@ -76,13 +76,21 @@ else {
 
 							<div class="row">
 				  				<label for="nameField">Name</label>
+				  				<?php if (isset($_SESSION['login']) && $_SESSION['login'] == "1") { ?>
+				  				<input type="disabled" class="form-control" id="name" name="name" value="<?php echo $_SESSION['user_name']; ?>">
+				  				<?php } else { ?>
 				  				<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" onchange="validate(name)">
+				  				<?php } ?>
 				  				<span class="help-block error"><div id="errorName"></div></span>
 		  					</div>
 
 							<div class="row">
 				  				<label for="emailField">Email</label>
+				  				<?php if (isset($_SESSION['login']) && $_SESSION['login'] == "1") { ?>
+				  				<input type="text" class="form-control disabled" id="name" name="name" value="<?php echo $_SESSION['user']; ?>">
+				  				<? } else { ?>
 				  				<input type="text" class="form-control" id="email" name="email" placeholder="Enter your contact email" onchange="validate(email)">
+				  				<?php } ?>
 				  				<span class="help-block error"><div id="errorEmail"></div></span>
 		  					</div>
 
@@ -148,7 +156,7 @@ else {
 		$('#emailSent').modal('show');
 	}
 
-	var validate = function (field) = {
+	var validate = function (field) {
 
 		if (field == "name") {
 

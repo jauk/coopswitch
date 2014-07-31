@@ -61,11 +61,11 @@ $num_users_not_matched = mysql_num_rows($result);
         var pieChartData = [
 
                 {
-                    "status": "Matched",
+                    "status": "Switched",
                     "value":  <?php echo $num_users_matched; ?>
                 },
                 {
-                    "status": "Not Matched",
+                    "status": "Not Switched",
                     "value":  <?php echo $num_users_not_matched; ?>
                 }
         ];
