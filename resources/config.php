@@ -59,7 +59,7 @@ $config = array(
 	),
 	"urls" => array(
 		"baseUrl" => "coopswitch.com",
-		"testUrl" => "do.coopswitch.com",
+		"baseUrl2" => "www.coopswitch.com",
 		"devUrl" => "coop.localhost"
 	)
 );
