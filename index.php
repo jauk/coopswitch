@@ -134,7 +134,7 @@ $formElementErrClass = "";
 		      	<div class="row">
 		  			<div class="<?php echo "$formElementClass"; ?>">
 		  				<label for="majorField">Major</label>
-		  				<select class="form-control selectpicker" id="major" name="major" data-live-search="true" data-size="5">
+		  				<select class="form-control selectpicker" id="major" name="major" data-live-search="true" data-size="5" onchange="checkmajor()">
 		  					<?php
 		  					// Get the list of majors and display for user selection.
 		  					  print_majors();
@@ -453,6 +453,17 @@ $('#user_pass').popover();
 
 	}
 
+	var checkmajor = function () {
+
+		// Have a modal come up explaining problem with that major, disable registration.
+
+		// Array of IDs of majors which cannot switch.
+		nonSwitchMajorIds = ("", "", "", "", "");
+
+		
+
+	}
+
 	var validate_submit = function () {
 
 		errorDiv = id("formError");
@@ -460,8 +471,9 @@ $('#user_pass').popover();
 		validate_name();
 		validate_email();
 		validate_password();
+		checkmajor();
 
-		var totalErrors = nameErr + emailErr + passwordErr;
+		var totalErrors = nameErr + emailErr + passwordErr + majorErr;
 
 		if (totalErrors == 0) {
 			hasErrors = false;

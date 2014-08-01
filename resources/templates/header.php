@@ -135,7 +135,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 				</div>
 
 				<p class="lead">
-					Hey, <?php echo $_SESSION['user_name']; ?>.&nbsp;&nbsp;&nbsp;&nbsp;
+					<?php echo LOGIN_GREETING . $_SESSION['user_name']; ?>.&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="/account.php"><button type="button" class="btn btn-primary" >Profile</button></a>
 					<a href="/logout.php"><button type="button" class="btn btn-danger">Logout</button></a>
 				</p>
