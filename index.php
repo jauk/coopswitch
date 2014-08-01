@@ -172,6 +172,12 @@ $formElementErrClass = "";
 
 	      	</div>
 
+		    <div class="row">
+		    	<div class="<?php echo $formElementClass; ?>">
+		    		<hr>
+		    	</div>
+		    </div>
+
 	      	<div class="row">
 	      		<div class="<?php echo $formElementClass; ?>" id="acceptTerms">
 	      			<div class="checkbox">
