@@ -11,9 +11,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 
 // What database should we use
 if ($_SERVER['SERVER_NAME'] == $config['urls']['baseUrl']) {
-	$db_in_use = 'production';
-}
-else if ($_SERVER['SERVER_NAME'] == $config['urls']['testUrl']) {
 	$db_in_use = 'vps';
 }
 else {
