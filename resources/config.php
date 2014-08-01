@@ -50,9 +50,16 @@ $config = array(
 			"dbpass" => "switch",
 			"dbhost" => "justinmaslin.db"
 			),
+		"vps" => array(
+			"dbname" => 'coopswitch',
+			"dbuser" => 'root',
+			"dbpass" => 'c00pswitch',
+			"dbhost" => 'localhost'
+			)
 	),
 	"urls" => array(
 		"baseUrl" => "coopswitch.com",
+		"testUrl" => "do.coopswitch.com",
 		"devUrl" => "coop.localhost"
 	)
 );
