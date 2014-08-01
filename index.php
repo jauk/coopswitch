@@ -146,9 +146,7 @@ $formElementErrClass = "";
 		  				<span class="help-block error"><div id="majorError"></div></span>
 		  			</div>
 		      	</div>
-		      
-		      <br>
-
+		      	<br>
 		      	<div class="row">
 		  			<div class="col-md-5 col-md-offset-1 col-sm-6 text-center">
 		  				<label for="cycleField">Current Cycle</label>
@@ -166,13 +164,19 @@ $formElementErrClass = "";
 		  				</select>
 		  			</div>
 		      	</div>
+
 	      	</div>
-	  			<!-- In the future, will implement the "fast-track" option.
-	  			<div class="form-group row-fluid col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-	  				<label for="payment">Payment Amount <small>(Optional)</small></label>
-	  				<input type="text" class="form-control" id="payment" name="payment" placeholder="Enter an amount ($5)">
-	  			</div>
-	  			-->
+
+	      	<div class="row">
+	      		<div class="<?php echo $formElementClass; ?>" id="acceptTerms">
+	      			<div class="checkbox">
+	      				<label>
+	      					<input name="terms" id="terms" type="checkbox"> Please accept the <a href="#">terms and conditions.</a>
+	      				</label>
+	      			</div>
+	      		</div>
+	      	</div>
+
 	  			
 	      <br>
 	      
@@ -535,7 +539,7 @@ $('#user_pass').popover();
 		else if (hasErrors == true)
 		{
 			errorDiv.style.display = '';
-			errorDiv.textContent = "Hey, you have a problem on your form!"; // Probably change to recoloring the boxes later.
+			errorDiv.textContent = "An error is preventing your registration."; // Probably change to recoloring the boxes later.
 			return false;
 		}
 
