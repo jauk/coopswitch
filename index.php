@@ -130,9 +130,15 @@ $formElementErrClass = "";
 		      	</div>
 		    </div>
 
+		    <div class="row">
+		    	<div class="<?php echo $formElementClass; ?>">
+		    		<hr>
+		    	</div>
+		    </div>
+
 	      	<div id="profileElements" class="">
 		      	<div class="row">
-		  			<div class="<?php echo "$formElementClass"; ?>" id="mainMajorDiv">
+		  			<div class="<?php echo $formElementClass; ?>" id="mainMajorDiv">
 		  				<label for="majorField">Major</label>
 		  				<select class="form-control selectpicker" id="user_major" name="major" data-live-search="true" data-size="5" onchange="checkmajor()">
 		  					<?php
@@ -146,7 +152,6 @@ $formElementErrClass = "";
 		  				<span class="help-block error"><div id="majorError"></div></span>
 		  			</div>
 		      	</div>
-		      	<br>
 		      	<div class="row">
 		  			<div class="col-md-5 col-md-offset-1 col-sm-6 text-center">
 		  				<label for="cycleField">Current Cycle</label>
