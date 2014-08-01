@@ -30,8 +30,10 @@ $formElementErrClass = "";
 - Better password security
 - Better error reportng I guess? Like the /error.php page
 - Password resets
-- Contact form
-- Privacy policy?
+- ToS Page
+- ToS Validation (Check it is checked)
+
+- Is JS form validation enough, or do php validation too?
 
 */
 
@@ -65,9 +67,6 @@ $formElementErrClass = "";
   	</div>
 <!-- onclick="expandForm()"  -->
 </div>
-  	<!-- <br> -->
-
-<!-- <div class="container"> -->
 
   	<!-- REGISTER FORM START -->
 	<div id="registerForm" class="container col-sm-6 col-sm-offset-3">
@@ -106,7 +105,7 @@ $formElementErrClass = "";
 		     	 <div class="row">
 		  			<div id="mainEmailDiv" class="<?php echo "$formElementClass"; ?>">
 		  				<label for="emailField">Email</label>
-		  				<input type="text" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email()">
+		  				<input type="email" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email()">
 		  				<span class="help-block error"><div id="emailError"></div></span>
 		  			</div>
 		  		</div>
@@ -187,9 +186,8 @@ $formElementErrClass = "";
 	      			</div>
 	      		</div>
 	      	</div>
-
 	  			
-	      <br>
+	      	<br>
 	      
 	      	<div class="row">
 	  			<div class="<?php echo "$formElementClass"; ?> text-center">
@@ -212,22 +210,19 @@ $formElementErrClass = "";
 				array("http://twistedsifter.files.wordpress.com/2012/05/funny-baby-elephant-4.jpg", "Here is an elephant playing soccer.")
 			);
 
-				$option = rand(0, 3);
-			?>
+			$option = rand(0, 3);
 
+		?>
 
-    <div class="row">
-  		<div class="<?php echo $typicalRowClass; ?>">
-  			<p class="lead">
-  			Coopswitch switches more co-op cycles than any other website.
-  			</p>
-  			<!-- <h4>You are already registered.
-  			<?php echo $fun[$option][1]; ?>
-  			<br></h4>
-  			<img src="<?php echo $fun[$option][0]; ?>" max-width: 100%; height: auto; class="img-responsive img-circle center-block"> -->
-  		</div>
-	</div> 
-	<?php } ?>
+		    <div class="row">
+		  		<div class="<?php echo $typicalRowClass; ?>">
+		  			<p class="lead">
+		  			Coopswitch switches more co-op cycles than any other website.
+		  			</p>
+		  		</div>
+			</div> 
+
+		<?php } ?>
 
 
 <div class="modal fade" id="nonSwitchMajor" tabindex="-1" role="dialog">
@@ -251,26 +246,25 @@ $formElementErrClass = "";
 
 <!-- </div> -->
 <script>
-id("registerForm").style.display = 'none';
+	id("registerForm").style.display = 'none';
 
-// $("#getStarted").click(function(e) {
-// 	$(".starter").fadeOut('slow', funct);
-// 	$("#registerForm").fadeIn('fast');
-// });
+	// $("#getStarted").click(function(e) {
+	// 	$(".starter").fadeOut('slow', funct);
+	// 	$("#registerForm").fadeIn('fast');
+	// });
 
-$('#getStarted').click(function(e){    
-    $('#begin').fadeOut('fast', function(){
-        $('#registerForm').fadeIn('fast');
-    });
-});
-
+	$('#getStarted').click(function(e){    
+	    $('#begin').fadeOut('fast', function(){
+	        $('#registerForm').fadeIn('fast');
+	    });
+	});
 </script>
 
 <script type="text/javascript">
 
-$('.selectpicker').selectpicker();
-$('#user_name').tooltip();
-$('#user_pass').popover();
+	$('.selectpicker').selectpicker();
+	$('#user_name').tooltip();
+	$('#user_pass').popover();
 
 	// When the page loads, do something I guess
 	window.onload = function () {
