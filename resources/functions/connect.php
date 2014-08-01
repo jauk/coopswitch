@@ -10,7 +10,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 // $database = "coop_dev";
 
 // What database should we use
-if ($_SERVER['SERVER_NAME'] == $config['urls']['baseUrl'] || $_SERVER['SERVER_NAME'] == $config['urs']['baseUrl2'] ) {
+if ($_SERVER['SERVER_NAME'] == $config['urls']['baseUrl'] || $_SERVER['SERVER_NAME'] == $config['urls']['baseUrl2'] ) {
 	$db_in_use = 'vps';
 }
 else {
