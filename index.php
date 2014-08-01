@@ -132,15 +132,18 @@ $formElementErrClass = "";
 
 	      	<div id="profileElements" class="">
 		      	<div class="row">
-		  			<div class="<?php echo "$formElementClass"; ?>">
+		  			<div class="<?php echo "$formElementClass"; ?>" id="mainMajorDiv">
 		  				<label for="majorField">Major</label>
-		  				<select class="form-control selectpicker" id="major" name="major" data-live-search="true" data-size="5" onchange="checkmajor()">
+		  				<select class="form-control selectpicker" id="user_major" name="major" data-live-search="true" data-size="5" onchange="checkmajor()">
 		  					<?php
 		  					// Get the list of majors and display for user selection.
 		  					  print_majors();
 		  					  mysql_close($con);
 		  					?>
 		  				</select>
+		  			</div>
+		  			<div class="<?php echo $formElementClass; ?>">
+		  				<span class="help-block error"><div id="majorError"></div></span>
 		  			</div>
 		      	</div>
 		      
@@ -210,6 +213,26 @@ $formElementErrClass = "";
   		</div>
 	</div> 
 	<?php } ?>
+
+
+<div class="modal fade" id="nonSwitchMajor" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="goHome()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h2 class="modal-title">Sorry, you cannot switch that major.</h2>
+			</div>
+			<div class="modal-body">
+				<p class="lead">Your major is not able to switch coop cycles.</p>
+				<p>For more information, please contact the Steinbright Career Development Center.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <!-- </div> -->
 <script>
@@ -458,9 +481,32 @@ $('#user_pass').popover();
 		// Have a modal come up explaining problem with that major, disable registration.
 
 		// Array of IDs of majors which cannot switch.
-		nonSwitchMajorIds = ("", "", "", "", "");
+		//nonSwitchMajorIds = ("", "", "", "", "");
 
-		
+		var major = id("user_major").value;
+		var majorDiv = id("majorError");
+		var mainMajorDiv = id("mainMajorDiv");
+
+		nonSwitchMajorIds = "87";
+
+		if (major == nonSwitchMajorIds) {
+
+			$('#nonSwitchMajor').modal().show();
+
+			majorDiv.style.display = '';
+			majorDiv.className = window.errorClassVals;
+			majorDiv.textContent = "You may not switch this major.";
+			mainMajorDiv.className = window.mainDivClassError;
+
+			majorErr = 1;
+		}
+		else {
+
+			mainMajorDiv.className = window.mainDivClassValid;
+			majorDiv.style.display = 'none';
+			majorErr = 0;
+		}		
+
 
 	}
 
