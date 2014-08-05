@@ -142,13 +142,22 @@ else {
 <script>
     $('.selectpicker').selectpicker();
 
+    jQuery(document).ready(function ($) {
+    	$('#tabs').tab();
+    });
+
+
 	$('#infoTab a').click(function (e) {
 		e.preventDefault()
 		$(this).tab('show')
+		$(this).tab('active')
+		id(infoTab).className = 'active';
 	})
 	$('#contactTab a').click(function (e) {
 		e.preventDefault()
 		$(this).tab('show')
+		$(this).tab('active')
+		id(contactTab).className = 'active';
 	})
 
 	msg = "<?php echo $msg; ?>";

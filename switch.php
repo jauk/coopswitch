@@ -108,8 +108,9 @@ else {
       }
 
         if ($num == 0) echo "No switches need to be made.<br><br>";
+        else if ($num == 1) echo "There is one person that needs to switch.";
         else { ?>
-            There are still <span class="text-info"><?php echo $notMatched ?></span> people who still need to be switched, or <span class="text-info"><?php echo $percentNotMatched ?>%</span> of verified users.
+            There are <span class="text-info"><?php echo $notMatched ?></span> people who need to be switched, or <span class="text-info"><?php echo $percentNotMatched ?>%</span> of verified users.
       </p>
         <?php if ($check) { ?>
           <p class="lead">
