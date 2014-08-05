@@ -87,9 +87,9 @@ else {
 							<div class="row">
 				  				<label for="emailField">Email</label>
 				  				<?php if (isset($_SESSION['login']) && $_SESSION['login'] == "1") { ?>
-				  				<input disabled type="text" class="form-control" id="name" name="name" value="<?php echo $_SESSION['user']; ?>">
+				  				<input disabled type="email" class="form-control" id="name" name="name" value="<?php echo $_SESSION['user']; ?>">
 				  				<?php } else { ?>
-				  				<input type="text" class="form-control" id="email" name="email" placeholder="Enter your contact email" onchange="validate(email)">
+				  				<input type="email" class="form-control" id="email" name="email" placeholder="Enter your contact email" onchange="validate(email)">
 				  				<?php } ?>
 				  				<span class="help-block error"><div id="errorEmail"></div></span>
 		  					</div>
@@ -111,6 +111,7 @@ else {
 		  					<div class="row" style="padding-top: 15px;">
 		  						<button class="btn btn-lg btn-success" type="submit" value="Submit">Send</button>
 		  					</div>
+		  					
 						</form>
 
 					</div>

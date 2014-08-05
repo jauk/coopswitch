@@ -9,9 +9,6 @@ ob_start();
 session_start();
 session_regenerate_id(true);
 
-echo $_SERVER['SERVER_NAME'];
-//include('/var/www/scripts.php');
-
 // Include useful scripts so I do not have to on each page.
 foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $filename) {
     
