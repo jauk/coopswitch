@@ -142,22 +142,17 @@ else {
 <script>
     $('.selectpicker').selectpicker();
 
-    jQuery(document).ready(function ($) {
-    	$('#tabs').tab();
-    });
-
-
 	$('#infoTab a').click(function (e) {
-		e.preventDefault()
+		//e.preventDefault()
 		$(this).tab('show')
-		$(this).tab('active')
-		id(infoTab).className = 'active';
+		$('#infoTab').addClass('active')
+		$('#contactTab').removeClass('active')
 	})
 	$('#contactTab a').click(function (e) {
-		e.preventDefault()
+		//e.preventDefault()
 		$(this).tab('show')
-		$(this).tab('active')
-		id(contactTab).className = 'active';
+		$('#contactTab').addClass('active')
+		$('#infoTab').removeClass('active')
 	})
 
 	msg = "<?php echo $msg; ?>";

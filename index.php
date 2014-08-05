@@ -287,6 +287,7 @@ $formElementErrClass = "";
 		window.mainDivClassError = mainDivClass + " has-error";
 		window.mainDivClassValid = mainDivClass + " has-success";
 		window.mainDivClassWarning = mainDivClass + " has-warning";
+		window.mainDivClassFeedback = mainDivClass + " has-feedback";
 
 		window.pageAlert = id("pageAlert");
 
@@ -544,7 +545,12 @@ $formElementErrClass = "";
 		else if (hasErrors == true)
 		{
 			errorDiv.style.display = '';
-			errorDiv.textContent = "An error is preventing your registration."; // Probably change to recoloring the boxes later.
+			if (totalErrors == 1) {
+				errorDiv.textContent = "An error is preventing your registration."; // Probably change to recoloring the boxes later.
+			}
+			else {
+				errorDiv.textContent = "Multiple errors are preventing your registration.";
+			}
 			return false;
 		}
 
