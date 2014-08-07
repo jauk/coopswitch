@@ -105,7 +105,7 @@ $formElementErrClass = "";
 		     	 <div class="row">
 		  			<div id="mainEmailDiv" class="<?php echo "$formElementClass"; ?>">
 		  				<label for="emailField">Email</label>
-		  				<input type="email" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email()">
+		  				<input type="email" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email(1)">
 		  				<span class="help-block error"><div id="emailError"></div></span>
 		  			</div>
 		  		</div>
@@ -154,9 +154,12 @@ $formElementErrClass = "";
 		    </div>
 
 		    <div class="row">
-	    		<div class="<?php echo $formElementClass; ?>" id="otherUserEmail" style="display: none;">
-	    			<input type="email" class="form-control" name="otherUserEmail" placeholder="Student's Drexel email">
+	    		<div class="<?php echo $formElementClass; ?>" id="otherEmailMain" style="display: none;">
+	    			<input type="email" class="form-control" name="otherUserEmail" id="otherUserEmail" placeholder="Student's Drexel email" onchange="validate_email(2)">	
 	    		</div>
+    			<div class="<?php echo "$formElementClass"; ?>">
+	  				<span class="help-block error"><div id="otherEmailError"></div></span>
+	        	</div>
 		    </div>
 
 		    <div class="row">
@@ -383,12 +386,23 @@ $formElementErrClass = "";
 	}
 
 
-	var validate_email = function () {
+	var validate_email = function (type) {
 
-		var emailDiv = id("emailError");
-		var mainEmailDiv = id("mainEmailDiv");
-
-		var email = id("user_email").value;
+		if (type == 1) {
+			var emailDiv = id("emailError");
+			var mainEmailDiv = id("mainEmailDiv");
+			var email = id("user_email").value;
+			var emailVal = id("user_email");
+		}
+		else if (type == 2) {
+			var mainEmailDiv = id("otherEmailMain");
+			var emailDiv = id("otherEmailError");
+			var email = id("otherUserEmail").value;
+			var emailVal = id("otherUserEmail");
+		}
+		else {
+			alert("ERROR.");
+		}
 
 		email = email.trim();
 		email = email.toLowerCase();
@@ -399,7 +413,7 @@ $formElementErrClass = "";
 		var endEmail = email.indexOf("@drexel.edu");
 
 		if (hasDrexelEmail != -1) {
-			emailErr = 0;
+			emailErr--;
 			//emailDiv.textContent = "Valid email!";
 
 			//emailDiv.className = window.
@@ -435,14 +449,15 @@ $formElementErrClass = "";
 			}
 
 			//setError(email, error);
-			emailErr = 1;
+			emailErr++;
 			emailDiv.textContent = error;
 			emailDiv.style.display = '';
 			emailDiv.className = window.errorClassVals;
 			mainEmailDiv.className = window.mainDivClassError;
 		}
 
-		id("user_email").value = email;
+		//id("user_email").value = email;
+		emailVal.value = email;
 	}
 
 	var setError = function (field, error) {
@@ -559,7 +574,10 @@ $formElementErrClass = "";
 		errorDiv = id("formError");
 
 		validate_name();
-		validate_email();
+		validate_email(1);
+		if (id("registerType2").checked) {
+			validate_email(2);
+		}
 		validate_password();
 		checkmajor();
 
@@ -594,11 +612,10 @@ $formElementErrClass = "";
 	var registerTypeCheck = function() {
 
 		if (id("registerType1").checked) {
-			id("otherUserEmail").style.display = 'none';
-
+			id("otherEmailMain").style.display = 'none';
 		}
 		else if (id("registerType2").checked) {
-			id("otherUserEmail").style.display = '';
+			id("otherEmailMain").style.display = '';
 		}
 	}
 
