@@ -135,6 +135,36 @@ $formElementErrClass = "";
 		    	</div>
 		    </div>
 
+		    <div class="row">
+		    	<div class="<?php echo $formElementClass; ?>" id="mainRegisterTypeDiv">
+					<div class="radio-inline">
+						<label>
+							<input checked type="radio" name="registerType" id="registerType1" onchange="registerTypeCheck()" value="1">
+							Find a switch.
+						</label>
+					</div>
+					<div class="radio-inline">
+						<label>
+							<input  type="radio" name="registerType" id="registerType2" onchange="registerTypeCheck()" value="2">
+							I have a switch. <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Choose this if you already have someone to switch with." id="registerTypeHelp"></span>
+							</label>
+
+					</div>
+		    	</div>
+		    </div>
+
+		    <div class="row">
+	    		<div class="<?php echo $formElementClass; ?>" id="otherUserEmail" style="display: none;">
+	    			<input type="email" class="form-control" name="otherUserEmail" placeholder="Student's Drexel email">
+	    		</div>
+		    </div>
+
+		    <div class="row">
+		    	<div class="<?php echo $formElementClass; ?>">
+		    		<hr>
+		    	</div>
+		    </div>
+
 	      	<div id="profileElements" class="">
 		      	<div class="row">
 		  			<div class="<?php echo $formElementClass; ?>" id="mainMajorDiv">
@@ -181,7 +211,7 @@ $formElementErrClass = "";
 	      		<div class="<?php echo $formElementClass; ?>" id="acceptTerms">
 	      			<div class="checkbox">
 	      				<label>
-	      					<input name="terms" id="terms" type="checkbox"> Please accept the <a href="#">terms and conditions.</a>
+	      					<input name="terms" id="terms" type="checkbox"> I<span id="myName"></span> accept the <a href="#">terms and conditions.</a>
 	      				</label>
 	      			</div>
 	      		</div>
@@ -266,6 +296,8 @@ $formElementErrClass = "";
 	$('#user_name').tooltip();
 	$('#user_pass').popover();
 
+	$('#registerTypeHelp').tooltip();
+
 	// When the page loads, do something I guess
 	window.onload = function () {
 		
@@ -344,6 +376,8 @@ $formElementErrClass = "";
 			nameDiv.style.display = 'none';
 
 			mainNameDiv.className = window.mainDivClassValid;
+
+			id("myName").innerHTML = ", " + name + ", ";
 		}
 
 	}
@@ -555,6 +589,17 @@ $formElementErrClass = "";
 		}
 
 		return false;
+	}
+
+	var registerTypeCheck = function() {
+
+		if (id("registerType1").checked) {
+			id("otherUserEmail").style.display = 'none';
+
+		}
+		else if (id("registerType2").checked) {
+			id("otherUserEmail").style.display = '';
+		}
 	}
 
 </script>
