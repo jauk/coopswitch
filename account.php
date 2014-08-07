@@ -213,7 +213,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 	      
 	      	<div class="row">
 	  			<div class="col-sm-8 col-sm-offset-2 well text-center" style="padding: 15px;">
-	  				<p class="lead">You have switched with <strong class="text-primary"> <?php echo $other_user_data[0]['name']; ?></strong></p>
+	  				<p class="lead">You can switch with <strong class="text-primary"> <?php echo $other_user_data[0]['name']; ?></strong></p>
 	  					<br>
 	  				<p class="lead">You can email them at <strong class="text-primary"> <?php echo $other_user_data[0]['email']; ?></strong></p>
 	  			</div>
