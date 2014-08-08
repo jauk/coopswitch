@@ -103,7 +103,7 @@ $formElementErrClass = "";
 		  		</div>
 		  
 		     	 <div class="row">
-		  			<div id="mainEmailDiv" class="<?php echo "$formElementClass"; ?>">
+		  			<div id="emailDiv" class="<?php echo "$formElementClass"; ?>">
 		  				<label for="emailField">Email</label>
 		  				<input type="email" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email(1)">
 		  				<span class="help-block error"><div id="emailError"></div></span>
@@ -301,7 +301,7 @@ $formElementErrClass = "";
 
 	$('#registerTypeHelp').tooltip();
 
-	// When the page loads, do something I guess
+	// When the page loads, do this
 	window.onload = function () {
 		
 		errorDiv = id("formError");
@@ -326,19 +326,7 @@ $formElementErrClass = "";
 
 		window.pageAlert = id("pageAlert");
 
-		//id("registerForm").style.display = 'none';
-
-
-		//id('email').onchange = validate_email;
-		//id("submit_form").onclick = validate_data;
-
-	}
-
-	var showInfo = function(type) {
-
-		// Tooltips should be used (to right with arrows look nice)
-		// Make form look nicer, bigger labels, better font
-
+		window.hasEnteredAgain = false;
 	}
 
 	var expandForm = function () {
@@ -352,35 +340,54 @@ $formElementErrClass = "";
 		// Scroll to form on page and have it fade in/down or something.
 	}
 
+	var setError = function(fieldMainDiv, fieldErrorDiv, errorMessage) {
+
+		var mainDiv = fieldMainDiv;
+		var errorDiv = fieldErrorDiv;
+		var error = errorMessage;
+
+		errorDiv.textContent = error;
+		errorDiv.style.display = '';
+		errorDiv.className = window.errorClassVals;
+		mainDiv.className = window.mainDivClassError;
+
+	}
+
+	var removeError = function(fieldMainDiv, fieldErrorDiv) {
+
+		var mainDiv = fieldMainDiv;
+		var errorDiv = fieldErrorDiv;
+
+		mainDiv.className = window.mainDivClassValid;
+		errorDiv.style.display = 'none';
+
+	}
+
 	var validate_name = function () {
 
-		name = id("user_name").value;
-		mainNameDiv = id("mainNameDiv");
+		var name = id("user_name").value;
+
+		var nameDiv = id("mainNameDiv");
+		var nameErrorDiv = id("nameError");
 
 		name = name.trim();
 
-		var nameDiv = id("nameError");
-		//var mainNameDiv = id("mainNameDiv");
-
+		// Only checks if blank, add regex support.
 		if (name == "")
 		{
 			nameErr = 1;
-			nameDiv.textContent = "You need a name.";
-			nameDiv.style.display = '';
-			nameDiv.className = window.errorClassVals;
 
-			mainNameDiv.className = window.mainDivClassError;
+			error = "You need a name.";
+			setError(nameDiv, nameErrorDiv, error);
 		}
 		else
 		{
 			nameErr = 0;
-			//nameDiv.textContent = "Name exists.";
+
 			id("user_name").value = name;
-			nameDiv.style.display = 'none';
-
-			mainNameDiv.className = window.mainDivClassValid;
-
 			id("myName").innerHTML = ", " + name + ", ";
+
+			removeError(nameDiv, nameErrorDiv)
 		}
 
 	}
@@ -389,14 +396,14 @@ $formElementErrClass = "";
 	var validate_email = function (type) {
 
 		if (type == 1) {
-			var emailDiv = id("emailError");
-			var mainEmailDiv = id("mainEmailDiv");
+			var emailErrorDiv = id("emailError");
+			var emailDiv = id("emailDiv");
 			var email = id("user_email").value;
 			var emailVal = id("user_email");
 		}
 		else if (type == 2) {
-			var mainEmailDiv = id("otherEmailMain");
-			var emailDiv = id("otherEmailError");
+			var emailDiv = id("otherEmailMain");
+			var emailErrorDiv = id("otherEmailError");
 			var email = id("otherUserEmail").value;
 			var emailVal = id("otherUserEmail");
 		}
@@ -408,35 +415,46 @@ $formElementErrClass = "";
 		email = email.toLowerCase();
 
 		var drexelEmail = "@drexel.edu";
-
 	 	var hasDrexelEmail = email.search("@drexel.edu");
 		var endEmail = email.indexOf("@drexel.edu");
 
 		if (hasDrexelEmail != -1) {
-			emailErr--;
-			//emailDiv.textContent = "Valid email!";
-
-			//emailDiv.className = window.
-			emailDiv.style.display = 'none';
 
 			var length = endEmail + drexelEmail.length;
-			//alert(length);
-
-			emailDiv.style.display = 'none';
 
 			if (length != email.length) {
 
 				emailRemove = email.slice(length, email.length);
 				email = email.replace(emailRemove, "");
 
-				emailDiv.style.display = '';
-				emailDiv.textContent = "Extra characters removed.";
-				emailDiv.className = 'alert alert-info';
+				emailErrorDiv.textContent = "Extra characters removed.";
+				emailErrorDiv.className = 'alert alert-info';
 
 				$("#emailError").fadeOut(2000);
+
+				removeError(emailDiv, emailErrorDiv);
 			}
 
-			mainEmailDiv.className = window.mainDivClassValid;
+			// Check to make sure email does not repeat in either form.
+			if (type == 1 && email == id("otherUserEmail").value) {
+
+				error = "Same email as person switching with.";
+				setError(emailDiv, emailErrorDiv, error);
+				emailErr++;
+
+			}
+			else if (type == 2 && email == id("user_email").value) {
+
+				error = "Same email as person registering.";
+				setError(emailDiv, emailErrorDiv, error);
+				emailErr++;
+			}
+
+			else {
+				removeError(emailDiv, emailErrorDiv);
+				emailErr--;
+			}
+
 		}
 		else
 		{
@@ -448,34 +466,13 @@ $formElementErrClass = "";
 				error = "That is not a valid Drexel email.";
 			}
 
-			//setError(email, error);
 			emailErr++;
-			emailDiv.textContent = error;
-			emailDiv.style.display = '';
-			emailDiv.className = window.errorClassVals;
-			mainEmailDiv.className = window.mainDivClassError;
+
+			setError(emailDiv, emailErrorDiv, error);
 		}
 
 		//id("user_email").value = email;
 		emailVal.value = email;
-	}
-
-	var setError = function (field, error) {
-
-		divName = field+"Div";
-		divErr = field+"Err";
-
-		var fieldDiv = id(divName);
-		var fieldDivErr = id(divErr);
-
-		divErr = 1;
-
-		id(divName).style.display = '';
-		// this['divName'].value.className = window.errorClassVals;
-
-
-
-		//alert(fieldDiv);
 	}
 
 	var validate_password = function () {
@@ -483,54 +480,45 @@ $formElementErrClass = "";
 		var password = id("user_pass").value;
 		var password2 = id("user_pass_confirm").value;
 
-		var passwordDiv = id("passwordError");
+		var passwordErrorDiv = id("passwordError");
 		var mainPasswordDiv = id("mainPasswordDiv");
 
-		if (password == "" || password2 == "") {
+		if (password == "" || (password2 == "" && hasEnteredAgain)) {
+
 			passwordErr = 1;
-			passwordDiv.textContent = "You need a password.";
-			passwordDiv.style.display = '';
-			passwordDiv.className = window.errorClassVals;
+			error = "You need a password.";
+			setError(mainPasswordDiv, passwordErrorDiv, error);	
 		}
 
-		else if (password != password2)
-		{
-			if (password2 == "" && (hasEnteredAgain == false))
-			{
-				hasEnteredAgain = true;
-				return;
+		else if (password != password2) {
+
+			if (password2 == "" && !window.hasEnteredAgain) {
+				window.hasEnteredAgain = true;
 			}
 
-			else
-			{
+			else {
 				passwordErr = 1;
 
-				passwordDiv.style.display = '';
-				passwordDiv.className = window.errorClassVals;
-				passwordDiv.textContent = "Passwords do not match!";
-				mainPasswordDiv.className = window.mainDivClassError;
+				error = "Passwords do not match.";
+				setError(mainPasswordDiv, passwordErrorDiv, error);
 			}
+
 		}
 
-		else
-		{
-			if (password.length < 6 && password.length > 0)
-			{
-				passwordDiv.style.display = '';
-				passwordDiv.className = window.errorClassVals;
-				passwordDiv.textContent = "You should use a longer password.";
-				mainPasswordDiv.className = window.mainDivClassWarning;
+		else {
 
+			if (password.length < 6 && password.length > 0) {
+				passwordErrorDiv.style.display = '';
+				passwordErrorDiv.className = window.errorClassVals;
+				passwordErrorDiv.textContent = "You should use a longer password.";
+				mainPasswordDiv.className = window.mainDivClassWarning;
 			}
 
-			else
-			{
-				passwordDiv.style.display = 'none';
-				mainPasswordDiv.className = window.mainDivClassValid;
+			else {
+				removeError(mainPasswordDiv, passwordErrorDiv);
 			}
 
 			passwordErr = 0;
-			//passwordDiv.textContent = "Passwords match.";
 		}
 
 	}
@@ -543,7 +531,7 @@ $formElementErrClass = "";
 		//nonSwitchMajorIds = ("", "", "", "", "");
 
 		var major = id("user_major").value;
-		var majorDiv = id("majorError");
+		var majorErrorDiv = id("majorError");
 		var mainMajorDiv = id("mainMajorDiv");
 
 		nonSwitchMajorIds = "87";
@@ -552,17 +540,14 @@ $formElementErrClass = "";
 
 			$('#nonSwitchMajor').modal().show();
 
-			majorDiv.style.display = '';
-			majorDiv.className = window.errorClassVals;
-			majorDiv.textContent = "You may not switch this major.";
-			mainMajorDiv.className = window.mainDivClassError;
+			error = "You may not switch this major.";
+			setError(mainMajorDiv, majorErrorDiv, error);
 
 			majorErr = 1;
 		}
 		else {
 
-			mainMajorDiv.className = window.mainDivClassValid;
-			majorDiv.style.display = 'none';
+			removeError(mainMajorDiv, majorErrorDiv);
 			majorErr = 0;
 		}		
 
