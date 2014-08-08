@@ -281,11 +281,6 @@ $formElementErrClass = "";
 <script>
 	id("registerForm").style.display = 'none';
 
-	// $("#getStarted").click(function(e) {
-	// 	$(".starter").fadeOut('slow', funct);
-	// 	$("#registerForm").fadeIn('fast');
-	// });
-
 	$('#getStarted').click(function(e){    
 	    $('#begin').fadeOut('fast', function(){
 	        $('#registerForm').fadeIn('fast');
@@ -327,6 +322,15 @@ $formElementErrClass = "";
 		window.pageAlert = id("pageAlert");
 
 		window.hasEnteredAgain = false;
+
+		window.errors = {
+		    name: 0,
+		    emailPrimary: 0,
+		    password: 0,
+		    major: 0,
+		    emailSecondary: 0
+		}; 
+
 	}
 
 	var expandForm = function () {
@@ -363,6 +367,11 @@ $formElementErrClass = "";
 
 	}
 
+	var calcErrors = function(type) {
+
+
+	}
+
 	var validate_name = function () {
 
 		var name = id("user_name").value;
@@ -379,14 +388,14 @@ $formElementErrClass = "";
 		// Only checks if blank, add regex support.
 		if (name == "" || !validName)
 		{
-			nameErr = 1;
+			errors.name = 1;
 
 			error = "Invalid name entered.";
 			setError(nameDiv, nameErrorDiv, error);
 		}
 		else
 		{
-			nameErr = 0;
+			errors.name = 0;
 
 			id("user_name").value = name;
 			id("myName").innerHTML = ", " + name + ", ";
@@ -404,12 +413,14 @@ $formElementErrClass = "";
 			var emailDiv = id("emailDiv");
 			var email = id("user_email").value;
 			var emailVal = id("user_email");
+
 		}
 		else if (type == 2) {
 			var emailDiv = id("otherEmailMain");
 			var emailErrorDiv = id("otherEmailError");
 			var email = id("otherUserEmail").value;
 			var emailVal = id("otherUserEmail");
+
 		}
 		else {
 			alert("ERROR.");
@@ -423,6 +434,8 @@ $formElementErrClass = "";
 		var endEmail = email.indexOf("@drexel.edu");
 
 		if (hasDrexelEmail != -1) {
+
+			console.debug("Has Drexel Email is true.")
 
 			var length = endEmail + drexelEmail.length;
 
@@ -444,19 +457,24 @@ $formElementErrClass = "";
 
 				error = "Same email as person switching with.";
 				setError(emailDiv, emailErrorDiv, error);
-				emailErr++;
+
+				errors.emailPrimary = 1;
 
 			}
 			else if (type == 2 && email == id("user_email").value) {
 
 				error = "Same email as person registering.";
 				setError(emailDiv, emailErrorDiv, error);
-				emailErr++;
+
+				errors.emailSecondary = 1;
 			}
 
 			else {
 				removeError(emailDiv, emailErrorDiv);
-				emailErr--;
+				if (type == 1)
+					errors.emailPrimary = 0;
+				else
+					errors.emailSecondary = 0;
 			}
 
 		}
@@ -470,7 +488,10 @@ $formElementErrClass = "";
 				error = "That is not a valid Drexel email.";
 			}
 
-			emailErr++;
+			if (type == 1)
+				errors.emailPrimary = 1;
+			else
+				errors.emailSecondary = 1;
 
 			setError(emailDiv, emailErrorDiv, error);
 		}
@@ -489,7 +510,7 @@ $formElementErrClass = "";
 
 		if (password == "" || (password2 == "" && hasEnteredAgain)) {
 
-			passwordErr = 1;
+			errors.password = 1;
 			error = "You need a password.";
 			setError(mainPasswordDiv, passwordErrorDiv, error);	
 		}
@@ -501,7 +522,7 @@ $formElementErrClass = "";
 			}
 
 			else {
-				passwordErr = 1;
+				errors.password = 1;
 
 				error = "Passwords do not match.";
 				setError(mainPasswordDiv, passwordErrorDiv, error);
@@ -522,7 +543,7 @@ $formElementErrClass = "";
 				removeError(mainPasswordDiv, passwordErrorDiv);
 			}
 
-			passwordErr = 0;
+			errors.password = 0;
 		}
 
 	}
@@ -547,12 +568,12 @@ $formElementErrClass = "";
 			error = "You may not switch this major.";
 			setError(mainMajorDiv, majorErrorDiv, error);
 
-			majorErr = 1;
+			errors.major = 1;
 		}
 		else {
 
 			removeError(mainMajorDiv, majorErrorDiv);
-			majorErr = 0;
+			errors.major = 0;
 		}		
 
 
@@ -562,24 +583,37 @@ $formElementErrClass = "";
 
 		errorDiv = id("formError");
 
+		// Revalidate all fields to do a final check 
 		validate_name();
 		validate_email(1);
-		if (id("registerType2").checked) {
-			validate_email(2);
-		}
+
 		validate_password();
 		checkmajor();
 
-		var totalErrors = nameErr + emailErr + passwordErr + majorErr;
+		if (!id("terms").checked) {
+			console.debug("Terms and Conditions have not been checked.");
+		}		
 
-		if (totalErrors == 0) {
-			hasErrors = false;
+		var totalErrors = errors.name + errors.emailPrimary + errors.password + errors.major;
+
+		if (id("registerType2").checked) {
+			validate_email(2);
+			console.debug("Registration type two being used.");
 		}
-		else
-			hasErrors = true;
 
-		if (totalErrors == 0 && hasErrors == false)
-		{
+		totalErrors += errors.emailSecondary;
+
+		if (totalErrors <= 0) {
+			hasErrors = false;
+			console.debug("Form submitted with no errors.");
+		}
+		else {
+			hasErrors = true;
+			console.debug("Total Errors: "+totalErrors);
+			console.debug("Name Error: "+errors.name+" | Email Error: "+errors.emailPrimary+ " | Email Secondary Error: "+errors.emailSecondary +" | Password Error: "+errors.password+" | Major Error: "+errors.major);
+		}
+
+		if (totalErrors == 0 && hasErrors == false) {
 			return true;
 		}
 		
