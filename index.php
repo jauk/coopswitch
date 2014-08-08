@@ -600,6 +600,10 @@ $formElementErrClass = "";
 			validate_email(2);
 			console.debug("Registration type two being used.");
 		}
+		else {
+			errors.emailSecondary = 0;
+			console.debug("Registration type one being used.");
+		}
 
 		totalErrors += errors.emailSecondary;
 
