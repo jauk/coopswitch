@@ -372,12 +372,16 @@ $formElementErrClass = "";
 
 		name = name.trim();
 
+		regTest = /^[a-zA-Z]+$/;
+
+		var validName = regTest.test(name);
+
 		// Only checks if blank, add regex support.
-		if (name == "")
+		if (name == "" || !validName)
 		{
 			nameErr = 1;
 
-			error = "You need a name.";
+			error = "Invalid name entered.";
 			setError(nameDiv, nameErrorDiv, error);
 		}
 		else
