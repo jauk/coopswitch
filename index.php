@@ -129,13 +129,14 @@ $formElementErrClass = "";
 		      	</div>
 		    </div>
 
-		    <?php if ($newFeatureTest) { ?>
 
 		    <div class="row">
 		    	<div class="<?php echo $formElementClass; ?>">
 		    		<hr>
 		    	</div>
 		    </div>
+		    
+		    <?php if ($newFeatureTest) { ?>
 
 		    <div class="row">
 		    	<div class="<?php echo $formElementClass; ?>" id="mainRegisterTypeDiv">
