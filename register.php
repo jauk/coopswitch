@@ -54,11 +54,58 @@ else {
 	$name = test_input($_POST['name']);
 	$password = test_input($_POST['password']);
 	$password = md5($password);
+
 	$cycle = test_input($_POST['cycle']);
 	$num_year_program = test_input($_POST['numCoops']);
-	$majorVal = test_input($_POST['major']);
 
+	$majorVal = test_input($_POST['major']);
 	$majorName = getMajorName($majorVal);
+
+	if (isset($_POST['otherUserEmail'])) {
+		$otherUserEmail = test_input($_POST['otherUserEmail']);
+
+		$query = 'SELECT * FROM Users WHERE email = "' .$otherUserEmail. '"';
+		$result = mysql_query($query);
+
+		if (mysql_num_rows($result) != 0) {
+			// Other user already signed up, do this:
+
+			$otherUser = array();
+			$row = mysql_fetch_assoc($result);
+			$otherUser = $row;
+
+			// See if other user put this user's email down as potential manual switch
+			if (isset($otherUser['manualMatchUser']) && $otherUser['manualMatchUser'] == $email) {
+				// If both users have each other, double check their profile elements
+
+				if ($majorVal == $otherUser['major'] && 
+						$num_year_program == $otherUser['num_year_program']) &&
+						$cycle != $otherUser['cycle']) {
+							// Switch would work, put together
+
+
+
+				}
+				else {
+					// Profile fields not compatible for switch
+				}
+
+			}
+
+			// Else, did not set (yet?)
+			else {
+
+			}
+
+
+		}
+		else {
+			// Other user has not even registered 
+
+		}
+
+
+	}
 
 	$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
 		VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal',
