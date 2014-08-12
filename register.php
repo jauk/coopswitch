@@ -61,14 +61,14 @@ else {
 	$majorVal = test_input($_POST['major']);
 	$majorName = getMajorName($majorVal);
 
+	// User has specified they have someone they want to switch with
 	if (isset($_POST['otherUserEmail'])) {
 		$otherUserEmail = test_input($_POST['otherUserEmail']);
 
 		$query = 'SELECT * FROM Users WHERE email = "' .$otherUserEmail. '"';
 		$result = mysql_query($query);
-
-		if (mysql_num_rows($result) != 0) {
-			// Other user already signed up, do this:
+ 
+		if (mysql_num_rows($result) != 0) { // Other user already signed up with that email
 
 			$otherUser = array();
 			$row = mysql_fetch_assoc($result);
@@ -79,7 +79,7 @@ else {
 				// If both users have each other, double check their profile elements
 
 				if ($majorVal == $otherUser['major'] && 
-						$num_year_program == $otherUser['num_year_program']) &&
+						$num_year_program == $otherUser['num_year_program'] &&
 						$cycle != $otherUser['cycle']) {
 							// Switch would work, put together
 

@@ -35,6 +35,8 @@ $GLOBALS['send_match_mail'] = False;
 
 $GLOBALS['debug_db'] = False;
 
+$GLOBALS['newFeatureTest'] = False;
+
 
 $config = array(
 	"db" => array(

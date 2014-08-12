@@ -129,6 +129,8 @@ $formElementErrClass = "";
 		      	</div>
 		    </div>
 
+		    <?php if ($newFeatureTest) { ?>
+
 		    <div class="row">
 		    	<div class="<?php echo $formElementClass; ?>">
 		    		<hr>
@@ -166,7 +168,10 @@ $formElementErrClass = "";
 		    	<div class="<?php echo $formElementClass; ?>">
 		    		<hr>
 		    	</div>
-		    </div>
+		    </div>		   
+
+		    <?php } ?>
+
 
 	      	<div id="profileElements" class="">
 		      	<div class="row">
@@ -585,6 +590,7 @@ $formElementErrClass = "";
 
 		// Revalidate all fields to do a final check 
 		validate_name();
+
 		validate_email(1);
 
 		validate_password();
