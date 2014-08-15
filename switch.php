@@ -71,7 +71,7 @@ include(FUNCTION_PATH . "/connect.php");
 $query = "SELECT * FROM Users WHERE matched = 1";
 $usersMatched = mysql_num_rows(mysql_query($query));
 
-// How many users do not have a match:
+// How many users do not have a match: (USED IN ARRAY)
 $query="SELECT * FROM Users WHERE matched = 0 AND verified = 1 AND withdraw != 1 ORDER BY dropped_matches ASC, new_date ASC";
 $result=mysql_query($query);
 
@@ -101,23 +101,17 @@ else {
 
       ?>
       <p class="lead">
-      <?php 
-      if ($notMatched+$usersMatched > 0) {
-        $percentNotMatched = $notMatched/($notMatched+$usersMatched)*100;
-        $percentNotMatched = number_format((float)$percentNotMatched, 2, '.', '');
-      }
-
-        if ($num == 0) echo "No switches need to be made.<br><br>";
-        else if ($num == 1) echo 'There is <span class="text-info">one</span> person that needs to switch.';
-        else { ?>
-            There are <span class="text-info"><?php echo $notMatched ?></span> people who need to be switched, or <span class="text-info"><?php echo $percentNotMatched ?>%</span> of verified users.
+        <?php 
+          if ($notMatched+$usersMatched > 0) {
+            $percentNotMatched = $notMatched/($notMatched+$usersMatched)*100;
+            $percentNotMatched = number_format((float)$percentNotMatched, 2, '.', '');
+          }
+          if ($num == 0) echo "No switches need to be made.<br><br>";
+          else if ($num == 1) echo 'There is <span class="text-info">one</span> person that needs to switch.';
+          else { ?>
+              There are <span class="text-info"><?php echo $notMatched ?></span> people who need to be switched, or <span class="text-info"><?php echo $percentNotMatched ?>%</span> of verified users.
+        <?php  } ?>
       </p>
-        <?php if ($check) { ?>
-          <p class="lead">
-          <!-- Will now attempt to manually match. -->
-          </p>
-        <?php } ?>
-      <?php } ?>
 
       <?php if ($debug_db) { ?>
       <button id="generate_records" type="button" class="btn btn-warning">Generate Records</button>
@@ -141,8 +135,6 @@ else {
         $users_not_matched[$index] = $row; // Save the users into the array.
         $index++; // KIND OF NEED THIS...
       }
-
-      //echo "<br><br>";
 
       for ($x = 0; $x < $index; $x++) {// Why doesn't count() work for array?
 
@@ -168,8 +160,6 @@ else {
 
               /* Put the users into the Matches table and set equaled to matched. */
 
-              // Update both users to be matched.
-              $query = "UPDATE Users SET matched = 1 WHERE id = " . $users_not_matched[$x]['id'] . " OR id = " . $matched_user_data['id'] . "";
               $users_not_matched[$x]['matched'] = 1;
 
               // Find where $matched_user_data is in $users_not_matched and set matched = 1 so that it stops dupes.
@@ -181,26 +171,11 @@ else {
                   }
               }
 
-              //$query = "INSERT INTO Users (id, matched) VALUES (" . $users_not_matched[$x]['matched'] . ",1),(" . $matched_user_data['id'] . ",1)";
-              $result = mysql_query($query);
+              $userA = $users_not_matched[$x]['id'];
+              $userB = $matched_user_data['id'];
+              $major = $users_not_matched[$x]['major'];
 
-
-              /* *** Matches db need to add date matched, date completed, major val (to compare to when change major in profile, also for stats [ie. most popular majors]) */
-
-              // Insert into the Matches database.
-              $query = sprintf("INSERT INTO Matches (userA, userB, major, isFinished, date_matched) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data['id'] . ", " . $users_not_matched[$x]['major'] . ", 0, " .'date("Y-m-d H:i:s")' . " )");
-              //$query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data['id'] . ")");
-              $result = mysql_query($query);
-
-              // Grab the Id of the match from Matches table
-              $query = mysql_query("SELECT id FROM Matches WHERE userA= " . $users_not_matched[$x]['id'] . " OR userB= " . $matched_user_data['id'] . "");
-              $result = mysql_fetch_array($query);
-              $newMatchId = $result['id'];
-              //echo "Match ID: " . $newMatchId . "<br>";
-
-              // Add the Matched ID to the Users
-              $query = "UPDATE Users SET Matches_id = " . $newMatchId . " WHERE id = " . $users_not_matched[$x]['id'] . " OR id = " . $matched_user_data['id'] . "";
-              $result = mysql_query($query);
+              switchUsers($userA, $userB, $major);
           
               $matches ++;
 
@@ -208,7 +183,6 @@ else {
               if (!$send_match_mail) {
                 //mail_matched_users($users_not_matched[$x]['name'], $users_not_matched[$x]['email'], $matched_user_data['name'], $matched_user_data['email']);
               }
-
 
           } // End If Statement (If match)
 

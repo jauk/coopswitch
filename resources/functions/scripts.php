@@ -132,15 +132,12 @@ function switchUsers ($idOne, $idTwo, $major) {
   /* *** Matches db need to add date matched, date completed, major val (to compare to when change major in profile, also for stats [ie. most popular majors]) */
 
   // Insert into the Matches database.
-  $query = sprintf("INSERT INTO Matches (userA, userB, major, isFinished, date_matched) VALUES (" . $idOne . ", " . $idTwo . ", " . $major . ", 0, " .'date("Y-m-d H:i:s")' . " )");
+  $query = sprintf("INSERT INTO Matches (userA, userB, major, date_matched) VALUES (" . $idOne . ", " . $idTwo . ", " . $major . ", " .'date("Y-m-d H:i:s")' . " )");
   //$query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data['id'] . ")");
   $result = mysql_query($query);
 
   // Grab the Id of the match from Matches table
-  $query = mysql_query("SELECT id FROM Matches WHERE userA= " . $idOne . " OR userB= " . $idTwo . "");
-  $result = mysql_fetch_array($query);
-  $newMatchId = $result['id'];
-  //echo "Match ID: " . $newMatchId . "<br>";
+  $newMatchId = mysql_get_var('SELECT id FROM Matches WHERE userA= ' . $idOne . ' OR userB= ' . $idTwo);
 
   // Add the Matched ID to the Users
   $query = "UPDATE Users SET Matches_id = " . $newMatchId . " WHERE id = " . $idOne . " OR id = " . $idTwo . "";

@@ -83,7 +83,7 @@ else {
 						$cycle != $otherUser['cycle']) {
 							// Switch would work, put together
 
-
+							// Need to verify email first tho!
 
 				}
 				else {
