@@ -78,16 +78,19 @@ else {
 			if (isset($otherUser['manualMatchUser']) && $otherUser['manualMatchUser'] == $email) {
 				// If both users have each other, double check their profile elements
 
+				// If same major, same year program, opposite cycle.
 				if ($majorVal == $otherUser['major'] && 
-						$num_year_program == $otherUser['num_year_program'] &&
-						$cycle != $otherUser['cycle']) {
-							// Switch would work, put together
-
+					$num_year_program == $otherUser['num_year_program'] &&
+					$cycle != $otherUser['cycle']) {
+						
+					
 
 
 				}
 				else {
 					// Profile fields not compatible for switch
+					$manualSwitchMsg = "Sorry, the user you specified cannot be switch with. 
+					Please make sure you have the same major, have the same number of coops, and are not in the same major.";
 				}
 
 			}
@@ -99,8 +102,8 @@ else {
 
 
 		}
-		else {
-			// Other user has not even registered 
+		else { 	// Other user has not even registered 
+
 
 		}
 

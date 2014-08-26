@@ -132,7 +132,7 @@ $formElementErrClass = "";
 
 		    <div class="row">
 		    	<div class="<?php echo $formElementClass; ?>">
-		    		<hr>
+		    		<hr class="style-three">
 		    	</div>
 		    </div>
 		    
@@ -167,7 +167,7 @@ $formElementErrClass = "";
 
 		    <div class="row">
 		    	<div class="<?php echo $formElementClass; ?>">
-		    		<hr>
+		    		<hr class="style-three">
 		    	</div>
 		    </div>		   
 
@@ -212,7 +212,7 @@ $formElementErrClass = "";
 
 		    <div class="row">
 		    	<div class="<?php echo $formElementClass; ?>">
-		    		<hr>
+		    		<hr class="style-three">
 		    	</div>
 		    </div>
 
@@ -565,22 +565,20 @@ $formElementErrClass = "";
 		var majorErrorDiv = id("majorError");
 		var mainMajorDiv = id("mainMajorDiv");
 
-		nonSwitchMajorIds = "87";
+		nonSwitchMajorIds = ["87", "4", "15", "37", "38", "49", "63", "70", "72", "50", "24", "22", "32", "62", "83", "85", "30", "25", "7", "68", "44"];
 
-		if (major == nonSwitchMajorIds) {
+		if (nonSwitchMajorIds.indexOf(major) >= 0) {
 
 			$('#nonSwitchMajor').modal().show();
-
 			error = "You may not switch this major.";
 			setError(mainMajorDiv, majorErrorDiv, error);
-
 			errors.major = 1;
 		}
 		else {
 
 			removeError(mainMajorDiv, majorErrorDiv);
 			errors.major = 0;
-		}		
+		}	
 
 
 	}
