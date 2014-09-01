@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.38, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.37, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: coop_dev
+-- Host: localhost    Database: coopswitch
 -- ------------------------------------------------------
--- Server version	5.5.38-0ubuntu0.14.04.1
+-- Server version	5.5.37-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,10 +23,11 @@ DROP TABLE IF EXISTS `Majors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Majors` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `major_long` varchar(128) DEFAULT NULL,
+  `noSwitch` int(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +36,7 @@ CREATE TABLE `Majors` (
 
 LOCK TABLES `Majors` WRITE;
 /*!40000 ALTER TABLE `Majors` DISABLE KEYS */;
-INSERT INTO `Majors` VALUES (2,'Accounting'),(3,'Animation & Visual Effects'),(4,'Anthropology'),(5,'Architectural Engineering'),(6,'Architecture'),(7,'Behavioral Health Counseling'),(8,'Biological Sciences'),(9,'Biomedical Engineering'),(10,'Business (General)'),(11,'Business Analytics'),(12,'Business Administration'),(13,'Business and Engineering'),(14,'Chemical Engineering'),(15,'Chemistry'),(16,'Civil Engineering'),(17,'Communication'),(18,'Communication and Applied Technology'),(19,'Computer Engineering'),(20,'Computer Science'),(21,'Computing and Security Technology'),(22,'Construction Management'),(23,'Criminal Justice'),(24,'Culinary Arts'),(25,'Custom-Designed Major'),(26,'Dance'),(27,'Design and Merchandising'),(28,'Economics'),(29,'Electrical Engineering'),(30,'Elementary Education'),(31,'Engineering'),(32,'Engineering Technology'),(33,'English'),(34,'Entertainment and Arts Management'),(35,'Entrepreneurship'),(36,'Environmental Engineering'),(37,'Environmental Science'),(38,'Environmental Studies'),(39,'Fashion Design'),(40,'Film and Video'),(41,'Finance'),(42,'Game Art & Production'),(43,'General Business'),(44,'General Studies'),(45,'Geoscience'),(46,'Graphic Design'),(47,'Health Sciences'),(48,'Health-Services Administration'),(49,'History'),(50,'Hospitality Management'),(51,'Informatics'),(52,'Information Systems'),(53,'Information Technology'),(54,'Interactive Digital Media'),(55,'International Area Studies'),(56,'International Business'),(57,'Interior Design'),(58,'Invasive Cardiovascular Technology'),(59,'Legal Studies'),(60,'Management Information Systems'),(61,'Marketing'),(62,'Materials Science and Engineering'),(63,'Mathematics'),(64,'Mechanical Engineering'),(65,'Music Industry'),(66,'Nursing'),(67,'Nursing: RN-MSN Bridge Program'),(68,'Nutrition and Foods'),(69,'Operations and Supply Chain Management'),(70,'Philosophy'),(71,'Photography'),(72,'Physics'),(73,'Political Science'),(74,'Product Design'),(75,'Professional Studies'),(76,'Property Management'),(77,'Psychology'),(78,'Public Health'),(79,'Radio Technology'),(80,'ROTC'),(81,'Screenwriting & Playwriting'),(82,'Sociology'),(83,'Software Engineering'),(84,'Sport Management'),(85,'Teacher Education'),(86,'TV Production & Media Management'),(87,'Westphal Studies Program');
+INSERT INTO `Majors` VALUES (1,'Animation & Visual Effects',0),(2,'Anthropology',1),(3,'Architectural Engineering',0),(4,'Architecture',0),(5,'Behavioral Health Counseling',1),(6,'Biological Sciences',0),(7,'Biomedical Engineering',0),(9,'Business Administration (All Majors)',0),(10,'Business and Engineering',0),(11,'Chemical Engineering',0),(12,'Chemistry',1),(13,'Civil Engineering',0),(14,'Communication',0),(15,'Computer Engineering',0),(16,'Computer Science',0),(17,'Construction Management',1),(18,'Criminal Justice',1),(19,'Culinary Arts',0),(20,'Custom-Designed Major',1),(21,'Dance',0),(22,'Design and Merchandising',0),(23,'Economics',0),(24,'Electrical Engineering',0),(25,'Elementary Education',1),(26,'Engineering',0),(27,'Engineering Technology',1),(28,'English',0),(29,'Entertainment and Arts Management',0),(30,'Entrepreneurship',0),(31,'Environmental Engineering',0),(32,'Environmental Science',1),(33,'Environmental Studies',1),(34,'Fashion Design',0),(35,'Film and Video',0),(36,'Game Art & Production',0),(37,'General Studies',1),(38,'Geoscience',0),(39,'Graphic Design',0),(40,'Health Sciences',0),(41,'Health-Services Administration',0),(42,'History',1),(43,'Hospitality Management',1),(44,'Informatics',0),(45,'Information Systems',0),(46,'Information Technology',0),(47,'Interactive Digital Media',0),(48,'Interior Design',0),(49,'International Area Studies',0),(50,'Materials Science and Engineering',1),(51,'Mathematics',1),(52,'Mechanical Engineering',0),(53,'Music Industry',0),(54,'Nursing',0),(55,'Nutrition and Foods',1),(56,'Philosophy',1),(57,'Photography',0),(58,'Physics',1),(59,'Political Science',0),(60,'Product Design',0),(61,'Property Management',0),(62,'Psychology',0),(63,'Public Health',0),(64,'Screenwriting & Playwriting',0),(65,'Sociology',0),(66,'Software Engineering',1),(67,'Sport Management',0),(68,'Teacher Education',1),(69,'TV Production & Media Management',0),(70,'Westphal Studies Program',1);
 /*!40000 ALTER TABLE `Majors` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-01 15:24:40
+-- Dump completed on 2014-08-31 21:39:09

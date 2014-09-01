@@ -4,25 +4,25 @@
 
 function print_majors() {
 
-	$query="SELECT * FROM Majors";
-	$result=mysql_query($query);
-	$numMajors=mysql_num_rows($result);
+	$query = "SELECT * FROM Majors";
+	$result = mysql_query($query);
+	$numMajors = mysql_num_rows($result);
 	
 	//Debug
 	//$numMajors = 10;
 
 	$i=0; while ($i < $numMajors) {
-		$major_name=mysql_result($result, $i, "major_long");
-		
-		//Debug (no db here)
-		//$major_name = "Computer Science";
+		$major_name = mysql_result($result, $i, "major_long");
+		$canSwitch = mysql_result($result, $i, "noSwitch");
 		
 		$major_ident=mysql_result($result, $i, "id");
 
 		if (isset($_SESSION['login']) && $_SESSION['user_major'] == $major_ident)
-			echo '<option selected="selected" value=' . $major_ident . '>' . $major_name . '</option> \n\t\t\t\t\t\t';
+			print_r('<option selected="selected" value=' . $major_ident . '>' . $major_name . '</option>');
+		else if ($canSwitch == 1)
+			print_r('<option class="noSwitch" value=' . $major_ident . '>' . $major_name . '</option>');
 		else
-			echo "<option value=" . $major_ident . ">" . $major_name . "</option> \n\t\t\t\t\t\t";
+			print_r('<option value=' . $major_ident . '>' . $major_name . '</option>');
 
 		$i++;
 	}
