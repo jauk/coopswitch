@@ -231,7 +231,7 @@ $formElementErrClass = "";
 	      	<div class="row">
 	  			<div class="<?php echo "$formElementClass"; ?> text-center">
 	  				 <div id="errorFree">
-	  				 	<button disabled type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
+	  				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
 	  				 </div>
 	  			</div>
 	     	</div>
@@ -596,6 +596,12 @@ $formElementErrClass = "";
 
 	var validate_form = function () {
 
+
+	}
+
+
+	var validate_submit = function () {
+
 		errorDiv = id("formError");
 
 		// Revalidate all fields to do a final check 
@@ -635,7 +641,6 @@ $formElementErrClass = "";
 
 		if (totalErrors == 0 && hasErrors == false) {
 			return true;
-			$("submit_form").disabled = false;
 		}
 		
 		else if (hasErrors == true)
@@ -647,11 +652,9 @@ $formElementErrClass = "";
 			else {
 				errorDiv.textContent = "Multiple errors are preventing your registration.";
 			}
-			return false;
 		}
 
 		return false;
-		$("submit_form").disabled = true;
 	}
 
 	var registerTypeCheck = function() {
