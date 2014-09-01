@@ -80,11 +80,20 @@ else {
 
 				// If same major, same year program, opposite cycle.
 				if ($majorVal == $otherUser['major'] && 
+<<<<<<< HEAD
 						$num_year_program == $otherUser['num_year_program'] &&
+=======
+						$num_year_program == $otherUser['num_year_program']) &&
+>>>>>>> 795ba27fc7422b51414bdeb4ad566669661f4afe
 						$cycle != $otherUser['cycle']) {
 							// Switch would work, put together
 
 							// Need to verify email first tho!
+<<<<<<< HEAD
+=======
+					$num_year_program == $otherUser['num_year_program'] &&
+					$cycle != $otherUser['cycle']) {
+>>>>>>> 795ba27fc7422b51414bdeb4ad566669661f4afe
 						
 				
 				}
