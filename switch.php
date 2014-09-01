@@ -55,6 +55,15 @@ $(function(){
     });
 });
 
+/*
+$(function()){
+  $('#manualCheck').click(function(){
+    $.ajax({
+
+    });
+  });
+});
+*/
 </script>
 
 <div class="container-fluid">
@@ -280,9 +289,7 @@ else {
 
   <div class="row">
     <div class="<?php echo $rowClass; ?>">
-
       <a href="?check=1"><button class="btn">Manual Switch Check</button></a>
-
     </div>
   </div>
 
@@ -294,7 +301,6 @@ else {
   mysql_close($con);
   require_once(TEMPLATES_PATH . "/footer.php");
 ?>
-
 
 <script>
 

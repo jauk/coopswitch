@@ -17,7 +17,7 @@ function print_majors() {
 		//Debug (no db here)
 		//$major_name = "Computer Science";
 		
-		$major_ident=mysql_result($result, $i, id);
+		$major_ident=mysql_result($result, $i, "id");
 
 		if (isset($_SESSION['login']) && $_SESSION['user_major'] == $major_ident)
 			echo '<option selected="selected" value=' . $major_ident . '>' . $major_name . '</option> \n\t\t\t\t\t\t';

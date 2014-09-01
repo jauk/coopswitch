@@ -61,14 +61,14 @@ else {
 	$majorVal = test_input($_POST['major']);
 	$majorName = getMajorName($majorVal);
 
+	// User has specified they have someone they want to switch with
 	if (isset($_POST['otherUserEmail'])) {
 		$otherUserEmail = test_input($_POST['otherUserEmail']);
 
-		$query = 'SELECT * FROM Users WHERE email = "' .$otherUserEmail. '"';
+		$query = 'SELECT * FROM Users WHERE email = "' .$otherUserEmail;
 		$result = mysql_query($query);
-
-		if (mysql_num_rows($result) != 0) {
-			// Other user already signed up, do this:
+ 
+		if (mysql_num_rows($result) != 0) { // Other user already signed up with that email
 
 			$otherUser = array();
 			$row = mysql_fetch_assoc($result);
@@ -78,16 +78,22 @@ else {
 			if (isset($otherUser['manualMatchUser']) && $otherUser['manualMatchUser'] == $email) {
 				// If both users have each other, double check their profile elements
 
+				// If same major, same year program, opposite cycle.
 				if ($majorVal == $otherUser['major'] && 
 						$num_year_program == $otherUser['num_year_program']) &&
 						$cycle != $otherUser['cycle']) {
 							// Switch would work, put together
 
 							// Need to verify email first tho!
-
+					$num_year_program == $otherUser['num_year_program'] &&
+					$cycle != $otherUser['cycle']) {
+						
+				
 				}
 				else {
 					// Profile fields not compatible for switch
+					$manualSwitchMsg = "Sorry, the user you specified cannot be switch with. 
+					Please make sure you have the same major, have the same number of coops, and are not in the same major.";
 				}
 
 			}
@@ -99,8 +105,8 @@ else {
 
 
 		}
-		else {
-			// Other user has not even registered 
+		else { 	// Other user has not even registered 
+
 
 		}
 
