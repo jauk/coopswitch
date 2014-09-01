@@ -136,7 +136,7 @@ $formElementErrClass = "";
 		    	</div>
 		    </div>
 		    
-		    <?php if ($newFeatureTest) { ?>
+		    <?php if ($testHaveSwitch) { ?>
 
 		    <div class="row">
 		    	<div class="<?php echo $formElementClass; ?>" id="mainRegisterTypeDiv">
@@ -231,7 +231,7 @@ $formElementErrClass = "";
 	      	<div class="row">
 	  			<div class="<?php echo "$formElementClass"; ?> text-center">
 	  				 <div id="errorFree">
-	  				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
+	  				 	<button disabled type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
 	  				 </div>
 	  			</div>
 	     	</div>
@@ -409,6 +409,7 @@ $formElementErrClass = "";
 			removeError(nameDiv, nameErrorDiv)
 		}
 
+		validate_form();
 	}
 
 
@@ -504,6 +505,8 @@ $formElementErrClass = "";
 
 		//id("user_email").value = email;
 		emailVal.value = email;
+
+		validate_form();
 	}
 
 	var validate_password = function () {
@@ -552,6 +555,8 @@ $formElementErrClass = "";
 			errors.password = 0;
 		}
 
+		validate_form();
+
 	}
 
 	var checkmajor = function () {
@@ -585,10 +590,11 @@ $formElementErrClass = "";
 			errors.major = 0;
 		}	
 
+		validate_form();
 
 	}
 
-	var validate_submit = function () {
+	var validate_form = function () {
 
 		errorDiv = id("formError");
 
@@ -629,6 +635,7 @@ $formElementErrClass = "";
 
 		if (totalErrors == 0 && hasErrors == false) {
 			return true;
+			$("submit_form").disabled = false;
 		}
 		
 		else if (hasErrors == true)
@@ -644,6 +651,7 @@ $formElementErrClass = "";
 		}
 
 		return false;
+		$("submit_form").disabled = true;
 	}
 
 	var registerTypeCheck = function() {

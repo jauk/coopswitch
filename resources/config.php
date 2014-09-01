@@ -65,7 +65,7 @@ $GLOBALS['debug_db'] = False;
 
 // Test new feature on production?
 if ($_SERVER['SERVER_NAME'] == $config['urls']['baseUrl'])
-	$GLOBALS['newFeatureTest'] = False;
+	$GLOBALS['testHaveSwitch'] = False;
 else 
 	$GLOBALS['testHaveSwitch'] = False;
 
