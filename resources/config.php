@@ -35,7 +35,11 @@ $GLOBALS['send_match_mail'] = False;
 
 $GLOBALS['debug_db'] = False;
 
-$GLOBALS['newFeatureTest'] = True;
+// Test new feature on production?
+if ($_SERVER['SERVER_NAME'] == $config['urls']['baseUrl'])
+	$GLOBALS['newFeatureTest'] = False;
+else 
+	$GLOBALS['testHaveSwitch'] = False;
 
 
 $config = array(
