@@ -606,8 +606,7 @@ $formElementErrClass = "";
 
 		// Revalidate all fields to do a final check 
 		validate_name();
-		validate_email(1);
-
+		validate_email(1); // 1 is for main email. Not using other field currently.
 		validate_password();
 		checkmajor();
 
@@ -617,6 +616,7 @@ $formElementErrClass = "";
 
 		var totalErrors = errors.name + errors.emailPrimary + errors.password + errors.major;
 
+		/*
 		if (id("registerType2").checked) {
 			validate_email(2);
 			console.debug("Registration type two being used.");
@@ -627,25 +627,24 @@ $formElementErrClass = "";
 		}
 
 		totalErrors += errors.emailSecondary;
+		*/
+
 
 		if (totalErrors <= 0) {
 			hasErrors = false;
 			console.debug("Form submitted with no errors.");
-		}
-		else {
-			hasErrors = true;
-			console.debug("Total Errors: "+totalErrors);
-			console.debug("Name Error: "+errors.name+" | Email Error: "+errors.emailPrimary+ " | Email Secondary Error: "+errors.emailSecondary +" | Password Error: "+errors.password+" | Major Error: "+errors.major);
+
+			return true;
 		}
 
-		if (totalErrors == 0 && hasErrors == false) {
-			return true;
-			alert("NO ERROR");
-		}
-		
-		else if (hasErrors == true)
-		{
+		else {
+			var hasErrors = true;
+
+			console.debug("Total Errors: "+totalErrors);
+			console.debug("Name Error: "+errors.name+" | Email Error: "+errors.emailPrimary+ " | Email Secondary Error: "+errors.emailSecondary +" | Password Error: "+errors.password+" | Major Error: "+errors.major);
+
 			errorDiv.style.display = '';
+
 			if (totalErrors == 1) {
 				errorDiv.textContent = "An error is preventing your registration."; // Probably change to recoloring the boxes later.
 			}
