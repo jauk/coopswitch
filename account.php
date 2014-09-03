@@ -68,12 +68,81 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 	<!-- Should I add confirmations? "Sure you want to change/drop match, sure you want to change. Nice popup. Learn jquery -->
 
+<!--  TO DO ON PROFILE DESIGN
+
+		 Change profile fields to three horizontal boxes (or vertical if mobile.)
+		 Nicer, simpler design (3 well designed boxes with big headings, minimal images depending on co-op seasons, number co-ops, maybe even major.)
+ -->
+
   <!-- Profile Fields Containter -->
  <?php if ($_SESSION['withdraw'] == 0) { ?>
  <form id="profileForm" name="profileForm" method="post" action="update.php" onsubmit="return saveChanges()">
-  
-  	<div id="profileFields" name="profileFields" class="container col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-1 col-xs-6 col-xs-offset-3" style="border: 0px solid black; padding: 5px;">
-  	
+
+
+
+  	<!-- <div id="profileFields" name="profileFields" class="container col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-1 col-xs-6 col-xs-offset-3" style="border: 0px solid black; padding: 5px;"> -->
+  	<div>
+
+  		<div class="row text-center" id="profileFieldsRow" style="">
+
+  			<!-- Major -->
+  			<div class="col-md-4 profileBox" style="border: 1px solid black;">
+  				<h3 class="profileBoxHeading">Major</h3>
+	      	<h4 id="majorNameText"><?php echo "{$_SESSION['user_major_name']}"; ?></h4>
+        	
+        	<!-- For editing the major. -->
+        	<div id="majorSpan" class="profileBoxEdit">
+						<input type="hidden" name="newMajorId" id="newMajorId" value="">
+						<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
+							<?php print_majors(); ?>
+						</select>
+         	</div>
+  			</div>
+
+  			<!-- Cycle -->
+  			<div class="col-md-4 profileBox" style="border: 1px solid black;">
+  				<h3 class="profileBoxHeading">Cycle</h3>
+	      	<h4 id="cycleNameText"><?php echo "{$_SESSION['user_cycle_name']}"; ?></h4>
+
+	      	<!-- For editing the cycle. -->
+        	<div id="cycleSpan" class="profileBoxEdit">
+					<input type="hidden" name="newCycleId" id="newCycleId" value="">
+						<select id="selectCycle" class="form-control selectpicker" name="cycle">
+							<?php if ($_SESSION['user_cycle'] == 1) { ?>
+								<option selected="selected" value="1">Fall-Winter</option>
+								<option value="2">Spring-Summer</option>
+							<?php } else { ?>
+								<option value="1">Fall-Winter</option>
+								<option selected="selected" value="2">Spring-Summer</option>
+							<?php } ?>
+						</select>
+          </div>
+  			</div>
+
+  			<!-- Program -->
+  			<div class="col-md-4 profileBox" style="border: 1px solid black;">
+  				<h3 class="profileBoxHeading">Program</h3>
+	      	<h4 id="programNameText" ><?php echo "{$_SESSION['user_program_name']}"; ?></h4>
+
+	      	<!-- For editing the program. -->
+        	<div id="programSpan" class="profileBoxEdit">
+						<input type="hidden" name="newProgramId" id="newProgramId" value="">
+						<select id="selectProgram" class="form-control selectpicker" showSubtext="true" name="program">
+							<?php if ($_SESSION['user_program'] == 1) { ?>
+								<option selected="selected" value="1" data-subtext="4 years">1 co-op</option>
+								<option value="2" data-subtext="5 years">3 co-ops</option>
+							<?php } else { ?>
+								<option value="1" data-subtext="4 years">1 co-op</option>
+								<option selected="selected" value="2" data-subtext="5 years">3 co-ops</option>
+							<?php } ?>
+						</select>
+        	</div>	      	
+  			</div>
+  		
+  		</div>
+
+  	  	<br><br><br><br><br><br><br><br><br><br><br><br><br>
+
     	<div class="row"> <!-- Major -->
   
 	      	<div id="majorBeginText" class="<?php echo $beginTextClass; ?>" style="<?php echo $beginTextStyle; ?>">
@@ -88,10 +157,10 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
     
        <!-- <form id="majorForm" name="majorForm" method="post" action="update.php" onsubmit="return saveMajor();"> -->
         	<div id="majorSpan" style="display: none; padding-left: 5px;" class="col-sm-6">
-				<input type="hidden" name="newMajorId" id="newMajorId" value="">
-				<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
-					<?php print_majors(); ?>
-				</select>
+						<input type="hidden" name="newMajorId" id="newMajorId" value="">
+						<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
+							<?php print_majors(); ?>
+						</select>
          	</div>
         <!-- </form> -->
       	
@@ -158,22 +227,24 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
     <?php $btnRowClass = "col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3"; ?>
   
+    	<br><br><br><br><br>
+
     <div id="editBtns" class="container col-md-2 col-sm-12 col-xs-12" style="border: 0px solid black; padding: 5px; padding-top: 8px; margin-left: 20px;">
-		<div class="row" style="padding-bottom: 5px;">
-			<div class="<?php echo $btnRowClass; ?>">
-				<button id="saveMainBtn" class="btn btn-success btn-sm" style="width: 75%;" onclick="saveChanges()">Save</button>
+			<div class="row" style="padding-bottom: 5px;">
+				<div class="<?php echo $btnRowClass; ?>">
+					<button id="saveMainBtn" class="btn btn-success btn-sm" style="width: 75%;" onclick="saveChanges()">Save</button>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="<?php echo $btnRowClass; ?>">
-				<button type="button" id="editMainBtn" class="btn btn-warning btn-sm" style="width: 75%;" onclick="editProfile()">Edit</button>
+			<div class="row">
+				<div class="<?php echo $btnRowClass; ?>">
+					<button type="button" id="editMainBtn" class="btn btn-warning btn-sm" style="width: 75%;" onclick="editProfile()">Edit</button>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="<?php echo $btnRowClass; ?>">
-				<button type="button" id="cancelMainBtn" class="btn btn-info btn-sm" style="width: 75%;" onclick="cancelChanges()">Cancel</button>
+			<div class="row">
+				<div class="<?php echo $btnRowClass; ?>">
+					<button type="button" id="cancelMainBtn" class="btn btn-info btn-sm" style="width: 75%;" onclick="cancelChanges()">Cancel</button>
+				</div>
 			</div>
-		</div>
     </div>
 
  </form>
