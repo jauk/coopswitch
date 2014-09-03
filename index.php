@@ -215,7 +215,7 @@ $formElementErrClass = "";
 		    		<hr class="style-three">
 		    	</div>
 		    </div>
-
+ 
 	      	<div class="row">
 	      		<div class="<?php echo $formElementClass; ?>" id="acceptTerms">
 	      			<div class="checkbox">

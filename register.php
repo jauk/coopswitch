@@ -62,6 +62,7 @@ else {
 	$majorName = getMajorName($majorVal);
 
 	// User has specified they have someone they want to switch with
+	/*
 	if (isset($_POST['otherUserEmail'])) {
 		$otherUserEmail = test_input($_POST['otherUserEmail']);
 
@@ -79,13 +80,7 @@ else {
 				// If both users have each other, double check their profile elements
 
 				// If same major, same year program, opposite cycle.
-				if ($majorVal == $otherUser['major'] && 
-						$num_year_program == $otherUser['num_year_program'] &&
-						$cycle != $otherUser['cycle']) {
-							// Switch would work, put together
 
-							// Need to verify email first tho!
-						
 				
 				}
 				else {
@@ -110,6 +105,7 @@ else {
 
 
 	}
+	*/
 
 	$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
 		VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal',
