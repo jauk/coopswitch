@@ -121,7 +121,7 @@ $formElementErrClass = "";
 		  				<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()"  data-toggle="popover" data-trigger="" data-placement="auto" title="Warning" data-content="Please do not use your Drexel One password.">
 		  			</div>
 		  			<div class="col-md-5 col-sm-6">
-		  				<input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="validate_password()">
+		  				<input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="passwordConfirm()">
 		  			</div>
 		  			<div class="<?php echo "$formElementClass"; ?>">
 		  				<span class="help-block error"><div id="passwordError"></div></span>
@@ -140,19 +140,19 @@ $formElementErrClass = "";
 
 		    <div class="row">
 		    	<div class="<?php echo $formElementClass; ?>" id="mainRegisterTypeDiv">
-					<div class="radio-inline">
-						<label>
-							<input checked type="radio" name="registerType" id="registerType1" onchange="registerTypeCheck()" value="1">
-							Find a switch.
-						</label>
-					</div>
-					<div class="radio-inline">
-						<label>
-							<input  type="radio" name="registerType" id="registerType2" onchange="registerTypeCheck()" value="2">
-							I have a switch. <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Choose this if you already have someone to switch with." id="registerTypeHelp"></span>
+						<div class="radio-inline">
+							<label>
+								<input checked type="radio" name="registerType" id="registerType1" onchange="registerTypeCheck()" value="1">
+								Find a switch.
 							</label>
+						</div>
+						<div class="radio-inline">
+							<label>
+								<input  type="radio" name="registerType" id="registerType2" onchange="registerTypeCheck()" value="2">
+								I have a switch. <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Choose this if you already have someone to switch with." id="registerTypeHelp"></span>
+								</label>
 
-					</div>
+						</div>
 		    	</div>
 		    </div>
 
@@ -268,8 +268,8 @@ $formElementErrClass = "";
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" onclick="goHome()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h2 class="modal-title">Sorry, you cannot switch that major.</h2>
+        <button type="button" class="close" data-dismiss="modal" onclick="goHome()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h2 class="modal-title">Sorry, you cannot switch that major.</h2>
 			</div>
 			<div class="modal-body">
 				<p class="lead">Your major is not able to switch coop cycles.</p>
@@ -520,25 +520,25 @@ $formElementErrClass = "";
 		var passwordErrorDiv = id("passwordError");
 		var mainPasswordDiv = id("mainPasswordDiv");
 
-		if (password == "" || (password2 == "" && hasEnteredAgain)) {
+		if (password2 == "" && window.hasEnteredAgain) {
 
 			errors.password = 1;
 			error = "You need a password.";
 			setError(mainPasswordDiv, passwordErrorDiv, error);	
 		}
 
-		else if (password != password2) {
+		else if ((password != password2) && window.hasEnteredAgain) {
 
-			if (password2 == "" && !window.hasEnteredAgain) {
-				window.hasEnteredAgain = true;
-			}
+			// if (password2 == "" && !window.hasEnteredAgain) {
+			// 	window.hasEnteredAgain = true;
+			// }
 
-			else {
+			// else {
 				errors.password = 1;
 
 				error = "Passwords do not match.";
 				setError(mainPasswordDiv, passwordErrorDiv, error);
-			}
+	//		}
 
 		}
 
@@ -560,6 +560,13 @@ $formElementErrClass = "";
 
 		validate_form();
 
+	}
+
+	var passwordConfirm = function () {
+
+		window.hasEnteredAgain = true;
+
+		validate_password();
 	}
 
 	var checkmajor = function () {
@@ -611,6 +618,7 @@ $formElementErrClass = "";
 		validate_name();
 		validate_email(1); // 1 is for main email. Not using other field currently.
 		validate_password();
+		passwordConfirm();
 		checkmajor();
 
 		if (!id("terms").checked) {
