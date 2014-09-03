@@ -1,6 +1,5 @@
 <?php
 
-$_SERVER['SERVER_PORT'] = 443;
 // error_reporting(0);
 // @ini_set('display_errors', 0);
 // Same as error_reporting(E_ALL);
@@ -28,7 +27,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 	<?php 
 
-		$pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
+			$pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
 
 	    $restOfURL = $_SERVER['REQUEST_URI'];
 	    $restOfURL = trim($restOfURL, "/");
@@ -58,7 +57,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 	<script src="/js/bootstrap-select.js"></script>
 	<script src="/js/global.js"></script>
 
-	<link href="http://fonts.googleapis.com/css?family=Cutive" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Cutive" rel="stylesheet" type="text/css">
 
 	<style>
 		.page-title {
