@@ -606,7 +606,6 @@ $formElementErrClass = "";
 
 		// Revalidate all fields to do a final check 
 		validate_name();
-
 		validate_email(1);
 
 		validate_password();
@@ -641,6 +640,7 @@ $formElementErrClass = "";
 
 		if (totalErrors == 0 && hasErrors == false) {
 			return true;
+			alert("NO ERROR");
 		}
 		
 		else if (hasErrors == true)
