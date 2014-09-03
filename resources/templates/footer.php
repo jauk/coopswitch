@@ -12,6 +12,9 @@
                         <p class="small">
                         Coopswitch has no affiliation with Drexel University or the Steinbright Career Development Center.
                         </p>
+                        <p class="small">
+                        For more information on the co-op swap policy, please <a target="_blank" href="https://www.drexel.edu/scdc/co-op/undergraduate/policies-procedures/cycles/">click here.</a>
+                        </p>
                         <p class="tiny">
                         Created by <a href="http://justinmaslin.com" target="_blank">Justin Maslin</a>.
                         </p>
