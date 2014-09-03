@@ -5,6 +5,9 @@ RewriteRule ^(.*)$ $1.php
 
 ErrorDocument 404 /404.php 
 
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} 
+
 AuthType Basic  
 AuthName "Coopswitch is under construction. Contact Justin to demo."  
 #AuthUserFile /var/www/coopswitch/.htpasswd
