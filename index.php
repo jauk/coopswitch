@@ -273,7 +273,10 @@ $formElementErrClass = "";
 			</div>
 			<div class="modal-body">
 				<p class="lead">Your major is not able to switch coop cycles.</p>
-				<p>For more information, please contact the Steinbright Career Development Center.</p>
+				<p>For more information, please contact the Steinbright Career Development Center or 
+					<a target="_blank" href="https://www.drexel.edu/scdc/co-op/undergraduate/policies-procedures/cycles/">click here</a>
+						for more information.
+				</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
