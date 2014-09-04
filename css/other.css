@@ -36,6 +36,7 @@ select {
 .profileBox {
 
 	padding: 5px;
+	margin-bottom: 35px;
 }
 
 #profileBoxMiddle {
@@ -57,3 +58,46 @@ select {
 .profileBoxEditOn {
 	display: inline;
 }
+
+.profileBoxImg {
+	zoom: 0.4;
+	-moz-transform: scale(0.4);
+	margin-top: -20px;
+}
+
+.circle {
+    width: 50%;
+    height: 0;
+    padding-bottom: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    display: inline-block;
+   	/*background: #4679BD;*/
+    border: 5px solid #f8f8f2;
+}
+
+.textboxTest {
+	border:2px solid #456879;
+	border-radius:10px;
+}
+
+.dropdown select {
+      border: 0 !important;.  /*Removes border*/
+     -webkit-appearance: none;  /*Removes default chrome and safari style*/
+     -moz-appearance: none;  /*Removes default style Firefox*/
+      background: url('you_own_image_arrow.png')  no-repeat;
+  }
+
+ .profileButton {
+  	width: 60%;
+ }
+
+ #profileButtonContainer {
+ 	margin-top: 30px;
+ }
+
+ .profileButtonEditMode {
+ 	width: 30%;
+ 	padding: 2px;
+ }

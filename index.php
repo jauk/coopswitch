@@ -54,7 +54,7 @@ $formElementErrClass = "";
     <div id="stockPhoto" class="row">
   		<div class="<?php echo $typicalRowClass; ?>">
   			<img src="/img/stockphoto.jpeg"
-  				 class="img-responsive img-rounded center-block" max-width: 100%; height: auto;>
+  				 class="img-responsive img-rounded center-block">
   			<!-- <div class="caption">Friends having fun on Coopswitch.</div>  -->
   	 	<br><br>
   		</div>

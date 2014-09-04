@@ -85,68 +85,96 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   		<div class="row text-center" id="profileFieldsRow" style="">
 
   			<!-- Major -->
-  			<div class="col-md-4 profileBox">
-  				<h3 class="profileBoxHeading">Major</h3>
-	      	<div id="majorNameText"><?php echo "{$_SESSION['user_major_name']}"; ?></div>
-        	
-        	<!-- For editing the major. -->
-        	<div id="majorSpan" class="profileBoxEditOff">
-						<input type="hidden" name="newMajorId" id="newMajorId" value="">
-						<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
-							<?php print_majors(); ?>
-						</select>
+  			<div class="col-md-4 profileBox" >
+
+  				<div class="circle">
+	  				<h3 class="profileBoxHeading">Major</h3>
+		      	<div id="majorNameText"><?php echo "{$_SESSION['user_major_name']}"; ?></div>
+	        	
+	        	<!-- For editing the major. -->
+	        	<div id="majorSpan" class="profileBoxEditOff">
+							<input type="hidden" name="newMajorId" id="newMajorId" value="">
+							<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5" data-width="80%">
+								<?php print_majors(); ?>
+							</select>
+	         	</div>
+
+	         	<img src="/img/cal-book.png" class="img-responsive img-rounded center-block profileBoxImg">
          	</div>
+
   			</div>
 
   			<!-- Cycle -->
   			<div class="col-md-4 profileBox">
-  				<h3 class="profileBoxHeading">Cycle</h3>
-	      	<div id="cycleNameText"><?php echo "{$_SESSION['user_cycle_name']}"; ?></div>
 
-	      	<!-- For editing the cycle. -->
-        	<div id="cycleSpan" class="profileBoxEditOff">
-					<input type="hidden" name="newCycleId" id="newCycleId" value="">
-						<select id="selectCycle" class="form-control selectpicker" name="cycle">
-							<?php if ($_SESSION['user_cycle'] == 1) { ?>
-								<option selected="selected" value="1">Fall-Winter</option>
-								<option value="2">Spring-Summer</option>
-							<?php } else { ?>
-								<option value="1">Fall-Winter</option>
-								<option selected="selected" value="2">Spring-Summer</option>
-							<?php } ?>
-						</select>
-          </div>
+   				<div class="circle">
+
+	  				<h3 class="profileBoxHeading">Cycle</h3>
+		      	<div id="cycleNameText"><?php echo "{$_SESSION['user_cycle_name']}"; ?></div>
+
+		      	<!-- For editing the cycle. -->
+	        	<div id="cycleSpan" class="profileBoxEditOff">
+						<input type="hidden" name="newCycleId" id="newCycleId" value="">
+							<select id="selectCycle" class="form-control selectpicker" name="cycle" data-width="auto">
+								<?php if ($_SESSION['user_cycle'] == 1) { ?>
+									<option selected="selected" value="1">Fall-Winter</option>
+									<option value="2">Spring-Summer</option>
+								<?php } else { ?>
+									<option value="1">Fall-Winter</option>
+									<option selected="selected" value="2">Spring-Summer</option>
+								<?php } ?>
+							</select>
+	          </div>
+
+	         	<img src="/img/cal-icon.png" class="img-responsive img-rounded center-block profileBoxImg">
+
+	         </div>
+
   			</div>
 
   			<!-- Program -->
   			<div class="col-md-4 profileBox">
-  				<h3 class="profileBoxHeading">Program</h3>
-	      	<div id="programNameText" ><?php echo "{$_SESSION['user_program_name']}"; ?></div>
 
-	      	<!-- For editing the program. -->
-        	<div id="programSpan" class="profileBoxEditOff">
-						<input type="hidden" name="newProgramId" id="newProgramId" value="">
-						<select id="selectProgram" class="form-control selectpicker" showSubtext="true" name="program">
-							<?php if ($_SESSION['user_program'] == 1) { ?>
-								<option selected="selected" value="1" data-subtext="4 years">1 co-op</option>
-								<option value="2" data-subtext="5 years">3 co-ops</option>
-							<?php } else { ?>
-								<option value="1" data-subtext="4 years">1 co-op</option>
-								<option selected="selected" value="2" data-subtext="5 years">3 co-ops</option>
-							<?php } ?>
-						</select>
-        	</div>	      	
+  				<div class="circle">
+	  				<h3 class="profileBoxHeading">Program</h3>
+		      	<div id="programNameText" ><?php echo "{$_SESSION['user_program_name']}"; ?></div>
+
+		      	<!-- For editing the program. -->
+	        	<div id="programSpan" class="profileBoxEditOff">
+							<input type="hidden" name="newProgramId" id="newProgramId" value="">
+							<select id="selectProgram" class="form-control selectpicker" showSubtext="true" name="program" data-width="auto">
+								<?php if ($_SESSION['user_program'] == 1) { ?>
+									<option selected="selected" value="1" data-subtext="">1 co-op</option>
+									<option value="2" data-subtext="">3 co-ops</option>
+								<?php } else { ?>
+									<option value="1" data-subtext="">1 co-op</option>
+									<option selected="selected" value="2" data-subtext="">3 co-ops</option>
+								<?php } ?>
+							</select>
+	        	</div>	     
+
+	        	<img src="/img/cal-business.png" class="img-responsive img-rounded center-block profileBoxImg">
+	        </div>
+
   			</div>
-  		
+        
+
   		</div>
       
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4 text-center" id="profileButtonContainer">
+					<button type="button" id="editMainBtn" class="btn btn-warning btn-sm profileButton" onclick="editProfile()">Edit</button>
+					<button id="saveMainBtn" class="btn btn-success btn-sm profileButtonEditMode" onclick="saveChanges()">Save</button>
+					<button type="button" id="cancelMainBtn" class="btn btn-info btn-sm profileButtonEditMode" onclick="cancelChanges()">Cancel</button>
+				</div>
+			</div>
+
 
     <?php $btnRowClass = "col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3"; ?>
   
-    <div id="editBtns" class="container col-md-2 col-sm-12 col-xs-12" style="border: 0px solid black; padding: 5px; padding-top: 8px; margin-left: 20px;">
+<!--     <div id="editBtns" class="col-md-2 col-sm-12 col-xs-12" style="border: 0px solid black; padding: 5px; padding-top: 8px; margin-left: 20px;">
 			<div class="row" style="padding-bottom: 5px;">
 				<div class="<?php echo $btnRowClass; ?>">
-					<button id="saveMainBtn" class="btn btn-success btn-sm" style="width: 75%;" onclick="saveChanges()">Save</button>
 				</div>
 			</div>
 			<div class="row">
@@ -159,7 +187,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 					<button type="button" id="cancelMainBtn" class="btn btn-info btn-sm" style="width: 75%;" onclick="cancelChanges()">Cancel</button>
 				</div>
 			</div>
-    </div>
+    </div> -->
 
  </form>
 
@@ -359,6 +387,7 @@ $('.selectpicker').selectpicker();
   var editProfile = function () {
     
     window.editMainBtn.style.display ='none';
+
     window.saveMainBtn.style.display = '';
     window.cancelMainBtn.style.display = '';
     
