@@ -36,7 +36,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
   <?php if ($_SESSION['user_email_verified'] == 0) { ?>
     <div class="row">
-      <div class="<?php echo $rowClass; ?>">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
         <p class="lead text-danger">
         	Your email has not been verified. You are not eligible for a switch.
         	<a href="resendverify.php"><button class="btn btn-info btn-sm">Resend Email</button></a>
@@ -89,7 +89,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
   				<div class="circle">
 	  				<h3 class="profileBoxHeading">Major</h3>
-		      	<div id="majorNameText"><?php echo "{$_SESSION['user_major_name']}"; ?></div>
+		      	<div class="profileBoxText" id="majorNameText"><?php echo "{$_SESSION['user_major_name']}"; ?></div>
 	        	
 	        	<!-- For editing the major. -->
 	        	<div id="majorSpan" class="profileBoxEditOff">
@@ -110,23 +110,18 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
    				<div class="circle">
 
 	  				<h3 class="profileBoxHeading">Cycle</h3>
-		      	<div id="cycleNameText"><?php echo "{$_SESSION['user_cycle_name']}"; ?></div>
+		      	<div class="profileBoxText" id="cycleNameText"><?php echo "{$_SESSION['user_cycle_name']}"; ?></div>
 
 		      	<!-- For editing the cycle. -->
 	        	<div id="cycleSpan" class="profileBoxEditOff">
 						<input type="hidden" name="newCycleId" id="newCycleId" value="">
 							<select id="selectCycle" class="form-control selectpicker" name="cycle" data-width="auto">
-								<?php if ($_SESSION['user_cycle'] == 1) { ?>
-									<option selected="selected" value="1">Fall-Winter</option>
-									<option value="2">Spring-Summer</option>
-								<?php } else { ?>
-									<option value="1">Fall-Winter</option>
-									<option selected="selected" value="2">Spring-Summer</option>
-								<?php } ?>
+									<option <?php if ($_SESSION['user_cycle'] == 1) { echo "selected"; } ?> value="1"><?php echo FALLWINTER; ?></option>
+									<option <?php if ($_SESSION['user_cycle'] == 2) { echo "selected"; } ?> value="2"><?php echo SPRINGSUMMER; ?></option>
 							</select>
 	          </div>
 
-	         	<img src="/img/icon-cal.png" class="img-responsive center-block profileBoxImg">
+	         	<img src="/img/icon-cal.png" id="middleImg" class="img-responsive center-block profileBoxImg">
 
 	         </div>
 
@@ -137,19 +132,14 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
   				<div class="circle">
 	  				<h3 class="profileBoxHeading">Program</h3>
-		      	<div id="programNameText" ><?php echo "{$_SESSION['user_program_name']}"; ?></div>
+		      	<div class="profileBoxText" id="programNameText" ><?php echo "{$_SESSION['user_program_name']}"; ?></div>
 
 		      	<!-- For editing the program. -->
 	        	<div id="programSpan" class="profileBoxEditOff">
 							<input type="hidden" name="newProgramId" id="newProgramId" value="">
 							<select id="selectProgram" class="form-control selectpicker" showSubtext="true" name="program" data-width="auto">
-								<?php if ($_SESSION['user_program'] == 1) { ?>
-									<option selected="selected" value="1" data-subtext="">1 co-op</option>
-									<option value="2" data-subtext="">3 co-ops</option>
-								<?php } else { ?>
-									<option value="1" data-subtext="">1 co-op</option>
-									<option selected="selected" value="2" data-subtext="">3 co-ops</option>
-								<?php } ?>
+									<option <?php if ($_SESSION['user_program'] == 1) { echo "selected"; } ?> value="1" data-subtext=""><?php echo ONECOOP; ?></option>
+									<option <?php if ($_SESSION['user_program'] == 2) { echo "selected"; } ?> value="2" data-subtext=""><?php echo THREECOOPS; ?></option>
 							</select>
 	        	</div>	     
 

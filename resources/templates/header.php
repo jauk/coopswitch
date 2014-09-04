@@ -18,7 +18,6 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
     if (strpos($filename, 'connect.php') != TRUE) {
     	include $filename;
     }
-    // echo $filename;
 }
 
 ?>

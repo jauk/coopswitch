@@ -26,18 +26,18 @@
   
   		// Get what the cycle actually is named
   		if ($user_data[0]['cycle'] == '1')
-  			$_SESSION['user_cycle_name'] = "Fall-Winter";
+  			$_SESSION['user_cycle_name'] = FALLWINTER;
   		else
-  			$_SESSION['user_cycle_name'] = "Spring-Summer";
+  			$_SESSION['user_cycle_name'] = SPRINGSUMMER;
   
       // How many years user is student
   		$_SESSION['user_program'] = $user_data[0]['num_year_program'];
   
   		// Get what the program actually is named
   		if ($user_data[0]['num_year_program'] == 1)
-  			$_SESSION['user_program_name'] = "1 co-op";
+  			$_SESSION['user_program_name'] = ONECOOP;
   		else
-  			$_SESSION['user_program_name'] = "3 co-ops";
+  			$_SESSION['user_program_name'] = THREECOOPS;
   
       // Get user matched info
   		$_SESSION['user_matched'] = $user_data[0]['matched']; // This will have to be updated or something when searches are done...

@@ -51,6 +51,11 @@ select {
 
 }
 
+.profileBoxText {
+	margin-bottom: 10px;
+	font-size: medium;
+}
+
 .profileBoxEditOff {
 	display: none;
 }
@@ -66,15 +71,16 @@ select {
 }
 
 .circle {
-    width: 50%;
+/*    width: 50%;
     height: 0;
     padding-bottom: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    display: inline-block;
+    display: inline-block;*/
    	/*background: #4679BD;*/
     border: 5px solid #D7F5F3;
+    border-radius: 30px;
 }
 
 .textboxTest {
@@ -94,10 +100,14 @@ select {
  }
 
  #profileButtonContainer {
- 	margin-top: 30px;
+ 	margin-top: 10px;
  }
 
  .profileButtonEditMode {
  	width: 30%;
  	padding: 2px;
+ }
+
+ #middleImg {
+ 	margin-bottom: 6px;
  }

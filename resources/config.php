@@ -50,6 +50,14 @@ define('SITE_SLOGAN', 'A simple way to switch co-ops.');
 // Header Vars
 define('LOGIN_GREETING', 'Hey, ');
 
+// Names of each co-op cycle
+define('FALLWINTER', 'Fall Winter');
+define('SPRINGSUMMER', 'Spring Summer');
+
+// Names of how many co-ops
+define('ONECOOP', 'One Coop');
+define('THREECOOPS', 'Three Coops');
+
 
 /* Debug Variables */
 
