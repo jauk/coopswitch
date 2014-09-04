@@ -99,7 +99,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 							</select>
 	         	</div>
 
-	         	<img src="/img/cal-book.png" class="img-responsive img-rounded center-block profileBoxImg">
+	         	<img src="/img/icon-book.svg" class="img-responsive img-rounded center-block profileBoxImg">
          	</div>
 
   			</div>

@@ -7,22 +7,49 @@ function print_majors() {
 	$query = "SELECT * FROM Majors";
 	$result = mysql_query($query);
 	$numMajors = mysql_num_rows($result);
+
+	$selected = "";
+	$majorSubtext = "";
 	
 	//Debug
 	//$numMajors = 10;
 
 	$i=0; while ($i < $numMajors) {
 		$major_name = mysql_result($result, $i, "major_long");
-		$canSwitch = mysql_result($result, $i, "noSwitch");
+		$noSwitch = mysql_result($result, $i, "noSwitch");
 		
 		$major_ident=mysql_result($result, $i, "id");
 
-		if (isset($_SESSION['login']) && $_SESSION['user_major'] == $major_ident)
-			print_r('<option selected="selected" value=' . $major_ident . '>' . $major_name . '</option>');
-		else if ($canSwitch == 1)
+		$business = "Business Administration";
+
+		$businessMajorSubtext = "(All Majors)";
+
+		if (isset($_SESSION['login']) && $_SESSION['user_major_name'] == $major_name) {
+			$selected = "selected";
+		}
+		else {
+			$selected = "";
+		}
+
+		if ($major_name == $business) {
+			$majorSubtext = $businessMajorSubtext;
+		}
+		else {
+			$majorSubtext = "";
+		}
+
+		if ($noSwitch == 1)
 			print_r('<option class="noSwitch" value=' . $major_ident . '>' . $major_name . '</option>');
 		else
-			print_r('<option value=' . $major_ident . '>' . $major_name . '</option>');
+			print_r('<option ' . $selected . ' value="' . $major_ident . '" data-subtext="' . $majorSubtext . '">' . $major_name . '</option>');
+
+		// else {
+
+		// 	if (isset($_SESSION['login']) && $_SESSION['user_major'] == $major_ident)
+		// 		print_r('<option selected="selected" value=' . $major_ident . '>' . $major_name . '</option>');
+
+		// 	else
+		// 		print_r('<option value=' . $major_ident . '>' . $major_name . '</option>');
 
 		$i++;
 	}

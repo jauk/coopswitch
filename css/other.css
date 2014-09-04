@@ -60,10 +60,10 @@ select {
 }
 
 .profileBoxImg {
-	zoom: 0.4;
-	-moz-transform: scale(0.4);
-	margin-top: -20px;
-}
+/*	zoom: 0.4;
+	-moz-transform: scale(0.4);*/
+/*	margin-top: -20px;
+*/}
 
 .circle {
     width: 50%;

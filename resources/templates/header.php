@@ -3,11 +3,13 @@
 // error_reporting(0);
 // @ini_set('display_errors', 0);
 // Same as error_reporting(E_ALL);
-//ini_set('error_reporting', E_ALL);
+// ini_set('error_reporting', E_ALL);
 ob_start();
 
+if (isset($_SESSION['login']))
+	session_regenerate_id(true);
+
 session_start();
-session_regenerate_id(true);
 
 // Include useful scripts so I do not have to on each page.
 foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $filename) {
