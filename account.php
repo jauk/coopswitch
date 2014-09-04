@@ -81,17 +81,16 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 
   	<!-- <div id="profileFields" name="profileFields" class="container col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-1 col-xs-6 col-xs-offset-3" style="border: 0px solid black; padding: 5px;"> -->
-  	<div>
 
   		<div class="row text-center" id="profileFieldsRow" style="">
 
   			<!-- Major -->
-  			<div class="col-md-4 profileBox" style="border: 1px solid black;">
+  			<div class="col-md-4 profileBox">
   				<h3 class="profileBoxHeading">Major</h3>
-	      	<h4 id="majorNameText"><?php echo "{$_SESSION['user_major_name']}"; ?></h4>
+	      	<div id="majorNameText"><?php echo "{$_SESSION['user_major_name']}"; ?></div>
         	
         	<!-- For editing the major. -->
-        	<div id="majorSpan" class="profileBoxEdit">
+        	<div id="majorSpan" class="profileBoxEditOff">
 						<input type="hidden" name="newMajorId" id="newMajorId" value="">
 						<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
 							<?php print_majors(); ?>
@@ -100,12 +99,12 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   			</div>
 
   			<!-- Cycle -->
-  			<div class="col-md-4 profileBox" style="border: 1px solid black;">
+  			<div class="col-md-4 profileBox">
   				<h3 class="profileBoxHeading">Cycle</h3>
-	      	<h4 id="cycleNameText"><?php echo "{$_SESSION['user_cycle_name']}"; ?></h4>
+	      	<div id="cycleNameText"><?php echo "{$_SESSION['user_cycle_name']}"; ?></div>
 
 	      	<!-- For editing the cycle. -->
-        	<div id="cycleSpan" class="profileBoxEdit">
+        	<div id="cycleSpan" class="profileBoxEditOff">
 					<input type="hidden" name="newCycleId" id="newCycleId" value="">
 						<select id="selectCycle" class="form-control selectpicker" name="cycle">
 							<?php if ($_SESSION['user_cycle'] == 1) { ?>
@@ -120,12 +119,12 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   			</div>
 
   			<!-- Program -->
-  			<div class="col-md-4 profileBox" style="border: 1px solid black;">
+  			<div class="col-md-4 profileBox">
   				<h3 class="profileBoxHeading">Program</h3>
-	      	<h4 id="programNameText" ><?php echo "{$_SESSION['user_program_name']}"; ?></h4>
+	      	<div id="programNameText" ><?php echo "{$_SESSION['user_program_name']}"; ?></div>
 
 	      	<!-- For editing the program. -->
-        	<div id="programSpan" class="profileBoxEdit">
+        	<div id="programSpan" class="profileBoxEditOff">
 						<input type="hidden" name="newProgramId" id="newProgramId" value="">
 						<select id="selectProgram" class="form-control selectpicker" showSubtext="true" name="program">
 							<?php if ($_SESSION['user_program'] == 1) { ?>
@@ -140,95 +139,10 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   			</div>
   		
   		</div>
-
-  	  	<br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-    	<div class="row"> <!-- Major -->
-  
-	      	<div id="majorBeginText" class="<?php echo $beginTextClass; ?>" style="<?php echo $beginTextStyle; ?>">
-	      		<h4>Your major is</h4>
-	      	</div>
-	      	
-	      	<div id="majorNameText" class="col-sm-5 col-xs-7" style="text-align: left; padding-left: 5px;">
-	      	  <h4>
-	      	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_major_name']}."; ?></div>
-	      		</h4>
-	      	</div>
-    
-       <!-- <form id="majorForm" name="majorForm" method="post" action="update.php" onsubmit="return saveMajor();"> -->
-        	<div id="majorSpan" style="display: none; padding-left: 5px;" class="col-sm-6">
-						<input type="hidden" name="newMajorId" id="newMajorId" value="">
-						<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5">
-							<?php print_majors(); ?>
-						</select>
-         	</div>
-        <!-- </form> -->
-      	
-    	</div>
-    
-    	<div class="row"> <!-- Cycle -->
-    	
-    	 	<div id="cycleBeginText" class="<?php echo $beginTextClass; ?>" style="<?php echo $beginTextStyle; ?>">
-      			<h4>Your cycle is</h4>
-      		</div>
-      	
-	      	<div id="cycleNameText" class="col-sm-5" style="text-align: left; padding-left: 5px;">
-	      	  <h4>
-	      	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_cycle_name']}."; ?></div>
-	      		</h4>
-	      	</div>
-      	
-       <!-- <form id="cycleForm" name="cycleForm" method="post" action="update.php" onsubmit="return saveCycle();"> -->
-        	<div id="cycleSpan" style="display: none; padding-left: 5px;" class="col-sm-6">
-				<input type="hidden" name="newCycleId" id="newCycleId" value="">
-				<select id="selectCycle" class="form-control selectpicker" name="cycle">
-					<?php if ($_SESSION['user_cycle'] == 1) { ?>
-						<option selected="selected" value="1">Fall-Winter</option>
-						<option value="2">Spring-Summer</option>
-					<?php } else { ?>
-						<option value="1">Fall-Winter</option>
-						<option selected="selected" value="2">Spring-Summer</option>
-					<?php } ?>
-				</select>
-          	</div>
-      <!-- </form> -->
-      	
-    	</div>
-    
-    	<div class="row"> <!-- Program -->
-    	
-	    	<div id="programBeginText" class="<?php echo $beginTextClass; ?>" style="<?php echo $beginTextStyle; ?>">
-	      		<h4>You will have</h4>
-	      	</div>
-	      	
-	      	<div id="programNameText" class="col-sm-5" style="text-align: left; padding-left: 5px;">
-	      	  <h4>
-	      	   	<div style="display: inline-block;"><?php echo "{$_SESSION['user_program_name']}"; ?>.</div>
-	      		</h4>
-	      	</div>
-      	
-        <!-- <form id="programForm" name="programForm" method="post" action="update.php" onsubmit="return saveProgram();"> -->
-        	<div id="programSpan" style="display: none; padding-left: 5px;" class="col-sm-6">
-				<input type="hidden" name="newProgramId" id="newProgramId" value="">
-				<select id="selectProgram" class="form-control selectpicker" showSubtext="true" name="program">
-					<?php if ($_SESSION['user_program'] == 1) { ?>
-						<option selected="selected" value="1" data-subtext="4 years">1 co-op</option>
-						<option value="2" data-subtext="5 years">3 co-ops</option>
-					<?php } else { ?>
-						<option value="1" data-subtext="4 years">1 co-op</option>
-						<option selected="selected" value="2" data-subtext="5 years">3 co-ops</option>
-					<?php } ?>
-				</select>
-        	</div>
-      <!-- </form> -->
-      	</div>
       
-    </div> <!-- End profile field div begin btn container -->
 
     <?php $btnRowClass = "col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3"; ?>
   
-    	<br><br><br><br><br>
-
     <div id="editBtns" class="container col-md-2 col-sm-12 col-xs-12" style="border: 0px solid black; padding: 5px; padding-top: 8px; margin-left: 20px;">
 			<div class="row" style="padding-bottom: 5px;">
 				<div class="<?php echo $btnRowClass; ?>">
@@ -480,9 +394,9 @@ $('.selectpicker').selectpicker();
 	var editMajor = function () {
 		
 		if (check_if_dropped()) {
-			window.majorDiv.style.display = 'none';
+			window.majorDiv.className = 'profileBoxEditOff'
 			//window.majorDiv.innerHTML = "";
-			window.majorSpan.style.display = '';
+			window.majorSpan.className = 'profileBoxEditOn';
 
 		// 	window.majorEditBtn.style.display = 'none';
 		// 	window.majorSaveBtn.style.display = '';
@@ -509,8 +423,8 @@ $('.selectpicker').selectpicker();
 	var editCycle = function () {
 		
 		if (check_if_dropped()) {
-			window.cycleDiv.style.display = 'none';
-			window.cycleSpan.style.display = '';
+			window.cycleDiv.className = 'profileBoxEditOff';
+			window.cycleSpan.className = 'profileBoxEditOn';
 
 		// 	window.cycleEditBtn.style.display = 'none';
 		// 	window.cycleSaveBtn.style.display = '';
@@ -535,8 +449,8 @@ $('.selectpicker').selectpicker();
 	var editProgram = function () {
 		
 		if (check_if_dropped()) {
-			window.programDiv.style.display = 'none';
-			window.programSpan.style.display = '';
+			window.programDiv.className = 'profileBoxEditOff';
+			window.programSpan.className = 'profileBoxEditOn';
 
 		// 	window.programEditBtn.style.display = 'none';
 		// 	window.programSaveBtn.style.display = '';

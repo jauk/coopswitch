@@ -50,6 +50,10 @@ select {
 
 }
 
-.profileBoxEdit {
+.profileBoxEditOff {
 	display: none;
+}
+
+.profileBoxEditOn {
+	display: inline;
 }
