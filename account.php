@@ -99,7 +99,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 							</select>
 	         	</div>
 
-	         	<img src="/img/icon-book.svg" class="img-responsive img-rounded center-block profileBoxImg">
+	         	<img src="/img/icon-book.png" class="img-responsive center-block profileBoxImg">
          	</div>
 
   			</div>
@@ -126,7 +126,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 							</select>
 	          </div>
 
-	         	<img src="/img/cal-icon.png" class="img-responsive img-rounded center-block profileBoxImg">
+	         	<img src="/img/icon-cal.png" class="img-responsive center-block profileBoxImg">
 
 	         </div>
 
@@ -153,7 +153,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 							</select>
 	        	</div>	     
 
-	        	<img src="/img/cal-business.png" class="img-responsive img-rounded center-block profileBoxImg">
+	        	<img src="/img/icon-case.png" class="img-responsive center-block profileBoxImg">
 	        </div>
 
   			</div>
@@ -532,22 +532,22 @@ $('.selectpicker').selectpicker();
 
 		//if (field == "major") {
 		//window.majorSaveBtn.style.display = 'none';
-			window.majorSpan.style.display = 'none';
-			window.majorDiv.style.display = 'inline-block';
+			window.majorSpan.className = 'profileBoxEditOff';
+			window.majorDiv.className = 'profileBoxEditOn';
 		// 	window.majorCancelBtn.style.display = 'none';
 		// 	window.majorEditBtn.style.display = '';
 		//}
 		//else if (field == "cycle") {
 	  //window.cycleSaveBtn.style.display = 'none';
-			window.cycleSpan.style.display = 'none';
-			window.cycleDiv.style.display = 'inline-block';
+			window.cycleSpan.className = 'profileBoxEditOff';
+			window.cycleDiv.className = 'profileBoxEditOn';
 		// 	window.cycleCancelBtn.style.display = 'none';
 		// 	window.cycleEditBtn.style.display = '';
 		//}
 		//else if (field == "program") {
 		//window.programSaveBtn.style.display = 'none';
-			window.programSpan.style.display = 'none';
-			window.programDiv.style.display = 'inline-block';
+			window.programSpan.className = 'profileBoxEditOff';
+			window.programDiv.className = 'profileBoxEditOn';
 		// 	window.programCancelBtn.style.display = 'none';
 		// 	window.programEditBtn.style.display = '';
 		//}

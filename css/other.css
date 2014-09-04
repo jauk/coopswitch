@@ -60,10 +60,10 @@ select {
 }
 
 .profileBoxImg {
-/*	zoom: 0.4;
-	-moz-transform: scale(0.4);*/
-/*	margin-top: -20px;
-*/}
+	zoom: 0.7;
+	-moz-transform: scale(0.7);
+/*	margin-top: -20px;*/
+}
 
 .circle {
     width: 50%;
@@ -74,7 +74,7 @@ select {
     border-radius: 50%;
     display: inline-block;
    	/*background: #4679BD;*/
-    border: 5px solid #f8f8f2;
+    border: 5px solid #D7F5F3;
 }
 
 .textboxTest {
