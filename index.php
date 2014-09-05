@@ -47,8 +47,8 @@ $formElementErrClass = "";
 
 	<div id="startText" class="row">
 		<div class="<?php echo $typicalRowClass; ?>">
-				<p class="lead">Find someone to trade coop cycles with!</p>
-			</div>
+			<p class="lead">Find someone to trade coop cycles with!</p>
+		</div>
 	</div>
 
     <div id="stockPhoto" class="row">
@@ -69,7 +69,7 @@ $formElementErrClass = "";
 </div>
 
   	<!-- REGISTER FORM START -->
-	<div id="registerForm" class="container col-sm-6 col-sm-offset-3">
+	<div id="registerForm" class="container col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 	    <div class="row">
 	  		<div class="<?php echo $formHeaderClass; ?>" style="padding: 20px;">
 	  			<h3><strong>Registration Form</strong></h3>
@@ -77,60 +77,55 @@ $formElementErrClass = "";
 	  		</div>
 	  	</div>
 		
-			<!-- Print out if there is an error with the form data. -->
+		<!-- Print out if there is an error with the form data. -->
 		<div class="row">
-	  		<div class="<?php echo $formMainErrClass; ?>">
-	  			<span class="error">
-	  				<strong>
-	  					<div class="alert alert-warning lead" id="formError">
-	  						<!-- <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
-	  					</div>
-	  				</strong>
-	  			</span>
-	  		</div>
-	  	</div>
+  		<div class="<?php echo $formMainErrClass; ?>">
+  			<span class="error">
+  				<strong>
+  					<div class="alert alert-warning lead" id="formError">
+  						<!-- <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+  					</div>
+  				</strong>
+  			</span>
+  		</div>
+  	</div>
+
+  	<?php 
+  		$formLabelClass = "col-sm-2 col-sm-offset-1 control-label formLabel"; 
+  		$formInputWidth = "col-sm-8";
+  	?>
 
 			<!-- Registration Form -->
-		<form role="form" id="register" method="post" action="register.php" onsubmit="return validate_submit();" id="register">
+		<form class="form-horizontal" role="form" id="register" method="post" action="register.php" onsubmit="return validate_submit();" id="register">
 
-			<div id="userElements" class="">
-		     	<div class="row">
-		  			<div id="mainNameDiv" class="<?php echo "$formElementClass"; ?>">
-		  				<label for="nameField">Name</label>
-		  				<input type="text" class="form-control" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()" data-toggle="tooltip" data-trigger="click" data-placement="right" title="">
-		  				<span class="help-block error"><div id="nameError"></div></span>
-		  			</div>
-		  		</div>
-		  
-		     	 <div class="row">
-		  			<div id="emailDiv" class="<?php echo "$formElementClass"; ?>">
-		  				<label for="emailField">Email</label>
-		  				<input type="email" class="form-control" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email(1)">
+
+	  			<div id="nameDiv" class="form-group">
+	  				<label for="nameField" class="<?php echo $formLabelClass ?>">Name</label>
+	  				<div class="<?php echo $formInputWidth ?>">
+		  				<input type="text" class="form-control input-lg" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()" data-toggle="tooltip" data-trigger="click" data-placement="right" title="">
+	 	  				<span class="help-block error"><div id="nameError"></div></span>
+	  				</div>
+	  			</div>
+	  
+	  			<div id="emailDiv" class="form-group">
+	  				<label for="emailField" class="<?php echo $formLabelClass ?>">Email</label>
+	  				<div class="<?php echo $formInputWidth ?>">
+		  				<input type="email" class="form-control input-lg" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email(1)">
 		  				<span class="help-block error"><div id="emailError"></div></span>
-		  			</div>
-		  		</div>
-		  
-		     	 <div class="row">
-		  			<div id="mainPasswordDiv" class="<?php echo "$formElementClass"; ?>">
-		  				<label for="passwordField">Password<!-- <small><br /><em>Do not use your Drexel One password.</em></small> --></label>
-		  			</div>
-		  		</div>
-		  		
-		  		<div class="row">
-		  		  <div class="col-md-5 col-md-offset-1 col-sm-6">
-		  				<input type="password" class="form-control" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()"  data-toggle="popover" data-trigger="" data-placement="auto" title="Warning" data-content="Please do not use your Drexel One password.">
-		  			</div>
-		  			<div class="col-md-5 col-sm-6">
-		  				<input type="password" class="form-control" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="passwordConfirm()">
-		  			</div>
-		  			<div class="<?php echo "$formElementClass"; ?>">
-		  				<span class="help-block error"><div id="passwordError"></div></span>
-		        	</div>
-		      	</div>
-		    </div>
+	  				</div>
+	  			</div>
+
+	  			<div id="passwordDiv" class="form-group">
+	  				<label for="passwordField" class="<?php echo $formLabelClass ?>">Password</label>
+	  				<div class="<?php echo $formInputWidth ?>">
+	  					<input type="password" class="form-control input-lg" id="user_pass" name="password" placeholder="Enter a password (not your Drexel One password)" onchange="validate_password()">
+		  				<input type="password" class="form-control input-lg" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="passwordConfirm()">
+	  				</div>
+	  			</div>
 
 
-		    <div class="row">
+
+		    <div class="form-group">
 		    	<div class="<?php echo $formElementClass; ?>">
 		    		<hr class="style-three">
 		    	</div>
@@ -173,42 +168,44 @@ $formElementErrClass = "";
 
 		    <?php } ?>
 
+  			<div class="form-group" id="mainMajorDiv">
+  				<label for="majorField" class="<?php echo $formLabelClass ?>">Major</label>
+					<div class="<?php echo $formInputWidth ?>">			  			
+	  				<select class="form-control selectpicker input-lg" id="user_major" name="major" data-live-search="true" data-size="5" data-width="auto" onchange="checkmajor()">
+	  					<?php
+	  					// Get the list of majors and display for user selection.
+	  					  print_majors();
+	  					  mysql_close($con);
+	  					?>
+	  				</select>
+	  				<span class="help-block error"><div id="majorError"></div></span>
+	  			</div>
+  			</div>
 
-	      	<div id="profileElements" class="">
-		      	<div class="row">
-		  			<div class="<?php echo $formElementClass; ?>" id="mainMajorDiv">
-		  				<label for="majorField">Major</label>
-		  				<select class="form-control selectpicker" id="user_major" name="major" data-live-search="true" data-size="5" onchange="checkmajor()">
-		  					<?php
-		  					// Get the list of majors and display for user selection.
-		  					  print_majors();
-		  					  mysql_close($con);
-		  					?>
-		  				</select>
+	    	<div class="form-group">
+	  				<label for="cycleField" class="<?php echo $formLabelClass ?>">Current Cycle</label>
+	  				<div class="<?php echo $formInputWidth ?>">
+		  				<label class="radio-inline">
+							  <input checked="checked" type="radio" name="cycle" id="cycle" value="1"><?php echo FALLWINTER ?>
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="cycle" id="cycle" value="2"><?php echo SPRINGSUMMER ?>
+							</label>
 		  			</div>
-		  			<div class="<?php echo $formElementClass; ?>">
-		  				<span class="help-block error"><div id="majorError"></div></span>
-		  			</div>
-		      	</div>
-		      	<div class="row">
-		  			<div class="col-md-5 col-md-offset-1 col-sm-6 text-center">
-		  				<label for="cycleField">Current Cycle</label>
-		  				<select class="form-control selectpicker" id="cycle" name="cycle">
-		  					<option value="1"><?php echo FALLWINTER; ?></option>
-		  					<option value="2"><?php echo SPRINGSUMMER; ?></option>
-		  				</select>
-		  			</div>
+	  		</div>
 
-		  			<div class="col-md-5 col-sm-6 text-center">
-		  				<label for="numCoopsField">Current Program</label>
-		  				<select class="form-control selectpicker" name="numCoops">
-		  					<option value="1"><?php echo ONECOOP; ?></option>
-		  					<option value="2"><?php echo THREECOOPS; ?></option>
-		  				</select>
-		  			</div>
-		      	</div>
+	  		<div class="form-group">
+	  				<label for="numCoopsField" class="<?php echo $formLabelClass ?>">Coops</label>
+	  				<div class="<?php echo $formInputWidth ?>">
+		  				<label class="radio-inline">
+							  <input checked="checked" type="radio" name="numCoops" id="numCoops" value="1"><?php echo ONECOOP ?>
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="numCoops" id="numCoops" value="2"><?php echo THREECOOPS ?>
+							</label>		  			
+	  				</div>
+	    	</div>
 
-	      	</div>
 
 		    <div class="row">
 		    	<div class="<?php echo $formElementClass; ?>">
@@ -259,7 +256,7 @@ $formElementErrClass = "";
 		  			Coopswitch switches more coop cycles than any other website.
 		  			</p>
 		  		</div>
-			</div> 
+				</div> 
 
 		<?php } ?>
 
@@ -288,7 +285,10 @@ $formElementErrClass = "";
 
 <!-- </div> -->
 <script>
-	id("registerForm").style.display = 'none';
+
+	//id("registerForm").style.display = 'none';
+	id("registerForm").style.display = '';
+	id("begin").style.display = 'none';
 
 	$('#getStarted').click(function(e){    
 	    $('#begin').fadeOut('fast', function(){
@@ -299,7 +299,9 @@ $formElementErrClass = "";
 
 <script type="text/javascript">
 
-	$('.selectpicker').selectpicker();
+	// $('.selectpicker').selectpicker();
+	$('.selectpicker').selectpicker({ 'selectedText': '',style:'btn-default btn-lg' });
+
 	$('#user_name').tooltip();
 	$('#user_pass').popover();
 
@@ -322,7 +324,8 @@ $formElementErrClass = "";
 
 		window.errorClassVals = "alert alert-warning";
 
-		window.mainDivClass = "<?php echo $formElementClass; ?>";
+		// window.mainDivClass = "<?php echo $formElementClass; ?>";
+		window.mainDivClass = "";
 		window.mainDivClassError = mainDivClass + " has-error";
 		window.mainDivClassValid = mainDivClass + " has-success";
 		window.mainDivClassWarning = mainDivClass + " has-warning";
@@ -359,10 +362,10 @@ $formElementErrClass = "";
 		var errorDiv = fieldErrorDiv;
 		var error = errorMessage;
 
-		errorDiv.textContent = error;
-		errorDiv.style.display = '';
-		errorDiv.className = window.errorClassVals;
-		mainDiv.className = window.mainDivClassError;
+		// errorDiv.textContent = error;
+		// errorDiv.style.display = '';
+		// errorDiv.className = window.errorClassVals;
+		mainDiv.className = "form-group has-error";
 
 	}
 
@@ -371,8 +374,8 @@ $formElementErrClass = "";
 		var mainDiv = fieldMainDiv;
 		var errorDiv = fieldErrorDiv;
 
-		mainDiv.className = window.mainDivClassValid;
-		errorDiv.style.display = 'none';
+		mainDiv.className = "form-group has-success";
+		// errorDiv.style.display = 'none';
 
 	}
 
@@ -385,7 +388,7 @@ $formElementErrClass = "";
 
 		var name = id("user_name").value;
 
-		var nameDiv = id("mainNameDiv");
+		var nameDiv = id("nameDiv");
 		var nameErrorDiv = id("nameError");
 
 		name = name.trim();
@@ -419,23 +422,25 @@ $formElementErrClass = "";
 	var validate_email = function (type) {
 
 		if (type == 1) {
-			var emailErrorDiv = id("emailError");
+			// var emailErrorDiv = id("emailError");
 			var emailDiv = id("emailDiv");
-			var email = id("user_email").value;
-			var emailVal = id("user_email");
+			var emailErrorDiv = "";
+			// var email = id("user_email");
+			// var emailVal = id("user_email");
 
 		}
-		else if (type == 2) {
-			var emailDiv = id("otherEmailMain");
-			var emailErrorDiv = id("otherEmailError");
-			var email = id("otherUserEmail").value;
-			var emailVal = id("otherUserEmail");
+		// else if (type == 2) {
+		// 	var emailDiv = id("otherEmailMain");
+		// 	var emailErrorDiv = id("otherEmailError");
+		// 	var email = id("otherUserEmail").value;
+		// 	var emailVal = id("otherUserEmail");
 
-		}
+		// }
 		else {
-			alert("ERROR.");
+			console.log("ERROR WITH EMAIL.");
 		}
 
+		email = id("user_email").value;
 		email = email.trim();
 		email = email.toLowerCase();
 
@@ -454,15 +459,17 @@ $formElementErrClass = "";
 				emailRemove = email.slice(length, email.length);
 				email = email.replace(emailRemove, "");
 
-				emailErrorDiv.textContent = "Extra characters removed.";
-				emailErrorDiv.className = 'alert alert-info';
+				// emailErrorDiv.textContent = "Extra characters removed.";
+				// emailErrorDiv.className = 'alert alert-info';
 
-				$("#emailError").fadeOut(2000);
+				// $("#emailError").fadeOut(2000);
 
-				removeError(emailDiv, emailErrorDiv);
 			}
+			
+			removeError(emailDiv, emailErrorDiv);
 
 			// Check to make sure email does not repeat in either form.
+			/*
 			if (type == 1 && email == id("otherUserEmail").value) {
 
 				error = "Same email as person switching with.";
@@ -486,6 +493,7 @@ $formElementErrClass = "";
 				else
 					errors.emailSecondary = 0;
 			}
+			*/
 
 		}
 		else
@@ -507,9 +515,14 @@ $formElementErrClass = "";
 		}
 
 		//id("user_email").value = email;
-		emailVal.value = email;
+		id("user_email").value = email;
 
 		validate_form();
+	}
+
+	var showConfirm = function () {
+		id("user_pass_confirm").style.display = '';
+
 	}
 
 	var validate_password = function () {
@@ -517,14 +530,16 @@ $formElementErrClass = "";
 		var password = id("user_pass").value;
 		var password2 = id("user_pass_confirm").value;
 
-		var passwordErrorDiv = id("passwordError");
-		var mainPasswordDiv = id("mainPasswordDiv");
+		//var passwordErrorDiv = id("passwordError");
+		var passwordErrorDiv = "";
+		var passwordDiv = id("passwordDiv");
 
 		if (password2 == "" && window.hasEnteredAgain) {
 
 			errors.password = 1;
 			error = "You need a password.";
-			setError(mainPasswordDiv, passwordErrorDiv, error);	
+			setError(passwordDiv, passwordErrorDiv, error);	
+			console.log("This first if");
 		}
 
 		else if ((password != password2) && window.hasEnteredAgain) {
@@ -537,7 +552,9 @@ $formElementErrClass = "";
 				errors.password = 1;
 
 				error = "Passwords do not match.";
-				setError(mainPasswordDiv, passwordErrorDiv, error);
+				setError(passwordDiv, passwordErrorDiv, error);
+
+				console.log(error);
 	//		}
 
 		}
@@ -545,14 +562,16 @@ $formElementErrClass = "";
 		else {
 
 			if (password.length < 6 && password.length > 0) {
-				passwordErrorDiv.style.display = '';
-				passwordErrorDiv.className = window.errorClassVals;
-				passwordErrorDiv.textContent = "You should use a longer password.";
-				mainPasswordDiv.className = window.mainDivClassWarning;
+				// passwordErrorDiv.style.display = '';
+				// passwordErrorDiv.className = window.errorClassVals;
+				// passwordErrorDiv.textContent = "You should use a longer password.";
+
+				passwordDiv.className = "form-group has-warning";
+				console.log("Pass warning");
 			}
 
 			else {
-				removeError(mainPasswordDiv, passwordErrorDiv);
+				removeError(passwordDiv, passwordErrorDiv);
 			}
 
 			errors.password = 0;

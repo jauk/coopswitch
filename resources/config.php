@@ -45,7 +45,7 @@ $config = array(
 
 // Main Vars
 define('SITE_NAME', 'Coopswitch');
-define('SITE_SLOGAN', 'A simple way to switch coops.');
+define('SITE_SLOGAN', 'A simpler way to switch coops.');
 
 // Header Vars
 define('LOGIN_GREETING', 'Hey, ');
