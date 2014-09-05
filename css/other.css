@@ -151,8 +151,9 @@ select {
 
 .siteNav li>* {
 	display: block !important;
-	margin-left: 2px;
-	margin-right: 2px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
 }
 
 .siteNav li>img {
@@ -169,6 +170,17 @@ select {
 
 .siteNav li>img {
 	  margin: 0 auto;
+}
+
+.nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs, .nav-pills {
+    text-align:center;
 }
 
 /* FOOTER */

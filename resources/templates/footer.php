@@ -1,8 +1,8 @@
 <!-- <div class="bottom"> -->
 
-        <div class="container">
+        <div class="container-fluid">
           <div class="row">
-            <div class="col-sm-8 col-sm-offset-2" id="footer-container"> 
+            <div class="col-sm-6 col-sm-offset-3" id="footer-container"> 
 
               <footer class="footer-text">
                   <div class="row">
