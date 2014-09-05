@@ -124,7 +124,6 @@ $formElementErrClass = "";
 	  			</div>
 
 
-
 		    <div class="form-group">
 		    	<div class="<?php echo $formElementClass; ?>">
 		    		<hr class="style-three">
@@ -393,8 +392,8 @@ $formElementErrClass = "";
 
 		name = name.trim();
 
-		regTest = /^[a-zA-Z]+$/;
-
+		regTest = /^[a-zA-Z\s]*$/;
+		
 		var validName = regTest.test(name);
 
 		// Only checks if blank, add regex support.
