@@ -86,7 +86,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 				<!-- Site Nav Main -->
 				<div class="row">
-					<div class="">
+					<div class="col-xs-offset-1">
 						<ul id="mainNav" class="nav nav-pills nav-stackable siteNav">
 							<li <?php if ($pageName == "Home") echo 'class="active"'; ?> >
 								<a href="/">
@@ -98,11 +98,6 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 								<img src="/img/header/icon-info.png" class="img-responsive headerImg" />
 								About</a>
 							</li>
-							<!--
-					 		<li <?php if ($pageName == "Stats") echo 'class="active"'; ?> >
-								<a href="/stats">Stats</a>
-							</li> 
-							-->
 							<li <?php if ($pageName == "Switch") echo 'class="active"'; ?> >
 								<a href="/switch">
 								<img src="/img/header/icon-time.png" class="img-responsive headerImg" />
@@ -113,8 +108,6 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 									<img src="/img/header/icon-user.png" class="img-responsive headerImg">
 									Account</a>
 							</li>
-							<li>
-							</li>
 						</ul>
 
 					</div>
@@ -122,7 +115,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 
 				<div class="row">
-					<div class="col-sm-11 col-sm-offset-1 col-xs-8 col-xs-offset-2 text-center">
+					<div class="col-sm-12 col-xs-8 col-xs-offset-2">
 							<?php if (!isset($_SESSION['login'])) { ?>
 
 							<form id="loginForm" class="form-inline" role="form" name="login_form" method="post" action="/login.php">
@@ -135,7 +128,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 							    	<label class="sr-only" for="password">Password</label>
 							    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
 									</div>
-						   		<button type="submit" class="btn btn-default btn-info">Sign In</button>
+						   		<button id="signInHeader" type="submit" class="btn btn-default btn-info text-center">Sign In</button>
 							  </fieldset>
 							</form>
 					</div>
