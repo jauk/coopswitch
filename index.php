@@ -467,6 +467,7 @@ $formElementErrClass = "";
 			}
 			
 			removeError(emailDiv, emailErrorDiv);
+			errors.emailPrimary = 0;
 
 			// Check to make sure email does not repeat in either form.
 			/*

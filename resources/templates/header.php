@@ -114,8 +114,8 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 				</div>
 
 
-				<div class="row">
-					<div class="col-sm-12 col-xs-8 col-xs-offset-2">
+				<div class="row-fluid">
+					<div class="">
 							<?php if (!isset($_SESSION['login'])) { ?>
 
 							<form id="loginForm" class="form-inline" role="form" name="login_form" method="post" action="/login.php">
@@ -131,6 +131,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 						   		<button id="signInHeader" type="submit" class="btn btn-default btn-info text-center">Sign In</button>
 							  </fieldset>
 							</form>
+
 					</div>
 				</div>
 							<?php } else { ?>
