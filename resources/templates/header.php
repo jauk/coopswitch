@@ -63,9 +63,9 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 </head>
 
 <body style="">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2" id="header-container"> 
+			<div class="col-sm-6 col-sm-offset-3" id="header-container"> 
 				<!-- Page Alert: Span width and gradient, have X or disappear on own? On top of title, etc. -->
 				<div id="pageAlert" style="display: none; position: fixed;" class="row">
 					<div class="text-center bg-warning text-warning lead" style="padding: 25px;">
@@ -86,7 +86,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 				<!-- Site Nav Main -->
 				<div class="row">
-					<div class="col-sm-11 col-sm-offset-1 col-xs-8 col-xs-offset-2 text-center">
+					<div class="col-md-offset-3 col-xs-8 col-xs-offset-2 text-center">
 						<ul id="mainNav" class="nav nav-pills nav-stackable siteNav">
 							<li <?php if ($pageName == "Home") echo 'class="active"'; ?> >
 								<a href="/">
