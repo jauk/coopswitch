@@ -33,6 +33,25 @@ select {
 	/*font-size: 18px;*/
 }
 
+/* HEADER */
+
+.pageTitleFont {
+	font-family: 'Cutive';
+}
+
+.page-title {
+	font-family: 'Cutive';
+	font-stretch: 100%;
+	font-size: 2.8em;
+}
+
+#subtitle {
+	padding: 5px;
+	margin-top: 10px;
+}
+
+/* USER PROFIES */
+
 .profileBox {
 
 	padding: 5px;

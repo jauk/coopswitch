@@ -47,7 +47,7 @@ $formElementErrClass = "";
 
 	<div id="startText" class="row">
 		<div class="<?php echo $typicalRowClass; ?>">
-				<p class="lead">Find someone to trade co-op cycles with!</p>
+				<p class="lead">Find someone to trade coop cycles with!</p>
 			</div>
 	</div>
 
@@ -194,16 +194,16 @@ $formElementErrClass = "";
 		  			<div class="col-md-5 col-md-offset-1 col-sm-6 text-center">
 		  				<label for="cycleField">Current Cycle</label>
 		  				<select class="form-control selectpicker" id="cycle" name="cycle">
-		  					<option value="1">Fall-Winter</option>
-		  					<option value="2">Spring-Summer</option>
+		  					<option value="1"><?php echo FALLWINTER; ?></option>
+		  					<option value="2"><?php echo SPRINGSUMMER; ?></option>
 		  				</select>
 		  			</div>
 
 		  			<div class="col-md-5 col-sm-6 text-center">
 		  				<label for="numCoopsField">Current Program</label>
 		  				<select class="form-control selectpicker" name="numCoops">
-		  					<option value="1">1 co-op</option>
-		  					<option value="2">3 co-ops</option>
+		  					<option value="1"><?php echo ONECOOP; ?></option>
+		  					<option value="2"><?php echo THREECOOPS; ?></option>
 		  				</select>
 		  			</div>
 		      	</div>
@@ -256,7 +256,7 @@ $formElementErrClass = "";
 		    <div class="row">
 		  		<div class="<?php echo $typicalRowClass; ?>">
 		  			<p class="lead">
-		  			Coopswitch switches more co-op cycles than any other website.
+		  			Coopswitch switches more coop cycles than any other website.
 		  			</p>
 		  		</div>
 			</div> 

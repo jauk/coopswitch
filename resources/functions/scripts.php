@@ -36,7 +36,7 @@ function print_majors() {
 		}
 
 		if ($noSwitch == 1)
-			print_r('<option class="noSwitch" value=' . $major_ident . '>' . $major_name . '</option>');
+			print_r('<option class="noSwitch" value=' . $major_ident . ' data-subtext="Not Available" >' . $major_name . '</option>');
 		else
 			print_r('<option ' . $selected . ' value="' . $major_ident . '" data-subtext="' . $majorSubtext . '">' . $major_name . '</option>');
 

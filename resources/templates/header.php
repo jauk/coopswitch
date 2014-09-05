@@ -59,13 +59,6 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 	<script src="/js/global.js"></script>
 
 	<link href="https://fonts.googleapis.com/css?family=Cutive" rel="stylesheet" type="text/css">
-
-	<style>
-		.page-title {
-			font-family: 'Cutive';
-			font-size: 48px;
-		}
-	</style>
 	
 </head>
 
@@ -81,11 +74,13 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 		<!-- Site Title -->
 		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
-				<h1 class="page-title"><?php echo SITE_NAME; ?></h1>
-				<h4><?php echo SITE_SLOGAN; ?> </h4>
+			<div class="col-sm-10 col-sm-offset-1 text-center">
+				<h1 class="page-title"><?php echo SITE_NAME; ?>
+					<div id="subtitle"><small><?php echo SITE_SLOGAN; ?></small></div>
+				</h1>
 			</div>
 		</div>
+
 
 		<!-- Site Nav Main -->
 		<div class="row">
