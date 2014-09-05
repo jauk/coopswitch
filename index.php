@@ -252,7 +252,7 @@ $formElementErrClass = "";
 
 		    <div class="row">
 		  		<div class="<?php echo $typicalRowClass; ?>">
-		  			<p class="lead">
+		  			<p class="lead" style="margin-bottom: 16em;">
 		  			Coopswitch switches more coop cycles than any other website.
 		  			</p>
 		  		</div>

@@ -64,99 +64,115 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 <body style="">
 	<div class="container">
-
-		<!-- Page Alert: Span width and gradient, have X or disappear on own? On top of title, etc. -->
-		<div id="pageAlert" style="display: none; position: fixed;" class="row">
-			<div class="text-center bg-warning text-warning lead" style="padding: 25px;">
-				Testing Error 123
-			</div>
-		</div>
-
-		<!-- Site Title -->
 		<div class="row">
-			<div class="col-sm-10 col-sm-offset-1 text-center">
-				<h1 class="page-title"><?php echo SITE_NAME; ?>
-					<div id="subtitle"><small><?php echo SITE_SLOGAN; ?></small></div>
-				</h1>
-			</div>
-		</div>
+			<div class="col-sm-8 col-sm-offset-2" id="header-container"> 
+				<!-- Page Alert: Span width and gradient, have X or disappear on own? On top of title, etc. -->
+				<div id="pageAlert" style="display: none; position: fixed;" class="row">
+					<div class="text-center bg-warning text-warning lead" style="padding: 25px;">
+						Testing Error 123
+					</div>
+				</div>
 
 
-		<!-- Site Nav Main -->
-		<div class="row">
-			<div class="col-sm-7 col-sm-offset-3 col-xs-6 col-xs-offset-3 text-center lead">
-				<ul id="mainNav" class="nav nav-pills nav-stackable nav-justified ">
-					<li <?php if ($pageName == "Home") echo 'class="active"'; ?> >
-						<a href="/">Home</a>
-					</li>
-					<li <?php if ($pageName == "About") echo 'class="active"'; ?> >
-						<a href="/about">About</a>
-					</li>
-					<!--
-			 		<li <?php if ($pageName == "Stats") echo 'class="active"'; ?> >
-						<a href="/stats">Stats</a>
-					</li> 
-					-->
-					<li <?php if ($pageName == "Switch") echo 'class="active"'; ?> >
-						<a href="/switch">Switch</a>
-					</li>
-					<li>
-						<div >
-							<a class="btn  btn-info accountBtn"  <?php print (isset($_SESSION['login']) ? 'href="/account.php"' : 'id="loginBtn" href="#"'); ?>>My Account</a>
-						</div>
-					</li>
-					<li >
-						<div>
-							<?php print (isset($_SESSION['login']) ? '<a href="/logout" id="logoutBtn" class="btn btn-danger accountBtn">Logout</a>' : ''); ?>
-						</div>
-					</li>
-				</ul>
-
-			</div>
-		</div>
+				<!-- Site Title -->
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1 text-center">
+						<h1 class="page-title "><?php echo SITE_NAME; ?>
+							<div id="subtitle"><small><?php echo SITE_SLOGAN; ?></small></div>
+						</h1>
+					</div>
+				</div>
 
 
-		<div class="row">
-			<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 text-center">
-					<?php if (!isset($_SESSION['login'])) { ?>
+				<!-- Site Nav Main -->
+				<div class="row">
+					<div class="col-sm-11 col-sm-offset-1 col-xs-8 col-xs-offset-2 text-center">
+						<ul id="mainNav" class="nav nav-pills nav-stackable siteNav">
+							<li <?php if ($pageName == "Home") echo 'class="active"'; ?> >
+								<a href="/">
+								<img src="/img/header/icon-home.png" class="img-responsive headerImg" />
+								Home</a>
+							</li>
+							<li <?php if ($pageName == "About") echo 'class="active"'; ?> >							
+								<a href="/about">
+								<img src="/img/header/icon-info.png" class="img-responsive headerImg" />
+								About</a>
+							</li>
+							<!--
+					 		<li <?php if ($pageName == "Stats") echo 'class="active"'; ?> >
+								<a href="/stats">Stats</a>
+							</li> 
+							-->
+							<li <?php if ($pageName == "Switch") echo 'class="active"'; ?> >
+								<a href="/switch">
+								<img src="/img/header/icon-time.png" class="img-responsive headerImg" />
+								Switch</a>
+							</li>
+							<li <?php if ($pageName == "Account") echo 'class="active"'; ?> >
+									<a href="#" <?php print (isset($_SESSION['login']) ? 'id="loggedInBtn"' : 'id="loginBtn"'); ?>> 
+									<img src="/img/header/icon-user.png" class="img-responsive headerImg">
+									Account</a>
+							</li>
+							<li>
+							</li>
+						</ul>
 
-					<form id="loginForm" class="form-inline" role="form" name="login_form" method="post" action="/login.php">
-						<fieldset>
-							<div class="form-group">
-					    	<label class="sr-only" for="email">Email address</label>
-					   		<input type="email" class="form-control" name="email" id="email" placeholder="Email">
-  						</div>
-  						<div class="form-group">
-					    	<label class="sr-only" for="password">Password</label>
-					    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-sm-11 col-sm-offset-1 col-xs-8 col-xs-offset-2 text-center">
+							<?php if (!isset($_SESSION['login'])) { ?>
+
+							<form id="loginForm" class="form-inline" role="form" name="login_form" method="post" action="/login.php">
+								<fieldset>
+									<div class="form-group">
+							    	<label class="sr-only" for="email">Email address</label>
+							   		<input type="email" class="form-control" name="email" id="email" placeholder="Email">
+		  						</div>
+		  						<div class="form-group">
+							    	<label class="sr-only" for="password">Password</label>
+							    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+									</div>
+						   		<button type="submit" class="btn btn-default btn-info">Sign In</button>
+							  </fieldset>
+							</form>
+					</div>
+				</div>
+							<?php } else { ?>
+
+							<div class="row text-center" id="loggedInHeader">
+								<div class="col-sm-10  col-xs-8 col-xs-offset-2 text-center">
+									<p class="lead">Welcome back, <?php echo $_SESSION['user_name'] ?>. 									<a href="/account" id="profileBtn" class="btn btn-primary accountBtn">Account</a>
+									<a href="/logout" id="logoutBtn" class="btn btn-danger accountBtn">Logout</a>
+</p>
+							
+								</div>
 							</div>
-				   		<button type="submit" class="btn btn-default btn-info">Sign In</button>
-					  </fieldset>
-					</form>
 
-					<?php } else { ?>
+						<?php } ?>
 
 
-
-				<?php } ?>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
-				<hr class="style-one">
-			</div>
-		</div>
+<!-- 
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2">
+						<hr class="style-one">
+					</div>
+				</div> -->
 	
 		<!-- <hr> -->
-
+			</div>
+		</div>
 	</div> <!-- End Header Container -->
 
 <script>
-	id("loginForm").style.display = 'none';
 
-	$('#loginBtn').click(function(e){    
+	<?php if (!isset($_SESSION['login'])) echo 'id("loginForm").style.display = "none";' ?>
+
+	<?php if (isset($_SESSION['login'])) echo 'id("loggedInHeader").style.display = "none";' ?>
+
+	$('#loginBtn').click(function(e){ 
 		//$('#loginBtn').fadeOut('fast');
 		if (id("loginForm").style.display == '' || id("loginForm").style.display == 'inline') {
 			$('#loginForm').fadeOut('fast');
@@ -164,6 +180,16 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 		}
 		else {
 			$('#loginForm').fadeIn('fast');
+		}
+	});
+
+	$('#loggedInBtn').click(function(e){    
+		if (id("loggedInHeader").style.display == '' || id("loggedInHeader").style.display == 'inline') {
+			$('#loggedInHeader').fadeOut('fast');
+			id("loggedInHeader").style.display = 'none';
+		}
+		else {
+			$('#loggedInHeader').fadeIn('fast');
 		}
 	});
 

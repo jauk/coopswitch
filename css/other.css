@@ -19,12 +19,6 @@
 	margin-top: .8em;
 }
 
-#accountBtn {
-	border-style: inset;
-	border: 1px solid black;
-	border-radius: 90px;
-}
-
 
 /* Thank you CSS tricks */
 hr.style-one { border: 0; height: 1px; background: #333; background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc); background-image: -moz-linear-gradient(left, #ccc, #333, #ccc); background-image: -ms-linear-gradient(left, #ccc, #333, #ccc); background-image: -o-linear-gradient(left, #ccc, #333, #ccc); }
@@ -45,6 +39,7 @@ select {
 	font-family: 'Cutive';
 	font-stretch: 100%;
 	font-size: 2.8em;
+	color: white;
 }
 
 #subtitle {
@@ -133,9 +128,68 @@ select {
  	margin-bottom: 6px;
  }
 
-/* HEADER LOGIN */
+/* HEADER */
 
-#logoutBtn {
+#header-container {
+	/*border: 1px solid black;*/
+	margin-bottom: 2.5em;
+
+	background-color: #333;
+
+	-webkit-border-bottom-right-radius: 25px;
+	-webkit-border-bottom-left-radius: 25px;
+	-moz-border-radius-bottomright: 25px;
+	-moz-border-radius-bottomleft: 25px;
+	border-bottom-right-radius: 25px;
+	border-bottom-left-radius: 25px;
+}
+
+.headerImg {
+	zoom: 0.5;
+	-moz-transform: scale(0.5);
+}
+
+.siteNav li>* {
+	display: block !important;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.siteNav li>img {
+	display: block;
+}
+.siteNav li>a {
+	color: #fff;
+	text-align: center;
+}
+
+.siteNav li>a:hover {
+	background-color: #666;
+}
+
+.siteNav li>img {
+	  margin: 0 auto;
+}
+
+/* FOOTER */
+
+#footer-container {
+
+	margin-top: 3em;
+	padding-top: 2em;
+
+	background-color: #444;
+
+	-webkit-border-top-left-radius: 30px;
+	-webkit-border-top-right-radius: 30px;
+	-moz-border-radius-topleft: 30px;
+	-moz-border-radius-topright: 30px;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+}
+
+.footer-text {
+	color: fff;
 }
 
 /* FORM */
@@ -177,4 +231,14 @@ select {
 
 .switchText {
 	text-align: center;
+}
+
+
+#loginForm {
+	margin-top: 2em;
+}
+
+#loggedInHeader p {
+	color: white;
+	margin-top: 2em;
 }
