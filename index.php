@@ -183,11 +183,13 @@ $formElementErrClass = "";
 
 	    	<div class="form-group">
 	  				<label for="cycleField" class="<?php echo $formLabelClass ?>">Current Cycle</label>
-	  				<div class="<?php echo $formInputWidth ?>">
-		  				<label class="radio-inline">
+	  				<div class="col-sm-3">
+		  				<label class="radio-inline formLabelRadio lead">
 							  <input checked="checked" type="radio" name="cycle" id="cycle" value="1"><?php echo FALLWINTER ?>
 							</label>
-							<label class="radio-inline">
+						</div>
+						<div class="col-sm-3">
+							<label class="radio-inline formLabelRadio lead">
 							  <input type="radio" name="cycle" id="cycle" value="2"><?php echo SPRINGSUMMER ?>
 							</label>
 		  			</div>
@@ -195,11 +197,13 @@ $formElementErrClass = "";
 
 	  		<div class="form-group">
 	  				<label for="numCoopsField" class="<?php echo $formLabelClass ?>">Coops</label>
-	  				<div class="<?php echo $formInputWidth ?>">
-		  				<label class="radio-inline">
+	  				<div class="col-sm-3">
+		  				<label class="radio-inline formLabelRadio lead">
 							  <input checked="checked" type="radio" name="numCoops" id="numCoops" value="1"><?php echo ONECOOP ?>
 							</label>
-							<label class="radio-inline">
+						</div>
+						<div class="col-sm-3">
+							<label class="radio-inline formLabelRadio lead">
 							  <input type="radio" name="numCoops" id="numCoops" value="2"><?php echo THREECOOPS ?>
 							</label>		  			
 	  				</div>
@@ -285,9 +289,9 @@ $formElementErrClass = "";
 <!-- </div> -->
 <script>
 
-	id("registerForm").style.display = 'none';
-	// id("registerForm").style.display = '';
-	// id("begin").style.display = 'none';
+	// id("registerForm").style.display = 'none';
+	id("registerForm").style.display = '';
+	id("begin").style.display = 'none';
 
 	$('#getStarted').click(function(e){    
 	    $('#begin').fadeOut('fast', function(){
@@ -393,7 +397,7 @@ $formElementErrClass = "";
 		name = name.trim();
 
 		regTest = /^[a-zA-Z\s]*$/;
-		
+
 		var validName = regTest.test(name);
 
 		// Only checks if blank, add regex support.

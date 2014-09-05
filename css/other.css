@@ -158,7 +158,6 @@ select {
 
 .siteNav li>img {
 	display: block;
-	margin-bottom: -5px;
 }
 .siteNav li>a {
 	color: #fff;
@@ -177,11 +176,11 @@ select {
     float:none;
     display:inline-block;
     *display:inline; /* ie7 fix */
-     zoom:1; /* hasLayout ie7 trigger */
+     zoom: 1; /* hasLayout ie7 trigger */
 }
 
 .nav-tabs, .nav-pills {
-    text-align:center;
+    text-align: center;
 }
 
 
@@ -261,4 +260,14 @@ select {
 #loggedInHeader p {
 	color: white;
 	margin-top: 1.5em;
+}
+
+input[type="radio"] {
+	/*width: 100%;*/
+}
+
+.formLabelRadio {
+	/*border: 1px solid #555;*/
+	/*padding: 5px;*/
+	margin: 5px 5px;
 }
