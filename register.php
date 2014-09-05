@@ -3,7 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
 include(FUNCTION_PATH . "/connect.php");
 
-$url = "http://" . $_SERVER['SERVER_NAME'];
+$url = "https://" . $_SERVER['SERVER_NAME'];
 
 if ($_SERVER['CONTENT_LENGTH'] == 0) {
 	header("Location: " . $url . "/error.php?msg=3");
