@@ -133,6 +133,10 @@ select {
  	margin-bottom: 6px;
  }
 
+/* HEADER LOGIN */
+
+#logoutBtn {
+}
 
 /* FORM */
 
@@ -155,4 +159,22 @@ select {
 	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
 	box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
 
+}
+
+/* SWITCH */
+
+#switchStatus {
+
+	-webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0.5); 
+
+	margin-bottom: 3em;
+	padding: 5px;
+	padding-top: 1.2em;
+
+}
+
+.switchText {
+	text-align: center;
 }

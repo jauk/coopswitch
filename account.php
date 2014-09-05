@@ -49,7 +49,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   <div class="row">
   	<div class="<?php echo $rowClass; ?>">
   		<div class="panel-heading">
-  			<h2>Hello, 
+  			<h2>Hey, 
   				<div style="display: inline-block;" class="text-primary">
   					<!-- <a href="#" id="userName" role="tooltip" data-toggle="tooltip" data-placement="bottom" title="Email" trigger="hover"> -->
   						<?php echo "{$_SESSION['user_name']}" ?>
@@ -67,12 +67,6 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   </div>
 
 	<!-- Should I add confirmations? "Sure you want to change/drop match, sure you want to change. Nice popup. Learn jquery -->
-
-<!--  TO DO ON PROFILE DESIGN
-
-		 Change profile fields to three horizontal boxes (or vertical if mobile.)
-		 Nicer, simpler design (3 well designed boxes with big headings, minimal images depending on co-op seasons, number co-ops, maybe even major.)
- -->
 
   <!-- Profile Fields Containter -->
  <?php if ($_SESSION['withdraw'] == 0) { ?>
@@ -183,27 +177,27 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 
    	<div class="container col-xs-12">
-	  	<div class="<?php echo $rowClass; ?>">
+	  <!-- 	<div class="<?php echo $rowClass; ?>">
    			
    			<hr>
    			
-   			<h2>Switch Status</h2>
+   			<h2>Switch Status</h2> -->
 
 			<?php
 			// Get the latest user_matched status
-			if (!$debug_login)
-		  	$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
+			// if (!$debug_login)
+		 //  	$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
 
-			// If the user has a match, get the match's info and display it.
-			if ($_SESSION['user_matched'] == 1) {
-				$other_user_data = get_match_info();
-				if ($debug_login) {
-			        $other_user_data[0]['name'] = "John Fry";
-			        $other_user_data[0]['email'] = "fry@drexel.edu";
-				}
+			// // If the user has a match, get the match's info and display it.
+			// if ($_SESSION['user_matched'] == 1) {
+			// 	$other_user_data = get_match_info();
+			// 	if ($debug_login) {
+			//         $other_user_data[0]['name'] = "John Fry";
+			//         $other_user_data[0]['email'] = "fry@drexel.edu";
+			// 	}
 			?>
 	      
-	      
+<!-- 	      
 		     <hr>
 
 		     <div class="row">
@@ -220,19 +214,19 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 	  					<br>
 	  				<p class="lead">You can email them at <strong class="text-primary"> <?php echo $other_user_data[0]['email']; ?></strong></p>
 	  			</div>
-	  		</div>
+	  		</div> -->
   		
 
 	
-	<?php } else { // If the user does not have a match tell them they still do not. ?>
+	<?php //} else { // If the user does not have a match tell them they still do not. ?>
 			
-			<div class="row">
+<!-- 			<div class="row">
 	  			<div id="matchStatusFalse">
 	  				<br><p class="lead">You do not have a switch yet, but we will keep looking!</p>
 	  			</div>
-			</div>
+			</div> -->
 			
-	<?php } ?>
+	<?php //} ?>
 
 			<hr>
 

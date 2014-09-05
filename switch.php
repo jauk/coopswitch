@@ -66,8 +66,6 @@ $(function()){
 */
 </script>
 
-<div class="container-fluid">
-
 <?php
 
 $rowClass = "col-sm-6 col-sm-offset-3 text-center";
@@ -95,6 +93,68 @@ else {
 }
 
 ?>
+
+              
+<!-- User Switch Code -->
+<?php if (isset($_SESSION['login'])) { ?>
+
+<div class="container">
+  <div id="switchStatus" class="col-sm-6 col-sm-offset-3 text-center">
+  <h2><strong>Coopswitch Status</strong></h2>
+
+  <?php
+    // Get the latest user_matched status
+    $_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
+
+    // If the user has a match, get the match's info and display it.
+    if ($_SESSION['user_matched'] == 1) {
+      
+      $other_user_data = get_match_info();
+    
+  ?>
+
+      <div class="row">
+        <div id="matchStatusTrue">
+          <p class="lead">You have a coop switch!</p>
+          <hr>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-sm-2 col-sm-offset-2 control-label">Name</label>
+            <div class="col-sm-8">
+              <p class="form-control-static lead text-primary"><?php echo $other_user_data['name']; ?></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 col-sm-offset-2 control-label">Email</label>
+            <div class="col-sm-8">
+              <p class="form-control-static lead text-primary"><?php echo $other_user_data['email']; ?></p>
+            </div>
+          </div>
+        </form>       
+      </div>
+
+
+
+  <?php } else { // If the user does not have a match tell them they still do not. ?>
+
+          <div class="row">
+            <div id="matchStatusFalse">
+              <?php print ($_SESSION['withdraw'] == 1 ? '<p class="lead">Your account is withdrawn.</p>' : '<p class="lead">You do not have a switch yet, but we will keep looking!</p>'); ?>
+            </div>
+          </div>
+
+  <?php } ?>
+  </div>
+</div>
+<?php } ?>
+
+<div class="container">
 
   <div class="row">
     <div class="<?php echo $rowClass; ?>">

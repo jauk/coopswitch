@@ -101,14 +101,14 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 						<a href="/switch">Switch</a>
 					</li>
 					<li>
-						<strong>
+						<div >
 							<a class="btn  btn-info accountBtn"  <?php print (isset($_SESSION['login']) ? 'href="/account.php"' : 'id="loginBtn" href="#"'); ?>>My Account</a>
-						</strong>
+						</div>
 					</li>
 					<li >
-						<strong>
-							<?php print (isset($_SESSION['login']) ? '<a href="/logout" class="btn btn-danger accountBtn">Logout</a>' : ''); ?>
-						</strong>
+						<div>
+							<?php print (isset($_SESSION['login']) ? '<a href="/logout" id="logoutBtn" class="btn btn-danger accountBtn">Logout</a>' : ''); ?>
+						</div>
 					</li>
 				</ul>
 
