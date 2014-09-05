@@ -47,14 +47,14 @@ $formElementErrClass = "";
 
 	<div id="startText" class="row">
 		<div class="<?php echo $typicalRowClass; ?>">
-			<p class="lead">Find someone to trade coop cycles with!</p>
+			<h2>Find someone to trade coop cycles with!</h2>
 		</div>
 	</div>
 
     <div id="stockPhoto" class="row">
   		<div class="<?php echo $typicalRowClass; ?>">
   			<img src="/img/stockphoto.jpeg"
-  				 class="img-responsive img-rounded center-block">
+  				 class="img-responsive img-thumbnail center-block">
   			<!-- <div class="caption">Friends having fun on Coopswitch.</div>  -->
   	 	<br><br>
   		</div>
