@@ -143,3 +143,16 @@ select {
 #user_pass_confirm {
 	margin-top: .8em;
 }
+
+.formHeader {
+
+	margin-bottom: 2em;
+
+	padding-top: 1em;
+	padding-bottom: 1em;
+	
+	-webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+
+}

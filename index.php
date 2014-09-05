@@ -17,7 +17,7 @@ $typicalRowClass = "col-sm-6 col-sm-offset-3 text-center";
 //$formElementClass = "col-sm-4 col-sm-offset-4 text-center";
 
 $formElementClass = "col-md-10 col-md-offset-1 col-sm-12 text-center";
-$formHeaderClass = $formElementClass . " bg-info lead text-info";
+$formHeaderClass = $formElementClass . " text-primary";
 
 $formMainErrClass = $formElementClass;
 
@@ -71,7 +71,7 @@ $formElementErrClass = "";
   	<!-- REGISTER FORM START -->
 	<div id="registerForm" class="container col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 	    <div class="row">
-	  		<div class="<?php echo $formHeaderClass; ?>" style="padding: 20px;">
+	  		<div class="<?php echo $formHeaderClass; ?> formHeader">
 	  			<h3><strong>Registration Form</strong></h3>
 	  			<!-- <p>This is currently for <em>Drexel Freshman</em> only.</p> -->
 	  		</div>
@@ -207,31 +207,31 @@ $formElementErrClass = "";
 	    	</div>
 
 
-		    <div class="row">
+		    <div class="form-group">
 		    	<div class="<?php echo $formElementClass; ?>">
 		    		<hr class="style-three">
 		    	</div>
 		    </div>
  
-	      	<div class="row">
-	      		<div class="<?php echo $formElementClass; ?>" id="acceptTerms">
-	      			<div class="checkbox">
-	      				<label>
-	      					<input name="terms" id="terms" type="checkbox"> I<span id="myName"></span> accept the <a href="#">terms and conditions.</a>
-	      				</label>
-	      			</div>
-	      		</div>
-	      	</div>
-	  			
-	      	<br>
-	      
-	      	<div class="row">
-	  			<div class="<?php echo "$formElementClass"; ?> text-center">
-	  				 <div id="errorFree">
-	  				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
-	  				 </div>
-	  			</div>
-	     	</div>
+      	<div class="form-group" id="acceptTerms">
+      		<div class="col-sm-offset-4 col-xs-offset-2">
+      			<div class="checkbox">
+      				<label>
+      					<input name="terms" id="terms" type="checkbox"> I<span id="myName"></span> accept the <a href="#">terms and conditions.</a>
+      				</label>
+      			</div>
+      		</div>
+      	</div>
+  			
+      	<br>
+      
+      	<div class="form-group">
+  			<div class="<?php echo "$formElementClass"; ?> text-center">
+  				 <div id="errorFree">
+  				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
+  				 </div>
+  			</div>
+     	</div>
 	      
 		</form>
 	</div>
