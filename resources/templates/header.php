@@ -81,8 +81,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 							<div id="subtitle"><small><?php echo SITE_SLOGAN; ?></small></div>
 						</h1>
 					</div>
-				</div>
-
+				</div> 
 
 				<!-- Site Nav Main -->
 				<div class="row">

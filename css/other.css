@@ -202,7 +202,13 @@ select {
 }
 
 .footer-text {
-	color: fff;
+	color: #fff;
+}
+
+/* WELCOME */
+
+#begin {
+	/*display: none;*/
 }
 
 /* FORM */

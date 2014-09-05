@@ -5,13 +5,14 @@ include(FUNCTION_PATH . "/connect.php");
 
 $url = "https://" . $_SERVER['SERVER_NAME'];
 
+// No post data sent.
 if ($_SERVER['CONTENT_LENGTH'] == 0) {
 	header("Location: " . $url . "/error.php?msg=3");
 	die();
-	//break;
-	// Make a global "ERROR" variable that also sends to error page to choose which error to display?
 }
 
+
+// User already logged in.
 else if (isset($_SESSION['login'])) {
 	header("Location: " . $url . "/error.php?msg=4");
 	die();
@@ -24,112 +25,61 @@ else if (!isset($_POST['name']) || !isset($_POST['password']) || !isset($_POST['
 	//break;
 }
 
-global $email;
 
+
+if (!isset($_POST['name']) || $_POST['name'] == "") { die("No name."); }
+if (!isset($_POST['email']) || $_POST['email'] == "") { die("No email. "); } 
+if (!isset($_POST['password']) || $_POST['password'] == "") { die("No password one. "); } 
+if (!isset($_POST['password2']) || $_POST['password2'] == "") { die("No password two. "); } 
+if (!isset($_POST['cycle']) || $_POST['cycle'] == "") { die("No cycle. "); } 
+if (!isset($_POST['numCoops']) || $_POST['numCoops'] == "") { die("No numCoops. "); } 
+if (!isset($_POST['major']) || $_POST['major'] == "") { die("No major. "); } 
+
+// Run post data through test_input function 	header("Location: " . $url . "/error.php?msg=nodata");
+$name = test_input($_POST['name']);
 $email = test_input($_POST['email']);
+$password = test_input($_POST['password']);
+$password = md5($password);
+$cycle = test_input($_POST['cycle']);
+$num_year_program = test_input($_POST['numCoops']);
+$majorVal = test_input($_POST['major']);
 
+// See if email is already in use
 $query = 'SELECT * FROM Users WHERE email = "' .$email. '"';
 $result = mysql_query($query);
 
+// Not 0 means the email already exists.
 if (mysql_num_rows($result) != 0) {
 
-	header("Location: " . $url . "/error.php?msg=1");
-	die();
-	//break;
-}
-
-else if (!$result) { // May not actually work since its not supposed to return results. Check when have db.
-
-	header("Location: " . $url . "/error.php");
+	header("Location: /error?msg=emailinuse");
 	die();
 }
 
+// Go through some data validation
+
+if ($password != $password2) {
+	// Passwords do not match.
+	die("Passwords do not match.");
+}
 
 
-// Check against email existing, how have I not done this already oops.
+// Add user to db
+
+$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
+VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal',
+		'".date("Y-m-d H:i:s")."'
+	)";
+
+$verifyLink = getVerifyLink($name, $email, $cycle);
+
+if (!mysql_query($sql,$con)) {
+  	die('Error: ' . mysql_error());
+}
 
 else {
-
-	// Sanitize post data
-	$name = test_input($_POST['name']);
-	$password = test_input($_POST['password']);
-	$password = md5($password);
-
-	$cycle = test_input($_POST['cycle']);
-	$num_year_program = test_input($_POST['numCoops']);
-
-	$majorVal = test_input($_POST['major']);
-	$majorName = getMajorName($majorVal);
-
-	// User has specified they have someone they want to switch with
-	/*
-	if (isset($_POST['otherUserEmail'])) {
-		$otherUserEmail = test_input($_POST['otherUserEmail']);
-
-		$query = 'SELECT * FROM Users WHERE email = "' .$otherUserEmail;
-		$result = mysql_query($query);
- 
-		if (mysql_num_rows($result) != 0) { // Other user already signed up with that email
-
-			$otherUser = array();
-			$row = mysql_fetch_assoc($result);
-			$otherUser = $row;
-
-			// See if other user put this user's email down as potential manual switch
-			if (isset($otherUser['manualMatchUser']) && $otherUser['manualMatchUser'] == $email) {
-				// If both users have each other, double check their profile elements
-
-				// If same major, same year program, opposite cycle.
-
-				
-				}
-				else {
-					// Profile fields not compatible for switch
-					$manualSwitchMsg = "Sorry, the user you specified cannot be switch with. 
-					Please make sure you have the same major, have the same number of coops, and are not in the same major.";
-				}
-
-			}
-
-			// Else, did not set (yet?)
-			else {
-
-			}
-
-
-		}
-		else { 	// Other user has not even registered 
-
-
-		}
-
-
-	}
-	*/
-
-	$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
-		VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal',
-				'".date("Y-m-d H:i:s")."'
-	 )";
-
-	//$registerLinkBase = "http://coopswitch.com/verify?a=$email&b=";
-
-	$verifyLink = getVerifyLink($name, $email, $cycle);
-
-	if (!mysql_query($sql,$con)) {
-	  	die('Error: ' . mysql_error());
-	}
-
-	else {
-		send_init_email($name, $email, $verifyLink); // Success, user has been created.
-
-		// Log in user for first time auto
-		// $id = mysql_get_var("SELECT id FROM Users WHERE email = " . $email);
-		// $user_data = getUserDataFromId($id);
-		// login_user($user_data);
-	}
-
+	send_init_email($name, $email, $verifyLink); // Success, user has been created.
 }
+
 
 mysql_close($con);
 

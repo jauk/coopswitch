@@ -98,7 +98,7 @@ function get_match_info() {
 
 	$other_user_data = array();
 	$other_user_data = $row;
-	
+
 	return $other_user_data;
 }
 
