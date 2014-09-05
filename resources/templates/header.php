@@ -137,11 +137,10 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 							<?php } else { ?>
 
 							<div class="row center-header" id="loggedInHeader">
-								<div class="col-sm-10 col-xs-8 col-xs-offset-2 text-center">
+								<div class="col-sm-10 col-sm-offset-1 col-xs-8 col-xs-offset-2 text-center">
 									<p class="lead">Welcome back, <?php echo $_SESSION['user_name'] ?>. 									<a href="/account" id="profileBtn" class="btn btn-primary accountBtn">Account</a>
 									<a href="/logout" id="logoutBtn" class="btn btn-danger accountBtn">Logout</a>
-</p>
-							
+									</p>
 								</div>
 							</div>
 
