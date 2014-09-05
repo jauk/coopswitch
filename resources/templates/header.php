@@ -90,22 +90,22 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 						<ul id="mainNav" class="nav nav-pills nav-stackable siteNav">
 							<li <?php if ($pageName == "Home") echo 'class="active"'; ?> >
 								<a href="/">
-								<img src="/img/header/icon-home.png" class="img-responsive headerImg" />
+								<img src="/img/header/icon-home.png" class="img-responsive headerImg img-rounded" />
 								Home</a>
 							</li>
 							<li <?php if ($pageName == "About") echo 'class="active"'; ?> >							
 								<a href="/about">
-								<img src="/img/header/icon-info.png" class="img-responsive headerImg" />
+								<img src="/img/header/icon-info.png" class="img-responsive headerImg img-rounded" />
 								About</a>
 							</li>
 							<li <?php if ($pageName == "Switch") echo 'class="active"'; ?> >
 								<a href="/switch">
-								<img src="/img/header/icon-time.png" class="img-responsive headerImg" />
+								<img src="/img/header/icon-time.png" class="img-responsive headerImg img-rounded" />
 								Switch</a>
 							</li>
 							<li <?php if ($pageName == "Account") echo 'class="active"'; ?> >
 									<a href="#" <?php print (isset($_SESSION['login']) ? 'id="loggedInBtn"' : 'id="loginBtn"'); ?>> 
-									<img src="/img/header/icon-user.png" class="img-responsive headerImg">
+									<img <?php print (isset($_SESSION['login']) ? 'src="/img/header/icon-user-loggedin.png"' : 'src="/img/header/icon-user.png"'); ?> class="img-responsive headerImg img-rounded">
 									Account</a>
 							</li>
 						</ul>

@@ -1,5 +1,5 @@
 <!-- <div class="bottom"> -->
-
+</div>
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-6 col-sm-offset-3" id="footer-container"> 

@@ -153,11 +153,12 @@ select {
 	display: block !important;
 	margin-left: 5px;
 	margin-right: 5px;
-	margin-top: 5px;
+	margin-top: 2px;
 }
 
 .siteNav li>img {
 	display: block;
+	margin-bottom: -5px;
 }
 .siteNav li>a {
 	color: #fff;
