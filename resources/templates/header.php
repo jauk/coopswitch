@@ -84,8 +84,8 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 		<!-- Site Nav Main -->
 		<div class="row">
-			<div class="col-sm-6 col-sm-offset-3 col-xs-12 text-center">
-				<ul id="mainNav" class="nav nav-justified lead">
+			<div class="col-sm-7 col-sm-offset-3 col-xs-6 col-xs-offset-3 text-center lead">
+				<ul id="mainNav" class="nav nav-pills nav-stackable nav-justified ">
 					<li <?php if ($pageName == "Home") echo 'class="active"'; ?> >
 						<a href="/">Home</a>
 					</li>
@@ -97,47 +97,51 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 						<a href="/stats">Stats</a>
 					</li> 
 					-->
-					<li <?php if ($pageName == "Check") echo 'class="active"'; ?> >
+					<li <?php if ($pageName == "Switch") echo 'class="active"'; ?> >
 						<a href="/switch">Switch</a>
 					</li>
+					<li>
+						<strong>
+							<a class="btn  btn-info accountBtn"  <?php print (isset($_SESSION['login']) ? 'href="/account.php"' : 'id="loginBtn" href="#"'); ?>>My Account</a>
+						</strong>
+					</li>
+					<li >
+						<strong>
+							<?php print (isset($_SESSION['login']) ? '<a href="/logout" class="btn btn-danger accountBtn">Logout</a>' : ''); ?>
+						</strong>
+					</li>
 				</ul>
+
 			</div>
 		</div>
 
 
 		<div class="row">
-			<div class="text-center" style="padding-top: 20px;">
-				<div class="">
+			<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 text-center">
 					<?php if (!isset($_SESSION['login'])) { ?>
 
-					<form class="form-inline" role="form" name="login_form" method="post" action="/login.php">
+					<form id="loginForm" class="form-inline" role="form" name="login_form" method="post" action="/login.php">
 						<fieldset>
 							<div class="form-group">
-						    	<label class="sr-only" for="email">Email address</label>
-						   		<input type="email" class="form-control" name="email" id="email" placeholder="Email">
-	  						</div>
-	  						<div class="form-group">
-						    	<label class="sr-only" for="password">Password</label>
-						    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+					    	<label class="sr-only" for="email">Email address</label>
+					   		<input type="email" class="form-control" name="email" id="email" placeholder="Email">
+  						</div>
+  						<div class="form-group">
+					    	<label class="sr-only" for="password">Password</label>
+					    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
 							</div>
-					   		<button type="submit" class="btn btn-default btn-primary">Sign In</button>
-					    </fieldset>
+				   		<button type="submit" class="btn btn-default btn-info">Sign In</button>
+					  </fieldset>
 					</form>
 
 					<?php } else { ?>
-				</div>
 
-				<p class="lead">
-					<?php echo LOGIN_GREETING . $_SESSION['user_name']; ?>.&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="/account.php"><button type="button" class="btn btn-primary" >Profile</button></a>
-					<a href="/logout.php"><button type="button" class="btn btn-danger">Logout</button></a>
-				</p>
+
 
 				<?php } ?>
-
 			</div>
-
 		</div>
+
 
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
@@ -148,3 +152,24 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 		<!-- <hr> -->
 
 	</div> <!-- End Header Container -->
+
+<script>
+	id("loginForm").style.display = 'none';
+
+	$('#loginBtn').click(function(e){    
+		//$('#loginBtn').fadeOut('fast');
+		if (id("loginForm").style.display == '' || id("loginForm").style.display == 'inline') {
+			$('#loginForm').fadeOut('fast');
+			id("loginForm").style.display = 'none';
+		}
+		else {
+			$('#loginForm').fadeIn('fast');
+		}
+	});
+
+	$("#submenu").hover(function(){
+		$('.dropdown-toggle').dropdown('toggle');
+		alert("test");
+	})
+
+</script>
