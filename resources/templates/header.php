@@ -115,11 +115,10 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 
 				<div class="row-fluid">
-					<div class="col-sm-8 col-sm-offset-2">
+					<div id="loginFormDiv" class="col-sm-10 col-sm-offset-1">
 							<?php if (!isset($_SESSION['login'])) { ?>
 
 							<form id="loginForm" class="form-inline" role="form" name="login_form" method="post" action="/login.php">
-								<fieldset>
 									<div class="form-group">
 							    	<label class="sr-only" for="email">Email address</label>
 							   		<input type="email" class="form-control" name="email" id="email" placeholder="Email">
@@ -128,8 +127,9 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 							    	<label class="sr-only" for="password">Password</label>
 							    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
 									</div>
-						   		<button id="signInHeader" type="submit" class="btn btn-default btn-info text-center">Sign In</button>
-							  </fieldset>
+									<div class="form-group">
+						   			<button id="signInHeader" type="submit" class="btn btn-default btn-info text-center">Sign In</button>
+							  	</div>
 							</form>
 
 					</div>

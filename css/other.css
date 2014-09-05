@@ -248,6 +248,12 @@ select {
 
 
 #loginForm {
+	width: 100%; 
+  margin:0 auto;
+  text-align: center;
+}
+
+#loginFormDiv {
 	margin-top: 2em;
 }
 
