@@ -115,7 +115,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 
 				<div class="row-fluid">
-					<div class="">
+					<div class="col-sm-8 col-sm-offset-2">
 							<?php if (!isset($_SESSION['login'])) { ?>
 
 							<form id="loginForm" class="form-inline" role="form" name="login_form" method="post" action="/login.php">
