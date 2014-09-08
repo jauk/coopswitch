@@ -291,9 +291,9 @@ $formElementErrClass = "";
 <!-- </div> -->
 <script>
 	
-	// id("registerForm").style.display = 'none';
-	 id("registerForm").style.display = '';
-	 id("begin").style.display = 'none';
+	id("registerForm").style.display = 'none';
+	 // id("registerForm").style.display = '';
+	 // id("begin").style.display = 'none';
 
 	$('#getStarted').click(function(e){    
 	    $('#begin').fadeOut('fast', function(){
