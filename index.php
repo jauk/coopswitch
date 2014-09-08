@@ -91,7 +91,7 @@ $formElementErrClass = "";
   	</div>
 
   	<?php 
-  		$formLabelClass = "col-sm-2 col-sm-offset-1 control-label formLabel"; 
+  		$formLabelClass = "col-sm-2 col-sm-offset-0 control-label formLabel"; 
   		$formInputWidth = "col-sm-6";
   		$formErrorWidth = "col-sm-3";
   	?>
@@ -286,9 +286,9 @@ $formElementErrClass = "";
 <!-- </div> -->
 <script>
 	
-	//id("registerForm").style.display = 'none';
-	 id("registerForm").style.display = '';
-	 id("begin").style.display = 'none';
+	id("registerForm").style.display = 'none';
+	 // id("registerForm").style.display = '';
+	 // id("begin").style.display = 'none';
 
 	$('#getStarted').click(function(e){    
 	    $('#begin').fadeOut('fast', function(){
