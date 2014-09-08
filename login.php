@@ -27,7 +27,7 @@
 	// $upass = quote_smart($upass, $con);
 
 	// Switch password to md5 version for db checking
-	$upass=md5($upass);
+	$upass=sha1($upass);
 
 	$sql = "SELECT * FROM Users WHERE email = '$umail' AND password = '$upass'";
 	$result = mysql_query($sql);

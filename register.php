@@ -43,7 +43,7 @@ $password = test_input($_POST['password']);
 $password2 = test_input($_POST['password2']);
 
 if ($password == $password2) {
-	$password = md5($password);
+	$password = sha1($password);
 }
 else {
 	die("Passwords do not match.");
