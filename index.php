@@ -100,34 +100,37 @@ $formElementErrClass = "";
 		<form class="form-horizontal" role="form" id="register" method="post" action="register.php" onsubmit="return validate_submit();" id="register">
 
 
-	  			<div id="nameDiv" class="form-group">
+	  			<div id="nameDiv" class="form-group has-feedback">
 	  				<label for="nameField" class="<?php echo $formLabelClass ?>">Name</label>
 	  				<div class="<?php echo $formInputWidth ?>">
 		  				<input type="text" class="form-control input-lg" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()" data-toggle="tooltip" data-trigger="click" data-placement="right" title="">
+	  					<span id="nameFeedback" class="glyphicon form-control-feedback"></span>
 	  				</div>
 	  				<div class="<?php echo $formErrorWidth ?>">
 	  					<span class="help-block error"><div id="nameError"></div></span>
 	  				</div>
 	  			</div>
 	  
-	  			<div id="emailDiv" class="form-group">
+	  			<div id="emailDiv" class="form-group has-feedback">
 	  				<label for="emailField" class="<?php echo $formLabelClass ?>">Email</label>
 	  				<div class="<?php echo $formInputWidth ?>">
 		  				<input type="email" class="form-control input-lg" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email(1)">
+	  					<span id="emailFeedback" class="glyphicon form-control-feedback"></span>	  			
 	  				</div>
 	  				<div class="<?php echo $formErrorWidth ?>">
 		  				<span class="help-block error"><div id="emailError"></div></span>
 					</div>	  				
 	  			</div>
 
-	  			<div id="passwordDiv" class="form-group">
+	  			<div id="passwordDiv" class="form-group has-feedback">
 	  				<label for="passwordField" class="<?php echo $formLabelClass ?>">Password</label>
 	  				<div class="<?php echo $formInputWidth ?>">
-	  					<input type="password" class="form-control input-lg" id="user_pass" name="password" placeholder="Enter a password (not your Drexel One password)" onchange="validate_password()">
+	  					<input type="password" class="form-control input-lg" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
 		  				<input type="password" class="form-control input-lg" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="passwordConfirm()">
+	 	  				<span id="passwordFeedback" class="glyphicon form-control-feedback"></span> 				
 	  				</div>
 	  				<div class="<?php echo $formErrorWidth ?>">
-		  				<span class="help-block error"><div id="passwordError"></div></span>
+		  				<span class="help-block error"><div id="passwordError"><p class="text-info">Do not use your Drexel One password.</p></div></span>
 					</div>	 	  				
 	  			</div>
 
@@ -177,16 +180,18 @@ $formElementErrClass = "";
 
   			<div class="form-group" id="mainMajorDiv">
   				<label for="majorField" class="<?php echo $formLabelClass ?>">Major</label>
-					<div class="<?php echo $formInputWidth ?>">			  			
-	  				<select class="form-control selectpicker input-lg" id="user_major" name="major" data-live-search="true" data-size="5" data-width="auto" onchange="checkmajor()">
-	  					<?php
-	  					// Get the list of majors and display for user selection.
-	  					  print_majors();
-	  					  mysql_close($con);
-	  					?>
-	  				</select>
-	  				<span class="help-block error"><div id="majorError"></div></span>
+					<div class="col-sm-6">			  			
+		  				<select class="form-control selectpicker input-lg" id="user_major" name="major" data-live-search="true" data-size="5" data-width="" onchange="checkmajor()">
+		  					<?php
+		  					// Get the list of majors and display for user selection.
+		  					  print_majors();
+		  					  mysql_close($con);
+		  					?>
+		  				</select>
 	  			</div>
+  				<div class="<?php echo $formErrorWidth ?>">
+  					<span class="help-block error"><div id="majorError"></div></span>
+  				</div>
   			</div>
 
 	    	<div class="form-group">
@@ -286,9 +291,9 @@ $formElementErrClass = "";
 <!-- </div> -->
 <script>
 	
-	id("registerForm").style.display = 'none';
-	 // id("registerForm").style.display = '';
-	 // id("begin").style.display = 'none';
+	// id("registerForm").style.display = 'none';
+	 id("registerForm").style.display = '';
+	 id("begin").style.display = 'none';
 
 	$('#getStarted').click(function(e){    
 	    $('#begin').fadeOut('fast', function(){
@@ -298,6 +303,7 @@ $formElementErrClass = "";
 </script>
 
 <script type="text/javascript">
+
 
 	// $('.selectpicker').selectpicker();
 	$('.selectpicker').selectpicker({ 'selectedText': '',style:'btn-default btn-lg' });
@@ -310,6 +316,7 @@ $formElementErrClass = "";
 	// When the page loads, do this
 	window.onload = function () {
 		
+		console.log("<?php echo $pageName; ?>");
 		formErrorDiv = id("formError");
 		formErrorDiv.style.display = 'none';
 
@@ -330,6 +337,10 @@ $formElementErrClass = "";
 		window.mainDivClassValid = mainDivClass + " has-success";
 		window.mainDivClassWarning = mainDivClass + " has-warning";
 		window.mainDivClassFeedback = mainDivClass + " has-feedback";
+
+		window.feedbackSuccess = "glyphicon glyphicon-ok form-control-feedback";
+		window.feedbackWarning = "glyphicon glyphicon-warning-sign form-control-feedback";
+		window.feedbackError = "glyphicon glyphicon-remove form-control-feedback";
 
 		window.pageAlert = id("pageAlert");
 
@@ -356,31 +367,39 @@ $formElementErrClass = "";
 		// Scroll to form on page and have it fade in/down or something.
 	}
 
-	var setError = function(fieldMainDiv, fieldErrorDiv, errorMessage) {
+	var setError = function(fieldMainDiv, fieldErrorDiv, fieldFeedbackDiv, errorMessage) {
 
 		var mainDiv = fieldMainDiv;
 		var errorDiv = fieldErrorDiv;
+
+		if (fieldFeedbackDiv != "") {
+			var feedbackDiv = fieldFeedbackDiv;
+			feedbackDiv.className = window.feedbackError;
+		}
+
 		var error = errorMessage;
 
-		 errorDiv.textContent = error;
-		 errorDiv.style.display = '';
-		 errorDiv.className = window.errorClassVals;
-		mainDiv.className = "form-group has-error";
+		errorDiv.textContent = error;
+		errorDiv.style.display = '';
+		errorDiv.className = window.errorClassVals;
+
+		mainDiv.className = "form-group has-feedback has-error";
 
 	}
 
-	var removeError = function(fieldMainDiv, fieldErrorDiv) {
+	var removeError = function(fieldMainDiv, fieldErrorDiv, fieldFeedbackDiv) {
 
 		var mainDiv = fieldMainDiv;
 		var errorDiv = fieldErrorDiv;
 
-		mainDiv.className = "form-group has-success";
+		if (fieldFeedbackDiv != "") {
+			var feedbackDiv = fieldFeedbackDiv;
+			feedbackDiv.className = window.feedbackSuccess;
+		}
+
+		mainDiv.className = "form-group has-feedback has-success";
+
 	 	errorDiv.style.display = 'none';
-
-	}
-
-	var calcErrors = function(type) {
-
 
 	}
 
@@ -390,6 +409,7 @@ $formElementErrClass = "";
 
 		var nameDiv = id("nameDiv");
 		var nameErrorDiv = id("nameError");
+		var nameFeedback = id("nameFeedback");
 
 		name = name.trim();
 
@@ -403,7 +423,7 @@ $formElementErrClass = "";
 			errors.name = 1;
 
 			error = "Invalid name entered.";
-			setError(nameDiv, nameErrorDiv, error);
+			setError(nameDiv, nameErrorDiv, nameFeedback, error);
 		}
 		else
 		{
@@ -412,7 +432,7 @@ $formElementErrClass = "";
 			id("user_name").value = name;
 			id("myName").innerHTML = ", " + name + ", ";
 
-			removeError(nameDiv, nameErrorDiv)
+			removeError(nameDiv, nameErrorDiv, nameFeedback);
 		}
 
 		validate_form();
@@ -425,6 +445,7 @@ $formElementErrClass = "";
 			// var emailErrorDiv = id("emailError");
 			var emailDiv = id("emailDiv");
 			var emailErrorDiv = id("emailError");
+			var emailFeedback = id("emailFeedback");
 			// var email = id("user_email");
 			// var emailVal = id("user_email");
 
@@ -466,7 +487,7 @@ $formElementErrClass = "";
 
 			}
 			
-			removeError(emailDiv, emailErrorDiv);
+			removeError(emailDiv, emailErrorDiv, emailFeedback);
 			errors.emailPrimary = 0;
 
 			// Check to make sure email does not repeat in either form.
@@ -504,7 +525,7 @@ $formElementErrClass = "";
 			}
 			//email = "email";
 			else {
-				error = "That is not a valid Drexel email.";
+				error = "Not a valid Drexel email.";
 			}
 
 			if (type == 1)
@@ -512,7 +533,7 @@ $formElementErrClass = "";
 			else
 				errors.emailSecondary = 1;
 
-			setError(emailDiv, emailErrorDiv, error);
+			setError(emailDiv, emailErrorDiv, emailFeedback, error);
 		}
 
 		//id("user_email").value = email;
@@ -534,12 +555,13 @@ $formElementErrClass = "";
 		var passwordErrorDiv = id("passwordError");
 		//var passwordErrorDiv = "";
 		var passwordDiv = id("passwordDiv");
+		var passwordFeedback = id("passwordFeedback");
 
 		if (password2 == "" && window.hasEnteredAgain) {
 
 			errors.password = 1;
 			error = "You need a password.";
-			setError(passwordDiv, passwordErrorDiv, error);	
+			setError(passwordDiv, passwordErrorDiv, passwordFeedback, error);	
 			console.log("This first if");
 		}
 
@@ -553,7 +575,7 @@ $formElementErrClass = "";
 				errors.password = 1;
 
 				error = "Passwords do not match.";
-				setError(passwordDiv, passwordErrorDiv, error);
+				setError(passwordDiv, passwordErrorDiv, passwordFeedback, error);
 
 				console.log(error);
 	//		}
@@ -563,16 +585,18 @@ $formElementErrClass = "";
 		else {
 
 			if (password.length < 6 && password.length > 0) {
-				// passwordErrorDiv.style.display = '';
-				// passwordErrorDiv.className = window.errorClassVals;
-				// passwordErrorDiv.textContent = "You should use a longer password.";
 
-				passwordDiv.className = "form-group has-warning";
+			 	passwordErrorDiv.style.display = '';
+				// passwordErrorDiv.className = window.errorClassVals;
+				passwordErrorDiv.textContent = "You should use a longer password.";
+
+				passwordDiv.className = "form-group has-feedback has-warning";
+				passwordFeedback.className = window.feedbackWarning;
 				console.log("Pass warning");
 			}
 
 			else {
-				removeError(passwordDiv, passwordErrorDiv);
+				removeError(passwordDiv, passwordErrorDiv, passwordFeedback);
 			}
 
 			errors.password = 0;
@@ -611,13 +635,13 @@ $formElementErrClass = "";
 		// }
 		if($("option:selected", "select[name=major]").hasClass('noSwitch')){
 				$('#nonSwitchMajor').modal().show();
-				error = "You may not switch this major.";
-				setError(mainMajorDiv, majorErrorDiv, error);
+				error = 'Unswitchable major.';
+				setError(mainMajorDiv, majorErrorDiv, "", error);
 				errors.major = 1;
-    }
+    	}
 		else {
 
-			removeError(mainMajorDiv, majorErrorDiv);
+			removeError(mainMajorDiv, majorErrorDiv, "");
 			errors.major = 0;
 		}	
 
