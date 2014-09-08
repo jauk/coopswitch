@@ -4,6 +4,8 @@
 
 function print_majors() {
 
+	$pageName = getPageName();
+
 	$query = "SELECT * FROM Majors";
 	$result = mysql_query($query);
 	$numMajors = mysql_num_rows($result);
@@ -36,7 +38,7 @@ function print_majors() {
 		}
 
 		if ($noSwitch == 1)
-			print_r('<option class="noSwitch" value=' . $major_ident . ' data-subtext="Not Available" >' . $major_name . '</option>');
+			print_r('<option ' . ($pageName == "Index" ? '' : 'disabled=disabled') . ' class="noSwitch" value=' . $major_ident . ' data-subtext="Not Available" >' . $major_name . '</option>');
 		else
 			print_r('<option ' . $selected . ' value="' . $major_ident . '" data-subtext="' . $majorSubtext . '">' . $major_name . '</option>');
 
@@ -45,6 +47,12 @@ function print_majors() {
 
 	$major_ident = 0;
 	$major_name = "";
+}
+
+function getPageName() {
+	$pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
+
+	return $pageName;
 }
 
 // Useful function found online
