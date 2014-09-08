@@ -29,7 +29,8 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 	<meta content="utf-8" http-equiv="encoding">
 	<?php 
 
-			$pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
+		// $pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
+		$pageName = getPageName();
 
 	    $restOfURL = $_SERVER['REQUEST_URI'];
 	    $restOfURL = trim($restOfURL, "/");
