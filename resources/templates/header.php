@@ -25,7 +25,8 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 <html lang="en">
 
 <head>
-
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
 	<?php 
 
 			$pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
@@ -45,7 +46,6 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 	<title><?php echo SITE_NAME . " | $pageName"; ?></title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<meta content="utf-8" http-equiv="encoding">
 	<link href="/css/bootstrap.css" rel="stylesheet">
 	<link href="/css/other.css" rel="stylesheet">
 	
