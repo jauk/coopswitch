@@ -251,6 +251,18 @@ select {
 	text-align: center;
 }
 
+.formError {
+	margin-bottom: -2em;
+}
+
+.form-group {
+	margin-bottom: 2em;
+}
+
+.formInput {
+	/*margin-top 1*/
+}
+
 /* SWITCH */
 
 #switchStatus {

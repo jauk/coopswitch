@@ -93,7 +93,7 @@ $formElementErrClass = "";
   	<?php 
   		$formLabelClass = "col-sm-2 col-sm-offset-0 control-label formLabel"; 
   		$formInputWidth = "col-sm-6";
-  		$formErrorWidth = "col-sm-3";
+  		$formErrorWidth = "formError col-sm-3";
   	?>
 
 			<!-- Registration Form -->
@@ -130,7 +130,7 @@ $formElementErrClass = "";
 	 	  				<span id="passwordFeedback" class="glyphicon form-control-feedback"></span> 				
 	  				</div>
 	  				<div class="<?php echo $formErrorWidth ?>">
-		  				<span class="help-block error"><div id="passwordError"><p class="text-info">Do not use your Drexel One password.</p></div></span>
+		  				<span class="help-block error"><div id="passwordError"><p class="alert text-info bg-info">Do not use your Drexel One password.</p></div></span>
 					</div>	 	  				
 	  			</div>
 
@@ -329,7 +329,7 @@ $formElementErrClass = "";
 		window.emailErr = 1;
 		window.passwordErr = 1;
 
-		window.errorClassVals = "alert alert-warning";
+		window.errorClassVals = "alert alert-danger";
 
 		// window.mainDivClass = "<?php echo $formElementClass; ?>";
 		window.mainDivClass = "";
@@ -587,6 +587,7 @@ $formElementErrClass = "";
 			if (password.length < 6 && password.length > 0) {
 
 			 	passwordErrorDiv.style.display = '';
+			 	passwordErrorDiv.className = 'alert text-warning bg-warning';
 				// passwordErrorDiv.className = window.errorClassVals;
 				passwordErrorDiv.textContent = "You should use a longer password.";
 
