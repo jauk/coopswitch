@@ -38,8 +38,17 @@ if (!isset($_POST['major']) || $_POST['major'] == "") { die("No major. "); }
 // Run post data through test_input function 	header("Location: " . $url . "/error.php?msg=nodata");
 $name = test_input($_POST['name']);
 $email = test_input($_POST['email']);
+
 $password = test_input($_POST['password']);
-$password = md5($password);
+$password2 = test_input($_POST['password2']);
+
+if ($password == $password2) {
+	$password = md5($password);
+}
+else {
+	die("Passwords do not match.");
+}
+
 $cycle = test_input($_POST['cycle']);
 $num_year_program = test_input($_POST['numCoops']);
 $majorVal = test_input($_POST['major']);
@@ -53,13 +62,6 @@ if (mysql_num_rows($result) != 0) {
 
 	header("Location: /error?msg=emailinuse");
 	die();
-}
-
-// Go through some data validation
-
-if ($password != $password2) {
-	// Passwords do not match.
-	die("Passwords do not match.");
 }
 
 
