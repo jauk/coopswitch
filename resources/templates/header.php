@@ -171,6 +171,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 		if (id("loginForm").style.display == '' || id("loginForm").style.display == 'inline') {
 			$('#loginForm').fadeOut('fast');
 			id("loginForm").style.display = 'none';
+			$('#loginBtn').blur();
 		}
 		else {
 			$('#loginForm').fadeIn('fast');
@@ -181,6 +182,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 		if (id("loggedInHeader").style.display == '' || id("loggedInHeader").style.display == 'inline') {
 			$('#loggedInHeader').fadeOut('fast');
 			id("loggedInHeader").style.display = 'none';
+			$('#loggedInBtn').blur();
 		}
 		else {
 			$('#loggedInHeader').fadeIn('fast');

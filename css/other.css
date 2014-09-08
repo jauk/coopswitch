@@ -179,6 +179,14 @@ select {
 	background-color: #666;
 }
 
+.siteNav li>a:focus {
+	/*background-color: transparent;*/
+	outline: 0;
+		background-color: #666;
+
+
+}
+
 .siteNav li>img {
 	  margin: 0 auto;
 }
