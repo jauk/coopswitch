@@ -92,7 +92,8 @@ $formElementErrClass = "";
 
   	<?php 
   		$formLabelClass = "col-sm-2 col-sm-offset-1 control-label formLabel"; 
-  		$formInputWidth = "col-sm-8";
+  		$formInputWidth = "col-sm-6";
+  		$formErrorWidth = "col-sm-3";
   	?>
 
 			<!-- Registration Form -->
@@ -103,7 +104,9 @@ $formElementErrClass = "";
 	  				<label for="nameField" class="<?php echo $formLabelClass ?>">Name</label>
 	  				<div class="<?php echo $formInputWidth ?>">
 		  				<input type="text" class="form-control input-lg" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()" data-toggle="tooltip" data-trigger="click" data-placement="right" title="">
-	 	  				<span class="help-block error"><div id="nameError"></div></span>
+	  				</div>
+	  				<div class="<?php echo $formErrorWidth ?>">
+	  					<span class="help-block error"><div id="nameError"></div></span>
 	  				</div>
 	  			</div>
 	  
@@ -111,8 +114,10 @@ $formElementErrClass = "";
 	  				<label for="emailField" class="<?php echo $formLabelClass ?>">Email</label>
 	  				<div class="<?php echo $formInputWidth ?>">
 		  				<input type="email" class="form-control input-lg" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email(1)">
-		  				<span class="help-block error"><div id="emailError"></div></span>
 	  				</div>
+	  				<div class="<?php echo $formErrorWidth ?>">
+		  				<span class="help-block error"><div id="emailError"></div></span>
+					</div>	  				
 	  			</div>
 
 	  			<div id="passwordDiv" class="form-group">
@@ -121,6 +126,9 @@ $formElementErrClass = "";
 	  					<input type="password" class="form-control input-lg" id="user_pass" name="password" placeholder="Enter a password (not your Drexel One password)" onchange="validate_password()">
 		  				<input type="password" class="form-control input-lg" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="passwordConfirm()">
 	  				</div>
+	  				<div class="<?php echo $formErrorWidth ?>">
+		  				<span class="help-block error"><div id="passwordError"></div></span>
+					</div>	 	  				
 	  			</div>
 
 
@@ -241,7 +249,7 @@ $formElementErrClass = "";
 		<!-- USER IS LOGGED IN, MAKE THIS BETTER -->
 		
 		<?php } else {	header("Location: /switch"); ?>
-		
+
 <!-- 		    <div class="row">
 		  		<div class="<?php echo $typicalRowClass; ?>">
 		  			<p class="lead" style="margin-bottom: 20em;">
@@ -278,9 +286,9 @@ $formElementErrClass = "";
 <!-- </div> -->
 <script>
 	
-	id("registerForm").style.display = 'none';
-	// id("registerForm").style.display = '';
-	// id("begin").style.display = 'none';
+	//id("registerForm").style.display = 'none';
+	 id("registerForm").style.display = '';
+	 id("begin").style.display = 'none';
 
 	$('#getStarted').click(function(e){    
 	    $('#begin').fadeOut('fast', function(){
@@ -354,9 +362,9 @@ $formElementErrClass = "";
 		var errorDiv = fieldErrorDiv;
 		var error = errorMessage;
 
-		// errorDiv.textContent = error;
-		// errorDiv.style.display = '';
-		// errorDiv.className = window.errorClassVals;
+		 errorDiv.textContent = error;
+		 errorDiv.style.display = '';
+		 errorDiv.className = window.errorClassVals;
 		mainDiv.className = "form-group has-error";
 
 	}
@@ -367,7 +375,7 @@ $formElementErrClass = "";
 		var errorDiv = fieldErrorDiv;
 
 		mainDiv.className = "form-group has-success";
-		// errorDiv.style.display = 'none';
+	 	errorDiv.style.display = 'none';
 
 	}
 
@@ -416,7 +424,7 @@ $formElementErrClass = "";
 		if (type == 1) {
 			// var emailErrorDiv = id("emailError");
 			var emailDiv = id("emailDiv");
-			var emailErrorDiv = "";
+			var emailErrorDiv = id("emailError");
 			// var email = id("user_email");
 			// var emailVal = id("user_email");
 

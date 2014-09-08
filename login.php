@@ -4,6 +4,9 @@
 	require_once(TEMPLATES_PATH . "/header.php");
 	include(FUNCTION_PATH . "/connect.php");
 	
+	if (!isset($_POST['email']) || $_POST['email'] == "") { die("No email. "); } 
+	if (!isset($_POST['password']) || $_POST['password'] == "") { die("No password. "); } 
+
 	$umail = test_input($_POST['email']);
 	$upass = test_input($_POST['password']);
 

@@ -5,6 +5,9 @@ body {
 
 /**/
 
+
+
+
 .border-test {
   
   border: 1px solid black;
@@ -104,7 +107,7 @@ select {
    	/*background: #4679BD;*/
     border: 2px solid #428BCA;
     border-radius: 30px;
-    
+
 }
 
 .textboxTest {
@@ -240,6 +243,11 @@ select {
 	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
 	box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
 
+}
+
+.error {
+
+	font-size: small;
 }
 
 /* SWITCH */
