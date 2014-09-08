@@ -248,6 +248,7 @@ select {
 .error {
 
 	font-size: small;
+	text-align: center;
 }
 
 /* SWITCH */
