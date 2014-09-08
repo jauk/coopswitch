@@ -36,7 +36,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
   <?php if ($_SESSION['user_email_verified'] == 0) { ?>
     <div class="row">
-      <div class="<?php echo $rowClass; ?>">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
         <p class="lead text-danger">
         	Your email has not been verified. You are not eligible for a switch.
         	<a href="resendverify.php"><button class="btn btn-info btn-sm">Resend Email</button></a>
@@ -49,7 +49,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   <div class="row">
   	<div class="<?php echo $rowClass; ?>">
   		<div class="panel-heading">
-  			<h2>Hello, 
+  			<h2>Hey, 
   				<div style="display: inline-block;" class="text-primary">
   					<!-- <a href="#" id="userName" role="tooltip" data-toggle="tooltip" data-placement="bottom" title="Email" trigger="hover"> -->
   						<?php echo "{$_SESSION['user_name']}" ?>
@@ -68,12 +68,6 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 	<!-- Should I add confirmations? "Sure you want to change/drop match, sure you want to change. Nice popup. Learn jquery -->
 
-<!--  TO DO ON PROFILE DESIGN
-
-		 Change profile fields to three horizontal boxes (or vertical if mobile.)
-		 Nicer, simpler design (3 well designed boxes with big headings, minimal images depending on co-op seasons, number co-ops, maybe even major.)
- -->
-
   <!-- Profile Fields Containter -->
  <?php if ($_SESSION['withdraw'] == 0) { ?>
  <form id="profileForm" name="profileForm" method="post" action="update.php" onsubmit="return saveChanges()">
@@ -89,7 +83,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
   				<div class="circle">
 	  				<h3 class="profileBoxHeading">Major</h3>
-		      	<div id="majorNameText"><?php echo "{$_SESSION['user_major_name']}"; ?></div>
+		      	<div class="profileBoxText" id="majorNameText"><?php echo "{$_SESSION['user_major_name']}"; ?></div>
 	        	
 	        	<!-- For editing the major. -->
 	        	<div id="majorSpan" class="profileBoxEditOff">
@@ -99,7 +93,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 							</select>
 	         	</div>
 
-	         	<img src="/img/cal-book.png" class="img-responsive img-rounded center-block profileBoxImg">
+	         	<img src="/img/icon-book.png" class="img-responsive center-block profileBoxImg">
          	</div>
 
   			</div>
@@ -110,23 +104,18 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
    				<div class="circle">
 
 	  				<h3 class="profileBoxHeading">Cycle</h3>
-		      	<div id="cycleNameText"><?php echo "{$_SESSION['user_cycle_name']}"; ?></div>
+		      	<div class="profileBoxText" id="cycleNameText"><?php echo "{$_SESSION['user_cycle_name']}"; ?></div>
 
 		      	<!-- For editing the cycle. -->
 	        	<div id="cycleSpan" class="profileBoxEditOff">
 						<input type="hidden" name="newCycleId" id="newCycleId" value="">
 							<select id="selectCycle" class="form-control selectpicker" name="cycle" data-width="auto">
-								<?php if ($_SESSION['user_cycle'] == 1) { ?>
-									<option selected="selected" value="1">Fall-Winter</option>
-									<option value="2">Spring-Summer</option>
-								<?php } else { ?>
-									<option value="1">Fall-Winter</option>
-									<option selected="selected" value="2">Spring-Summer</option>
-								<?php } ?>
+									<option <?php if ($_SESSION['user_cycle'] == 1) { echo "selected"; } ?> value="1"><?php echo FALLWINTER; ?></option>
+									<option <?php if ($_SESSION['user_cycle'] == 2) { echo "selected"; } ?> value="2"><?php echo SPRINGSUMMER; ?></option>
 							</select>
 	          </div>
 
-	         	<img src="/img/cal-icon.png" class="img-responsive img-rounded center-block profileBoxImg">
+	         	<img src="/img/icon-cal.png" id="middleImg" class="img-responsive center-block profileBoxImg">
 
 	         </div>
 
@@ -137,23 +126,18 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
   				<div class="circle">
 	  				<h3 class="profileBoxHeading">Program</h3>
-		      	<div id="programNameText" ><?php echo "{$_SESSION['user_program_name']}"; ?></div>
+		      	<div class="profileBoxText" id="programNameText" ><?php echo "{$_SESSION['user_program_name']}"; ?></div>
 
 		      	<!-- For editing the program. -->
 	        	<div id="programSpan" class="profileBoxEditOff">
 							<input type="hidden" name="newProgramId" id="newProgramId" value="">
 							<select id="selectProgram" class="form-control selectpicker" showSubtext="true" name="program" data-width="auto">
-								<?php if ($_SESSION['user_program'] == 1) { ?>
-									<option selected="selected" value="1" data-subtext="">1 co-op</option>
-									<option value="2" data-subtext="">3 co-ops</option>
-								<?php } else { ?>
-									<option value="1" data-subtext="">1 co-op</option>
-									<option selected="selected" value="2" data-subtext="">3 co-ops</option>
-								<?php } ?>
+									<option <?php if ($_SESSION['user_program'] == 1) { echo "selected"; } ?> value="1" data-subtext=""><?php echo ONECOOP; ?></option>
+									<option <?php if ($_SESSION['user_program'] == 2) { echo "selected"; } ?> value="2" data-subtext=""><?php echo THREECOOPS; ?></option>
 							</select>
 	        	</div>	     
 
-	        	<img src="/img/cal-business.png" class="img-responsive img-rounded center-block profileBoxImg">
+	        	<img src="/img/icon-case.png" class="img-responsive center-block profileBoxImg">
 	        </div>
 
   			</div>
@@ -193,27 +177,27 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 
    	<div class="container col-xs-12">
-	  	<div class="<?php echo $rowClass; ?>">
+	  <!-- 	<div class="<?php echo $rowClass; ?>">
    			
    			<hr>
    			
-   			<h2>Switch Status</h2>
+   			<h2>Switch Status</h2> -->
 
 			<?php
 			// Get the latest user_matched status
-			if (!$debug_login)
-		  	$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
+			// if (!$debug_login)
+		 //  	$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
 
-			// If the user has a match, get the match's info and display it.
-			if ($_SESSION['user_matched'] == 1) {
-				$other_user_data = get_match_info();
-				if ($debug_login) {
-			        $other_user_data[0]['name'] = "John Fry";
-			        $other_user_data[0]['email'] = "fry@drexel.edu";
-				}
+			// // If the user has a match, get the match's info and display it.
+			// if ($_SESSION['user_matched'] == 1) {
+			// 	$other_user_data = get_match_info();
+			// 	if ($debug_login) {
+			//         $other_user_data[0]['name'] = "John Fry";
+			//         $other_user_data[0]['email'] = "fry@drexel.edu";
+			// 	}
 			?>
 	      
-	      
+<!-- 	      
 		     <hr>
 
 		     <div class="row">
@@ -230,19 +214,19 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 	  					<br>
 	  				<p class="lead">You can email them at <strong class="text-primary"> <?php echo $other_user_data[0]['email']; ?></strong></p>
 	  			</div>
-	  		</div>
+	  		</div> -->
   		
 
 	
-	<?php } else { // If the user does not have a match tell them they still do not. ?>
+	<?php //} else { // If the user does not have a match tell them they still do not. ?>
 			
-			<div class="row">
+<!-- 			<div class="row">
 	  			<div id="matchStatusFalse">
 	  				<br><p class="lead">You do not have a switch yet, but we will keep looking!</p>
 	  			</div>
-			</div>
+			</div> -->
 			
-	<?php } ?>
+	<?php //} ?>
 
 			<hr>
 
@@ -532,22 +516,22 @@ $('.selectpicker').selectpicker();
 
 		//if (field == "major") {
 		//window.majorSaveBtn.style.display = 'none';
-			window.majorSpan.style.display = 'none';
-			window.majorDiv.style.display = 'inline-block';
+			window.majorSpan.className = 'profileBoxEditOff';
+			window.majorDiv.className = 'profileBoxEditOn';
 		// 	window.majorCancelBtn.style.display = 'none';
 		// 	window.majorEditBtn.style.display = '';
 		//}
 		//else if (field == "cycle") {
 	  //window.cycleSaveBtn.style.display = 'none';
-			window.cycleSpan.style.display = 'none';
-			window.cycleDiv.style.display = 'inline-block';
+			window.cycleSpan.className = 'profileBoxEditOff';
+			window.cycleDiv.className = 'profileBoxEditOn';
 		// 	window.cycleCancelBtn.style.display = 'none';
 		// 	window.cycleEditBtn.style.display = '';
 		//}
 		//else if (field == "program") {
 		//window.programSaveBtn.style.display = 'none';
-			window.programSpan.style.display = 'none';
-			window.programDiv.style.display = 'inline-block';
+			window.programSpan.className = 'profileBoxEditOff';
+			window.programDiv.className = 'profileBoxEditOn';
 		// 	window.programCancelBtn.style.display = 'none';
 		// 	window.programEditBtn.style.display = '';
 		//}

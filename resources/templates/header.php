@@ -90,7 +90,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3 col-xs-12 text-center">
 				<ul id="mainNav" class="nav nav-justified lead">
-					<li style="width: 25%;" <?php if ($pageName == "Home") echo 'class="active"'; ?> >
+					<li <?php if ($pageName == "Home") echo 'class="active"'; ?> >
 						<a href="/">Home</a>
 					</li>
 					<li <?php if ($pageName == "About") echo 'class="active"'; ?> >

@@ -7,22 +7,38 @@ function print_majors() {
 	$query = "SELECT * FROM Majors";
 	$result = mysql_query($query);
 	$numMajors = mysql_num_rows($result);
-	
-	//Debug
-	//$numMajors = 10;
+
+	$selected = "";
+	$majorSubtext = "";
 
 	$i=0; while ($i < $numMajors) {
 		$major_name = mysql_result($result, $i, "major_long");
-		$canSwitch = mysql_result($result, $i, "noSwitch");
+		$noSwitch = mysql_result($result, $i, "noSwitch");
 		
 		$major_ident=mysql_result($result, $i, "id");
 
-		if (isset($_SESSION['login']) && $_SESSION['user_major'] == $major_ident)
-			print_r('<option selected="selected" value=' . $major_ident . '>' . $major_name . '</option>');
-		else if ($canSwitch == 1)
-			print_r('<option class="noSwitch" value=' . $major_ident . '>' . $major_name . '</option>');
+		$business = "Business Administration";
+
+		$businessMajorSubtext = "(All Majors)";
+
+		if (isset($_SESSION['login']) && $_SESSION['user_major_name'] == $major_name) {
+			$selected = "selected";
+		}
+		else {
+			$selected = "";
+		}
+
+		if ($major_name == $business) {
+			$majorSubtext = $businessMajorSubtext;
+		}
+		else {
+			$majorSubtext = "";
+		}
+
+		if ($noSwitch == 1)
+			print_r('<option class="noSwitch" value=' . $major_ident . ' data-subtext="Not Available" >' . $major_name . '</option>');
 		else
-			print_r('<option value=' . $major_ident . '>' . $major_name . '</option>');
+			print_r('<option ' . $selected . ' value="' . $major_ident . '" data-subtext="' . $majorSubtext . '">' . $major_name . '</option>');
 
 		$i++;
 	}
@@ -57,25 +73,31 @@ function get_match_info() {
 	$row = mysql_fetch_array($result);
 
 	$matched_data = array();
-	$matched_data[0] = $row; // Save the match information into an array to pull data from
+	$matched_data = $row; // Save the match information into an array to pull data from
 
 	// Get the ID of the logged in user's match.
 	$other_user_match_id = "";
 
-	if ($matched_data[0]['userA'] == $_SESSION['user_id'])
-		$other_user_match_id = $matched_data[0]['userB'];
-	else if ($matched_data[0]['userB'] == $_SESSION['user_id'])
-		$other_user_match_id = $matched_data[0]['userA'];
-	else {
-		print("BROKEN");
-	}
+	$other_user_match_id = ($matched_data['userA'] == $_SESSION['user_id'] ? $other_user_match_id = $matched_data['userB'] : $other_user_match_id = $matched_data['userA']);
+
+	// if ($matched_data['userA'] == $_SESSION['user_id'])
+	// 	$other_user_match_id = $matched_data['userB'];
+	// else if ($matched_data['userB'] == $_SESSION['user_id'])
+	// 	$other_user_match_id = $matched_data['userA'];
+	// else {
+	// 	print("BROKEN");
+	// }
+
+	if ($other_user_match_id == "") {
+		die("Error");
+	}	
 
 	$query = "SELECT * FROM Users WHERE id = " . $other_user_match_id;
 	$result = mysql_query($query);
-	$row = mysql_fetch_array($result);
+	$row = mysql_fetch_assoc($result);
 
 	$other_user_data = array();
-	$other_user_data[0] = $row;
+	$other_user_data = $row;
 
 	return $other_user_data;
 }

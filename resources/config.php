@@ -45,10 +45,18 @@ $config = array(
 
 // Main Vars
 define('SITE_NAME', 'Coopswitch');
-define('SITE_SLOGAN', 'A simple way to switch co-ops.');
+define('SITE_SLOGAN', 'A simpler way to switch.');
 
 // Header Vars
 define('LOGIN_GREETING', 'Hey, ');
+
+// Names of each co-op cycle
+define('FALLWINTER', 'Fall Winter');
+define('SPRINGSUMMER', 'Spring Summer');
+
+// Names of how many co-ops
+define('ONECOOP', 'One Coop');
+define('THREECOOPS', 'Three Coops');
 
 
 /* Debug Variables */

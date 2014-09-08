@@ -45,7 +45,7 @@
 
     // Grab the row with user data
 	  $row = mysql_fetch_array($result);
-	  $user_data[0] = $row; // Save the user's info in an array.
+	  $user_data = $row; // Save the user's info in an array.
 
 		$errorMessage = "Logged on!"; // Hooray, we are logged on.
 

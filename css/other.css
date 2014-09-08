@@ -15,23 +15,39 @@
 
 }
 
-#mainNav.li.active {
-	text-decoration: underline;
+#mainNav {
+	margin-top: .8em;
 }
 
-body { 
-  /*background-color: #FFFAFA;*/
-}
 
 /* Thank you CSS tricks */
-/* Gradient color1 - color2 - color1 */ hr.style-one { border: 0; height: 1px; background: #333; background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc); background-image: -moz-linear-gradient(left, #ccc, #333, #ccc); background-image: -ms-linear-gradient(left, #ccc, #333, #ccc); background-image: -o-linear-gradient(left, #ccc, #333, #ccc); }
-
+hr.style-one { border: 0; height: 1px; background: #333; background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc); background-image: -moz-linear-gradient(left, #ccc, #333, #ccc); background-image: -ms-linear-gradient(left, #ccc, #333, #ccc); background-image: -o-linear-gradient(left, #ccc, #333, #ccc); }
 hr.style-three { border: 0; border-bottom: 1px dashed #ccc; background: #999; }
 
 select {
 
 	/*font-size: 18px;*/
 }
+
+/* HEADER */
+
+.pageTitleFont {
+	font-family: 'Cutive';
+}
+
+.page-title {
+	font-family: 'Cutive';
+	font-stretch: 100%;
+	font-size: 2.8em;
+	color: white;
+}
+
+#subtitle {
+	padding: 5px;
+	margin-top: 10px;
+}
+
+/* USER PROFIES */
 
 .profileBox {
 
@@ -51,6 +67,11 @@ select {
 
 }
 
+.profileBoxText {
+	margin-bottom: 10px;
+	font-size: medium;
+}
+
 .profileBoxEditOff {
 	display: none;
 }
@@ -60,21 +81,22 @@ select {
 }
 
 .profileBoxImg {
-	zoom: 0.4;
-	-moz-transform: scale(0.4);
-	margin-top: -20px;
+	zoom: 0.7;
+	-moz-transform: scale(0.7);
+/*	margin-top: -20px;*/
 }
 
 .circle {
-    width: 50%;
+/*    width: 50%;
     height: 0;
     padding-bottom: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    display: inline-block;
+    display: inline-block;*/
    	/*background: #4679BD;*/
-    border: 5px solid #f8f8f2;
+    border: 5px solid #D7F5F3;
+    border-radius: 30px;
 }
 
 .textboxTest {
@@ -94,10 +116,164 @@ select {
  }
 
  #profileButtonContainer {
- 	margin-top: 30px;
+ 	margin-top: 10px;
  }
 
  .profileButtonEditMode {
  	width: 30%;
  	padding: 2px;
  }
+
+ #middleImg {
+ 	margin-bottom: 6px;
+ }
+
+/* HEADER */
+
+#header-container {
+	/*border: 1px solid black;*/
+	margin-bottom: 2.5em;
+
+	background-color: #333;
+
+	-webkit-border-bottom-right-radius: 25px;
+	-webkit-border-bottom-left-radius: 25px;
+	-moz-border-radius-bottomright: 25px;
+	-moz-border-radius-bottomleft: 25px;
+	border-bottom-right-radius: 25px;
+	border-bottom-left-radius: 25px;
+}
+
+.headerImg {
+	zoom: 0.5;
+	-moz-transform: scale(0.5);
+}
+
+.siteNav li>* {
+	display: block !important;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 2px;
+}
+
+.siteNav li>img {
+	display: block;
+}
+.siteNav li>a {
+	color: #fff;
+	text-align: center;
+}
+
+.siteNav li>a:hover {
+	background-color: #666;
+}
+
+.siteNav li>img {
+	  margin: 0 auto;
+}
+
+.nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom: 1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs, .nav-pills {
+    text-align: center;
+}
+
+
+/* FOOTER */
+
+#footer-container {
+
+	margin-top: 3em;
+	padding-top: 2em;
+
+	background-color: #444;
+
+	-webkit-border-top-left-radius: 30px;
+	-webkit-border-top-right-radius: 30px;
+	-moz-border-radius-topleft: 30px;
+	-moz-border-radius-topright: 30px;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+}
+
+.footer-text {
+	color: #fff;
+}
+
+/* WELCOME */
+
+#begin {
+	/*display: none;*/
+}
+
+/* FORM */
+
+.formLabel {
+	text-align: center;
+}
+
+#user_pass_confirm {
+	margin-top: .8em;
+}
+
+.formHeader {
+
+	margin-bottom: 2em;
+
+	padding-top: 1em;
+	padding-bottom: 1em;
+	
+	-webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+/* SWITCH */
+
+#switchStatus {
+
+	-webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0.5); 
+
+	margin-bottom: 3em;
+	padding: 5px;
+	padding-top: 1.2em;
+
+}
+
+.switchText {
+	text-align: center;
+}
+
+#loginForm, .centerHeader {
+	width: 100%; 
+  margin:0 auto;
+  text-align: center;
+}
+
+#loginFormDiv {
+	margin-top: 2em;
+	margin-bottom: .8em;
+}
+
+#loggedInHeader p {
+	color: white;
+	margin-top: 1.5em;
+}
+
+input[type="radio"] {
+	/*width: 100%;*/
+}
+
+.formLabelRadio {
+	/*border: 1px solid #555;*/
+	/*padding: 5px;*/
+	margin: 5px 5px;
+}
