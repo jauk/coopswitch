@@ -240,26 +240,15 @@ $formElementErrClass = "";
 	</div>
 		<!-- USER IS LOGGED IN, MAKE THIS BETTER -->
 		
-		<?php } else {
+		<?php } else {	header("Location: /switch"); ?>
 		
-			$fun = array(
-				array("http://upload.wikimedia.org/wikipedia/commons/5/5c/Narwhals_breach.jpg", "Here are some narwhals playing."),
-				array("http://www.graphics99.com/wp-content/uploads/2012/07/funny-giraffe-tongue-image-for-friendster.jpg", "Here is a silly giraffe."),
-				array("http://www.funnyzone.org/wp-content/uploads/2009/06/635_bear-and-panda.jpg", "Here is a group of penguins."),
-				array("http://twistedsifter.files.wordpress.com/2012/05/funny-baby-elephant-4.jpg", "Here is an elephant playing soccer.")
-			);
-
-			$option = rand(0, 3);
-
-		?>
-
-		    <div class="row">
+<!-- 		    <div class="row">
 		  		<div class="<?php echo $typicalRowClass; ?>">
-		  			<p class="lead" style="margin-bottom: 16em;">
+		  			<p class="lead" style="margin-bottom: 20em;">
 		  			Coopswitch switches more coop cycles than any other website.
 		  			</p>
 		  		</div>
-				</div> 
+			</div>  -->
 
 		<?php } ?>
 
