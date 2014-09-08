@@ -310,8 +310,8 @@ $formElementErrClass = "";
 	// When the page loads, do this
 	window.onload = function () {
 		
-		errorDiv = id("formError");
-		errorDiv.style.display = 'none';
+		formErrorDiv = id("formError");
+		formErrorDiv.style.display = 'none';
 
 		var errors = 0;
 		window.hasEnteredAgain = false;
@@ -531,8 +531,8 @@ $formElementErrClass = "";
 		var password = id("user_pass").value;
 		var password2 = id("user_pass_confirm").value;
 
-		//var passwordErrorDiv = id("passwordError");
-		var passwordErrorDiv = "";
+		var passwordErrorDiv = id("passwordError");
+		//var passwordErrorDiv = "";
 		var passwordDiv = id("passwordDiv");
 
 		if (password2 == "" && window.hasEnteredAgain) {
@@ -585,6 +585,7 @@ $formElementErrClass = "";
 	var passwordConfirm = function () {
 
 		window.hasEnteredAgain = true;
+		console.log("Password 2 entered.");
 
 		validate_password();
 	}
