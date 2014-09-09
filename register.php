@@ -51,7 +51,7 @@ else {
 
 $cycle = test_input($_POST['cycle']);
 $num_year_program = test_input($_POST['numCoops']);
-$majorVal = test_input($_POST['major']);
+$major = test_input($_POST['major']);
 
 // See if email is already in use
 $query = 'SELECT * FROM Users WHERE email = "' .$email. '"';
@@ -68,7 +68,7 @@ if (mysql_num_rows($result) != 0) {
 // Add user to db
 
 $sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
-VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$majorVal',
+VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$major',
 		'".date("Y-m-d H:i:s")."'
 	)";
 
@@ -82,7 +82,7 @@ else {
 	send_init_email($name, $email, $verifyLink); // Success, user has been created.
 }
 
-
+$majorName = getMajorName($major);
 mysql_close($con);
 
 ?>
@@ -121,7 +121,7 @@ mysql_close($con);
 					</p>
 
 					<p>
-					We need to find other <strong><?php echo "$majorName"; ?></strong> majors!
+					We need to find other <strong><?php echo $majorName; ?></strong> majors!
 					</p>
 				</div>
 			</div>
