@@ -122,6 +122,7 @@ else {
 
       <br>
 
+      <!-- Switch persons info for contact -->
       <div class="row">
         <form class="form-horizontal" role="form">
           <div class="form-group">
@@ -136,9 +137,41 @@ else {
               <p class="form-control-static lead text-primary"><?php echo $other_user_data['email']; ?></p>
             </div>
           </div>
-        </form>       
+        </form>    
       </div>
 
+      <?php 
+
+        // First name of other person
+        list($firstName) = explode(' ', trim($other_user_data['name']));
+
+        $daysBeforeDrop = 2;
+
+        $switchedDate = mysql_get_var('SELECT date_matched FROM Matches WHERE id = ' . $other_user_data['Matches_id']);
+        $switchedDate = date_create_from_format('Y-m-d H:i:s', $switchedDate);
+
+        $today = new DateTime();
+
+        $difference = $switchedDate->diff($today);
+  
+        $days = $difference->format('%d');
+
+        // echo $days;
+
+        if ($days > $daysBeforeDrop) {
+          // echo "Can drop.";
+        }
+        else {
+          // echo "Cannot drop yet. " . ($daysBeforeDrop - $days) . " days left.";
+        }
+
+      ?>
+
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+          <button id="unresponsive" class="btn btn-info" onclick="checkCanDrop()">Is <?php echo $firstName; ?> unresponsive?</button>
+        </div>
+      </div>
 
 
   <?php } else { // If the user does not have a match tell them they still do not. ?>
