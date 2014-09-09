@@ -32,9 +32,7 @@
 	$sql = "SELECT * FROM Users WHERE email = '$umail' AND password = '$upass'";
 	$result = mysql_query($sql);
 
-	if ($result){
-	}
-	else {
+	if (!$result) {
 		die(mysql_error());
 		$errorMessage = "Error logging on. 2";
 	}

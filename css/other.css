@@ -182,7 +182,7 @@ select {
 .siteNav li>a:focus {
 	/*background-color: transparent;*/
 	outline: 0;
-		background-color: #666;
+	background-color: #666;
 
 
 }
@@ -282,6 +282,7 @@ select {
 	margin-bottom: 3em;
 	padding: 5px;
 	padding-top: 1.2em;
+	padding-bottom: 1em;
 
 }
 
@@ -313,4 +314,13 @@ input[type="radio"] {
 	/*border: 1px solid #555;*/
 	/*padding: 5px;*/
 	margin: 5px 5px;
+}
+
+/**
+ * SWITCH
+ */
+
+#switchStatusError {
+	display: none;
+	/*text-align: left;*/
 }

@@ -99,75 +99,77 @@ else {
 <?php if (isset($_SESSION['login'])) { ?>
 
 <div class="container">
-  <div id="switchStatus" class="col-sm-6 col-sm-offset-3 text-center">
-  <h2><strong>Coopswitch Status</strong></h2>
+  <div class="row">
+    <div id="switchStatus" class="col-sm-6 col-sm-offset-3 text-center">
 
-  <?php
-    // Get the latest user_matched status
-    $_SESSION['user_matched'] = mysql_get_var('SELECT matched FROM Users WHERE id = ' . $_SESSION['user_id']);
+      <?php
+        // Get the latest user_matched status
+        $_SESSION['user_matched'] = mysql_get_var('SELECT matched FROM Users WHERE id = ' . $_SESSION['user_id']);
 
-    // If the user has a match, get the match's info and display it.
-    if ($_SESSION['user_matched'] == 1) {
-      
-      $other_user_data = get_match_info();
+        // If the user has a match, get the match's info and display it.
+        if ($_SESSION['user_matched'] == 1) {
+          
+          $other_user_data = get_match_info();
 
-      // Code to calc difference incase user wants to drop the switch and re-enter queue
+          // Code to calc difference incase user wants to drop the switch and re-enter queue
 
-      $matchStatus = mysql_get_var('SELECT isFinished FROM Matches WHERE id = ' . $other_user_data['Matches_id']);
+          $matchStatus = mysql_get_var('SELECT isFinished FROM Matches WHERE id = ' . $other_user_data['Matches_id']);
 
-      // $canDrop = False;
+          // $canDrop = False;
 
-      if ($matchStatus == 0) {
+          if ($matchStatus == 0) {
 
-        list($firstName) = explode(' ', trim($other_user_data['name']));
+            list($firstName) = explode(' ', trim($other_user_data['name']));
 
-        $daysBeforeDrop = 2;
+            $daysBeforeDrop = 2;
 
-        $switchedDate = mysql_get_var('SELECT date_matched FROM Matches WHERE id = ' . $other_user_data['Matches_id']);
-        $switchedDate = date_create_from_format('Y-m-d H:i:s', $switchedDate);
+            $switchedDate = mysql_get_var('SELECT date_matched FROM Matches WHERE id = ' . $other_user_data['Matches_id']);
+            $switchedDate = date_create_from_format('Y-m-d H:i:s', $switchedDate);
 
-        $today = new DateTime();
+            $today = new DateTime();
 
-        $difference = $switchedDate->diff($today);
+            $difference = $switchedDate->diff($today);
 
-        $days = $difference->format('%d');
+            $days = $difference->format('%d');
 
-        $timeLeft = $daysBeforeDrop - $days;
+            $timeLeft = $daysBeforeDrop - $days;
 
-        if ($days > $daysBeforeDrop) { 
-          $canDrop = True;
-          // Can drop 
-        }
-        else {
-          $canDrop = False; 
-          // Must wait ($daysBeforeDrop - $days) days. (SHOULD I CALC HOURS INSTEAD?)
-        }
+            if ($days > $daysBeforeDrop) { 
+              $canDrop = True;
+              // Can drop 
+            }
+            else {
+              $canDrop = False; 
+              // Must wait ($daysBeforeDrop - $days) days. (SHOULD I CALC HOURS INSTEAD?)
+            }
 
-        $status = "In Progress";
-      }
+            $status = "In Progress";
+          }
 
-      else if ($matchStatus == 1) {
-        $status = "Completed";
-      }
+          else if ($matchStatus == 2) { $status = "SCDC Contacted"; }
 
+          else if ($matchStatus == 3) { $status = "Switch failed. Reason: <?php echo $failReason ?>"; }
 
-  ?>
+          else if ($matchStatus == 4) { $status = "Switch complete!"; }
 
-
-      <?php 
-
-        // First name of other person
-
-        // echo $days;
-
-        if ($days > $daysBeforeDrop) {
-          // echo "Can drop.";
-        }
-        else {
-          // echo "Cannot drop yet. " . ($daysBeforeDrop - $days) . " days left.";
-        }
 
       ?>
+
+      <div id="switchStatusError" class="alert alert-info alert-dismissable fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+        <p id="dropFalse"> 
+          <strong>You cannot drop this switch yet.</strong><br /> <hr /> 
+          You may drop this switch in <strong><?php echo $timeLeft; ?> day(s)</strong> and enter back into the queue. <br /><br />
+          Email <strong><?php echo $firstName; ?></strong> to finish your switch! 
+        </p>
+        <p id="dropTrue">
+          <strong>Are you sure you want to drop this switch?</strong> <!-- YES | NO buttons. -->
+        </p>
+      </div>
+
+      <h2><strong>Coopswitch Status</strong></h2>
 
       <div class="row">
         <div id="matchStatusTrue">
@@ -221,6 +223,8 @@ else {
 
   <?php } ?>
   </div>
+
+</div>
 </div>
 <?php } ?>
 
@@ -434,6 +438,7 @@ else {
 
 <script>
 
+test = 1;
   manualCheck = "<?php echo $check; ?>";
 
   if (manualCheck == 1) {
@@ -442,12 +447,31 @@ else {
 
   $('.lastMatch').tooltip();
 
+  // $("#switchStatusError").alert();
+
+  // $('#switchStatusError .close').click(function(e) {
+  //   $('#switchStatusError').fadeTo('fast', 2);
+  //   console.log("Fade out.");
+  // });
+
   var checkCanDrop = function () {
 
     var canDrop = <?php echo ($canDrop) ? "true" : "false"; ?>;
 
-    id("unresponsive").className = "hide";
-    id("unresponsive-msg").innerHTML = "Please wait at least <?php echo $timeLeft; ?> days before finding another switch.";
+    if (!canDrop) {
+      $('#switchStatusError').fadeTo('fast', 2);
+          console.log("Fade In." + test);
+
+    }
+
+
+    // id("switchStatusError").style.display = '';
+
+    
+    test++;
+
+    // id("unresponsive").className = "hide";
+    // id("unresponsive-msg").innerHTML = "Please wait at least <?php echo $timeLeft; ?> days before finding another switch.";
 
   }
 

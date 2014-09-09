@@ -4,9 +4,8 @@ Other person gets button to go back in (with that date, not original)
 Change going back in system to original, not withdrawn date.
 - Still log withdrawn date.
 
-No clicking unavailable majors in profile change.
 
 - Send messages to Stephanie and anything generated once action is taken
   - Waiting, Next Steps, Etc
 
-  - Green account user img when logged in
+Better error reporting (email in use)
