@@ -422,6 +422,8 @@ else {
     </div>
   </div>
 
+  <?php echo ($max == 0) ? '<div style="padding-bottom: 10em;"></div>' : ''; ?>
+
   <div class="row">
     <div class="<?php echo $rowClass; ?>">
       <a href="?check=1"><button class="btn">Manual Switch Check</button></a>
@@ -432,7 +434,6 @@ else {
 
 <br />
 
-<?php echo ($max == 0) ? '<div style="padding-bottom: 8em;"></div>' : ''; ?>
 
 
 <?php
