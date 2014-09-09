@@ -104,14 +104,70 @@ else {
 
   <?php
     // Get the latest user_matched status
-    $_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
+    $_SESSION['user_matched'] = mysql_get_var('SELECT matched FROM Users WHERE id = ' . $_SESSION['user_id']);
 
     // If the user has a match, get the match's info and display it.
     if ($_SESSION['user_matched'] == 1) {
       
       $other_user_data = get_match_info();
-    
+
+      // Code to calc difference incase user wants to drop the switch and re-enter queue
+
+      $matchStatus = mysql_get_var('SELECT isFinished FROM Matches WHERE id = ' . $other_user_data['Matches_id']);
+
+      // $canDrop = False;
+
+      if ($matchStatus == 0) {
+
+        list($firstName) = explode(' ', trim($other_user_data['name']));
+
+        $daysBeforeDrop = 2;
+
+        $switchedDate = mysql_get_var('SELECT date_matched FROM Matches WHERE id = ' . $other_user_data['Matches_id']);
+        $switchedDate = date_create_from_format('Y-m-d H:i:s', $switchedDate);
+
+        $today = new DateTime();
+
+        $difference = $switchedDate->diff($today);
+
+        $days = $difference->format('%d');
+
+        $timeLeft = $daysBeforeDrop - $days;
+
+        if ($days > $daysBeforeDrop) { 
+          $canDrop = True;
+          // Can drop 
+        }
+        else {
+          $canDrop = False; 
+          // Must wait ($daysBeforeDrop - $days) days. (SHOULD I CALC HOURS INSTEAD?)
+        }
+
+        $status = "In Progress";
+      }
+
+      else if ($matchStatus == 1) {
+        $status = "Completed";
+      }
+
+
   ?>
+
+
+      <?php 
+
+        // First name of other person
+
+        // echo $days;
+
+        if ($days > $daysBeforeDrop) {
+          // echo "Can drop.";
+        }
+        else {
+          // echo "Cannot drop yet. " . ($daysBeforeDrop - $days) . " days left.";
+        }
+
+      ?>
 
       <div class="row">
         <div id="matchStatusTrue">
@@ -137,39 +193,20 @@ else {
               <p class="form-control-static lead text-primary"><?php echo $other_user_data['email']; ?></p>
             </div>
           </div>
+          <div class="form-group">
+            <label class="col-sm-2 col-sm-offset-2 control-label">Status</label>
+            <div class="col-sm-8">
+              <p class="form-control-static lead text-primary"><?php echo $status; ?></p>
+            </div>
+          </div>
         </form>    
       </div>
 
-      <?php 
-
-        // First name of other person
-        list($firstName) = explode(' ', trim($other_user_data['name']));
-
-        $daysBeforeDrop = 2;
-
-        $switchedDate = mysql_get_var('SELECT date_matched FROM Matches WHERE id = ' . $other_user_data['Matches_id']);
-        $switchedDate = date_create_from_format('Y-m-d H:i:s', $switchedDate);
-
-        $today = new DateTime();
-
-        $difference = $switchedDate->diff($today);
-  
-        $days = $difference->format('%d');
-
-        // echo $days;
-
-        if ($days > $daysBeforeDrop) {
-          // echo "Can drop.";
-        }
-        else {
-          // echo "Cannot drop yet. " . ($daysBeforeDrop - $days) . " days left.";
-        }
-
-      ?>
-
       <div class="row">
-        <div class="col-sm-4 col-sm-offset-4">
-          <button id="unresponsive" class="btn btn-info" onclick="checkCanDrop()">Is <?php echo $firstName; ?> unresponsive?</button>
+        <div class="col-sm-8 col-sm-offset-2">
+            <hr class="style-three" />
+            <button id="unresponsive" class="btn btn-info" onclick="checkCanDrop()">Is <?php echo $firstName; ?> unresponsive?</button>
+            <div id="unresponsive-msg"></div>
         </div>
       </div>
 
@@ -404,5 +441,14 @@ else {
   }
 
   $('.lastMatch').tooltip();
+
+  var checkCanDrop = function () {
+
+    var canDrop = <?php echo ($canDrop) ? "true" : "false"; ?>;
+
+    id("unresponsive").className = "hide";
+    id("unresponsive-msg").innerHTML = "Please wait at least <?php echo $timeLeft; ?> days before finding another switch.";
+
+  }
 
 </script>
