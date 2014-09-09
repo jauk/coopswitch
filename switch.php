@@ -432,7 +432,7 @@ else {
 
 <br />
 
-<?php echo ($max == 0) ? '<div style="padding-bottom: 5em;"></div>' : ''; ?>
+<?php echo ($max == 0) ? '<div style="padding-bottom: 8em;"></div>' : ''; ?>
 
 
 <?php
