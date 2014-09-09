@@ -477,8 +477,9 @@ $formElementErrClass = "";
 
 			if (length != email.length) {
 
-				emailRemove = email.slice(length, email.length);
-				email = email.replace(emailRemove, "");
+				//emailRemove = email.slice(length, email.length);
+				email = email.slice(0, length);
+				//email = email.replace(emailRemove, "");
 
 				// emailErrorDiv.textContent = "Extra characters removed.";
 				// emailErrorDiv.className = 'alert alert-info';
