@@ -286,11 +286,12 @@ else {
       Criteria: Not switched, email verified, not withdrawn, same major, not the same ID, opposite cycle.
       Order: First by dropped matches, then by new_date (users who have not redrawn have no new date).
       */
-
+      
+          // Do not use the new_date for users who withdraw/re-enter again.
           $query = " SELECT * FROM Users WHERE matched = 0 AND verified = 1 AND withdraw != 1 AND major = " . $users_not_matched[$x]['major'] .
                    " AND id != " . $users_not_matched[$x]['id'] . " AND cycle != " . $users_not_matched[$x]['cycle'] .
                    " AND num_year_program = " . $users_not_matched[$x]['num_year_program'] .
-                   " ORDER BY dropped_matches ASC, new_date ASC";
+                   " ORDER BY dropped_matches ASC";
 
           $result = mysql_query($query);
 
