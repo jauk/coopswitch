@@ -69,7 +69,7 @@
                 <p class="lead">Please enter your email address.</p>
                 <p id="isValidEmail" class="text-warning lead" style="display: none;">That is not a valid email.</p>
                 <form id="resetForm" role="form" method="post" action="resetpass" onsubmit="return validateInput()">
-                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email">
                 </form>
             </div>
             <div id="emailSubmitted" class="modal-body">
