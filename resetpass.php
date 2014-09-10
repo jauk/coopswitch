@@ -177,5 +177,4 @@ mysql_close($con);
 
 	var validate_form = function() {}
 
-
 </script>
