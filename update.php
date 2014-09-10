@@ -132,7 +132,12 @@
 
 		   	}
 		   	else if ($withdraw == 2) {
-		   		// Withdraw is done because user B is not responsive. 
+		   		// Withdraw is done because: user B is not responsive. 
+		   		// User A is put back into queue. User B is marked as withdrawn and sent email.
+
+		   		// Set as withdrawn.
+		   		$sql = 'UPDATE Users SET withdraw = 1 WHERE id = '.$other_user_data['id'];
+		   		$result = mysql_query($sql);
 
 		   		
 
