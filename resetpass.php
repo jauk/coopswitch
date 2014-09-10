@@ -38,7 +38,7 @@ if (isset($_POST['email']) && $_POST['email'] != "") {
 			$resetLink = $baseUrl . $token;
 			reset_pass_email($name, $email, $resetLink);
 
-			die("Email sent.");
+			header("Location: /error?action=resetsent");
 		}
 
 	}
