@@ -104,8 +104,12 @@
 		   	$result = mysql_query($query);
 		   
 		   	// Add the dropped match to db for user dropping (add to current)
-		   	$query = "UPDATE Users SET dropped_matches = " . ($user_data['dropped_matches']+1) . " WHERE id = " . $user_data['id'];
-		   	$result = mysql_query($query);
+		   	// Do not add dropped match if reason = user unresponsive (unsure of actual situation).
+		   	if ($withdraw != 2) {
+		   		$query = "UPDATE Users SET dropped_matches = " . ($user_data['dropped_matches']+1) . " WHERE id = " . $user_data['id'];
+		   		$result = mysql_query($query);
+		   	}
+
 
 		   	//Lets reset those session vars, too.
 
@@ -122,8 +126,15 @@
 			   	mail_user_dropped($other_user_data['name'], $other_user_data['email']);		   		
 		   	}
 		   	else if ($withdraw == 1) {
+		   		// User has withdrawed their account. Other user needs to be notified their match is being dropped.
 		   		// Email the user who is getting dropped. User withdrawing will get different email.
 
+
+		   	}
+		   	else if ($withdraw == 2) {
+		   		// Withdraw is done because user B is not responsive. 
+
+		   		
 
 		   	}
 

@@ -4,11 +4,11 @@ require_once(TEMPLATES_PATH . "/header.php");
 //include('mail.php');
 /* Have a cron job run this page every minute so checks are always done. FOR PRODUCTION SERVER. */
 
-if (isset($_GET['msg'])) {
+if (isset($_GET['msg']) && $_GET['msg'] != "") {
   $msg = test_input($_GET['msg']);
 }
 
-if (isset($_GET['check'])) {
+if (isset($_GET['check']) && $_GET['check'] != "") {
   $check = test_input($_GET['check']);
 }
 else {
@@ -92,6 +92,8 @@ else {
   $matches = 0;
 }
 
+$canDrop = false;
+
 ?>
 
               
@@ -133,6 +135,7 @@ else {
             $days = $difference->format('%d');
 
             $timeLeft = $daysBeforeDrop - $days;
+      // if ($time < strtotime('+1 day', $requestTime)) { 
 
             if ($days > $daysBeforeDrop) { 
               $canDrop = True;
@@ -152,21 +155,50 @@ else {
 
           else if ($matchStatus == 4) { $status = "Switch complete!"; }
 
+          else {
+            $status = "Searching";
+          }
+
 
       ?>
+
+      <?php
+
+          if (isset($_SESSION['login']) && isset($_GET['drop']) && $_GET['drop'] == 1) {
+            if ($canDrop) {
+
+              // Include for the check_for_match function, move to functions.php eventually
+              include_once("update.php");
+
+              $user_data = getUserDataFromId($_SESSION['user_id']);
+
+              // Function is just named this, we know they are matched. Get a better function name.
+              check_for_match($user_data, "2");
+
+            }
+            else {
+              echo '<div class="alert alert-danger"><strong>Cannot drop switch.</strong> Please wait '.$timeLeft.' day(s) before trying again.</div>';
+            }
+
+        }
+    
+    ?>
 
       <div id="switchStatusError" class="alert alert-info alert-dismissable fade in" role="alert">
         <button type="button" class="close" data-dismiss="alert">
           <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
         </button>
-        <p id="dropFalse"> 
-          <strong>You cannot drop this switch yet.</strong><br /> <hr /> 
+        <div id="dropFalse" class="hide"> 
+          <p><strong>You cannot drop this switch yet.</strong><br /> <hr /> 
           You may drop this switch in <strong><?php echo $timeLeft; ?> day(s)</strong> and enter back into the queue. <br /><br />
-          Email <strong><?php echo $firstName; ?></strong> to finish your switch! 
-        </p>
-        <p id="dropTrue">
-          <strong>Are you sure you want to drop this switch?</strong> <!-- YES | NO buttons. -->
-        </p>
+          Email <strong><?php echo $firstName; ?></strong> to finish your switch!</p>
+        </div>
+        <div id="dropTrue" class="hide">
+          <p><strong>Are you sure you want to drop this switch?</strong><br />You will be entered back into the queue.</p>
+          <a href="/switch?drop=1"><button class="btn btn-warning dropTrueBtn">Yes</button></a>
+          <a href="#"><button id="dropNo" class="btn btn-success dropTrueBtn">No</button></a>
+          <!-- YES | NO buttons. -->
+        </div>
       </div>
 
       <h2><strong>Coopswitch Status</strong></h2>
@@ -444,7 +476,6 @@ else {
 
 <script>
 
-test = 1;
   manualCheck = "<?php echo $check; ?>";
 
   if (manualCheck == 1) {
@@ -460,24 +491,33 @@ test = 1;
   //   console.log("Fade out.");
   // });
 
+  $('#dropNo').click(function() {
+    $('#switchStatusError').slideUp(500, function() {
+      $('#switchStatusError').remove();
+
+    });
+  }); 
+
+  $('.close').click(function() {
+    //$('#switchStatusError').slideUp(500, function() {
+      //$('#switchStatusError').remove();
+
+    //});
+  }); 
+
+
   var checkCanDrop = function () {
 
     var canDrop = <?php echo ($canDrop) ? "true" : "false"; ?>;
 
+    $('#switchStatusError').fadeTo('fast', 2);
+
     if (!canDrop) {
-      $('#switchStatusError').fadeTo('fast', 2);
-          console.log("Fade In." + test);
-
+      id("dropTrue").className = 'show';
     }
-
-
-    // id("switchStatusError").style.display = '';
-
-    
-    test++;
-
-    // id("unresponsive").className = "hide";
-    // id("unresponsive-msg").innerHTML = "Please wait at least <?php echo $timeLeft; ?> days before finding another switch.";
+    else {
+      id("dropFalse").className = 'show';
+    }
 
   }
 

@@ -325,3 +325,7 @@ input[type="radio"] {
 	display: none;
 	/*text-align: left;*/
 }
+
+.dropTrueBtn {
+	width: 20%;
+}
