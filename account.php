@@ -35,13 +35,14 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 <!-- Use ajax to call send page -->
 
   <?php if ($_SESSION['user_email_verified'] == 0) { ?>
+
     <div class="row">
-      <div class="col-sm-8 col-sm-offset-2 text-center">
-        <p class="lead text-danger">
-        	Your email has not been verified. You are not eligible for a switch.
+			<div class="panel panel-default col-sm-8 col-sm-offset-2">
+			  <div class="panel-body text-center">
+        	<p class="lead text-danger ">	Your email has not been verified. Not eligible for a switch.</p>
         	<a href="resendverify.php"><button class="btn btn-info btn-sm">Resend Email</button></a>
-        </p>
-      </div>
+			  </div>
+			</div>
     </div>
     
   <?php } ?>
@@ -73,7 +74,6 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
  <form id="profileForm" name="profileForm" method="post" action="update.php" onsubmit="return saveChanges()">
 
 
-
   	<!-- <div id="profileFields" name="profileFields" class="container col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-1 col-xs-6 col-xs-offset-3" style="border: 0px solid black; padding: 5px;"> -->
 
   		<div class="row text-center" id="profileFieldsRow" style="">
@@ -101,7 +101,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   			<!-- Cycle -->
   			<div class="col-md-4 profileBox">
 
-   				<div class="circle">
+   				<div class="circle" >
 
 	  				<h3 class="profileBoxHeading">Cycle</h3>
 		      	<div class="profileBoxText" id="cycleNameText"><?php echo "{$_SESSION['user_cycle_name']}"; ?></div>
