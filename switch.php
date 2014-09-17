@@ -247,7 +247,7 @@ $canDrop = false;
 
   <?php } else { // If the user does not have a match tell them they still do not. ?>
 
-          <div class="row">
+          <div class="row" ">
             <div id="matchStatusFalse">
               <?php print ($_SESSION['withdraw'] == 1 ? '<p class="lead">Your account is withdrawn.</p>' : '<p class="lead">You do not have a switch yet, but we will keep looking!</p>'); ?>
             </div>
