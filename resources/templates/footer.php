@@ -8,6 +8,9 @@
                   <div class="row">
                       <div class="col-sm-8 col-sm-offset-2 text-center">
                           <p class="small">
+                          © 2014 Coopswitch. All rights reserved.
+                          </p>
+                          <p class="small">
                           Coopswitch has no affiliation with Drexel University or the Steinbright Career Development Center.
                           </p>
                           <p class="small">
