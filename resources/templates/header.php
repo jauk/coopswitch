@@ -27,6 +27,12 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
+	<meta charset="UTF-8">
+	
+	<meta name="description" content="Coopswitch: A simpler way to switch coops.">
+	<meta name="keywords" content="coop, switch">
+	<meta name="author" content="Coopswitch">
+
 	<?php 
 
 		// $pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
@@ -60,7 +66,7 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 	<script src="/js/global.js"></script>
 
 	<link href="https://fonts.googleapis.com/css?family=Cutive" rel="stylesheet" type="text/css">
-	
+
 </head>
 
 <body>
