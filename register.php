@@ -50,7 +50,9 @@ else {
 }
 
 $cycle = test_input($_POST['cycle']);
+$currentCycleText = ($cycle == "1" ? "Fall-Winter" : "Spring-Summer");
 $num_year_program = test_input($_POST['numCoops']);
+$currentProgramText = ($num_year_program == "1" ? "One Coop" : "Three Coops");
 $major = test_input($_POST['major']);
 
 // See if email is already in use
@@ -85,51 +87,69 @@ else {
 $majorName = getMajorName($major);
 mysql_close($con);
 
+$formGroupLabel = "col-sm-4 col-sm-offset-1";
+$formGroupItem = "text-primary col-sm-7";
+
 ?>
 
-<br />
 <div class="container">
-
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3 text-center">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="lead">Hi, <?php echo $name; ?>!</p>
-				</div>
-				<div class="text-info bg-info lead" style="padding: 10px;">
-					<p>Please check your email to verify your account.</p>
-				</div>
-				<div class="panel-body">
-					<p>Your Drexel email address is: <?php echo $email; ?></p>
+		<div class="col-sm-8 col-sm-offset-2 formHeader text-center">
 
-					<p>
-					<?php
-						if ($num_year_program == 1)
-							echo "You are in the 4 year, 1 co-op program.";
-						else
-							echo "You are in the 5 year, 3 co-op program";
-					?>
-					</p>
 
-					<p>
-					<?php
-						if ($cycle == 1)
-							echo "You <strong>want</strong> a Spring-Summer co-op cycle.";
-						else
-							echo "You <strong>want</strong> a Fall-Winter co-op cycle.";
-					?>
-					</p>
 
-					<p>
-					We need to find other <strong><?php echo $majorName; ?></strong> majors!
-					</p>
-				</div>
-			</div>
+					<div class="row">
+						<h2>Welcome to Coopswitch, <span class="text-primary"><?php echo $name; ?></span>!</h2>
+						<br />
+					</div>
+					<div class="row">
+						<div class="text-warning bg-warning lead" style="padding: 12px;">
+							<p class=""><strong>Please check your email to verify your account.</strong></p>
+						</div>
+					</div>
+
+					<div class="row">
+						<form id="registeredForm" class="form-horizontal" role="form">
+							<div class="form-group">
+								<label class="control-label <?php echo $formGroupLabel; ?>">Email</label>
+								<div class="<?php echo $formGroupItem; ?>">
+									<p class="form-control-static"><?php echo $email; ?></p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label <?php echo $formGroupLabel; ?>">Major</label>
+								<div class="<?php echo $formGroupItem; ?>">
+									<p class="form-control-static"><?php echo $majorName; ?></p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label <?php echo $formGroupLabel; ?>">Current Program</label>
+								<div class="<?php echo $formGroupItem; ?>">
+									<p class="form-control-static"><?php echo $currentProgramText; ?></p>								
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label <?php echo $formGroupLabel; ?>">Current Cycle</label>
+								<div class="<?php echo $formGroupItem; ?>">
+									<p class="form-control-static"><?php echo $currentCycleText; ?></p>								
+								</div>
+							</div>
+						</form>
+					</div>
+
 		</div>
 	</div>
-	
 </div>
 
 <?php
 require_once(TEMPLATES_PATH . "/footer.php");
 ?>
+
+<script type="text/javascript">
+
+
+
+</script>

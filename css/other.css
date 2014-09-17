@@ -329,3 +329,16 @@ input[type="radio"] {
 .dropTrueBtn {
 	width: 20%;
 }
+
+
+/**
+ * REGISTER
+ */
+
+ #registeredForm p, label {
+ 	font-size: 160%;
+ }
+
+#registeredForm label {
+	text-align: left;
+}
