@@ -92,7 +92,7 @@ else {
   $matches = 0;
 }
 
-$canDrop = false;
+$canDrop = False;
 
 ?>
 
@@ -119,6 +119,7 @@ $canDrop = false;
 
           // $canDrop = False;
 
+          // Update this to use UNIX time instead - more reliable // (Currenty not working with proper message)
           if ($matchStatus == 0) {
 
             list($firstName) = explode(' ', trim($other_user_data['name']));
