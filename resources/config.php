@@ -77,6 +77,7 @@ if ($_SERVER['SERVER_NAME'] == $config['urls']['baseUrl'])
 else 
 	$GLOBALS['testHaveSwitch'] = False;
 
+// include "functions/login.php";
 
 
 

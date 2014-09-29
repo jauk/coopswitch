@@ -237,6 +237,7 @@ $canDrop = False;
         </form>    
       </div>
 
+      <!-- Hide this if SCDC adds to switch queue? -->
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
             <hr class="style-three" />

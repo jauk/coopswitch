@@ -53,7 +53,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   			<h2>Hey, 
   				<div style="display: inline-block;" class="text-primary">
   					<!-- <a href="#" id="userName" role="tooltip" data-toggle="tooltip" data-placement="bottom" title="Email" trigger="hover"> -->
-  						<?php echo "{$_SESSION['user_name']}" ?>
+  						<span class="name"></span>
   					<!-- </a> -->
   				</div>
   			</h2>
@@ -306,6 +306,35 @@ mysql_close($con);
 require_once(TEMPLATES_PATH . "/footer.php");
 ?>
 
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+
+		// $('.name span').update(function() {
+
+			$.get("/resources/user.php?g=name", function(name) {
+				//$('.name').html(name);
+				//console.log(name);
+			});
+
+			$.ajax({
+
+				type: "GET",
+				url: "/resources/user.php",
+				data: "g=name",
+				success: function(data){
+					$('.name').html(data);
+					console.log(data);
+				}
+
+			});
+
+		// }); // Event Handler
+
+	});
+
+</script>
 
 <script type="text/javascript">
 
