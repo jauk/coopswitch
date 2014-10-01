@@ -3,26 +3,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
 include_once(FUNCTION_PATH . "/connect.php");
 
-// Some global CSS variables. Need to fix these names, organize, move to separate class file
-$formGroupClass="form-group row-fluid col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3";
-
-$notFormClass="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-center";
-$otherClassMaybe="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center";
-
-// For now, typical row class that will center items on page and take up 50% of width (6 columns)
-$typicalRowClass = "col-sm-6 col-sm-offset-3 text-center";
-
-// Form specific
-//$formHeaderClass = "col-sm-4 col-sm-offset-4 text-center well";
-//$formElementClass = "col-sm-4 col-sm-offset-4 text-center";
-
-$formElementClass = "col-md-10 col-md-offset-1 col-sm-12 text-center";
-$formHeaderClass = $formElementClass . " text-primary";
-
-$formMainErrClass = $formElementClass;
-
-$formElementErrClass = "";
-
 /*
 
 == To Do ==
@@ -46,13 +26,13 @@ $formElementErrClass = "";
 <?php if (!isset($_SESSION['login'])) { // if ($_SESSION['login'] == "") { ?>
 
 	<div id="startText" class="row">
-		<div class="<?php echo $typicalRowClass; ?>">
+		<div class="normalRow">
 			<h2>Find someone to trade coop cycles with!</h2>
 		</div>
 	</div>
 
     <div id="stockPhoto" class="row">
-  		<div class="<?php echo $typicalRowClass; ?>">
+  		<div class="normalRow">
   			<img src="/img/stockphoto.jpeg"
   				 class="img-responsive img-thumbnail center-block">
   			<!-- <div class="caption">Friends having fun on Coopswitch.</div>  -->
@@ -61,7 +41,7 @@ $formElementErrClass = "";
   	</div>
 
   	<div class="row">
-  		<div class="<?php echo $typicalRowClass; ?>">
+  		<div class="normalRow">
   			<button class="btn btn-lg btn-success" id="getStarted" style="width: 85%;"><h2>Get Started</h2></button>
   		</div> 
   	</div>
@@ -71,72 +51,65 @@ $formElementErrClass = "";
   	<!-- REGISTER FORM START -->
 	<div id="registerForm" class="container col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 	    <div class="row">
-	  		<div class="<?php echo $formHeaderClass; ?> formHeader">
+	  		<div id="formHeader">
 	  			<h3><strong>Registration Form</strong></h3>
 	  			<!-- <p>This is currently for <em>Drexel Freshman</em> only.</p> -->
 	  		</div>
 	  	</div>
 		
-		<!-- Print out if there is an error with the form data. -->
-		<div class="row">
-  		<div class="<?php echo $formMainErrClass; ?>">
-  			<span class="error">
-  				<strong>
-  					<div class="alert alert-warning lead" id="formError">
-  						<!-- <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
-  					</div>
-  				</strong>
-  			</span>
-  		</div>
-  	</div>
-
-  	<?php 
-  		$formLabelClass = "col-sm-2 col-sm-offset-0 control-label formLabel"; 
-  		$formInputWidth = "col-sm-6";
-  		$formErrorWidth = "formError col-sm-3";
-  	?>
+			<!-- Print out if there is an error with the form data. -->
+			<div class="row">
+	  		<div id="element">
+	  			<span class="error">
+	  				<strong>
+	  					<div class="alert alert-warning lead" id="formError">
+	  						<!-- <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+	  					</div>
+	  				</strong>
+	  			</span>
+	  		</div>
+	  	</div>
 
 			<!-- Registration Form -->
 		<form class="form-horizontal" role="form" id="register" method="post" action="register.php" onsubmit="return validate_submit();" id="register">
 
-
 	  			<div id="nameDiv" class="form-group has-feedback">
-	  				<label for="nameField" class="<?php echo $formLabelClass ?>">Name</label>
-	  				<div class="<?php echo $formInputWidth ?>">
+	  				<label for="nameField">Name</label>
+	  				<div>
 		  				<input type="text" class="form-control input-lg" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()" data-toggle="tooltip" data-trigger="click" data-placement="right" title="">
 	  					<span id="nameFeedback" class="glyphicon form-control-feedback"></span>
 	  				</div>
-	  				<div class="<?php echo $formErrorWidth ?>">
+	  				<div>
 	  					<span class="help-block error"><div id="nameError"></div></span>
 	  				</div>
 	  			</div>
 	  
 	  			<div id="emailDiv" class="form-group has-feedback">
-	  				<label for="emailField" class="<?php echo $formLabelClass ?>">Email</label>
-	  				<div class="<?php echo $formInputWidth ?>">
+	  				<label for="emailField">Email</label>
+	  				<div>
 		  				<input type="email" class="form-control input-lg" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email(1)">
 	  					<span id="emailFeedback" class="glyphicon form-control-feedback"></span>	  			
 	  				</div>
-	  				<div class="<?php echo $formErrorWidth ?>">
+	  				<div>
 		  				<span class="help-block error"><div id="emailError"></div></span>
 					</div>	  				
 	  			</div>
 
 	  			<div id="passwordDiv" class="form-group has-feedback">
-	  				<label for="passwordField" class="<?php echo $formLabelClass ?>">Password</label>
-	  				<div class="<?php echo $formInputWidth ?>">
+	  				<label for="passwordField">Password</label>
+	  				<div>
 	  					<input type="password" class="form-control input-lg" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
 		  				<input type="password" class="form-control input-lg" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="passwordConfirm()">
 	 	  				<span id="passwordFeedback" class="glyphicon form-control-feedback"></span> 				
 	  				</div>
-	  				<div class="<?php echo $formErrorWidth ?>">
+	  				<div>
 		  				<span class="help-block error"><div id="passwordError"><p class="alert text-info bg-info">Do not use your Drexel One password.</p></div></span>
 						</div>	 	  				
 	  			</div>
 
 
 		    <div class="form-group">
-		    	<div class="<?php echo $formElementClass; ?>">
+		    	<div id="element">
 		    		<hr class="style-three">
 		    	</div>
 		    </div>
@@ -144,7 +117,7 @@ $formElementErrClass = "";
 		    <?php if ($testHaveSwitch) { ?>
 
 		    <div class="row">
-		    	<div class="<?php echo $formElementClass; ?>" id="mainRegisterTypeDiv">
+		    	<div id="element" id="mainRegisterTypeDiv">
 						<div class="radio-inline">
 							<label>
 								<input checked type="radio" name="registerType" id="registerType1" onchange="registerTypeCheck()" value="1">
@@ -155,23 +128,23 @@ $formElementErrClass = "";
 							<label>
 								<input  type="radio" name="registerType" id="registerType2" onchange="registerTypeCheck()" value="2">
 								I have a switch. <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Choose this if you already have someone to switch with." id="registerTypeHelp"></span>
-								</label>
+							</label>
 
 						</div>
 		    	</div>
 		    </div>
 
 		    <div class="row">
-	    		<div class="<?php echo $formElementClass; ?>" id="otherEmailMain" style="display: none;">
+	    		<div id="otherEmailMain element" style="display: none;">
 	    			<input type="email" class="form-control" name="otherUserEmail" id="otherUserEmail" placeholder="Student's Drexel email" onchange="validate_email(2)">	
 	    		</div>
-    			<div class="<?php echo "$formElementClass"; ?>">
+    			<div id="element">
 	  				<span class="help-block error"><div id="otherEmailError"></div></span>
 	        	</div>
 		    </div>
 
 		    <div class="row">
-		    	<div class="<?php echo $formElementClass; ?>">
+		    	<div id="element">
 		    		<hr class="style-three">
 		    	</div>
 		    </div>		   
@@ -179,7 +152,7 @@ $formElementErrClass = "";
 		    <?php } ?>
 
   			<div class="form-group" id="mainMajorDiv">
-  				<label for="majorField" class="<?php echo $formLabelClass ?>">Major</label>
+  				<label for="majorField">Major</label>
 					<div class="col-sm-6">			  			
 		  				<select class="form-control selectpicker input-lg" id="user_major" name="major" data-live-search="true" data-size="5" data-width="" onchange="checkmajor()">
 		  					<?php
@@ -189,13 +162,13 @@ $formElementErrClass = "";
 		  					?>
 		  				</select>
 	  			</div>
-  				<div class="<?php echo $formErrorWidth ?>">
+  				<div>
   					<span class="help-block error"><div id="majorError"></div></span>
   				</div>
   			</div>
 
 	    	<div class="form-group">
-	  				<label for="cycleField" class="<?php echo $formLabelClass ?>">Current Cycle</label>
+	  				<label for="cycleField">Current Cycle</label>
 	  				<div class="col-sm-3">
 		  				<label class="radio-inline formLabelRadio lead">
 							  <input checked="checked" type="radio" name="cycle" id="cycle" value="1"><?php echo FALLWINTER ?>
@@ -209,7 +182,7 @@ $formElementErrClass = "";
 	  		</div>
 
 	  		<div class="form-group">
-	  				<label for="numCoopsField" class="<?php echo $formLabelClass ?>">Coops</label>
+	  				<label for="numCoopsField">Coops</label>
 	  				<div class="col-sm-3">
 		  				<label class="radio-inline formLabelRadio lead">
 							  <input checked="checked" type="radio" name="numCoops" id="numCoops" value="1"><?php echo ONECOOP ?>
@@ -224,7 +197,7 @@ $formElementErrClass = "";
 
 
 		    <div class="form-group">
-		    	<div class="<?php echo $formElementClass; ?>">
+		    	<div id="element">
 		    		<hr class="style-three">
 		    	</div>
 		    </div>
@@ -242,7 +215,7 @@ $formElementErrClass = "";
       	<br>
       
       	<div class="form-group">
-  			<div class="<?php echo "$formElementClass"; ?> text-center">
+  			<div id="element">
   				 <div id="errorFree">
   				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
   				 </div>
@@ -287,8 +260,32 @@ $formElementErrClass = "";
 	</div>
 </div>
 
+<!-- // New JQuery Code! // -->
+<script type="text/javascript">
 
-<!-- </div> -->
+	/* CSS CLASS VARS */
+	formLabelClass = "col-sm-2 col-sm-offset-0 control-label formLabel";
+	formInputWidth = "col-sm-6";
+  formErrorWidth = "formError col-sm-3";
+  formElementClass = "col-md-10 col-md-offset-1 col-sm-12 text-center";
+  normalRowClass = "col-sm-6 col-sm-offset-3 text-center";
+
+	/* ON LOAD SET CLASSES */
+	$( window ).ready(function() {
+			$('form#register label').addClass(formLabelClass);
+			$('form#register input').parent().addClass(formInputWidth);
+			$('form#register span.error').parent().addClass(formErrorWidth);
+			$('form#register #element').addClass(formElementClass);
+			$('#formHeader').addClass(formElementClass+" text-primary formHeader");
+			$('.normalRow').addClass(normalRowClass);
+
+			console.log("Loaded.");
+	});
+
+
+
+</script>
+
 <script>
 	
 	id("registerForm").style.display = 'none';
@@ -331,7 +328,6 @@ $formElementErrClass = "";
 
 		window.errorClassVals = "alert alert-danger";
 
-		// window.mainDivClass = "<?php echo $formElementClass; ?>";
 		window.mainDivClass = "";
 		window.mainDivClassError = mainDivClass + " has-error";
 		window.mainDivClassValid = mainDivClass + " has-success";
