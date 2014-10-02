@@ -1,4 +1,5 @@
 <?php
+
 require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
 include_once(FUNCTION_PATH . "/connect.php");
@@ -114,42 +115,7 @@ include_once(FUNCTION_PATH . "/connect.php");
 		    	</div>
 		    </div>
 		    
-		    <?php if ($testHaveSwitch) { ?>
-
-		    <div class="row">
-		    	<div id="element" id="mainRegisterTypeDiv">
-						<div class="radio-inline">
-							<label>
-								<input checked type="radio" name="registerType" id="registerType1" onchange="registerTypeCheck()" value="1">
-								Find a switch.
-							</label>
-						</div>
-						<div class="radio-inline">
-							<label>
-								<input  type="radio" name="registerType" id="registerType2" onchange="registerTypeCheck()" value="2">
-								I have a switch. <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Choose this if you already have someone to switch with." id="registerTypeHelp"></span>
-							</label>
-
-						</div>
-		    	</div>
-		    </div>
-
-		    <div class="row">
-	    		<div id="otherEmailMain element" style="display: none;">
-	    			<input type="email" class="form-control" name="otherUserEmail" id="otherUserEmail" placeholder="Student's Drexel email" onchange="validate_email(2)">	
-	    		</div>
-    			<div id="element">
-	  				<span class="help-block error"><div id="otherEmailError"></div></span>
-	        	</div>
-		    </div>
-
-		    <div class="row">
-		    	<div id="element">
-		    		<hr class="style-three">
-		    	</div>
-		    </div>		   
-
-		    <?php } ?>
+		    <?php if ($testHaveSwitch) { require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/dev/haveSwitch.html"); } ?>
 
   			<div class="form-group" id="mainMajorDiv">
   				<label for="majorField">Major</label>
@@ -169,12 +135,12 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 	    	<div class="form-group">
 	  				<label for="cycleField">Current Cycle</label>
-	  				<div class="col-sm-3">
+	  				<div class="col-sm-4">
 		  				<label class="radio-inline formLabelRadio lead">
 							  <input checked="checked" type="radio" name="cycle" id="cycle" value="1"><span class="fallwinter">Fall Winter</span>
 							</label>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-sm-4">
 							<label class="radio-inline formLabelRadio lead">
 							  <input type="radio" name="cycle" id="cycle" value="2"><span class="springsummer">Spring Summer</span>
 							</label>
@@ -183,12 +149,12 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 	  		<div class="form-group">
 	  				<label for="numCoopsField">Coops</label>
-	  				<div class="col-sm-3">
+	  				<div class="col-sm-4">
 		  				<label class="radio-inline formLabelRadio lead">
 							  <input checked="checked" type="radio" name="numCoops" id="numCoops" value="1"><span class="onecoop">One Coop</span>
 							</label>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-sm-4">
 							<label class="radio-inline formLabelRadio lead">
 							  <input type="radio" name="numCoops" id="numCoops" value="2"><span class="threecoop">Three Coops</span>
 							</label>		  			
@@ -203,11 +169,9 @@ include_once(FUNCTION_PATH . "/connect.php");
 		    </div>
  
       	<div class="form-group" id="acceptTerms">
-      		<div class="col-sm-offset-4 col-xs-offset-2">
+      		<div class="col-sm-offset-2 col-sm-8 text-center lead">
       			<div class="checkbox">
-      				<label>
       					<input name="terms" id="terms" type="checkbox"> I<span id="myName"></span> accept the <a href="#">terms and conditions.</a>
-      				</label>
       			</div>
       		</div>
       	</div>
@@ -215,23 +179,18 @@ include_once(FUNCTION_PATH . "/connect.php");
       	<br>
       
       	<div class="form-group">
-  			<div id="element">
-  				 <div id="errorFree">
-  				 	<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
-  				 </div>
-  			</div>
-     	</div>
+	  			<div id="element">
+	  				 <div id="errorFree">
+	  				 		<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
+	  				 </div>
+	  			</div>
+     		</div>
 	      
 		</form>
 	</div>
 		<!-- USER IS LOGGED IN, MAKE THIS BETTER -->
 		
-		<?php } else {	
-
-			header("Location: /switch"); ?>
-
-		<?php } ?>
-
+		<?php } else {	header("Location: /switch"); } ?>
 
 <div class="modal fade" id="nonSwitchMajor" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
@@ -266,6 +225,7 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 	/* ON LOAD SET CLASSES */
 	$( window ).ready(function() {
+
 			$('form#register label').addClass(formLabelClass);
 			$('form#register input').parent().addClass(formInputWidth);
 			$('form#register span.error').parent().addClass(formErrorWidth);
@@ -275,8 +235,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 			console.log("Loaded.");
 	});
-
-
 
 </script>
 
