@@ -171,12 +171,12 @@ include_once(FUNCTION_PATH . "/connect.php");
 	  				<label for="cycleField">Current Cycle</label>
 	  				<div class="col-sm-3">
 		  				<label class="radio-inline formLabelRadio lead">
-							  <input checked="checked" type="radio" name="cycle" id="cycle" value="1"><?php echo FALLWINTER ?>
+							  <input checked="checked" type="radio" name="cycle" id="cycle" value="1"><span class="fallwinter">Fall Winter</span>
 							</label>
 						</div>
 						<div class="col-sm-3">
 							<label class="radio-inline formLabelRadio lead">
-							  <input type="radio" name="cycle" id="cycle" value="2"><?php echo SPRINGSUMMER ?>
+							  <input type="radio" name="cycle" id="cycle" value="2"><span class="springsummer">Spring Summer</span>
 							</label>
 		  			</div>
 	  		</div>
@@ -185,12 +185,12 @@ include_once(FUNCTION_PATH . "/connect.php");
 	  				<label for="numCoopsField">Coops</label>
 	  				<div class="col-sm-3">
 		  				<label class="radio-inline formLabelRadio lead">
-							  <input checked="checked" type="radio" name="numCoops" id="numCoops" value="1"><?php echo ONECOOP ?>
+							  <input checked="checked" type="radio" name="numCoops" id="numCoops" value="1"><span class="onecoop">One Coop</span>
 							</label>
 						</div>
 						<div class="col-sm-3">
 							<label class="radio-inline formLabelRadio lead">
-							  <input type="radio" name="numCoops" id="numCoops" value="2"><?php echo THREECOOPS ?>
+							  <input type="radio" name="numCoops" id="numCoops" value="2"><span class="threecoop">Three Coops</span>
 							</label>		  			
 	  				</div>
 	    	</div>
@@ -226,15 +226,9 @@ include_once(FUNCTION_PATH . "/connect.php");
 	</div>
 		<!-- USER IS LOGGED IN, MAKE THIS BETTER -->
 		
-		<?php } else {	header("Location: /switch"); ?>
+		<?php } else {	
 
-<!-- 		    <div class="row">
-		  		<div class="<?php echo $typicalRowClass; ?>">
-		  			<p class="lead" style="margin-bottom: 20em;">
-		  			Coopswitch switches more coop cycles than any other website.
-		  			</p>
-		  		</div>
-			</div>  -->
+			header("Location: /switch"); ?>
 
 		<?php } ?>
 
@@ -313,7 +307,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 	// When the page loads, do this
 	window.onload = function () {
 		
-		console.log("<?php echo $pageName; ?>");
 		formErrorDiv = id("formError");
 		formErrorDiv.style.display = 'none';
 
