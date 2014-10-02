@@ -2,7 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
 
-$rowClass = "col-sm-6 col-sm-offset-3";
+$rowClass = "";
 
 
 if (isset($_GET['msg'])) {
@@ -16,11 +16,11 @@ else {
 
 <div class="container">
 
-		<div class="row":>
-			<div class="<?php echo $rowClass; ?> text-center">
-				<ul class="nav nav-tabs nav-justified" role="tablist" id="aboutTabs" data-tabs="tabs">
-					<li class="active" role="tab" id="infoTab" data-toggle="tab"><a href="#info">Info</a></li>
-					<li role="tab" id="contactTab" data-toggle="tab"><a href="#contact">Contact</a></li>
+		<div class="row">
+			<div class="centeredRow">
+				<ul class="nav nav-tabs nav-justified" role="tablist" id="aboutTabs">
+					<li class="active" id="infoTab"><a href="#info">Info</a></li>
+					<li id="contactTab"><a href="#contact">Contact</a></li>
 				</ul>
 			</div>
 		</div>
@@ -29,7 +29,7 @@ else {
 
 			<div class="tab-pane fade in active" id="info">
 				<div class="row">
-					<div class="<?php echo $rowClass; ?>">
+					<div class="normalRow">
 						<div class="text-center text-primary">
 							<h2>What is this website?</h2>
 						</div>
@@ -37,7 +37,7 @@ else {
 				</div>
 
 				<div class="row">
-					<div class="<?php echo $rowClass; ?>">
+					<div class="normalRow">
 						<div class="lead text-center">
 							<p>Coopswitch automates the co-op switch process to save Drexel students time.</p>
 						</div>
@@ -45,7 +45,7 @@ else {
 				</div>
 
 				<div class="row">	
-					<div class="<?php echo $rowClass; ?>">
+					<div class="normalRow">
 						<div clsudo apt-get install ubuntu-restricted-extras avvass="bg-info text-center" style="padding: 20px; font-size: 135%; line-height: 200%;">
 							<p>Coopswitch was created to help Drexel students quickly and easily find someone to switch co-op cycles with.</p>
 							<br>
@@ -58,20 +58,20 @@ else {
 			<div class="tab-pane fade" id="contact">
 
 				<div class="row">
-					<div class="<?php echo $rowClass; ?>">
+					<div class="normalRow">
 						<div class="text-center text-primary">
 							<h2>Contact Us</h2>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="<?php echo $rowClass; ?> text-center">
+					<div class="centeredRow">
 						<p class="lead">Feedback is always appreciated!</p>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="<?php echo $rowClass ?> text-center">
+					<div class="centeredRow">
 						<form role="form" iid="emailUs" method="post" action="mailsite.php">
 
 							<div class="row">
@@ -139,20 +139,29 @@ else {
     </div>
 </div>
 
+<script type="text/javascript">
+
+	rowClass = "col-sm-6 col-sm-offset-3";
+
+	$('.normalRow').addClass(rowClass);
+	$('.centeredRow').addClass(rowClass + " text-center");
+
+</script>
+
 <script>
     $('.selectpicker').selectpicker();
 
 	$('#infoTab a').click(function (e) {
-		//e.preventDefault()
+		e.preventDefault()
 		$(this).tab('show')
-		$('#infoTab').addClass('active')
-		$('#contactTab').removeClass('active')
+		//$('#infoTab').addClass('active')
+		//$('#contactTab').removeClass('active')
 	})
 	$('#contactTab a').click(function (e) {
-		//e.preventDefault()
+		e.preventDefault()
 		$(this).tab('show')
-		$('#contactTab').addClass('active')
-		$('#infoTab').removeClass('active')
+		//$('#contactTab').addClass('active')
+		//$('#infoTab').removeClass('active')
 	})
 
 	msg = "<?php echo $msg; ?>";
