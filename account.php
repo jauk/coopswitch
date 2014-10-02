@@ -330,6 +330,17 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 			});
 
+			$.ajax({
+
+				type: "GET",
+				url: "/resources/user.php",
+				data: "g=email",
+				success: function(data){
+					console.log(data);
+				}
+
+			});
+
 		// }); // Event Handler
 
 	});
