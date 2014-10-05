@@ -23,19 +23,9 @@ function print_majors() {
 
 		$businessMajorSubtext = "(All Majors)";
 
-		if (isset($_SESSION['login']) && $_SESSION['user_major_name'] == $major_name) {
-			$selected = "selected";
-		}
-		else {
-			$selected = "";
-		}
+		$selected = ((isset($_SESSION['login']) && $_SESSION['user_major_name'] == $major_name) ? 'selected' : '');
 
-		if ($major_name == $business) {
-			$majorSubtext = $businessMajorSubtext;
-		}
-		else {
-			$majorSubtext = "";
-		}
+		$majorSubtext = ($major_name == $business ? $businessMajorSubtext : '');
 
 		print_r('<option ' . ($noSwitch == 1 ? 'class="noSwitch"  data-subtext="Not Available" ' : '' ) . $selected . ' value="' . $major_ident . '" data-subtext="' . $majorSubtext . '">' . $major_name . '</option>');
 
