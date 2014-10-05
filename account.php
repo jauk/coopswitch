@@ -341,6 +341,8 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 			});
 
+			$('.noSwitch').prop('disabled', true);
+
 		// }); // Event Handler
 
 	});

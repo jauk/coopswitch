@@ -232,6 +232,8 @@ include_once(FUNCTION_PATH . "/connect.php");
 			$('form#register #element').addClass(formElementClass);
 			$('#formHeader').addClass(formElementClass+" text-primary formHeader");
 			$('.normalRow').addClass(normalRowClass);
+			
+			$('.noSwitch').prop('disabled', false);
 
 			console.log("Loaded.");
 	});
