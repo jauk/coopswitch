@@ -83,12 +83,12 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
   				<div class="circle">
 	  				<h3 class="profileBoxHeading">Major</h3>
-		      	<div class="profileBoxText" id="majorNameText"><?php echo "{$_SESSION['user_major_name']}"; ?></div>
+		      	<div class="profileBoxText" id="majorNameText"><span class="majorName"></span></div>
 	        	
 	        	<!-- For editing the major. -->
 	        	<div id="majorSpan" class="profileBoxEditOff">
 							<input type="hidden" name="newMajorId" id="newMajorId" value="">
-							<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5" data-width="80%">
+							<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5" data-width="auto">
 								<?php print_majors(); ?>
 							</select>
 	         	</div>
@@ -104,7 +104,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
    				<div class="circle" >
 
 	  				<h3 class="profileBoxHeading">Cycle</h3>
-		      	<div class="profileBoxText" id="cycleNameText"><?php echo "{$_SESSION['user_cycle_name']}"; ?></div>
+		      	<div class="profileBoxText" id="cycleNameText"><span class="cycleName"></span></div>
 
 		      	<!-- For editing the cycle. -->
 	        	<div id="cycleSpan" class="profileBoxEditOff">
@@ -126,7 +126,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
   				<div class="circle">
 	  				<h3 class="profileBoxHeading">Program</h3>
-		      	<div class="profileBoxText" id="programNameText" ><?php echo "{$_SESSION['user_program_name']}"; ?></div>
+		      	<div class="profileBoxText" id="programNameText" ><span class="programName"></span></div>
 
 		      	<!-- For editing the program. -->
 	        	<div id="programSpan" class="profileBoxEditOff">
@@ -153,82 +153,10 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 				</div>
 			</div>
 
-
-    <?php $btnRowClass = "col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3"; ?>
-  
-<!--     <div id="editBtns" class="col-md-2 col-sm-12 col-xs-12" style="border: 0px solid black; padding: 5px; padding-top: 8px; margin-left: 20px;">
-			<div class="row" style="padding-bottom: 5px;">
-				<div class="<?php echo $btnRowClass; ?>">
-				</div>
-			</div>
-			<div class="row">
-				<div class="<?php echo $btnRowClass; ?>">
-					<button type="button" id="editMainBtn" class="btn btn-warning btn-sm" style="width: 75%;" onclick="editProfile()">Edit</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="<?php echo $btnRowClass; ?>">
-					<button type="button" id="cancelMainBtn" class="btn btn-info btn-sm" style="width: 75%;" onclick="cancelChanges()">Cancel</button>
-				</div>
-			</div>
-    </div> -->
-
  </form>
 
 
-   	<div class="container col-xs-12">
-	  <!-- 	<div class="<?php echo $rowClass; ?>">
-   			
-   			<hr>
-   			
-   			<h2>Switch Status</h2> -->
-
-			<?php
-			// Get the latest user_matched status
-			// if (!$debug_login)
-		 //  	$_SESSION['user_matched'] = mysql_get_var("SELECT matched FROM Users WHERE id = " . $_SESSION['user_id']);
-
-			// // If the user has a match, get the match's info and display it.
-			// if ($_SESSION['user_matched'] == 1) {
-			// 	$other_user_data = get_match_info();
-			// 	if ($debug_login) {
-			//         $other_user_data[0]['name'] = "John Fry";
-			//         $other_user_data[0]['email'] = "fry@drexel.edu";
-			// 	}
-			?>
-	      
-<!-- 	      
-		     <hr>
-
-		     <div class="row">
-		  		<div id="matchStatusTrue">
-		  			<h3>You have a switch!</h3>
-		  		</div>
-		    </div>
-		    
-		    <br>
-	      
-	      	<div class="row">
-	  			<div class="col-sm-8 col-sm-offset-2 well text-center" style="padding: 15px;">
-	  				<p class="lead">You can switch with <strong class="text-primary"> <?php echo $other_user_data[0]['name']; ?></strong></p>
-	  					<br>
-	  				<p class="lead">You can email them at <strong class="text-primary"> <?php echo $other_user_data[0]['email']; ?></strong></p>
-	  			</div>
-	  		</div> -->
-  		
-
-	
-	<?php //} else { // If the user does not have a match tell them they still do not. ?>
-			
-<!-- 			<div class="row">
-	  			<div id="matchStatusFalse">
-	  				<br><p class="lead">You do not have a switch yet, but we will keep looking!</p>
-	  			</div>
-			</div> -->
-			
-	<?php //} ?>
-
-			<hr>
+	<hr>
 
  <?php } else { // If the user has withdrawed from website. ?>
 
@@ -252,18 +180,14 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 			</div>
 		</div>
 
-
-	  	</div>
-	</div>
-
 </div>
 
 <div class="modal fade" id="withdraw" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" onclick="goHome()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h2 class="modal-title">Withdraw from Coopswitch</h2>
+        <button type="button" class="close" data-dismiss="modal" onclick="goHome()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h2 class="modal-title">Withdraw from Coopswitch</h2>
 			</div>
 			<div class="modal-body">
 				<p class="lead">Are you sure you want to withdraw?</p>
@@ -309,49 +233,65 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 <script type="text/javascript">
 
+
 	$(document).ready(function() {
 
-		// $('.name span').update(function() {
-
-			$.get("/resources/user.php?g=name", function(name) {
-				//$('.name').html(name);
-				//console.log(name);
-			});
-
-			$.ajax({
-
-				type: "GET",
-				url: "/resources/user.php",
-				data: "g=name",
-				success: function(data){
-					$('.name').html(data);
-					console.log(data);
-				}
-
-			});
-
-			$.ajax({
-
-				type: "GET",
-				url: "/resources/user.php",
-				data: "g=email",
-				success: function(data){
-					console.log(data);
-				}
-
-			});
-
+			getUser(); 
 			$('.noSwitch').prop('disabled', true);
 
-		// }); // Event Handler
 
 	});
 
-</script>
+	function getUser() {
 
-<script type="text/javascript">
+			var user = new Object();
+
+			$.ajax({
+
+				dataType: "json",
+				type: "POST",
+				url: "/resources/user.php",
+				data: "user",
+				success: function(data){
+
+						user = data;
+						setUserVars(user);
+
+						// console.log("User: " + user.toSource());
+						// console.log(user.name+ " Hi");
+
+
+				}
+
+			});	
+	}
+
+	function setUserVars(user) {
+
+		// console.log(user.toSource());
+
+		$('.name').html(user.name);
+		$('.majorName').html(user.majorName);
+		$('.cycleName').html(user.cycleName);
+		$('.programName').html(user.programName);
+
+		checkWithdraw(user.withdraw); // Move on to see withdraw status
+	}
+
+	function checkWithdraw(status) {
+
+		if (status != 1) {
+
+		}
+
+	}
+
+console.log(user.toSource());
+
 
 withdraw = "<?php echo $_SESSION['withdraw']; ?>";
+// console.log(window.user.toSource() + " woo ");
+// alert(window.user);
 
 $('.selectpicker').selectpicker();
 	
