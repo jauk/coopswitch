@@ -2,19 +2,51 @@
 
 	session_start();
 
-	switch ($_SERVER['QUERY_STRING']) {
+	if (isset($_SESSION['login']) && $_SESSION['login'] == 1) {
 
-		case 'g=name' :
-			$name = (isset($_SESSION['user_name'])) ? $_SESSION['user_name'] : "Error: No Name.";
-			echo $name;
-			break;
+		$user = new stdClass();
 
-		case 'g=email' :
-			$email = (isset($_SESSION['user'])) ? $_SESSION['user'] : "Error: No Email.";
-			echo $email;
-			break;
+		$user->name = $_SESSION['user_name'];
+		$user->email = $_SESSION['user'];
+		$user->id = $_SESSION['user_id'];
+		$user->verified = $_SESSION['user_email_verified'];
+
+		$user->major = $_SESSION['user_major'];
+		$user->majorName = $_SESSION['user_major_name'];
+
+		$user->cycle = $_SESSION['user_cycle'];
+		$user->cycleName = $_SESSION['user_cycle_name'];
+
+		$user->program = $_SESSION['user_program'];
+		$user->programName = $_SESSION['user_program_name'];
+
+		$user->withdraw = $_SESSION['withdraw'];
+
+
+		$json_user = json_encode($user, JSON_PRETTY_PRINT);
+		echo $json_user;
 
 	}
+
+	else {
+
+		echo "No user logged in.";
+		// die("Not logged in.");
+	}
+
+	// switch ($_SERVER['QUERY_STRING']) {
+
+	// 	case 'g=name' :
+	// 		$name = (isset($_SESSION['user_name'])) ? $_SESSION['user_name'] : "Error: No Name.";
+	// 		echo $name;
+	// 		break;
+
+	// 	case 'g=email' :
+	// 		$email = (isset($_SESSION['user'])) ? $_SESSION['user'] : "Error: No Email.";
+	// 		echo $email;
+	// 		break;
+
+	// }
 
 	// if ($_GET["g"] == "name") {
 
