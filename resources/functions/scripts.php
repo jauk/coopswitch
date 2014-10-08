@@ -1,10 +1,21 @@
 <?php
 
+if(!isset($_SESSION)){ session_start(); }
+
+switch ($_SERVER['QUERY_STRING']) {
+
+	case 'g=majors' :
+		print_majors();
+		//echo $json_majors[2] . " hi  ";
+		//echo $json_majors;
+		break;
+}
+
 /* Lets store scripts here to make our code more efficient. */
 
 function print_majors() {
 
-	$pageName = getPageName();
+	include("connect.php");
 
 	$query = "SELECT * FROM Majors";
 	$result = mysql_query($query);
@@ -13,28 +24,54 @@ function print_majors() {
 	$selected = "";
 	$majorSubtext = "";
 
+	$majors = array();
+	
+	$business = "Business Administration";
+	$businessMajorSubtext = "(All Majors)";
+
 	$i=0; while ($i < $numMajors) {
 		$major_name = mysql_result($result, $i, "major_long");
 		$noSwitch = mysql_result($result, $i, "noSwitch");
+
+		if ($noSwitch == 1) {
+			$class = "noSwitch";
+			$majorSubtext = "Not Available";
+		}
+		else if ($major_name != $business) {
+			$class = "";
+			$majorSubtext = "";
+		}
+		else {
+			$majorSubtext = $businessMajorSubtext;
+		}
 		
 		$major_ident=mysql_result($result, $i, "id");
 
-		$business = "Business Administration";
 
-		$businessMajorSubtext = "(All Majors)";
+		$selected = ((isset($_SESSION['login']) && $_SESSION['user_major_name'] == $major_name) ? "selected" : '');
+		//$majorSubtext = ($major_name == $business ? $businessMajorSubtext : '');
 
-		$selected = ((isset($_SESSION['login']) && $_SESSION['user_major_name'] == $major_name) ? 'selected' : '');
+		$line = "<option " . ($noSwitch == 1 ? 'class="noSwitch"  data-subtext="Not Available"' : "" ) . $selected . ' value="' . $major_ident . '" data-subtext="' . $majorSubtext . '">' . $major_name . '</option>';
 
-		$majorSubtext = ($major_name == $business ? $businessMajorSubtext : '');
-
-		print_r('<option ' . ($noSwitch == 1 ? 'class="noSwitch"  data-subtext="Not Available" ' : '' ) . $selected . ' value="' . $major_ident . '" data-subtext="' . $majorSubtext . '">' . $major_name . '</option>');
+		$majors[$i] = array(
+			"key"=>$major_ident,
+			"name"=>$major_name,
+			"class"=>$class,
+			"selected"=>$selected,
+			"subtext"=>$majorSubtext
+			);
 
 		$i++;
 	}
 
 	$major_ident = 0;
 	$major_name = "";
+
+	$json_majors = json_encode($majors, JSON_PRETTY_PRINT);
+	echo $json_majors;
+	
 }
+
 
 function getPageName() {
 	$pageName = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME)); 
