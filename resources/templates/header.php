@@ -179,9 +179,11 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 			$('#loginForm').fadeOut('fast');
 			id("loginForm").style.display = 'none';
 			$('#loginBtn').blur();
+			e.preventDefault();
 		}
 		else {
 			$('#loginForm').fadeIn('fast');
+			e.preventDefault();
 		}
 	});
 
