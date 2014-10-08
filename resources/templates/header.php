@@ -12,6 +12,7 @@ if (isset($_SESSION['login']))
 session_start();
 
 // Include useful scripts so I do not have to on each page.
+
 foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $filename) {
     
     // Ignore connect.php because we will use it when necessary only, avoid unnecessary connections
@@ -189,9 +190,11 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 			$('#loggedInHeader').fadeOut('fast');
 			id("loggedInHeader").style.display = 'none';
 			$('#loggedInBtn').blur();
+			e.preventDefault();
 		}
 		else {
 			$('#loggedInHeader').fadeIn('fast');
+				e.preventDefault();
 		}
 	});
 
