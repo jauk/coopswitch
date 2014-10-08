@@ -84,12 +84,13 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   				<div class="circle">
 	  				<h3 class="profileBoxHeading">Major</h3>
 		      	<div class="profileBoxText" id="majorNameText"><span class="majorName"></span></div>
-	        	
+	        	<div id="testing">
+
+	        	</div>
 	        	<!-- For editing the major. -->
 	        	<div id="majorSpan" class="profileBoxEditOff">
-							<input type="hidden" name="newMajorId" id="newMajorId" value="">
 							<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5" data-width="auto">
-								<?php print_majors(); ?>
+
 							</select>
 	         	</div>
 
@@ -108,7 +109,6 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 		      	<!-- For editing the cycle. -->
 	        	<div id="cycleSpan" class="profileBoxEditOff">
-						<input type="hidden" name="newCycleId" id="newCycleId" value="">
 							<select id="selectCycle" class="form-control selectpicker" name="cycle" data-width="auto">
 									<option <?php if ($_SESSION['user_cycle'] == 1) { echo "selected"; } ?> value="1"><?php echo FALLWINTER; ?></option>
 									<option <?php if ($_SESSION['user_cycle'] == 2) { echo "selected"; } ?> value="2"><?php echo SPRINGSUMMER; ?></option>
@@ -130,7 +130,6 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 		      	<!-- For editing the program. -->
 	        	<div id="programSpan" class="profileBoxEditOff">
-							<input type="hidden" name="newProgramId" id="newProgramId" value="">
 							<select id="selectProgram" class="form-control selectpicker" showSubtext="true" name="program" data-width="auto">
 									<option <?php if ($_SESSION['user_program'] == 1) { echo "selected"; } ?> value="1" data-subtext=""><?php echo ONECOOP; ?></option>
 									<option <?php if ($_SESSION['user_program'] == 2) { echo "selected"; } ?> value="2" data-subtext=""><?php echo THREECOOPS; ?></option>
@@ -210,8 +209,8 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" onclick="goHome()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h2 class="modal-title">Reactivate Account</h2>
+        <button type="button" class="close" data-dismiss="modal" onclick="goHome()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h2 class="modal-title">Reactivate Account</h2>
 			</div>
 			<div class="modal-body">
 				<p class="lead">Are you sure you want to reactivate your account?</p>
@@ -245,7 +244,40 @@ require_once(TEMPLATES_PATH . "/footer.php");
 		$('#majorSpan').hide();
 		$('#cycleSpan').hide();
 		$('#programSpan').hide();
+
+		$("selectMajor").load("/majors.html");
+		//getMajors();
+
 	});
+
+	function getMajors() {
+		var majors = new Array();
+
+		$.ajax({
+
+			dataType: "json",
+			url: "/resources/functions/scripts.php",
+			data: "g=majors", 
+			success: function(data) {
+
+				majors = data;
+				// console.log(majors[16]);
+
+				var noSwitch = ' class="noSwitch" data-subtext="Not Available"';
+				//var end = '">' + majors[x]["name"] + '</select>';
+
+				for (var x=0; x<majors.length; x++) {
+
+					var statement = '<option ' + majors[x]["selected"] + ' value="' + majors[x]["key"] + '" class="' + majors[x]["class"] + '" data-subtext="' + majors[x]["subtext"] + '">'+ majors[x]["name"] + '</select>';
+
+					console.log(statement);
+					$("#selectMajor").append(statement);
+
+				}
+			}
+
+		});
+	}
 
 	function getUser() {
 
@@ -296,6 +328,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 			toggleEditFields();
 		}
 
+
 	});
 
 	$('#cancelbutton').click(function() {
@@ -311,10 +344,10 @@ require_once(TEMPLATES_PATH . "/footer.php");
 			var major = $("#selectMajor").val();
 			var cycle = $("#selectCycle").val();
 			var program = $("#selectProgram").val();
-			console.log(major+" "+cycle+" "+program)
+			//console.log(major+" "+cycle+" "+program)
 
 			profileElements = 'newMajorId=' + major + '&newCycleId=' + cycle + '&newProgramId=' + program;
-			console.log(profileElements);
+			//console.log(profileElements);
 
 			// Submit ajax update data 
 			$.ajax({
@@ -324,10 +357,13 @@ require_once(TEMPLATES_PATH . "/footer.php");
 				data: profileElements,
 				success: function() {
 					console.log("Updated!");
+					buttonToggle();
+					toggleTexts();
+					toggleEditFields();
+					e.preventDefault();
 				}
 
 			});
-
 
 		});
 	}); // End submit function holder 
@@ -361,6 +397,7 @@ require_once(TEMPLATES_PATH . "/footer.php");
 	if (withdraw != 1) {
 
 		window.hasDroppedMatch = "<?php echo $_SESSION['user_dropped_matches']; ?>";
+
 		if (hasDroppedMatch == "") {
 			window.hasDroppedMatch = 0;
 		}
@@ -372,39 +409,6 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 		window.errorClassVals = "alert alert-warning";
 
-	}
-
-  var saveChanges = function () {
-    
-    saveMajor();
-    saveCycle();
-    saveProgram();
-
-    return true;
-  }
-
-	var saveMajor = function () {
-
-		var i = window.selectMajor.selectedIndex;
-		var newId = window.selectMajor[i].value;
-
-		id("newMajorId").value = newId;
-	}
-
-	var saveCycle = function () {
-
-		var i = window.selectCycle.selectedIndex;
-		var newId = window.selectCycle[i].value;
-
-    id("newCycleId").value = newId;
- 	}
-
-	var saveProgram = function () {
-
-		var i = window.selectProgram.selectedIndex;
-		var newId = window.selectProgram[i].value;
-
-		id("newProgramId").value = newId;
 	}
 
 	var check_if_dropped = function () {
