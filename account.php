@@ -71,8 +71,8 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 
   <!-- Profile Fields Containter -->
  <?php if ($_SESSION['withdraw'] == 0) { ?>
- <form id="profileForm" name="profileForm" method="post" action="update.php" onsubmit="return saveChanges()">
-
+ <!-- <form id="profileForm" name="profileForm" method="post" action="update.php" onsubmit="return saveChanges()"> -->
+		<form id="profileForm" name="profileForm">
 
   	<!-- <div id="profileFields" name="profileFields" class="container col-md-6 col-md-offset-3 col-sm-9 col-sm-offset-1 col-xs-6 col-xs-offset-3" style="border: 0px solid black; padding: 5px;"> -->
 
@@ -305,10 +305,33 @@ require_once(TEMPLATES_PATH . "/footer.php");
 		toggleEditFields();
 	});
 
-	$('#savebutton').click(function() {
+	$(function() {
+		$('#savebutton').click(function() {
+			
+			var major = $("#selectMajor").val();
+			var cycle = $("#selectCycle").val();
+			var program = $("#selectProgram").val();
+			console.log(major+" "+cycle+" "+program)
 
-		// Submit ajax update data 
-	});
+			profileElements = 'newMajorId=' + major + '&newCycleId=' + cycle + '&newProgramId=' + program;
+			console.log(profileElements);
+
+			// Submit ajax update data 
+			$.ajax({
+				
+				type: "POST",
+				url: "update.php",
+				data: profileElements,
+				success: function() {
+					console.log("Updated!");
+				}
+
+			});
+
+
+		});
+	}); // End submit function holder 
+
 
 	function buttonToggle() {
 
