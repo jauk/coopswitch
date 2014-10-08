@@ -147,9 +147,9 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
       
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4 text-center" id="profileButtonContainer">
-					<button type="button" id="editMainBtn" class="btn btn-warning btn-sm profileButton" onclick="editProfile()">Edit</button>
-					<button id="saveMainBtn" class="btn btn-success btn-sm profileButtonEditMode" onclick="saveChanges()">Save</button>
-					<button type="button" id="cancelMainBtn" class="btn btn-info btn-sm profileButtonEditMode" onclick="cancelChanges()">Cancel</button>
+					<button id="editbutton" type="button" class="btn btn-warning btn-sm profileButton">Edit</button>
+					<button id="savebutton" class="btn btn-success btn-sm profileButtonEditMode">Save</button>
+					<button id="cancelbutton" type="button" class="btn btn-info btn-sm profileButtonEditMode">Cancel</button>
 				</div>
 			</div>
 
@@ -236,39 +236,37 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 	$(document).ready(function() {
 
-			getUser(); 
-			$('.noSwitch').prop('disabled', true);
+		getUser(); 
+		$('.noSwitch').prop('disabled', true);
 
+		$('#savebutton').hide();
+		$('#cancelbutton').hide();
 
+		$('#majorSpan').hide();
+		$('#cycleSpan').hide();
+		$('#programSpan').hide();
 	});
 
 	function getUser() {
 
-			var user = new Object();
+		var user = new Object();
 
-			$.ajax({
+		$.ajax({
 
-				dataType: "json",
-				type: "POST",
-				url: "/resources/user.php",
-				data: "user",
-				success: function(data){
+			dataType: "json",
+			url: "/resources/user.php",
+			data: "user",
+			success: function(data){
 
-						user = data;
-						setUserVars(user);
+				user = data;
+				setUserVars(user);
+				checkWithdraw(user.withdraw);
+			}
 
-						// console.log("User: " + user.toSource());
-						// console.log(user.name+ " Hi");
-
-
-				}
-
-			});	
+		});	
 	}
 
 	function setUserVars(user) {
-
-		// console.log(user.toSource());
 
 		$('.name').html(user.name);
 		$('.majorName').html(user.majorName);
@@ -280,24 +278,62 @@ require_once(TEMPLATES_PATH . "/footer.php");
 
 	function checkWithdraw(status) {
 
-		if (status != 1) {
-
+		if (status == 1) {
+			// Do not show all fields and whatnot
+		}
+		else {
+			// Okay to show profile
 		}
 
 	}
 
-console.log(user.toSource());
+	$('#editbutton').click(function() {
 
+		buttonToggle();
 
-withdraw = "<?php echo $_SESSION['withdraw']; ?>";
-// console.log(window.user.toSource() + " woo ");
-// alert(window.user);
+		if (check_if_dropped()) {
+			toggleTexts();
+			toggleEditFields();
+		}
 
-$('.selectpicker').selectpicker();
-	
-	// $('#userName').tooltip();
+	});
 
-	// Get some vars from PHP
+	$('#cancelbutton').click(function() {
+
+		buttonToggle();
+		toggleTexts();
+		toggleEditFields();
+	});
+
+	$('#savebutton').click(function() {
+
+		// Submit ajax update data 
+	});
+
+	function buttonToggle() {
+
+		$('#editbutton').toggle();
+		$('#savebutton').toggle();
+		$('#cancelbutton').toggle();
+	}
+
+	function toggleTexts() {
+
+		$('#majorNameText').toggle();
+		$('#cycleNameText').toggle();
+		$('#programNameText').toggle();
+	}
+
+	function toggleEditFields() {
+
+		$('#majorSpan').toggle();
+		$('#cycleSpan').toggle();
+		$('#programSpan').toggle();
+	}
+
+	withdraw = "<?php echo $_SESSION['withdraw']; ?>";
+
+	$('.selectpicker').selectpicker();
 
 	if (withdraw != 1) {
 
@@ -311,121 +347,25 @@ $('.selectpicker').selectpicker();
 		window.droppedMatches = id("droppedMatches");
 		window.droppedMatches.style.display = 'none';
 
-		// Main Profile Buttons
-
-		window.editMainBtn = id("editMainBtn");
-		window.saveMainBtn = id("saveMainBtn");
-		window.cancelMainBtn = id("cancelMainBtn");
-
-		window.saveMainBtn.style.display = 'none';
-		window.cancelMainBtn.style.display = 'none';
-
-		// Major Window Vars
-
-		window.majorSaveBtn = id("majorSaveBtn");
-		window.majorEditBtn = id("majorEditBtn");
-		window.majorCancelBtn = id("majorCancelBtn");
-		window.majorSpan = id("majorSpan");
-		window.majorDiv = id("majorNameText");
-		window.selectMajor = id("selectMajor");
-		window.majorBeginText = id("majorBeginText");
-
-		// Cycle Window Vars
-		window.cycleSaveBtn = id("cycleSaveBtn");
-		window.cycleEditBtn = id("cycleEditBtn");
-		window.cycleCancelBtn = id("cycleCancelBtn");
-		window.cycleSpan = id("cycleSpan");
-		window.cycleDiv = id("cycleNameText");
-		window.selectCycle = id("selectCycle");
-
-		// Program Window Vars
-		window.programSaveBtn = id("programSaveBtn");
-		window.programEditBtn = id("programEditBtn");
-		window.programCancelBtn = id("programCancelBtn");
-		window.programSpan = id("programSpan");
-		window.programDiv = id("programNameText");
-		window.selectProgram = id("selectProgram");
-
 		window.errorClassVals = "alert alert-warning";
 
 	}
 
-  var editProfile = function () {
-    
-    window.editMainBtn.style.display ='none';
-
-    window.saveMainBtn.style.display = '';
-    window.cancelMainBtn.style.display = '';
-    
-    editMajor();
-    editCycle();
-    editProgram();
-    
-    return false;
-    
-  }
-  
-  var cancelChanges = function () {
-    
-    window.editMainBtn.style.display = '';
-    window.saveMainBtn.style.display = 'none';
-    window.cancelMainBtn.style.display = 'none';
-    
-    cancelEdit();
-    
-  }
-  
   var saveChanges = function () {
-    
     
     saveMajor();
     saveCycle();
     saveProgram();
-    
-    //alert("Test");
-    
+
+    return true;
   }
-
-	var editMajor = function () {
-		
-		if (check_if_dropped()) {
-			window.majorDiv.className = 'profileBoxEditOff'
-			//window.majorDiv.innerHTML = "";
-			window.majorSpan.className = 'profileBoxEditOn';
-
-		// 	window.majorEditBtn.style.display = 'none';
-		// 	window.majorSaveBtn.style.display = '';
-		// 	window.majorCancelBtn.style.display = '';
-			
-		//	window.majorBeginText.className = 'col-sm-2 col-sm-offset-3';
-			
-		}
-
-	}
 
 	var saveMajor = function () {
 
 		var i = window.selectMajor.selectedIndex;
 		var newId = window.selectMajor[i].value;
 
-		//document.majorForm.newCycleId.value = newId;
-		//document.profileForm.newMajorId.value = newId;
 		id("newMajorId").value = newId;
-
-		//return true;
-	}
-
-	var editCycle = function () {
-		
-		if (check_if_dropped()) {
-			window.cycleDiv.className = 'profileBoxEditOff';
-			window.cycleSpan.className = 'profileBoxEditOn';
-
-		// 	window.cycleEditBtn.style.display = 'none';
-		// 	window.cycleSaveBtn.style.display = '';
-		// 	window.cycleCancelBtn.style.display = '';
-		}
-		
 	}
 
 	var saveCycle = function () {
@@ -433,37 +373,15 @@ $('.selectpicker').selectpicker();
 		var i = window.selectCycle.selectedIndex;
 		var newId = window.selectCycle[i].value;
 
-		//document.cycleForm.newCycleId.value = newId;
-		//document.profileForm.newCycleId.value = newId;
-    	id("newCycleId").value = newId;
-    
-		//return true;
-	}
-
-
-	var editProgram = function () {
-		
-		if (check_if_dropped()) {
-			window.programDiv.className = 'profileBoxEditOff';
-			window.programSpan.className = 'profileBoxEditOn';
-
-		// 	window.programEditBtn.style.display = 'none';
-		// 	window.programSaveBtn.style.display = '';
-		// 	window.programCancelBtn.style.display = '';
-		}
-
-	}
+    id("newCycleId").value = newId;
+ 	}
 
 	var saveProgram = function () {
 
 		var i = window.selectProgram.selectedIndex;
 		var newId = window.selectProgram[i].value;
 
-		//document.programForm.newProgramId.value = newId;
-		//document.profileForm.newProgramId.value = newId;
 		id("newProgramId").value = newId;
-
-		//return true;
 	}
 
 	var check_if_dropped = function () {
@@ -474,49 +392,16 @@ $('.selectpicker').selectpicker();
 			return true;
 		}
 
-		// else if (hasDroppedMatch > 0) {
-		// 	setTimeout(1000);
-		// 	window.droppedMatches.textContent = "You cannot edit your profile and drop another match.";
-		// 	window.droppedMatches.className = window.errorClassVals;
-		// 	window.droppedMatches.style.display = '';
-		// 	return false;
-		// }
-
 		else if (window.isMatched == 1) {
 			window.droppedMatches.textContent = "By editing your profile, your current match will be dropped. The more matches you drop, the lower you go in the queue."
 			window.droppedMatches.className = 'alert alert-warning lead';
 			window.droppedMatches.style.display = '';
 			return true;
 		}
-		else {
-
-		}
 
 	}
 
 	var cancelEdit = function () {
-
-		//if (field == "major") {
-		//window.majorSaveBtn.style.display = 'none';
-			window.majorSpan.className = 'profileBoxEditOff';
-			window.majorDiv.className = 'profileBoxEditOn';
-		// 	window.majorCancelBtn.style.display = 'none';
-		// 	window.majorEditBtn.style.display = '';
-		//}
-		//else if (field == "cycle") {
-	  //window.cycleSaveBtn.style.display = 'none';
-			window.cycleSpan.className = 'profileBoxEditOff';
-			window.cycleDiv.className = 'profileBoxEditOn';
-		// 	window.cycleCancelBtn.style.display = 'none';
-		// 	window.cycleEditBtn.style.display = '';
-		//}
-		//else if (field == "program") {
-		//window.programSaveBtn.style.display = 'none';
-			window.programSpan.className = 'profileBoxEditOff';
-			window.programDiv.className = 'profileBoxEditOn';
-		// 	window.programCancelBtn.style.display = 'none';
-		// 	window.programEditBtn.style.display = '';
-		//}
 
 		window.droppedMatches.style.display = 'none';
 	}
