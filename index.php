@@ -120,12 +120,8 @@ include_once(FUNCTION_PATH . "/connect.php");
   			<div class="form-group" id="mainMajorDiv">
   				<label for="majorField">Major</label>
 					<div class="col-sm-6">			  			
-		  				<select class="form-control selectpicker input-lg" id="user_major" name="major" data-live-search="true" data-size="5" data-width="" onchange="checkmajor()">
-		  					<?php
-		  					// Get the list of majors and display for user selection.
-		  					  print_majors();
-		  					  mysql_close($con);
-		  					?>
+		  				<select class="form-control selectpicker input-lg" id="user_major" name="major" data-live-search="true" data-size="5" data-width="auto">
+
 		  				</select>
 	  			</div>
   				<div>
@@ -235,7 +231,14 @@ include_once(FUNCTION_PATH . "/connect.php");
 			
 			$('.noSwitch').prop('disabled', false);
 
+			getMajors();
 			console.log("Loaded.");
+			$('.selectpicker').selectpicker({ 'selectedText': '',style:'btn-default btn-lg' });
+
+	});
+
+	$('#user_major').change(function() {
+		checkMajor();
 	});
 
 </script>
@@ -255,9 +258,69 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 <script type="text/javascript">
 
+function getMajors() {
+	var majors = new Array();
+
+	idName = "#user_major";
+
+	$.ajax({
+
+		dataType: "json",
+		url: "/resources/functions/scripts.php",
+		data: "g=majors", 
+		success: function(data) {
+
+			majors = data;
+
+			//for (var x=0; x<majors.length; x++) {
+			$.each(majors, function() {
+
+				var statement = '<option value="' + this.key + '" class="' + this.class + '">'+ this.name + '</select>';
+
+				$('#user_major').append(statement);
+
+				if (this.class == "noSwitch") {
+					$('#user_major option:last-child').attr("data-canSwitch", "0");
+					$('#user_major option:last-child').attr("data-subtext", "Not Available");
+				}
+
+				if (this.name == "Business Administration") {
+					$('#user_major option:last-child').attr("data-subtext", "(All Business Majors)");
+				}
+
+			});
+
+			$('.selectpicker').selectpicker('refresh');
+
+		}
+	});
+
+}
+
+var checkMajor = function () {
+
+	var major = $("#user_major").val();
+
+	var majorErrorDiv = id("majorError");
+	var mainMajorDiv = id("mainMajorDiv");
+
+	console.log($("option:selected", "select[name=major]").attr("data-canSwitch"));
+
+	if($("option:selected", "select[name=major]").attr("data-canSwitch") == 0){
+
+		$('#nonSwitchMajor').modal().show();
+		error = 'Unswitchable major.';
+		setError(mainMajorDiv, majorErrorDiv, "", error);
+		errors.major = 1;
+  }
+	else {
+		removeError(mainMajorDiv, majorErrorDiv, "");
+		errors.major = 0;
+	}	
+
+}
 
 	// $('.selectpicker').selectpicker();
-	$('.selectpicker').selectpicker({ 'selectedText': '',style:'btn-default btn-lg' });
 
 	$('#user_name').tooltip();
 	$('#user_pass').popover();
@@ -461,45 +524,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 	}
 
-	var checkmajor = function () {
-
-		// Have a modal come up explaining problem with that major, disable registration.
-
-		// Array of IDs of majors which cannot switch.
-		//nonSwitchMajorIds = ("", "", "", "", "");
-
-		var major = id("user_major").value;
-		var majorErrorDiv = id("majorError");
-		var mainMajorDiv = id("mainMajorDiv");
-
-
-		// if (nonSwitchMajorIds.indexOf(major) >= 0) {
-
-		// 	$('#nonSwitchMajor').modal().show();
-		// 	error = "You may not switch this major.";
-		// 	setError(mainMajorDiv, majorErrorDiv, error);
-		// 	errors.major = 1;
-		// }
-		if($("option:selected", "select[name=major]").hasClass('noSwitch')){
-				$('#nonSwitchMajor').modal().show();
-				error = 'Unswitchable major.';
-				setError(mainMajorDiv, majorErrorDiv, "", error);
-				errors.major = 1;
-    	}
-		else {
-
-			removeError(mainMajorDiv, majorErrorDiv, "");
-			errors.major = 0;
-		}	
-
-		validate_form();
-
-	}
-
-	var validate_form = function () {
-
-
-	}
 
 
 	var validate_submit = function () {
@@ -511,7 +535,7 @@ include_once(FUNCTION_PATH . "/connect.php");
 		validate_email(1); // 1 is for main email. Not using other field currently.
 		validate_password();
 		passwordConfirm();
-		checkmajor();
+		checkMajor();
 
 		if (!id("terms").checked) {
 			console.debug("Terms and Conditions have not been checked.");
