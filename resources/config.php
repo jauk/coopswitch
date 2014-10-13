@@ -13,33 +13,45 @@ defined("LIB_PATH")
 	or define("LIB_PATH", realpath(dirname(__FILE__) . '/library'));
 
 
-$config = array(
-	"db" => array(
-		"development" => array(
-			"dbname" => "coop_dev",
-			"dbuser" => "root",
-			"dbpass" => "",
-			"dbhost" => "localhost"
-			),
-		"production" => array(
-			"dbname" => "coopswitch",
-			"dbuser" => "coop",
-			"dbpass" => "switch",
-			"dbhost" => "justinmaslin.db"
-			),
-		"vps" => array(
-			"dbname" => 'coopswitch',
-			"dbuser" => 'root',
-			"dbpass" => 'c00pswitch',
-			"dbhost" => 'localhost'
-			)
-	),
-	"urls" => array(
-		"baseUrl" => "coopswitch.com",
-		"baseUrl2" => "www.coopswitch.com",
-		"devUrl" => "coop.localhost"
-	)
-);
+function getConfig() {
+
+	$config = array(
+		"db" => array(
+			"development" => array(
+				"dbname" => "coop_dev",
+				"dbuser" => "root",
+				"dbpass" => "",
+				"dbhost" => "localhost"
+				),
+			"production" => array(
+				"dbname" => "coopswitch",
+				"dbuser" => "coop",
+				"dbpass" => "switch",
+				"dbhost" => "justinmaslin.db"
+				),
+			"vps" => array(
+				"dbname" => 'coopswitch',
+				"dbuser" => 'root',
+				"dbpass" => 'c00pswitch',
+				"dbhost" => 'localhost'
+				)
+		),
+		"urls" => array(
+			"baseUrl" => "coopswitch.com",
+			"baseUrl2" => "www.coopswitch.com",
+			"devUrl" => "coop.localhost"
+		)
+	);	
+
+	// Test new feature on production?
+	if ($_SERVER['SERVER_NAME'] == $config['urls']['baseUrl'])
+		$GLOBALS['testHaveSwitch'] = False;
+	else 
+		$GLOBALS['testHaveSwitch'] = False;
+
+	return $config;
+}
+
 
 /* Text Variables */
 
@@ -71,11 +83,6 @@ $GLOBALS['send_match_mail'] = False;
 
 $GLOBALS['debug_db'] = False;
 
-// Test new feature on production?
-if ($_SERVER['SERVER_NAME'] == $config['urls']['baseUrl'])
-	$GLOBALS['testHaveSwitch'] = False;
-else 
-	$GLOBALS['testHaveSwitch'] = False;
 
 // include "functions/login.php";
 
