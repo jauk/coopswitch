@@ -2,14 +2,15 @@
 
 if(!isset($_SESSION)){ session_start(); }
 
-switch ($_SERVER['QUERY_STRING']) {
+switch ($_SERVER['QUERY_STRING']) :
 
 	case 'g=majors' :
-		print_majors();
-		//echo $json_majors[2] . " hi  ";
-		//echo $json_majors;
+		$majors = print_majors();
+		echo $majors;
 		break;
-}
+
+endswitch;
+
 
 /* Lets store scripts here to make our code more efficient. */
 
@@ -17,59 +18,36 @@ function print_majors() {
 
 	include("connect.php");
 
-	$query = "SELECT * FROM Majors";
-	$result = mysql_query($query);
-	$numMajors = mysql_num_rows($result);
+	$sql = 'SELECT * FROM Majors';
+	$result = $con->query($sql);
 
-	$selected = "";
-	$majorSubtext = "";
+	$majorsDB = array();
 
-	$majors = array();
-	
-	$business = "Business Administration";
-	$businessMajorSubtext = "(All Majors)";
-
-	$i=0; while ($i < $numMajors) {
-		$major_name = mysql_result($result, $i, "major_long");
-		$noSwitch = mysql_result($result, $i, "noSwitch");
-
-		if ($noSwitch == 1) {
-			$class = "noSwitch";
-			$majorSubtext = "Not Available";
-		}
-		else if ($major_name != $business) {
-			$class = "";
-			$majorSubtext = "";
-		}
-		else {
-			$majorSubtext = $businessMajorSubtext;
-		}
-		
-		$major_ident=mysql_result($result, $i, "id");
-
-
-		$selected = ((isset($_SESSION['login']) && $_SESSION['user_major_name'] == $major_name) ? "selected" : '');
-		//$majorSubtext = ($major_name == $business ? $businessMajorSubtext : '');
-
-		$line = "<option " . ($noSwitch == 1 ? 'class="noSwitch"  data-subtext="Not Available"' : "" ) . $selected . ' value="' . $major_ident . '" data-subtext="' . $majorSubtext . '">' . $major_name . '</option>';
-
-		$majors[$i] = array(
-			"key"=>$major_ident,
-			"name"=>$major_name,
-			"class"=>$class,
-			"selected"=>$selected,
-			"subtext"=>$majorSubtext
-			);
-
-		$i++;
+	while ($row = $result->fetch_assoc()) {
+		$majorsDB[] = $row;
 	}
 
-	$major_ident = 0;
-	$major_name = "";
+	$majors = array();
+	$class = "";
+	$selected = "";
+
+	foreach ($majorsDB as $key => $major) {
+
+		$class = ($major['noSwitch'] == 1 ? 'noSwitch' : '');
+		$selected = ($_SESSION['user_major_name'] == $major['major_long'] ? "selected" : '');
+
+		$majors[] = array(
+			"key"=>$major['id'],
+			"name"=>$major['major_long'],
+			"class"=>$class,
+			"selected"=>$selected 
+		);
+
+	}
 
 	$json_majors = json_encode($majors, JSON_PRETTY_PRINT);
-	echo $json_majors;
-	
+	return $json_majors;
+
 }
 
 
@@ -90,8 +68,12 @@ function mysql_get_var($query,$y=0) {
 
 function getMajorName($id) {
 
-	$query = "SELECT major_long FROM Majors WHERE id='$id'";
-	$majorName = mysql_get_var($query);
+	include "connect.php";
+
+  $sql = 'SELECT major_long FROM Majors WHERE id= ' . $id;
+	$result = $con->query($sql);
+	$row = $result->fetch_row();
+	$majorName = $row[0];
 
 	return $majorName;
 }
@@ -167,13 +149,19 @@ function getVerifyLink ($name, $email, $cycle) {
 
 function getUserDataFromId ($id) {
 
+	include("connect.php");
+
+	$user_data = array();
 	// Get the user we are talking to and save them into a local array.
-	$query = "SELECT * FROM Users WHERE id = " . $id;
-	$result = mysql_query($query);
-	$row = mysql_fetch_array($result);
+	$sql = 'SELECT * FROM Users WHERE id = "' . $id . '"';
+	$result = $con->query($sql);
 
-	$user_data = $row;
-
+	if ($result == false) {
+  	trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $con->error, E_USER_ERROR);
+ 	}
+	else {
+		$user_data = $result->fetch_array(MYSQLI_ASSOC);
+	}
 	return $user_data;
 }
 
@@ -197,6 +185,22 @@ function switchUsers ($idOne, $idTwo, $major) {
   $query = "UPDATE Users SET Matches_id = " . $newMatchId . " WHERE id = " . $idOne . " OR id = " . $idTwo . "";
   $result = mysql_query($query);
 
+}
+
+function getName($type, $val) {
+
+	switch ($type):
+
+		case "cycle":
+			$name = ($val == 1 ? FALLWINTER : SPRINGSUMMER);
+			break;
+		case "program":
+			$name = ($val == 1 ? ONECOOP : THREECOOPS);
+			break;
+
+	endswitch;
+
+	return $name;
 }
 
 ?>
