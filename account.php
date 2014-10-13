@@ -3,29 +3,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
 require_once(TEMPLATES_PATH . "/header.php");
 include(FUNCTION_PATH . "/connect.php");
 
-if ($_SESSION['login'] == "") {
+if ($_SESSION['login'] != "1") {
 	header("Location: /error.php"); // Temporary I guess maybe add like ?error=1
 }
 
-else if ($_SESSION['login'] == "1") {
-}
-
-$rowClass = "col-sm-6 col-sm-offset-3 text-center";
-$userFieldClass = "col-sm-2 col-sm-offset-4 text-center";
-
-$majorBeginClass = "";
-$majorBeginEditClass = "";
-
-$beginTextClass = "col-sm-3 col-sm-offset-3 col-xs-12";
-$beginTextStyle = "padding-right: 0px; text-align: justify;";
 
 ?>
- <!-- On profile have option to decline (drop) match (change mind about switching cycles). Do this later. -->
 
-
-<!-- Work on edit button location -->
-
-<!-- <hr> -->
 
 <div class="container">
 
@@ -48,7 +32,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   <?php } ?>
 
   <div class="row">
-  	<div class="<?php echo $rowClass; ?>">
+  	<div class="rowClass">
   		<div class="panel-heading">
   			<h2>Hey, 
   				<div style="display: inline-block;" class="text-primary">
@@ -62,8 +46,8 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   </div>
   
   <div class="row">
-  	<div class="<?php echo $rowClass; ?>">
-  		<span><div id="droppedMatches"></div></span>
+  	<div class="rowClass">
+  		<span><div class="alert alert-warning lead" id="hasDroppedMatch">By editing your profile, your current match will be dropped. The more matches you drop, the lower you go in the queue.</div></span>
   	</div>
   </div>
 
@@ -84,9 +68,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
   				<div class="circle">
 	  				<h3 class="profileBoxHeading">Major</h3>
 		      	<div class="profileBoxText" id="majorNameText"><span class="majorName"></span></div>
-	        	<div id="testing">
 
-	        	</div>
 	        	<!-- For editing the major. -->
 	        	<div id="majorSpan" class="profileBoxEditOff">
 							<select id="selectMajor" class="form-control selectpicker" name="major" data-live-search="true" data-size="5" data-width="auto">
@@ -147,7 +129,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4 text-center" id="profileButtonContainer">
 					<button id="editbutton" type="button" class="btn btn-warning btn-sm profileButton">Edit</button>
-					<button id="savebutton" class="btn btn-success btn-sm profileButtonEditMode">Save</button>
+					<button id="savebutton" type="button" class="btn btn-success btn-sm profileButtonEditMode">Save</button>
 					<button id="cancelbutton" type="button" class="btn btn-info btn-sm profileButtonEditMode">Cancel</button>
 				</div>
 			</div>
@@ -160,7 +142,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
  <?php } else { // If the user has withdrawed from website. ?>
 
  		<div class="row">
- 			<div class="<?php echo $rowClass; ?>">
+  		<div class="rowClass">
  				<p class="lead">Your profile has been deactivated.</p>
  			</div>
  		</div>
@@ -168,7 +150,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
  <?php } ?>
 
 		<div class="row">
-			<div class="<?php echo $rowClass; ?>">
+  		<div class="rowClass">
 				<div style="margin-top: 30px;">
 				<?php if ($_SESSION['withdraw'] != 1) { ?>
 					<button class="btn btn-danger" data-toggle="modal" data-target="#withdraw">Withdraw Account</button>
@@ -199,7 +181,7 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="withdraw()">Withdraw</button>				
+				<button id="withdrawBtn" type="button" class="btn btn-danger" data-dismiss="modal">Withdraw</button>				
 			</div>
 		</div>
 	</div>
@@ -218,25 +200,22 @@ $beginTextStyle = "padding-right: 0px; text-align: justify;";
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-success" data-dismiss="modal" onclick="reactivate()">Reactivate</button>				
+				<button id="reactivateBtn" type="button" class="btn btn-success" data-dismiss="modal">Reactivate</button>				
 			</div>
 		</div>
 	</div>
 </div>
 
 <?php
-mysql_close($con);
 require_once(TEMPLATES_PATH . "/footer.php");
 ?>
 
 
 <script type="text/javascript">
 
-
 	$(document).ready(function() {
 
-		getUser(); 
-		$('.noSwitch').prop('disabled', true);
+		$('.rowClass').addClass("col-sm-6 col-sm-offset-3 text-center");
 
 		$('#savebutton').hide();
 		$('#cancelbutton').hide();
@@ -245,12 +224,74 @@ require_once(TEMPLATES_PATH . "/footer.php");
 		$('#cycleSpan').hide();
 		$('#programSpan').hide();
 
-		$("selectMajor").load("/majors.html");
-		//getMajors();
+		$('#hasDroppedMatch').hide();
 
+		getUser(); 
+		getMajors("#selectMajor");
 	});
 
-	function getMajors() {
+	$('#editbutton').click(function() {
+
+		if (window.isMatched == 1) {
+			$('#hasDroppedMatch').toggle();
+		}
+
+		buttonToggle();
+
+		toggleTexts();
+		toggleEditFields();
+	});
+
+	$('#cancelbutton').click(function() {
+
+		if (window.isMatched == 1) {
+			$('#hasDroppedMatch').toggle();
+		}
+
+		buttonToggle();
+		toggleTexts();
+		toggleEditFields();
+	});
+
+	$(function() {
+		$('#savebutton').click(function() {
+			
+			var major = $("#selectMajor").val();
+			var cycle = $("#selectCycle").val();
+			var program = $("#selectProgram").val();
+			//console.log(major+" "+cycle+" "+program)
+
+			profileElements = 'major=' + major + '&cycle=' + cycle + '&num_year_program=' + program;
+
+			// Submit ajax update data 
+			$.ajax({
+				
+				type: "POST",
+				url: "update.php",
+				data: profileElements,
+				success: function(data) {
+					buttonToggle();
+					toggleTexts();
+					toggleEditFields();
+					getUser();
+					getMajors("#selectMajor");
+				}
+
+			});
+		});
+
+	}); // End submit function holder 
+
+	$('#withdrawBtn').click(function() {
+		window.location.href = 'withdraw.php?act=withdraw';
+	});
+
+	$('#reactivateBtn').click(function() {
+		window.location.href = 'withdraw.php?act=rejoin';
+	});
+
+	function getMajors(selectName) {
+		
 		var majors = new Array();
 
 		$.ajax({
@@ -261,21 +302,32 @@ require_once(TEMPLATES_PATH . "/footer.php");
 			success: function(data) {
 
 				majors = data;
-				// console.log(majors[16]);
 
-				var noSwitch = ' class="noSwitch" data-subtext="Not Available"';
-				//var end = '">' + majors[x]["name"] + '</select>';
+				//for (var x=0; x<majors.length; x++) {
+				$.each(majors, function() {
 
-				for (var x=0; x<majors.length; x++) {
+					var statement = '<option value="' + this.key + '" class="' + this.class + '">'+ this.name + '</select>';
 
-					var statement = '<option ' + majors[x]["selected"] + ' value="' + majors[x]["key"] + '" class="' + majors[x]["class"] + '" data-subtext="' + majors[x]["subtext"] + '">'+ majors[x]["name"] + '</select>';
+					$(selectName).append(statement);
 
-					console.log(statement);
-					$("#selectMajor").append(statement);
+					if (this.class == "noSwitch") {
+						$(selectName+' option:last-child').attr("data-canSwitch", "0");
+						$(selectName+' option:last-child').attr("data-subtext", "Not Available");
+						$(selectName+' option:last-child').prop('disabled', true);					
+					}
 
-				}
+					if (this.name == "Business Administration") {
+						$(selectName+' option:last-child').attr("data-subtext", "(All Business Majors)");
+					}
+
+					if (this.selected == "selected") {
+						$(selectName+' option:last-child').prop('selected', true);
+					}
+
+				});
+
+				$(selectName).selectpicker('refresh');
 			}
-
 		});
 	}
 
@@ -294,7 +346,6 @@ require_once(TEMPLATES_PATH . "/footer.php");
 				setUserVars(user);
 				checkWithdraw(user.withdraw);
 			}
-
 		});	
 	}
 
@@ -305,69 +356,23 @@ require_once(TEMPLATES_PATH . "/footer.php");
 		$('.cycleName').html(user.cycleName);
 		$('.programName').html(user.programName);
 
-		checkWithdraw(user.withdraw); // Move on to see withdraw status
+		window.isMatched = user.isMatched;
+
+		window.hasDroppedMatch = user.droppedMatches;
+
+		checkWithdraw(user); // Move on to see withdraw status
 	}
 
-	function checkWithdraw(status) {
+	function checkWithdraw(user) {
 
-		if (status == 1) {
-			// Do not show all fields and whatnot
+		if (user.withdraw == 1) {
+			// Do not show all fields and whatnot because withdrawed.
 		}
 		else {
-			// Okay to show profile
+
 		}
 
 	}
-
-	$('#editbutton').click(function() {
-
-		buttonToggle();
-
-		if (check_if_dropped()) {
-			toggleTexts();
-			toggleEditFields();
-		}
-
-
-	});
-
-	$('#cancelbutton').click(function() {
-
-		buttonToggle();
-		toggleTexts();
-		toggleEditFields();
-	});
-
-	$(function() {
-		$('#savebutton').click(function() {
-			
-			var major = $("#selectMajor").val();
-			var cycle = $("#selectCycle").val();
-			var program = $("#selectProgram").val();
-			//console.log(major+" "+cycle+" "+program)
-
-			profileElements = 'newMajorId=' + major + '&newCycleId=' + cycle + '&newProgramId=' + program;
-			//console.log(profileElements);
-
-			// Submit ajax update data 
-			$.ajax({
-				
-				type: "POST",
-				url: "update.php",
-				data: profileElements,
-				success: function() {
-					console.log("Updated!");
-					buttonToggle();
-					toggleTexts();
-					toggleEditFields();
-					e.preventDefault();
-				}
-
-			});
-
-		});
-	}); // End submit function holder 
-
 
 	function buttonToggle() {
 
@@ -388,59 +393,6 @@ require_once(TEMPLATES_PATH . "/footer.php");
 		$('#majorSpan').toggle();
 		$('#cycleSpan').toggle();
 		$('#programSpan').toggle();
-	}
-
-	withdraw = "<?php echo $_SESSION['withdraw']; ?>";
-
-	$('.selectpicker').selectpicker();
-
-	if (withdraw != 1) {
-
-		window.hasDroppedMatch = "<?php echo $_SESSION['user_dropped_matches']; ?>";
-
-		if (hasDroppedMatch == "") {
-			window.hasDroppedMatch = 0;
-		}
-
-		window.isMatched = "<?php echo $_SESSION['user_matched']; ?>";
-
-		window.droppedMatches = id("droppedMatches");
-		window.droppedMatches.style.display = 'none';
-
-		window.errorClassVals = "alert alert-warning";
-
-	}
-
-	var check_if_dropped = function () {
-
-		if (window.isMatched == 0) {
-			//window.droppedMatches.textContent = "";
-			window.droppedMatches.style.display = 'none';
-			return true;
-		}
-
-		else if (window.isMatched == 1) {
-			window.droppedMatches.textContent = "By editing your profile, your current match will be dropped. The more matches you drop, the lower you go in the queue."
-			window.droppedMatches.className = 'alert alert-warning lead';
-			window.droppedMatches.style.display = '';
-			return true;
-		}
-
-	}
-
-	var cancelEdit = function () {
-
-		window.droppedMatches.style.display = 'none';
-	}
-
-	var withdraw = function () {
-
-		window.location.href = 'withdraw.php?act=withdraw';
-	}
-
-	var reactivate = function () {
-
-		window.location.href = 'withdraw.php?act=rejoin';
 	}
 
 </script>
