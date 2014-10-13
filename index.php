@@ -120,7 +120,7 @@ include_once(FUNCTION_PATH . "/connect.php");
   			<div class="form-group" id="mainMajorDiv">
   				<label for="majorField">Major</label>
 					<div class="col-sm-6">			  			
-		  				<select class="form-control selectpicker input-lg" id="user_major" name="major" data-live-search="true" data-size="5" data-width="auto">
+		  				<select class="form-control selectpicker input-lg" id="user_major" name="major" data-live-search="true" data-size="5">
 
 		  				</select>
 	  			</div>
