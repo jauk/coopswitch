@@ -22,6 +22,9 @@
 
 		$user->withdraw = $_SESSION['withdraw'];
 
+		$user->isMatched = $_SESSION['user_matched'];
+		$user->droppedMatchess = $_SESSION['user_dropped_matches'];
+
 
 		$json_user = json_encode($user, JSON_PRETTY_PRINT);
 		echo $json_user;
