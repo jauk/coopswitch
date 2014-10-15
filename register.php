@@ -49,6 +49,12 @@ else {
 	die("Passwords do not match.");
 }
 
+foreach ($_POST as $key => $value) {
+	# code...
+}
+
+echo $key . " " . $value;
+
 $cycle = test_input($_POST['cycle']);
 $currentCycleText = ($cycle == "1" ? "Fall-Winter" : "Spring-Summer");
 $num_year_program = test_input($_POST['numCoops']);
@@ -56,12 +62,11 @@ $currentProgramText = ($num_year_program == "1" ? "One Coop" : "Three Coops");
 $major = test_input($_POST['major']);
 
 // See if email is already in use
-$query = 'SELECT * FROM Users WHERE email = "' .$email. '"';
-$result = mysql_query($query);
+$sql = 'SELECT * FROM Users WHERE email = "' .$email. '"';
+$result = $con->query($sql);
 
 // Not 0 means the email already exists.
-if (mysql_num_rows($result) != 0) {
-
+if ($result->num_rows != 0) {
 	header("Location: /error?msg=emailinuse");
 	die();
 }
@@ -71,21 +76,20 @@ if (mysql_num_rows($result) != 0) {
 
 $sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
 VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$major',
-		'".date("Y-m-d H:i:s")."'
+		'".time()."'
 	)";
 
-$verifyLink = getVerifyLink($name, $email, $cycle);
 
-if (!mysql_query($sql,$con)) {
-  	die('Error: ' . mysql_error());
+if (!$con->query($sql)) {
+  trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $con->error, E_USER_ERROR);
 }
 
 else {
+	$verifyLink = getVerifyLink($name, $email, $cycle);
 	send_init_email($name, $email, $verifyLink); // Success, user has been created.
 }
 
 $majorName = getMajorName($major);
-mysql_close($con);
 
 $formGroupLabel = "col-sm-4 col-sm-offset-1";
 $formGroupItem = "text-primary col-sm-7";
@@ -95,8 +99,6 @@ $formGroupItem = "text-primary col-sm-7";
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2 formHeader text-center">
-
-
 
 					<div class="row">
 						<h2>Welcome to Coopswitch, <span class="text-primary"><?php echo $name; ?></span>!</h2>
