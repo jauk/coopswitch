@@ -34,7 +34,9 @@ function print_majors() {
 	foreach ($majorsDB as $key => $major) {
 
 		$class = ($major['noSwitch'] == 1 ? 'noSwitch' : '');
-		$selected = ($_SESSION['user_major_name'] == $major['major_long'] ? "selected" : '');
+
+		if (isset($_SESSION['login']))
+			$selected = ($_SESSION['user_major_name'] == $major['major_long'] ? "selected" : '');
 
 		$majors[] = array(
 			"key"=>$major['id'],
@@ -58,12 +60,21 @@ function getPageName() {
 }
 
 // Useful function found online
-function mysql_get_var($query,$y=0) {
-   $res = mysql_query($query);
-   $row = mysql_fetch_array($res);
-   mysql_free_result($res);
-   $rec = $row[$y];
-   return $rec;
+function getVar($con, $sql) {
+
+	// include "connect.php";
+	$result = $con->query($sql);
+	$value = $result->fetch_array(MYSQLI_NUM);
+
+	return is_array($value) ? $value[0]: "";
+	// if ($result) {
+	// 	$row = $result->fetch_assoc();
+	// 	$rec = $row[0];		
+	// }
+	// else {
+	// 	trigger_error("Failed to get var: " . $con->error, E_USER_ERROR);
+	// }
+	// return $rec;
 }
 
 function getMajorName($id) {
@@ -165,27 +176,28 @@ function getUserDataFromId ($id) {
 	return $user_data;
 }
 
-function switchUsers ($idOne, $idTwo, $major) {
 
-    // Update both users to be matched.
-  $query = "UPDATE Users SET matched = 1 WHERE id = " . $idOne . " OR id = " . $idTwo . "";
-  $result = mysql_query($query);
+// function switchUsers ($idOne, $idTwo, $major) {
 
-  /* *** Matches db need to add date matched, date completed, major val (to compare to when change major in profile, also for stats [ie. most popular majors]) */
+//     // Update both users to be matched.
+//   $query = "UPDATE Users SET matched = 1 WHERE id = " . $idOne . " OR id = " . $idTwo . "";
+//   $result = mysql_query($query);
 
-  // Insert into the Matches database.
-  $query = sprintf("INSERT INTO Matches (userA, userB, major, date_matched) VALUES (" . $idOne . ", " . $idTwo . ", " . $major . ", " .'date("Y-m-d H:i:s")' . " )");
-  //$query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data['id'] . ")");
-  $result = mysql_query($query);
+//   /* *** Matches db need to add date matched, date completed, major val (to compare to when change major in profile, also for stats [ie. most popular majors]) */
 
-  // Grab the Id of the match from Matches table
-  $newMatchId = mysql_get_var('SELECT id FROM Matches WHERE userA= ' . $idOne . ' OR userB= ' . $idTwo);
+//   // Insert into the Matches database.
+//   $query = sprintf("INSERT INTO Matches (userA, userB, major, date_matched) VALUES (" . $idOne . ", " . $idTwo . ", " . $major . ", " .'date("Y-m-d H:i:s")' . " )");
+//   //$query = sprintf("INSERT INTO Matches (userA, userB) VALUES (" . $users_not_matched[$x]['id'] . ", " . $matched_user_data['id'] . ")");
+//   $result = mysql_query($query);
 
-  // Add the Matched ID to the Users
-  $query = "UPDATE Users SET Matches_id = " . $newMatchId . " WHERE id = " . $idOne . " OR id = " . $idTwo . "";
-  $result = mysql_query($query);
+//   // Grab the Id of the match from Matches table
+//   $newMatchId = mysql_get_var('SELECT id FROM Matches WHERE userA= ' . $idOne . ' OR userB= ' . $idTwo);
 
-}
+//   // Add the Matched ID to the Users
+//   $query = "UPDATE Users SET Matches_id = " . $newMatchId . " WHERE id = " . $idOne . " OR id = " . $idTwo . "";
+//   $result = mysql_query($query);
+
+// }
 
 function getName($type, $val) {
 
