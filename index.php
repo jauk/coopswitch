@@ -72,7 +72,8 @@ include_once(FUNCTION_PATH . "/connect.php");
 	  	</div>
 
 			<!-- Registration Form -->
-		<form class="form-horizontal" role="form" id="register" method="post" action="register.php" onsubmit="return validate_submit();" id="register">
+			<!-- method="post" action="register.php" onsubmit="return validate_submit();" id="register" -->
+		<form class="form-horizontal" id="register">
 
 	  			<div id="nameDiv" class="form-group has-feedback">
 	  				<label for="nameField">Name</label>
@@ -177,7 +178,7 @@ include_once(FUNCTION_PATH . "/connect.php");
       	<div class="form-group">
 	  			<div id="element">
 	  				 <div id="errorFree">
-	  				 		<button type="submit" name="submit_form" value="Submit" id="submit_form" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
+	  				 		<button id="submitRegisterBtn" type="submit" value="Submit" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
 	  				 </div>
 	  			</div>
      		</div>
@@ -237,8 +238,37 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 	});
 
-	$('#user_major').change(function() {
-		checkMajor();
+	$('.form-control').change(function() {
+
+		console.log(this.id);
+		switch (this.id) {
+			case 'user_name':
+				validateName(this.value);
+				break;
+			case 'user_email':
+				validateEmail(this.value);
+				break;
+			case 'user_pass':
+				validatePassword(this.value);
+				break;
+			case 'user_pass_confirm':
+				validatePasswordConfirm(this.value);
+			case 'user_major':
+				validateMajor(this.value);
+				break;
+		}
+	});
+
+	$('#submitRegisterBtn').click(function(e) {
+
+		validRegister = false;
+		
+		console.log("Register submit.");
+
+		if (!validRegister) {
+			e.preventDefault();		
+		}
+
 	});
 
 </script>
@@ -297,9 +327,10 @@ function getMajors() {
 
 }
 
-var checkMajor = function () {
+var validateMajor = function (major) {
 
-	var major = $("#user_major").val();
+	console.log("Test!");
+	// var major = $("#user_major").val();
 
 	var majorErrorDiv = id("majorError");
 	var mainMajorDiv = id("mainMajorDiv");
@@ -411,7 +442,7 @@ var checkMajor = function () {
 			removeError(nameDiv, nameErrorDiv, nameFeedback);
 		}
 
-		validate_form();
+		// validate_form();
 	}
 
 
@@ -516,7 +547,7 @@ var checkMajor = function () {
 		//id("user_email").value = email;
 		id("user_email").value = email;
 
-		validate_form();
+		// validate_form();
 	}
 
 	var showConfirm = function () {
