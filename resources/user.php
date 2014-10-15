@@ -1,5 +1,7 @@
 <?php
 
+	// TODO: Put email/pass into a new Table to hide sensitive info / make more secure.
+
 	session_start();
 
 	if (isset($_SESSION['login']) && $_SESSION['login'] == 1) {
