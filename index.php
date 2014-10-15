@@ -75,48 +75,42 @@ include_once(FUNCTION_PATH . "/connect.php");
 			<!-- method="post" action="register.php" onsubmit="return validate_submit();" id="register" -->
 		<form class="form-horizontal" id="register">
 
-	  			<div id="nameDiv" class="form-group has-feedback">
-	  				<label for="nameField">Name</label>
-	  				<div>
-		  				<input type="text" class="form-control input-lg" id="user_name" name="name" placeholder="Enter your name" onchange="validate_name()" data-toggle="tooltip" data-trigger="click" data-placement="right" title="">
-	  					<span id="nameFeedback" class="glyphicon form-control-feedback"></span>
-	  				</div>
-	  				<div>
-	  					<span class="help-block error"><div id="nameError"></div></span>
-	  				</div>
-	  			</div>
-	  
-	  			<div id="emailDiv" class="form-group has-feedback">
-	  				<label for="emailField">Email</label>
-	  				<div>
-		  				<input type="email" class="form-control input-lg" id="user_email" name="email" placeholder="Enter your Drexel email" onchange="validate_email(1)">
-	  					<span id="emailFeedback" class="glyphicon form-control-feedback"></span>	  			
-	  				</div>
-	  				<div>
-		  				<span class="help-block error"><div id="emailError"></div></span>
-					</div>	  				
-	  			</div>
+			<div id="nameDiv" class="form-group has-feedback">
+				<label for="nameField">Name</label>
+				<div>
+  				<input type="text" class="form-control input-lg" id="user_name" name="name" placeholder="Enter your name" data-toggle="tooltip" data-trigger="click" data-placement="right" title="">
+					<span id="nameFeedback" class="glyphicon form-control-feedback"></span>
+				</div>
+				<div id="nameError" class="help-block error"></div>
+			</div>
 
-	  			<div id="passwordDiv" class="form-group has-feedback">
-	  				<label for="passwordField">Password</label>
-	  				<div>
-	  					<input type="password" class="form-control input-lg" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
-		  				<input type="password" class="form-control input-lg" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="passwordConfirm()">
-	 	  				<span id="passwordFeedback" class="glyphicon form-control-feedback"></span> 				
-	  				</div>
-	  				<div>
-		  				<span class="help-block error"><div id="passwordError"><p class="alert text-info bg-info">Do not use your Drexel One password.</p></div></span>
-						</div>	 	  				
-	  			</div>
+			<div id="emailDiv" class="form-group has-feedback">
+				<label for="emailField">Email</label>
+				<div>
+  				<input type="email" class="form-control input-lg" id="user_email" name="email" placeholder="Enter your Drexel email">
+					<span id="emailFeedback" class="glyphicon form-control-feedback"></span>	  			
+				</div>
+				<div id="emailError" class="help-block error"></div>	  				
+			</div>
 
+			<div id="passwordDiv" class="form-group has-feedback">
+				<label for="passwordField">Password</label>
+				<div>
+					<input type="password" class="form-control input-lg" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
+  				<input type="password" class="form-control input-lg" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="passwordConfirm()">
+	  				<span id="passwordFeedback" class="glyphicon form-control-feedback"></span> 				
+				</div>
+				<!-- TODO: Better initial message format (info via jquery). -->
+  			<div id="passwordError" class="help-block error"><p id="initPassMsg" class="alert text-warning bg-infook">Do not use your Drexel One password.</p></div>
+			</div>
 
-		    <div class="form-group">
-		    	<div id="element">
-		    		<hr class="style-three">
-		    	</div>
-		    </div>
+	    <div class="form-group">
+	    	<div id="element">
+	    		<hr class="style-three">
+	    	</div>
+	    </div>
 		    
-		    <?php if ($testHaveSwitch) { require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/dev/haveSwitch.html"); } ?>
+		  <?php if ($testHaveSwitch) { require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/dev/haveSwitch.html"); } ?>
 
   			<div class="form-group" id="mainMajorDiv">
   				<label for="majorField">Major</label>
@@ -220,6 +214,12 @@ include_once(FUNCTION_PATH . "/connect.php");
   formElementClass = "col-md-10 col-md-offset-1 col-sm-12 text-center";
   normalRowClass = "col-sm-6 col-sm-offset-3 text-center";
 
+	feedbackSuccess = " glyphicon-ok";
+	feedbackWarning = " glyphicon-warning-sign";
+	feedbackError = " glyphicon-remove";
+
+	errorClass = "formError col-sm-3 alert alert-danger";
+
 	/* ON LOAD SET CLASSES */
 	$( window ).ready(function() {
 
@@ -229,18 +229,22 @@ include_once(FUNCTION_PATH . "/connect.php");
 			$('form#register #element').addClass(formElementClass);
 			$('#formHeader').addClass(formElementClass+" text-primary formHeader");
 			$('.normalRow').addClass(normalRowClass);
-			
+			$('div.form-control-feedback').addClass('form-group glyphicon');
+
+			$('div.help-block').addClass(errorClass);
+			$('div.help-block').toggle();
+			$('#passwordError').toggle();
+
 			$('.noSwitch').prop('disabled', false);
 
 			getMajors();
 			console.log("Loaded.");
-			$('.selectpicker').selectpicker({ 'selectedText': '',style:'btn-default btn-lg' });
-
+			$('.selectpicker').selectpicker({ 'selectedText': '', style:'btn-default btn-lg' });
 	});
 
 	$('.form-control').change(function() {
 
-		console.log(this.id);
+		// console.log(this.id);
 		switch (this.id) {
 			case 'user_name':
 				validateName(this.value);
@@ -288,68 +292,148 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 <script type="text/javascript">
 
-function getMajors() {
-	var majors = new Array();
+	function toggleFeedback(formGroup, isValid) {
 
-	idName = "#user_major";
+		selector = 'div'+formGroup+' .form-control-feedback';
 
-	$.ajax({
-
-		dataType: "json",
-		url: "/resources/functions/scripts.php",
-		data: "g=majors", 
-		success: function(data) {
-
-			majors = data;
-
-			//for (var x=0; x<majors.length; x++) {
-			$.each(majors, function() {
-
-				var statement = '<option value="' + this.key + '" class="' + this.class + '">'+ this.name + '</select>';
-
-				$('#user_major').append(statement);
-
-				if (this.class == "noSwitch") {
-					$('#user_major option:last-child').attr("data-canSwitch", "0");
-					$('#user_major option:last-child').attr("data-subtext", "Not Available");
-				}
-
-				if (this.name == "Business Administration") {
-					$('#user_major option:last-child').attr("data-subtext", "(All Business Majors)");
-				}
-
-			});
-
-			$('.selectpicker').selectpicker('refresh');
-
+		if (isValid) {
+			console.log("Valid.");
+			$(selector).addClass(feedbackSuccess);
+			$(selector).removeClass(feedbackError);
+			$(formGroup).addClass('has-success');
+			$(formGroup).removeClass('has-error');
+			$(formGroup+ " .help-block").hide();
 		}
-	});
+		else if (!isValid) {
+			console.log("Not valid.");
+			$(selector).addClass(feedbackError);
+			$(selector).removeClass(feedbackSuccess);
+			$(formGroup).addClass('has-error');
+			$(formGroup).removeClass('has-success');
+			$(formGroup+ " .help-block").show();
+		}
+		else {
+			console.log("No valid state, show warning.");
+		}
 
-}
+	}
 
-var validateMajor = function (major) {
 
-	console.log("Test!");
-	// var major = $("#user_major").val();
+	function validateName(name) {
 
-	var majorErrorDiv = id("majorError");
-	var mainMajorDiv = id("mainMajorDiv");
+		isValid = false;
+		helpBlockText = "";
 
-	console.log($("option:selected", "select[name=major]").attr("data-canSwitch"));
+		name = name.trim();
+		regTest = /^[a-zA-Z\s]*$/;
 
-	if($("option:selected", "select[name=major]").attr("data-canSwitch") == 0){
+		var validName = regTest.test(name);
 
-		$('#nonSwitchMajor').modal().show();
-		error = 'Unswitchable major.';
-		setError(mainMajorDiv, majorErrorDiv, "", error);
-		errors.major = 1;
-  }
-	else {
-		removeError(mainMajorDiv, majorErrorDiv, "");
-		errors.major = 0;
-	}	
+		if (!validName || name.length == 0) {
+			errors.name = 1;
+			helpBlockText = "Invalid characters in name.";
+		}
+		else {
+			errors.name = 0;
+			isValid = true;
+		}
 
-}
+		$('#nameError').html(helpBlockText);
+		toggleFeedback('#nameDiv', isValid);
+	}
+
+	function validateEmail(email) {
+
+		isValid = false;
+		helpBlockText = "";
+
+		email = email.toLowerCase();
+
+		var regex = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
+
+		if (regex.test(email)) {
+			// Valid email true, now check domain.
+			if (email.indexOf('@drexel.edu', email.length - '@drexel.edu'.length) !== -1) {
+				errors.emailPrimary = 0;
+				isValid = true;
+				$('#user_email').value = email;
+			}
+			else {
+				helpBlockText = "Not a Drexel edu email.";
+			}
+		}
+		else {
+			helpBlockText = "Invalid email format.";
+		}
+
+		$('#emailError').html(helpBlockText);
+		toggleFeedback('#emailDiv', isValid);
+
+
+	}
+
+	function getMajors() {
+		var majors = new Array();
+
+		idName = "#user_major";
+
+		$.ajax({
+
+			dataType: "json",
+			url: "/resources/functions/scripts.php",
+			data: "g=majors", 
+			success: function(data) {
+
+				majors = data;
+
+				//for (var x=0; x<majors.length; x++) {
+				$.each(majors, function() {
+
+					var statement = '<option value="' + this.key + '" class="' + this.class + '">'+ this.name + '</select>';
+
+					$('#user_major').append(statement);
+
+					if (this.class == "noSwitch") {
+						$('#user_major option:last-child').attr("data-canSwitch", "0");
+						$('#user_major option:last-child').attr("data-subtext", "Not Available");
+					}
+
+					if (this.name == "Business Administration") {
+						$('#user_major option:last-child').attr("data-subtext", "(All Business Majors)");
+					}
+
+				});
+
+				$('.selectpicker').selectpicker('refresh');
+
+			}
+		});
+
+	}
+
+	var validateMajor = function (major) {
+
+		console.log("Test!");
+		// var major = $("#user_major").val();
+
+		var majorErrorDiv = id("majorError");
+		var mainMajorDiv = id("mainMajorDiv");
+
+		console.log($("option:selected", "select[name=major]").attr("data-canSwitch"));
+
+		if($("option:selected", "select[name=major]").attr("data-canSwitch") == 0){
+
+			$('#nonSwitchMajor').modal().show();
+			error = 'Unswitchable major.';
+			setError(mainMajorDiv, majorErrorDiv, "", error);
+			errors.major = 1;
+	  }
+		else {
+			removeError(mainMajorDiv, majorErrorDiv, "");
+			errors.major = 0;
+		}	
+
+	}
 
 	// $('.selectpicker').selectpicker();
 
@@ -381,9 +465,9 @@ var validateMajor = function (major) {
 		window.mainDivClassWarning = mainDivClass + " has-warning";
 		window.mainDivClassFeedback = mainDivClass + " has-feedback";
 
-		window.feedbackSuccess = "glyphicon glyphicon-ok form-control-feedback";
-		window.feedbackWarning = "glyphicon glyphicon-warning-sign form-control-feedback";
-		window.feedbackError = "glyphicon glyphicon-remove form-control-feedback";
+		// window.feedbackSuccess = "glyphicon glyphicon-ok form-control-feedback";
+		// window.feedbackWarning = "glyphicon glyphicon-warning-sign form-control-feedback";
+		// window.feedbackError = "glyphicon glyphicon-remove form-control-feedback";
 
 		window.pageAlert = id("pageAlert");
 
@@ -410,145 +494,7 @@ var validateMajor = function (major) {
 		// Scroll to form on page and have it fade in/down or something.
 	}
 
-	var validate_name = function () {
 
-		var name = id("user_name").value;
-
-		var nameDiv = id("nameDiv");
-		var nameErrorDiv = id("nameError");
-		var nameFeedback = id("nameFeedback");
-
-		name = name.trim();
-
-		regTest = /^[a-zA-Z\s]*$/;
-
-		var validName = regTest.test(name);
-
-		// Only checks if blank, add regex support.
-		if (name == "" || !validName)
-		{
-			errors.name = 1;
-
-			error = "Invalid name entered.";
-			setError(nameDiv, nameErrorDiv, nameFeedback, error);
-		}
-		else
-		{
-			errors.name = 0;
-
-			id("user_name").value = name;
-			id("myName").innerHTML = ", " + name + ", ";
-
-			removeError(nameDiv, nameErrorDiv, nameFeedback);
-		}
-
-		// validate_form();
-	}
-
-
-	var validate_email = function (type) {
-
-		if (type == 1) {
-			// var emailErrorDiv = id("emailError");
-			var emailDiv = id("emailDiv");
-			var emailErrorDiv = id("emailError");
-			var emailFeedback = id("emailFeedback");
-			// var email = id("user_email");
-			// var emailVal = id("user_email");
-
-		}
-		// else if (type == 2) {
-		// 	var emailDiv = id("otherEmailMain");
-		// 	var emailErrorDiv = id("otherEmailError");
-		// 	var email = id("otherUserEmail").value;
-		// 	var emailVal = id("otherUserEmail");
-
-		// }
-		else {
-			console.log("ERROR WITH EMAIL.");
-		}
-
-		email = id("user_email").value;
-		email = email.trim();
-		email = email.toLowerCase();
-
-		var drexelEmail = "@drexel.edu";
-	 	var hasDrexelEmail = email.search("@drexel.edu");
-		var endEmail = email.indexOf("@drexel.edu");
-
-		if (hasDrexelEmail != -1) {
-
-			console.debug("Has Drexel Email is true.")
-
-			var length = endEmail + drexelEmail.length;
-
-			if (length != email.length) {
-
-				//emailRemove = email.slice(length, email.length);
-				email = email.slice(0, length);
-				//email = email.replace(emailRemove, "");
-
-				// emailErrorDiv.textContent = "Extra characters removed.";
-				// emailErrorDiv.className = 'alert alert-info';
-
-				// $("#emailError").fadeOut(2000);
-
-			}
-			
-			removeError(emailDiv, emailErrorDiv, emailFeedback);
-			errors.emailPrimary = 0;
-
-			// Check to make sure email does not repeat in either form.
-			/*
-			if (type == 1 && email == id("otherUserEmail").value) {
-
-				error = "Same email as person switching with.";
-				setError(emailDiv, emailErrorDiv, error);
-
-				errors.emailPrimary = 1;
-
-			}
-			else if (type == 2 && email == id("user_email").value) {
-
-				error = "Same email as person registering.";
-				setError(emailDiv, emailErrorDiv, error);
-
-				errors.emailSecondary = 1;
-			}
-
-			else {
-				removeError(emailDiv, emailErrorDiv);
-				if (type == 1)
-					errors.emailPrimary = 0;
-				else
-					errors.emailSecondary = 0;
-			}
-			*/
-
-		}
-		else
-		{
-			if (email == "") {
-				error = "You need an email.";
-			}
-			//email = "email";
-			else {
-				error = "Not a valid Drexel email.";
-			}
-
-			if (type == 1)
-				errors.emailPrimary = 1;
-			else
-				errors.emailSecondary = 1;
-
-			setError(emailDiv, emailErrorDiv, emailFeedback, error);
-		}
-
-		//id("user_email").value = email;
-		id("user_email").value = email;
-
-		// validate_form();
-	}
 
 	var showConfirm = function () {
 		id("user_pass_confirm").style.display = '';
