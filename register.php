@@ -1,7 +1,8 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
-require_once(TEMPLATES_PATH . "/header.php");
+// require_once(TEMPLATES_PATH . "/header.php");
 include(FUNCTION_PATH . "/connect.php");
+include(FUNCTION_PATH . "/scripts.php");
 
 $url = "https://" . $_SERVER['SERVER_NAME'];
 
@@ -25,44 +26,35 @@ else if (!isset($_POST['name']) || !isset($_POST['password']) || !isset($_POST['
 	//break;
 }
 
+$userData = $_POST;
 
+$submitData = count($userData);
 
-if (!isset($_POST['name']) || $_POST['name'] == "") { die("No name."); }
-if (!isset($_POST['email']) || $_POST['email'] == "") { die("No email. "); } 
-if (!isset($_POST['password']) || $_POST['password'] == "") { die("No password one. "); } 
-if (!isset($_POST['password2']) || $_POST['password2'] == "") { die("No password two. "); } 
-if (!isset($_POST['cycle']) || $_POST['cycle'] == "") { die("No cycle. "); } 
-if (!isset($_POST['numCoops']) || $_POST['numCoops'] == "") { die("No numCoops. "); } 
-if (!isset($_POST['major']) || $_POST['major'] == "") { die("No major. "); } 
+if ($submitData != 7) {
+	die("Invalid registration submission.");
+}
 
-// Run post data through test_input function 	header("Location: " . $url . "/error.php?msg=nodata");
-$name = test_input($_POST['name']);
-$email = test_input($_POST['email']);
+else {
+	foreach ($userData as $key => $value) {
+		$userData[$key] = test_input($value);
+		if ($value == "") {
+			die("Error: " . $key . " cannot be null.");
+		}
+	}
+}
 
 $password = test_input($_POST['password']);
 $password2 = test_input($_POST['password2']);
 
-if ($password == $password2) {
-	$password = sha1($password);
+if ($userData['password'] == $userData['password2']) {
+	$password = sha1($userData['password']);
 }
 else {
 	die("Passwords do not match.");
 }
 
-foreach ($_POST as $key => $value) {
-	# code...
-}
-
-echo $key . " " . $value;
-
-$cycle = test_input($_POST['cycle']);
-$currentCycleText = ($cycle == "1" ? "Fall-Winter" : "Spring-Summer");
-$num_year_program = test_input($_POST['numCoops']);
-$currentProgramText = ($num_year_program == "1" ? "One Coop" : "Three Coops");
-$major = test_input($_POST['major']);
-
 // See if email is already in use
-$sql = 'SELECT * FROM Users WHERE email = "' .$email. '"';
+$sql = 'SELECT * FROM Users WHERE email = "' .$userData['email']. '"';
 $result = $con->query($sql);
 
 // Not 0 means the email already exists.
@@ -73,7 +65,7 @@ if ($result->num_rows != 0) {
 
 
 // Add user to db
-
+// TODO: UPDATE VARS TO USE OBJ
 $sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
 VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$major',
 		'".time()."'
@@ -87,15 +79,17 @@ if (!$con->query($sql)) {
 else {
 	$verifyLink = getVerifyLink($name, $email, $cycle);
 	send_init_email($name, $email, $verifyLink); // Success, user has been created.
+	echo "Registration successful!";
 }
 
-$majorName = getMajorName($major);
+// $majorName = getMajorName($major);
 
 $formGroupLabel = "col-sm-4 col-sm-offset-1";
 $formGroupItem = "text-primary col-sm-7";
 
 ?>
 
+<!--
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2 formHeader text-center">
@@ -145,6 +139,8 @@ $formGroupItem = "text-primary col-sm-7";
 		</div>
 	</div>
 </div>
+ -->
+
 
 <?php
 require_once(TEMPLATES_PATH . "/footer.php");

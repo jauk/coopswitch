@@ -96,12 +96,12 @@ include_once(FUNCTION_PATH . "/connect.php");
 			<div id="passwordDiv" class="form-group has-feedback">
 				<label for="passwordField">Password</label>
 				<div>
-					<input type="password" class="form-control input-lg" id="user_pass" name="password" placeholder="Enter a password" onchange="validate_password()">
-  				<input type="password" class="form-control input-lg" id="user_pass_confirm" name="password2" placeholder="Confirm password" onchange="passwordConfirm()">
-	  				<span id="passwordFeedback" class="glyphicon form-control-feedback"></span> 				
+					<input type="password" class="form-control input-lg" id="user_pass" name="password" placeholder="Enter a password">
+  				<input type="password" class="form-control input-lg" id="user_pass_confirm" name="password2" placeholder="Confirm password">
+	  			<span id="passwordFeedback" class="glyphicon form-control-feedback"></span> 				
 				</div>
 				<!-- TODO: Better initial message format (info via jquery). -->
-  			<div id="passwordError" class="help-block error"><p id="initPassMsg" class="alert text-warning bg-infook">Do not use your Drexel One password.</p></div>
+  			<div id="passwordError" class="help-block error"><!-- <p id="initPassMsg" class="alert text-warning bg-infook">Do not use your Drexel One password.</p> --></div>
 			</div>
 
 	    <div class="form-group">
@@ -110,72 +110,66 @@ include_once(FUNCTION_PATH . "/connect.php");
 	    	</div>
 	    </div>
 		    
-		  <?php if ($testHaveSwitch) { require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/dev/haveSwitch.html"); } ?>
+			<div id="majorDiv" class="form-group has-feedback">
+				<label for="majorField">Major</label>
+				<div class="col-sm-6">			  			
+	  				<select class="form-control selectpicker input-lg" id="user_major" name="major" data-live-search="true" data-size="5">
 
-  			<div class="form-group" id="mainMajorDiv">
-  				<label for="majorField">Major</label>
-					<div class="col-sm-6">			  			
-		  				<select class="form-control selectpicker input-lg" id="user_major" name="major" data-live-search="true" data-size="5">
-
-		  				</select>
-	  			</div>
-  				<div>
-  					<span class="help-block error"><div id="majorError"></div></span>
-  				</div>
+	  				</select>
   			</div>
+			</div>
 
-	    	<div class="form-group">
-	  				<label for="cycleField">Current Cycle</label>
-	  				<div class="col-sm-4">
-		  				<label class="radio-inline formLabelRadio lead">
-							  <input checked="checked" type="radio" name="cycle" id="cycle" value="1"><span class="fallwinter">Fall Winter</span>
-							</label>
-						</div>
-						<div class="col-sm-4">
-							<label class="radio-inline formLabelRadio lead">
-							  <input type="radio" name="cycle" id="cycle" value="2"><span class="springsummer">Spring Summer</span>
-							</label>
-		  			</div>
-	  		</div>
-
-	  		<div class="form-group">
-	  				<label for="numCoopsField">Coops</label>
-	  				<div class="col-sm-4">
-		  				<label class="radio-inline formLabelRadio lead">
-							  <input checked="checked" type="radio" name="numCoops" id="numCoops" value="1"><span class="onecoop">One Coop</span>
-							</label>
-						</div>
-						<div class="col-sm-4">
-							<label class="radio-inline formLabelRadio lead">
-							  <input type="radio" name="numCoops" id="numCoops" value="2"><span class="threecoop">Three Coops</span>
-							</label>		  			
-	  				</div>
-	    	</div>
-
-
-		    <div class="form-group">
-		    	<div id="element">
-		    		<hr class="style-three">
-		    	</div>
-		    </div>
- 
-      	<div class="form-group" id="acceptTerms">
-      		<div class="col-sm-offset-2 col-sm-8 text-center lead">
-      			<div class="checkbox">
-      					<input name="terms" id="terms" type="checkbox"> I<span id="myName"></span> accept the <a href="#">terms and conditions.</a>
-      			</div>
-      		</div>
-      	</div>
-  			
-      	<br>
-      
-      	<div class="form-group">
-	  			<div id="element">
-	  				 <div id="errorFree">
-	  				 		<button id="submitRegisterBtn" type="submit" value="Submit" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
-	  				 </div>
+    	<div class="form-group">
+  				<label for="cycleField">Current Cycle</label>
+  				<div class="col-sm-4">
+	  				<label class="radio-inline formLabelRadio lead">
+						  <input checked="checked" type="radio" name="cycle" id="cycle" value="1"><span class="fallwinter">Fall Winter</span>
+						</label>
+					</div>
+					<div class="col-sm-4">
+						<label class="radio-inline formLabelRadio lead">
+						  <input type="radio" name="cycle" id="cycle" value="2"><span class="springsummer">Spring Summer</span>
+						</label>
 	  			</div>
-     		</div>
+  		</div>
+
+  		<div class="form-group">
+  				<label for="numCoopsField">Coops</label>
+  				<div class="col-sm-4">
+	  				<label class="radio-inline formLabelRadio lead">
+						  <input checked="checked" type="radio" name="numCoops" id="numCoops" value="1"><span class="onecoop">One Coop</span>
+						</label>
+					</div>
+					<div class="col-sm-4">
+						<label class="radio-inline formLabelRadio lead">
+						  <input type="radio" name="numCoops" id="numCoops" value="2"><span class="threecoop">Three Coops</span>
+						</label>		  			
+  				</div>
+    	</div>
+
+	    <div class="form-group">
+	    	<div id="element">
+	    		<hr class="style-three">
+	    	</div>
+	    </div>
+ 
+    	<div class="form-group" id="acceptTerms">
+    		<div class="col-sm-offset-2 col-sm-8 text-center lead">
+    			<div class="checkbox">
+    					<input name="terms" id="terms" type="checkbox"> I<span id="myName"></span> accept the <a href="#">terms and conditions.</a>
+    			</div>
+    		</div>
+    	</div>
+  			
+      <br>
+      
+    	<div class="form-group">
+  			<div id="element">
+  				 <div id="errorFree">
+  				 		<button id="submitRegisterBtn" class="btn btn-block btn-default btn-lg btn-primary">Register</button>
+  				 </div>
+  			</div>
+   		</div>
 	      
 		</form>
 	</div>
@@ -220,8 +214,20 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 	errorClass = "formError col-sm-3 alert alert-danger";
 
+	firstEnter = false;
+
+	errors = {
+	  name: 1,
+	  email: 1,
+	  password: 1,
+	  major: 0
+	}; 
+
+
 	/* ON LOAD SET CLASSES */
 	$( window ).ready(function() {
+
+			$('#registerForm').hide();
 
 			$('form#register label').addClass(formLabelClass);
 			$('form#register input').parent().addClass(formInputWidth);
@@ -233,13 +239,19 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 			$('div.help-block').addClass(errorClass);
 			$('div.help-block').toggle();
-			$('#passwordError').toggle();
+			// $('#passwordError').toggle();
 
 			$('.noSwitch').prop('disabled', false);
 
 			getMajors();
 			console.log("Loaded.");
 			$('.selectpicker').selectpicker({ 'selectedText': '', style:'btn-default btn-lg' });
+	});
+
+	$('#getStarted').click(function(e){    
+	    $('#begin').fadeOut('fast', function(){
+	        $('#registerForm').fadeIn('fast');
+	    });
 	});
 
 	$('.form-control').change(function() {
@@ -253,10 +265,11 @@ include_once(FUNCTION_PATH . "/connect.php");
 				validateEmail(this.value);
 				break;
 			case 'user_pass':
-				validatePassword(this.value);
+				validatePassword();
 				break;
 			case 'user_pass_confirm':
-				validatePasswordConfirm(this.value);
+				validatePassword();
+				break;
 			case 'user_major':
 				validateMajor(this.value);
 				break;
@@ -265,32 +278,28 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 	$('#submitRegisterBtn').click(function(e) {
 
-		validRegister = false;
-		
-		console.log("Register submit.");
-
-		if (!validRegister) {
-			e.preventDefault();		
+		var formErrors = 0;
+		for (var errorType in errors) {
+			formErrors += errors[errorType];
 		}
 
+		if (formErrors != 0) {
+			console.log("Cannot submit: errors.");
+		}
+		else {
+			$.ajax({
+				type: "POST", 
+				url: "register.php", 
+				data: $('#register').serialize(),
+				success: function(data) {
+					
+				}
+			});
+		}
+		
+		e.preventDefault();
+
 	});
-
-</script>
-
-<script>
-	
-	id("registerForm").style.display = 'none';
-	 // id("registerForm").style.display = '';
-	 // id("begin").style.display = 'none';
-
-	$('#getStarted').click(function(e){    
-	    $('#begin').fadeOut('fast', function(){
-	        $('#registerForm').fadeIn('fast');
-	    });
-	});
-</script>
-
-<script type="text/javascript">
 
 	function toggleFeedback(formGroup, isValid) {
 
@@ -318,10 +327,10 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 	}
 
-
 	function validateName(name) {
 
 		isValid = false;
+		errors.name = 1;
 		helpBlockText = "";
 
 		name = name.trim();
@@ -342,9 +351,49 @@ include_once(FUNCTION_PATH . "/connect.php");
 		toggleFeedback('#nameDiv', isValid);
 	}
 
+	function validatePassword() {
+
+		passwordInitial = $('#user_pass').val();
+		passwordConfirmed = $('#user_pass_confirm').val();
+
+		if (!firstEnter) {
+			firstEnter = true; 
+		}
+
+		else {
+			isValid = false;
+			errors.password = 1;
+			helpBlockText = "";
+
+			if (passwordConfirmed == passwordInitial) {
+				if (passwordConfirmed.length > 6) {
+					isValid = true;
+					errors.password = 0;
+				}
+				else if (passwordConfirmed.length > 0) {
+					helpBlockText = "You should use a longer password.";
+					errors.password = 0;
+				}
+				else {
+					helpBlockText = "Password cannot be left blank.";
+				}
+			}
+			else {
+				helpBlockText = "Passwords do not match.";
+			}
+
+			$('#passwordError').html(helpBlockText);
+			toggleFeedback('#passwordDiv', isValid);
+		
+		}
+
+	}
+
+
 	function validateEmail(email) {
 
 		isValid = false;
+		errors.email = 1;
 		helpBlockText = "";
 
 		email = email.toLowerCase();
@@ -354,12 +403,12 @@ include_once(FUNCTION_PATH . "/connect.php");
 		if (regex.test(email)) {
 			// Valid email true, now check domain.
 			if (email.indexOf('@drexel.edu', email.length - '@drexel.edu'.length) !== -1) {
-				errors.emailPrimary = 0;
+				errors.email = 0;
 				isValid = true;
 				$('#user_email').value = email;
 			}
 			else {
-				helpBlockText = "Not a Drexel edu email.";
+				helpBlockText = "Not a Drexel email.";
 			}
 		}
 		else {
@@ -369,6 +418,25 @@ include_once(FUNCTION_PATH . "/connect.php");
 		$('#emailError').html(helpBlockText);
 		toggleFeedback('#emailDiv', isValid);
 
+
+	}
+
+	function validateMajor(major) {
+
+		isValid = false;
+
+		if($("option:selected", "select[name=major]").attr("data-canSwitch") == 0){
+
+			$('#nonSwitchMajor').modal().show();
+			error = 'Unswitchable major.';
+			errors.major = 1;
+	  }
+		else {
+			errors.major = 0;
+			isValid = true;
+		}	
+
+		toggleFeedback('#majorDiv', isValid);
 
 	}
 
@@ -411,29 +479,7 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 	}
 
-	var validateMajor = function (major) {
 
-		console.log("Test!");
-		// var major = $("#user_major").val();
-
-		var majorErrorDiv = id("majorError");
-		var mainMajorDiv = id("mainMajorDiv");
-
-		console.log($("option:selected", "select[name=major]").attr("data-canSwitch"));
-
-		if($("option:selected", "select[name=major]").attr("data-canSwitch") == 0){
-
-			$('#nonSwitchMajor').modal().show();
-			error = 'Unswitchable major.';
-			setError(mainMajorDiv, majorErrorDiv, "", error);
-			errors.major = 1;
-	  }
-		else {
-			removeError(mainMajorDiv, majorErrorDiv, "");
-			errors.major = 0;
-		}	
-
-	}
 
 	// $('.selectpicker').selectpicker();
 
@@ -473,13 +519,13 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 		window.hasEnteredAgain = false;
 
-		window.errors = {
-		    name: 0,
-		    emailPrimary: 0,
-		    password: 0,
-		    major: 0,
-		    emailSecondary: 0
-		}; 
+		// window.errors = {
+		//     name: 0,
+		//     emailPrimary: 0,
+		//     password: 0,
+		//     major: 0,
+		//     emailSecondary: 0
+		// }; 
 
 	}
 
