@@ -1,8 +1,9 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
-// require_once(TEMPLATES_PATH . "/header.php");
+
 include(FUNCTION_PATH . "/connect.php");
 include(FUNCTION_PATH . "/scripts.php");
+include(FUNCTION_PATH . "/mail.php");
 
 $url = "https://" . $_SERVER['SERVER_NAME'];
 
@@ -66,19 +67,18 @@ if ($result->num_rows != 0) {
 
 // Add user to db
 // TODO: UPDATE VARS TO USE OBJ
-$sql="INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date)
-VALUES ('$name','$password', '$email','$cycle', '$num_year_program', '$major',
-		'".time()."'
-	)";
-
+$sql = 'INSERT INTO Users (name, password, email, cycle, num_year_program, major, register_date) '.
+	'VALUES ("'.$userData['name'].'", "'.$userData['password'].'", "'.$userData['email'].'", "'
+						.$userData['cycle'].'", "'.$userData['numCoops'].'", "'.$userData['major'].'", "'.time().'"
+)';
 
 if (!$con->query($sql)) {
   trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $con->error, E_USER_ERROR);
 }
 
 else {
-	$verifyLink = getVerifyLink($name, $email, $cycle);
-	send_init_email($name, $email, $verifyLink); // Success, user has been created.
+	$verifyLink = getVerifyLink($userData['name'], $userData['email'], $userData['cycle']);
+	//send_init_email($userData['name'], $userData['email'], $userData['cycle']); // Success, user has been created.
 	echo "Registration successful!";
 }
 

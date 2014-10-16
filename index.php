@@ -23,7 +23,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 <div class="container" id="begin">
   
 	<!-- IF NOT LOGGED IN -->
-	
 <?php if (!isset($_SESSION['login'])) { // if ($_SESSION['login'] == "") { ?>
 
 	<div id="startText" class="row">
@@ -46,30 +45,29 @@ include_once(FUNCTION_PATH . "/connect.php");
   			<button class="btn btn-lg btn-success" id="getStarted" style="width: 85%;"><h2>Get Started</h2></button>
   		</div> 
   	</div>
-<!-- onclick="expandForm()"  -->
 </div>
 
   	<!-- REGISTER FORM START -->
 	<div id="registerForm" class="container col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 	    <div class="row">
 	  		<div id="formHeader">
-	  			<h3><strong>Registration Form</strong></h3>
-	  			<!-- <p>This is currently for <em>Drexel Freshman</em> only.</p> -->
+	  			<h3><strong>Registration</strong></h3>
 	  		</div>
 	  	</div>
 		
 			<!-- Print out if there is an error with the form data. -->
+			<!-- TODO: Better main form error display.
 			<div class="row">
 	  		<div id="element">
 	  			<span class="error">
 	  				<strong>
 	  					<div class="alert alert-warning lead" id="formError">
-	  						<!-- <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
 	  					</div>
 	  				</strong>
 	  			</span>
 	  		</div>
 	  	</div>
+	  	-->
 
 			<!-- Registration Form -->
 			<!-- method="post" action="register.php" onsubmit="return validate_submit();" id="register" -->
@@ -201,6 +199,10 @@ include_once(FUNCTION_PATH . "/connect.php");
 <!-- // New JQuery Code! // -->
 <script type="text/javascript">
 
+	$('#user_name').tooltip();
+	$('#user_pass').popover();
+	$('#registerTypeHelp').tooltip();
+
 	/* CSS CLASS VARS */
 	formLabelClass = "col-sm-2 col-sm-offset-0 control-label formLabel";
 	formInputWidth = "col-sm-6";
@@ -223,7 +225,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 	  major: 0
 	}; 
 
-
 	/* ON LOAD SET CLASSES */
 	$( window ).ready(function() {
 
@@ -239,7 +240,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 			$('div.help-block').addClass(errorClass);
 			$('div.help-block').toggle();
-			// $('#passwordError').toggle();
 
 			$('.noSwitch').prop('disabled', false);
 
@@ -256,7 +256,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 
 	$('.form-control').change(function() {
 
-		// console.log(this.id);
 		switch (this.id) {
 			case 'user_name':
 				validateName(this.value);
@@ -386,7 +385,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 			toggleFeedback('#passwordDiv', isValid);
 		
 		}
-
 	}
 
 
@@ -418,7 +416,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 		$('#emailError').html(helpBlockText);
 		toggleFeedback('#emailDiv', isValid);
 
-
 	}
 
 	function validateMajor(major) {
@@ -426,7 +423,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 		isValid = false;
 
 		if($("option:selected", "select[name=major]").attr("data-canSwitch") == 0){
-
 			$('#nonSwitchMajor').modal().show();
 			error = 'Unswitchable major.';
 			errors.major = 1;
@@ -437,7 +433,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 		}	
 
 		toggleFeedback('#majorDiv', isValid);
-
 	}
 
 	function getMajors() {
@@ -473,147 +468,21 @@ include_once(FUNCTION_PATH . "/connect.php");
 				});
 
 				$('.selectpicker').selectpicker('refresh');
-
 			}
 		});
 
 	}
 
-
-
-	// $('.selectpicker').selectpicker();
-
-	$('#user_name').tooltip();
-	$('#user_pass').popover();
-
-	$('#registerTypeHelp').tooltip();
-
-	// When the page loads, do this
-	window.onload = function () {
-		
-		formErrorDiv = id("formError");
-		formErrorDiv.style.display = 'none';
-
-		var errors = 0;
-		window.hasEnteredAgain = false;
-
-		window.hasErrors = true; //Start at true so cannot submit blank form.
-
-		window.nameErr = 1;
-		window.emailErr = 1;
-		window.passwordErr = 1;
-
-		window.errorClassVals = "alert alert-danger";
-
-		window.mainDivClass = "";
-		window.mainDivClassError = mainDivClass + " has-error";
-		window.mainDivClassValid = mainDivClass + " has-success";
-		window.mainDivClassWarning = mainDivClass + " has-warning";
-		window.mainDivClassFeedback = mainDivClass + " has-feedback";
-
-		// window.feedbackSuccess = "glyphicon glyphicon-ok form-control-feedback";
-		// window.feedbackWarning = "glyphicon glyphicon-warning-sign form-control-feedback";
-		// window.feedbackError = "glyphicon glyphicon-remove form-control-feedback";
-
-		window.pageAlert = id("pageAlert");
-
-		window.hasEnteredAgain = false;
-
-		// window.errors = {
-		//     name: 0,
-		//     emailPrimary: 0,
-		//     password: 0,
-		//     major: 0,
-		//     emailSecondary: 0
-		// }; 
-
-	}
-
-	var expandForm = function () {
-
-		id("getStarted").style.display = 'none';
-		id("registerForm").style.display = '';
-		id("stockPhoto").style.display = 'none';
-		id("startText").style.display = 'none';
-
-		//id("formInfo").style.display = '';
-		// Scroll to form on page and have it fade in/down or something.
-	}
-
-
-
-	var showConfirm = function () {
-		id("user_pass_confirm").style.display = '';
-
-	}
-
-
-
 	var validate_submit = function () {
 
-		errorDiv = id("formError");
 
-		// Revalidate all fields to do a final check 
-		validate_name();
-		validate_email(1); // 1 is for main email. Not using other field currently.
-		validate_password();
-		passwordConfirm();
-		checkMajor();
-
-		if (!id("terms").checked) {
-			console.debug("Terms and Conditions have not been checked.");
-		}		
-
-		var totalErrors = errors.name + errors.emailPrimary + errors.password + errors.major;
-
-		/*
-		if (id("registerType2").checked) {
-			validate_email(2);
-			console.debug("Registration type two being used.");
+		if (totalErrors == 1) {
+			errorDiv.textContent = "An error is preventing your registration."; // Probably change to recoloring the boxes later.
 		}
 		else {
-			errors.emailSecondary = 0;
-			console.debug("Registration type one being used.");
+			errorDiv.textContent = "Multiple errors are preventing your registration.";
 		}
 
-		totalErrors += errors.emailSecondary;
-		*/
-
-
-		if (totalErrors <= 0) {
-			hasErrors = false;
-			console.debug("Form submitted with no errors.");
-
-			return true;
-		}
-
-		else {
-			var hasErrors = true;
-
-			console.debug("Total Errors: "+totalErrors);
-			console.debug("Name Error: "+errors.name+" | Email Error: "+errors.emailPrimary+ " | Email Secondary Error: "+errors.emailSecondary +" | Password Error: "+errors.password+" | Major Error: "+errors.major);
-
-			errorDiv.style.display = '';
-
-			if (totalErrors == 1) {
-				errorDiv.textContent = "An error is preventing your registration."; // Probably change to recoloring the boxes later.
-			}
-			else {
-				errorDiv.textContent = "Multiple errors are preventing your registration.";
-			}
-		}
-
-		return false;
-	}
-
-	var registerTypeCheck = function() {
-
-		if (id("registerType1").checked) {
-			id("otherEmailMain").style.display = 'none';
-		}
-		else if (id("registerType2").checked) {
-			id("otherEmailMain").style.display = '';
-		}
 	}
 
 </script>
