@@ -223,7 +223,7 @@ include_once(FUNCTION_PATH . "/connect.php");
 	  email: 1,
 	  password: 1,
 	  major: 0
-	}; 
+	};
 
 	/* ON LOAD SET CLASSES */
 	$( window ).ready(function() {
@@ -273,6 +273,7 @@ include_once(FUNCTION_PATH . "/connect.php");
 				validateMajor(this.value);
 				break;
 		}
+
 	});
 
 	$('#submitRegisterBtn').click(function(e) {
@@ -474,7 +475,6 @@ include_once(FUNCTION_PATH . "/connect.php");
 	}
 
 	var validate_submit = function () {
-
 
 		if (totalErrors == 1) {
 			errorDiv.textContent = "An error is preventing your registration."; // Probably change to recoloring the boxes later.
