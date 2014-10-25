@@ -71,9 +71,8 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 </head>
 
 <body>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-6 col-sm-offset-3" id="header-container"> 
+	<div class="container">
+			<div class="col-sm-8 col-sm-offset-2 col-xs-12" id="header-container"> 
 				<!-- Page Alert: Span width and gradient, have X or disappear on own? On top of title, etc. -->
 			<!-- 	<div id="pageAlert" style="display: none; position: fixed;" class="row">
 					<div class="text-center bg-warning text-warning lead" style="padding: 25px;">
@@ -84,44 +83,49 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 
 				<!-- Site Title -->
 				<div class="row">
-					<div class="col-sm-10 col-sm-offset-1 text-center">
-						<h1 class="page-title "><?php echo SITE_NAME; ?>
+					<div class="text-center">
+						<a id="headerLink" href="/"><h1 class="page-title "><?php echo SITE_NAME; ?></a>
 							<div id="subtitle"><small><?php echo SITE_SLOGAN; ?></small></div>
 						</h1>
 					</div>
 				</div> 
 
 				<!-- Site Nav Main -->
-				<div class="row" style="margin: auto;">
-					<div class="col-md-12 col-sm-12 col-sm-offset-0 col-xs-offset-0">
-						<ul id="mainNav" class="nav nav-pills nav-stackable siteNav">
-							<li <?php if ($pageName == "Home") echo 'class="active"'; ?> >
-								<a href="/">
-								<img src="/img/header/icon-home.png" class="img-responsive headerImg img-rounded" />
-								Home</a>
-							</li>
-							<li <?php if ($pageName == "About") echo 'class="active"'; ?> >							
-								<a href="/about">
-								<img src="/img/header/icon-info.png" class="img-responsive headerImg img-rounded" />
-								About</a>
-							</li>
-							<li <?php if ($pageName == "Switch") echo 'class="active"'; ?> >
-								<a href="/switch">
-								<img src="/img/header/icon-time.png" class="img-responsive headerImg img-rounded" />
-								Switch</a>
-							</li>
-							<li <?php if ($pageName == "Account") echo 'class="active"'; ?> >
-									<a href="#" <?php print (isset($_SESSION['login']) ? 'id="loggedInBtn"' : 'id="loginBtn"'); ?>> 
-									<img <?php print (isset($_SESSION['login']) ? 'src="/img/header/icon-user-loggedin.png"' : 'src="/img/header/icon-user.png"'); ?> class="img-responsive headerImg img-rounded">
-									Account</a>
-							</li>
-						</ul>
-
-					</div>
+				<div class="row">
+					<ul id="mainNav" class="nav siteNav text-center" role="tablist">
+<!-- 						<div class="col-sm-3">
+						<li>
+							<a href="/">
+							<img src="/img/header/icon-home.png" class="img-responsive img-rounded center-block" />
+							Home</a>
+						</li>
+						</div> -->
+<!-- 						<div class="col-sm-3">
+						<li>							
+							<a href="/about">
+							<img src="/img/header/icon-info.png" class="img-responsive img-rounded center-block" />
+							About</a>
+						</li>
+						</div> -->
+						<div class="col-sm-3">
+						<li>
+							<a href="/switch">
+							<img src="/img/header/icon-time.png" class="img-responsive img-rounded center-block" />
+							Switch</a>
+						</li>
+						</div>
+						<div class="col-sm-3">
+						<li>
+								<a href="#" <?php print (isset($_SESSION['login']) ? 'id="loggedInBtn"' : 'id="loginBtn"'); ?>> 
+								<img src="/img/header/icon-user.png" class="img-responsive img-rounded center-block">
+								Account</a>
+						</li>
+						</div>
+					</ul>
 				</div>
 
 
-				<div class="row-fluid">
+				<div class="row">
 					<div id="loginFormDiv" class="col-sm-10 col-sm-offset-1">
 							<?php if (!isset($_SESSION['login'])) { ?>
 
@@ -163,11 +167,12 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/resources/functions/*.php") as $file
 				</div> -->
 	
 		<!-- <hr> -->
-			</div>
 		</div>
 	</div> <!-- End Header Container -->
 
 <script>
+
+	$('img').attr('width', '40px');
 
 	<?php if (!isset($_SESSION['login'])) echo 'id("loginForm").style.display = "none";' ?>
 
