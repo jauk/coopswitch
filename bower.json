@@ -1,0 +1,23 @@
+{
+  "name": "Coopswitch",
+  "version": "0.1",
+  "dependencies": {
+    "jquery": "latest",
+    "bootstrap-sass-official": "latest",
+    "sweetalert": "latest"
+  },
+  "homepage": "https://coopswitch.com",
+  "authors": [
+    "Justin <me@justinmaslin.com>"
+  ],
+  "description": "A way to switch coops.",
+  "license": "Don't steal it!",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
