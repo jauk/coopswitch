@@ -1,12 +1,11 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
-require_once(TEMPLATES_PATH . "/header.php");
-include(FUNCTION_PATH . "/connect.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/resources/config.php");
+	require_once(TEMPLATES_PATH . "/header.php");
+	include(FUNCTION_PATH . "/connect.php");
 
-if ($_SESSION['login'] != "1") {
-	header("Location: /error.php"); // Temporary I guess maybe add like ?error=1
-}
-
+	if ($_SESSION['login'] != "1") {
+		header("Location: /error.php"); // Temporary I guess maybe add like ?error=1
+	}
 
 ?>
 
