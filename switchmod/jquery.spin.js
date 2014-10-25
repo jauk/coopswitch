@@ -45,8 +45,8 @@ $('#el').spin('flower', 'red');
   }
   else {
     // Browser globals
-    // if (!window.Spinner) throw new Error('Spin.js not present')
-    // factory(window.jQuery, window.Spinner)
+    if (!window.Spinner) throw new Error('Spin.js not present')
+    factory(window.jQuery, window.Spinner)
   }
 
 }(function($, Spinner) {
