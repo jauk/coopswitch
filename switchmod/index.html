@@ -1,0 +1,604 @@
+<html lang="en">
+	<head>
+
+		<!-- META -->
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<meta charset="UTF-8">
+		<meta name="author" content="Justin Maslin">
+
+		<!-- TITLE -->
+		<title>Coopswitch Modified</title>
+
+		<!-- CSS -->
+		<link href="/css/bootstrap.css" rel="stylesheet">
+		<link href="/css/bootstrap-select.css" rel="stylesheet" media="screen">
+
+		<style>
+			td { text-align: center; }
+			tr { height: 45px; }
+			.faded { color: gray; }
+		</style>
+		
+		<!-- JAVASCRIPT LIBS -->
+		<script src="/js/jquery-2.1.1.js"></script>
+		<script src="/js/bootstrap.js"></script>
+		<script src="/js/bootstrap-select.js"></script>
+		<script src="jquery.spin.js"></script>
+
+	</head>
+	<body>
+
+	<!-- NAV -->
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Coopswitch</a>
+			</div>
+			<p class="navbar-text">Modified for manual entry only.</p>
+			<ul class="nav navbar-nav">
+				<li><a go="addUserContainer" href="#addUser">Add User</a></li>
+				<li><a go="manageUsersContainer" href="#manageUsers">Manage Users</a></li>
+				<li><a go="switchCheckContainer" href="#switchCheck">Switch Check</a></li>
+				<!-- <li class="disabled"><a href="#stats">Stats</a></li> -->
+			</ul>
+		</div>
+	</nav>
+
+	<!-- CONTENT -->
+	<div class="container">
+		<div class="row col-sm-6 col-sm-offset-3"> 
+			<!-- CHANGE BASED ON USER OPTION -->
+			<h2><span id="pageName">Choose an option from above.</span></h2>
+			<hr />
+			<div id="spin"></div>
+		</div>
+	</div>
+
+	<div id="addUserContainer" class="container optionContainer">
+
+		<div class="row col-sm-6 col-sm-offset-3">
+			<div id="userAddedSuccess" class="alert alert-dismissable alert-success" role="alert">
+ 		 		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+ 		 		User has been added!
+			</div>
+			<div id="userAddedFailed" class="alert alert-dismissable alert-warning" role="alert">
+ 		 		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+ 		 		User has not been added:
+			</div>
+		</div>
+
+		<div class="row col-sm-6 col-sm-offset-3">
+			<form id="addUserForm" role="form">
+
+				<!-- NAME -->
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text" class="form-control" id="userName" name="userName" placeholder="Name" autocomplete="off">
+				</div>
+
+				<!-- EMAIL -->
+				<div class="form-group">
+					<label for="email">Contact Email</label>
+					<input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Email" autocomplete="off">
+					<p class="help-block">This form does not validate the email address.</p>
+				</div>
+
+				<!-- COOPS -->
+				<div class="form-group">
+					<label for="userCoops">Program</label>
+					<div class="radio">
+						<label>
+							<input type="radio" name="userCoops" id="userCoops1" value="1">
+							4 Years, 1 Coop
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="userCoops" id="userCoops2" value="2">
+							5 Years, 3 Coops
+						</label>	
+					</div>					
+				</div>
+
+				<!-- CYCLE -->
+				<div class="form-group">
+					<label for="userCycle">Current Cycle</label>
+					<div class="radio">
+						<label>
+							<input type="radio" name="userCycle" id="userCycle1" value="1">
+							Fall Winter
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="userCycle" id="userCycle2" value="2">
+							Spring Summer
+						</label>	
+					</div>					
+				</div>
+
+				<!-- MAJOR -->
+				<div class="form-group">
+					<label for="userMajor">Major</label>
+  				<select class="form-control selectpicker" id="userMajor" name="userMajor" data-live-search="true" data-size="5">
+  				</select>
+				</div>
+
+				<!-- SUBMIT -->
+				<div class="form-group">
+					<input id="addUser" name="addUser" type="submit" class="btn btn-lg btn-primary" value="Add User">
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+
+	<div id="manageUsersContainer" class="container optionContainer">
+		<!-- TODO: List view of users, live search, options (remove from switch pool, lookup by x, etc) -->
+		<div class="panel panel-default">
+
+			<div class="panel-heading">User List</div>
+			<div class="panel-body">
+				<p>Options for manipulating user data.</p>
+				<!-- SHOW ONLY, SORT BY, ETC -->
+				<button type="button" class="btn btn-info" id="showAll">Show All</button>
+				<button type="button" class="btn btn-info" id="showUnswitched">Show Unswitched</button>
+				<button type="button" class="btn btn-info" id="showSwitched">Show Switched</button>
+				<hr />
+				<p class="lead">These are users who have been added, not withdrawn, and not finalized.</p>
+			</div>
+			<table id="manageTable" class="table">
+				<thead>
+					<tr>
+						<td><strong><span id="userid">Id</span></strong></td>
+						<td><strong><span id="name">Name</span></strong></td>
+						<td><strong><span id="major">Major</span></strong></td>
+						<td><strong><span id="cycle">Cycle</span></strong></td>
+						<td><strong><span id="program">Coops</span></strong></td>
+						<td><strong><span id="switch">Has Switch</span></strong></td>
+						<td><strong><span id="options">Options</span></strong></td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+    <button type="button" class="btn btn-info" id="loadMoreUsers">Load More</button>
+
+	</div>
+
+	<div id="switchCheckContainer" class="container optionContainer">
+
+	<!-- TODO: Table of users who have been paired, but not switched yet. -->
+		<div class="panel panel-default">
+			<div class="panel-heading">Paired User List</div>
+			<div class="panel-body">
+				<button type="button" id="findSwitches" class="btn btn-primary">Find Switches</button>
+				<span id="lastSwitches"></span>
+				<hr />
+				<p class="lead">Options for manipulating user data.</p>
+				<button type="button" class="btn btn-info">Show In Progress</button>
+				<button type="button" class="btn btn-info">Show Finalized</button>
+				<button type="button" class="btn btn-info">Show All</button>
+				<!-- SHOW SWITCH IN PROGRESS, ALREADY SWITCHED, ETC -->
+			</div>
+			<table id="switchTable" class="table">
+				<thead>
+					<tr>
+						<td><strong><span id="userid">Switch Id</span></strong></td>
+						<td><strong><span id="name">User A</span></strong></td>
+						<td><strong><span id="major">User B</span></strong></td>
+						<td><strong><span id="cycle">Major</span></strong></td>
+						<td><strong><span id="status">Status</span></strong></td>
+						<td><strong><span id="options">Options</span></strong></td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+	<div id="switchInfo" class="modal fade">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      	<div class="modal-header">
+        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        	<h4 class="modal-title">Switch Info</h4>
+      	</div>
+      	<div class="modal-body">
+      		<p class="lead"><strong>Major:</strong> <span id="modalMajor"></span></p>
+      		<p class="lead"><strong>Number Coops:</strong> <span id="modalCoops"></span></p>
+        	<table id="switchInfo" class="table">
+        		<thead>
+        			<tr>
+        				<td><strong>Name</strong></td>
+        				<td><strong>Email</strong></td>
+        				<td><strong>Current Cycle</strong></td>        				
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<tr>
+        				<td><span id="userAName"></span></td>
+        				<td><span id="userAEmail"></span></td>
+        				<td><span id="userACycle"></span></td>
+        			</tr>
+        			<tr>
+        				<td><span id="userBName"></span></td>
+        				<td><span id="userBEmail"></span></td>
+        				<td><span id="userBCycle"></span></td>
+        			</tr>
+        		</tbody>
+        	</table>
+      	</div>
+      	<div class="modal-footer">
+        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        	<button type="button" class="btn btn-primary" id="finalizeSwitch">Finalize Switch</button>
+      	</div>
+    	</div><!-- /.modal-content -->
+  	</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	</body>
+</html>
+
+
+<!-- CUSTOM SCRIPTS -->
+<script>
+
+	activeContainer = "";
+	initLoad = true;
+
+	$(window).ready(function() {
+
+		$('.optionContainer').hide();
+		$('.alert').hide();
+
+		page = window.location.href;
+		if (page.indexOf("#") != -1) {
+			var module = page.substring(page.indexOf("#")+1, page.length);
+			$(module+"Container").toggle();
+		}
+
+	});
+
+	$('#findSwitches').on('click', function() {
+
+		$.ajax({
+			type: "GET", 
+			url: "switch.php",
+			data: "s=switchcheck",  
+			success: function(data) {
+				$('#lastSwitches').html(data+" switches made!");
+				// Refresh table.
+			}
+		})
+
+	});
+
+	$('#addUserForm').submit(function(e) {
+
+		var userData = $('#addUserForm').serializeArray();
+
+		$.ajax({
+			type: "POST", 
+			url: "add.php", 
+			data: userData, 
+			success: function(data) {
+				if (data == 1) {
+					$('#userAddedFailed').fadeOut("fast", function() {
+						$('#userAddedSuccess').hide(function() {
+							$('#userAddedSuccess').html("<b>"+userData[0].value + "</b> has been added to the switch pool!");
+							$('#userAddedSuccess').fadeToggle("fast");
+						});
+					});
+
+				}
+				else {
+					$('#userAddedSuccess').fadeOut("fast", function() {
+						$('#userAddedFailed').hide(function() {
+							$('#userAddedFailed').html("<b>User not added due to:</b><br /> "+data);
+							$('#userAddedFailed').fadeToggle("fast");
+						});			
+					});	
+				}
+
+			}
+		});
+
+		e.preventDefault();
+
+	});
+
+	$('.nav li > a').off().on('click', function(e) {
+
+		if (activeContainer != $(this).attr('go')) {
+			if (activeContainer.length != 0) {
+				$('#'+activeContainer).toggle();
+			}
+			$('#'+$(this).attr('go')).toggle();
+			$('#pageName').html($(this).html());
+			activeContainer = $(this).attr('go');
+			if (activeContainer == "addUserContainer" && initLoad) {
+				getMajors();
+			}
+			if (activeContainer == "manageUsersContainer") {
+				$('#manageTable > tbody').empty();
+				getUsersStart = 0;
+				getUsers();
+			}
+			if (activeContainer == "switchCheckContainer") {
+				$('#switchTable > tbody').empty();
+				getSwitches();
+			}
+		}
+
+		e.stopPropagation();
+
+	});
+
+
+	$('#showUnswitched').off().on('click', function() {
+
+		$('#manageTable > tbody > tr').each(function() {
+			if ($(this).find('td.switched span').hasClass('glyphicon-ok')) {
+				$(this).hide();
+			}
+			else {
+				$(this).fadeIn('fast');
+			}
+		});
+
+	});
+
+	$('#showSwitched').off().on('click', function() {
+
+		$('#manageTable > tbody > tr').each(function() {
+			if ($(this).find('td.switched span').hasClass('glyphicon-remove')) {
+				$(this).hide();
+			}
+			else {
+				$(this).fadeIn('fast');
+			}
+		});
+
+	});
+
+	$('#showAll').off().on('click', function() {
+
+		$('#manageTable > tbody > tr').each(function() {
+			$(this).fadeIn('fast');
+		});
+
+	});
+
+
+	$('#manageTable').off().on('click', '.btn-remove', function(e) {
+
+		id = $(this).attr('id');
+		tableRow = $(this).parent().parent();
+		
+		switchId = $(tableRow).find('span.glyphicon').attr('switchid');
+		if (switchId != 0) {
+			$('#manageTable > tbody > tr').find("[switchid='" + switchId + "']").each(function() {
+				$(this).hide(function() {
+					$(this).attr('class', 'glyphicon glyphicon-remove');
+					$(this).fadeToggle("fast");
+				});
+			});			
+		}
+		else {
+			$(tableRow).find('span.glyphicon').hide(function() {
+				$(this).attr('class', 'glyphicon glyphicon-remove');
+				$(this).fadeToggle("fast");
+			});
+		}
+
+
+		$.ajax({
+			type: "POST", 
+			url: "manage.php", 
+			//data: "nId="+id, 
+			success: function() {
+				$(tableRow).addClass('faded');
+				$(tableRow).find(".btn-remove").hide();
+				$(tableRow).find(".btn-recover").show();
+
+			}
+
+		});
+
+	});
+
+	$('#manageTable').on('click', '.btn-recover', function(e) {
+
+		id = $(this).attr('id');
+		tableRow = $(this).parent().parent();
+
+		$.ajax({
+			type: "POST", 
+			url: "manage.php", 
+			data: "yId="+id, 
+			success: function() {
+				$(tableRow).removeClass('faded');
+				$(tableRow).find(".btn-remove").show();
+				$(tableRow).find(".btn-recover").hide();				
+			}
+
+		});
+
+	});
+
+	// SWITCH MODAL INFO
+	$('#switchTable').on('click', '.expandBtn', function(e) {
+
+		$.ajax({
+			type: "GET", 
+			url: "switch.php", 
+			data: "id="+$(this).attr('id'),
+			success: function(data) {
+
+				switchInfo = $.parseJSON(data);
+				
+				major = getMajorName(switchInfo[0].major);
+				$('#switchInfo span#modalMajor').html(major);
+
+				var coops = ((switchInfo[0].userA.program == 1) ? 'One' : 'Three');
+				$('#switchInfo span#modalCoops').html(coops);
+
+				$('#switchInfo span#userAName').html(switchInfo[0].userA.name);
+				$('#switchInfo span#userBName').html(switchInfo[0].userB.name);
+
+				$('#switchInfo span#userAEmail').html(switchInfo[0].userA.email);
+				$('#switchInfo span#userBEmail').html(switchInfo[0].userB.email);
+
+				var cycleA = ((switchInfo[0].userA.cycle == 1) ? 'Fall' : 'Spring');
+				$('#switchInfo span#userACycle').html(cycleA);
+
+				var cycleB = ((switchInfo[0].userB.cycle == 1) ? 'Fall' : 'Spring');
+				$('#switchInfo span#userBCycle').html(cycleB);
+
+				// Remove button too for each user / whole switch?
+
+				$('#switchInfo').modal('show');
+
+			}
+		});
+
+		console.log($(this).attr('id'));
+	});
+
+	$('#finalizeSwitch').off().on('click', function() {
+
+		var userA = $('table#switchInfo span#userAEmail').html();
+		var userB = $('table#switchInfo span#userBEmail').html();
+
+		// ajax to submit 
+
+	});
+
+	getSwitchesStart = 0;
+	getSwitchesRows = 50;
+
+	function getSwitches() {
+		var switchData = new Array();
+
+		$.ajax({
+			dataType: "json", 
+			url: "switch.php", 
+			data: "s=1", 
+			success: function(data) {
+				$.each(data, function(key, thisSwitch) {
+
+						major = getMajorName(thisSwitch.major);
+						rowColor = "";
+						userStatusBtn = "";
+						popoutBtn = '<button type="button" id="'+thisSwitch.switchId+'" class="btn btn-block btn-info expandBtn">Expand</button>';
+						if (thisSwitch.status == 0) {
+							status = "Not Finalized";
+						}
+
+						$('#switchTable > tbody:last').append('<tr class="'+rowColor+'"><td>'+thisSwitch.switchId+'</td><td>'+thisSwitch.userA.name+'</td><td>'+thisSwitch.userB.name+'</td><td>'+major+'</td><td>'+status+'</td><td>'+popoutBtn+'</td></tr>').hide();
+
+				});
+				$('#switchTable > tbody:last').fadeIn('slow');
+			}
+		});
+
+	}
+
+	jQuery.ajaxSetup({
+	  beforeSend: function() {
+	     // console.log("Before load");
+	  },
+	  complete: function(){
+	     // console.log("Complete load");
+	  },
+	  success: function() {}
+	});
+
+	getUsersStart = 0;
+	getUsersRows = 10;
+
+	function getUsers() {
+		var users = new Array();
+		// $('#manageTable tbody').hide();
+		$.ajax({
+			dataType: "json", 
+			url: "users.php", 
+			data: "start="+getUsersStart+"&rows="+getUsersRows, 
+			success: function(data) {
+				$.each(data, function(key, user) {
+
+					major = getMajorName(user.major);
+					glyphicon = ((user.switchId != 0) ? 'ok' : 'remove');
+					cycle = ((user.cycle == 1) ? 'Fall' : 'Spring');
+					program = ((user.program == 1) ? '1' : '3');
+
+					// userStatusBtn = ((user.hasWithdrawn == 1) ? '<button id="'+user.userId+'" type="button" class="btn btn-sm btn-info btn-recover">Recover</button>' : '<button id="'+user.userId+'" type="button" class="btn btn-sm btn-danger btn-remove">Remove</button>');
+					userStatusBtn = '<button id="'+user.userId+'" type="button" class="btn btn-sm btn-info btn-block btn-recover">Recover</button>' + '<button id="'+user.userId+'" type="button" class="btn btn-sm btn-danger btn-block btn-remove">Remove</button>';
+
+					rowColor = ((user.hasWithdrawn == 1) ? 'faded' : '');
+
+					$('#manageTable > tbody:last').append('<tr class="'+rowColor+'">Test<td class="userId">'+user.userId+'</td><td>'+user.name+'</td><td>'+major+'</td><td>'+cycle+'</td><td>'+program+'</td><td class="switched"><span switchId="'+user.switchId+'" class="glyphicon glyphicon-'+glyphicon+'"></span></td><td>'+userStatusBtn+'</td></tr>').hide();
+
+					((user.hasWithdrawn == 1) ? $('table#manageTable tbody tr:last .btn-remove').hide() : $('table#manageTable tbody tr:last .btn-recover').hide());
+
+					getUsersStart++;
+				});
+				$('#manageTable > tbody:last').fadeIn("slow");
+			}
+		});
+
+	}
+
+	function getMajorName(majorId) {
+
+		$.ajax({
+			type: "GET", 
+			url: "majors.php", 
+			data: "majorName="+majorId, 
+			async: false, 
+			success: function(data) { major = data; }
+		});
+
+		return major;
+	}
+
+	function getMajors() {
+		var majors = new Array();
+
+		idName = "#userMajor";
+
+		$.ajax({
+
+			dataType: "json", 
+			url: "/resources/functions/scripts.php",
+			data: "g=majors", 
+			success: function(data) {
+
+				majors = data;
+
+				//for (var x=0; x<majors.length; x++) {
+				$.each(majors, function() {
+
+					var statement = '<option value="' + this.key + '" class="' + this.class + '">'+ this.name + '</select>';
+
+					if (this.class != "noSwitch") {
+						$(idName).append(statement);
+					}
+
+				});
+
+				$('.selectpicker').selectpicker('refresh');
+				initLoad = false;
+			}
+		});
+
+	}
+
+
+</script>
