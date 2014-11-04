@@ -2,54 +2,54 @@
 
 	<head>
 
-	<link href="/css/bootstrap.css" rel="stylesheet">
-	<script src="/js/jquery-2.1.1.js"></script>
-	<script src="/js/bootstrap.js"></script>
+		<link href="/css/bootstrap.css" rel="stylesheet">
+		<script src="/js/jquery-2.1.1.js"></script>
+		<script src="/js/bootstrap.js"></script>
 
-	<script src="/js/bootstrap-select.js"></script>
-	<link href="/css/bootstrap-select.css" rel="stylesheet" media="screen">
+		<script src="/js/bootstrap-select.js"></script>
+		<link href="/css/bootstrap-select.css" rel="stylesheet" media="screen">
 
-	<style type="text/css">
+		<style type="text/css">
 
-		#title {
-			padding-bottom: 15%;
-		}
+			#title {
+				padding-bottom: 15%;
+			}
 
-		#titleText {
-			padding-bottom: .5em;
-			display: block;
-		}
+			#titleText {
+				padding-bottom: .5em;
+				display: block;
+			}
 
-		#mainContainer {
-			/*background-color: white;*/
-		}
+			#mainContainer {
+				/*background-color: white;*/
+			}
 
-		.vertical-center {
-		  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-		  min-height: 100vh; /* These two lines are counted as one :-)       */
+			.vertical-center {
+			  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+			  min-height: 100vh; /* These two lines are counted as one :-)       */
 
-		  display: flex;
-		  align-items: center;
-		}
+			  display: flex;
+			  align-items: center;
+			}
 
-		::-webkit-input-placeholder {
-			text-align: center;
-			font-weight: bold;
-		}
-		::-moz-placeholder { 
-			text-align: center;
-			font-weight: bold;
-		}
-		:-ms-input-placeholder {
-			text-align: center;
-			font-weight: bold;
-		}
+			::-webkit-input-placeholder {
+				text-align: center;
+				font-weight: bold;
+			}
+			::-moz-placeholder { 
+				text-align: center;
+				font-weight: bold;
+			}
+			:-ms-input-placeholder {
+				text-align: center;
+				font-weight: bold;
+			}
 
-		#userInfo {
-			padding-bottom: .5em;
-		}
+			#userInfo {
+				padding-bottom: .5em;
+			}
 
-	</style>
+		</style>
 
 	</head>
 
@@ -66,7 +66,7 @@
 
   			<div class="row">
   				<div class="col-lg-6 col-lg-offset-3">
-	  				<div id="helpBlock" class="alert alert-warning alert-dismissible" role="alert">
+	  				<div id="helpBlock" class="alert alert-info alert-dismissible" role="alert">
 	  					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 	  					<span id="alertText">Only Drexel emails will be accepted!</span>
 	  				</div>
@@ -76,7 +76,7 @@
   			<form id="register" class="form-horizontal">
   				<div class="row">
 	  				<div class="col-lg-6 col-lg-offset-3">
-	  					<input id="email" type="text" placeholder="Email">
+	  					<input id="email" type="text" placeholder="Email" autocomplete="off">
 	  					<div id="userAccount">
 		  					<input id="name" type="text" placeholder="Name">
 		  					<input id="password" type="password" placeholder="Password">
@@ -139,8 +139,11 @@
 		program = "";
 		cycle = "";
 
-		$(".alert").alert();
-		$('.alert').alert('close');
+		firstKey = false;
+
+
+		// $(".alert").alert();
+		// $('.alert').alert('close');
 
 	});
 
@@ -149,7 +152,9 @@
 		$('.alert').alert('close');
 
 		if (validAccount) {
-
+			$('#userAccount').fadeToggle("fast", function() {
+				$('#userInfo').fadeToggle("fast");
+			});
 		}
 		else if (validEmail) {
 			$('#email').fadeToggle("fast", function() {
@@ -198,32 +203,51 @@
 	});
 
 	var typingTimer;
-	var doneTypingInterval = 500;
+	var doneTypingInterval = 400;
 
 	$('form#register #email').keyup(function() {
 
-		alertCheck();
+		//alertCheck();
 		clearTimeout(typingTimer);
 		typingTimer = setTimeout(validateEmail, doneTypingInterval);
+		// $('.alert').fadeIn("fast");
 		// if (validateEmail())
 		// 	$('#continue').attr("disabled", false);
 	});
 
 	$('form#register #email').keydown(function() {
-		$(".alert").alert();
+		
+		if (!firstKey) {
+
+		 	$('.alert:visible').fadeOut(function() {
+		 		$(this).css({"display":"block", "visibility":"hidden"});
+		 	});
+			firstKey = true;
+
+		}
+
+		// console.log(typingTimer);
+		//console.log(typingTimer);
+		// $('.alert:visible').fadeOut();
+
+
+		// $('.alert').attr('visible', 'false');
+
 		clearTimeout(typingTimer);
 		$('#continue').attr("disabled", true);
+		// $('.alert').alert('close');
 	});
 
 	function alertCheck() {
 		$('#alertText').html("Checking to see if input is valid.");
 		$('.alert').removeClass('alert-warning');
 		$('.alert').addClass('alert-info');
-		$(".alert").alert();
+		// $(".alert").alert();
 
 	}
 
 	function validateEmail() {
+		firstKey = false;
 
 		// TODO: Go through some email validation.
 		validEmail = false;
@@ -258,11 +282,21 @@
 			$('.alert').removeClass('alert-info');
 			$('.alert').removeClass('alert-warning');
 		}
+
 		$('#alertText').html(helpBlockText);
+		// $(".alert").fadeToggle();
+
 		// $('#emailError').html(helpBlockText);
 		// toggleFeedback('#emailDiv', isValid);
 
 		console.log(helpBlockText);
+		// $('.alert:hidden').fadeTo(500, 1);
+		 	$('.alert:visible').fadeIn(function() {
+		 		$(this).css({"display":"block", "visibility":"visible"});
+		 	});			// $('.alert').css({"visibility":"visible", "display":"block"}, function() {
+			// 	$(this).fadeIn();
+			// });
+
 		return validEmail;
 
 	}
