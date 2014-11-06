@@ -23,16 +23,10 @@ function getConfig() {
 				"dbpass" => "",
 				"dbhost" => "localhost"
 				),
-			"production" => array(
-				"dbname" => "coopswitch",
-				"dbuser" => "coop",
-				"dbpass" => "switch",
-				"dbhost" => "justinmaslin.db"
-				),
 			"vps" => array(
 				"dbname" => 'coopswitch',
 				"dbuser" => 'root',
-				"dbpass" => 'c00pswitch',
+				"dbpass" => '',
 				"dbhost" => 'localhost'
 				)
 		),
