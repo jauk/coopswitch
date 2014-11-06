@@ -67,7 +67,7 @@
   			<div class="row">
   				<div class="col-lg-6 col-lg-offset-3">
 	  				<div id="helpBlock" class="alert alert-info alert-dismissible" role="alert">
-	  					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	  					<button type="button" class="close" data-dismiss=""><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 	  					<span id="alertText">Only Drexel emails will be accepted!</span>
 	  				</div>
   				</div>
@@ -305,6 +305,7 @@
 
 		// TODO: Basic info validation. 
 		validAccount = true;
+		valid = true;
 
 		if (valid) {
 			$('#userAccount').fadeToggle("fast", function() {
