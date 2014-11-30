@@ -77,10 +77,10 @@
   				<div class="row">
 	  				<div class="col-lg-6 col-lg-offset-3">
 	  					<input id="email" type="text" autocomplete="off" placeholder="Email">
-	  					<div id="userAccount">
+	  					<div id="userAccount" style="position: relative;">
 		  					<input id="name" type="text" autocomplete="off" placeholder="Name">
-		  					<input id="password" type="password" placeholder="Password">
-		  			  	<input id="passwordConfirm" type="password" placeholder="Confirm Password">
+		  					<input id="password" class="passwordField" type="password" placeholder="Password">
+		  			  	<input id="passwordConfirm" class="passwordField" type="password" placeholder="Confirm Password">
 	  			  	</div>
 	  			  	<div id="userInfo">
 	  			  		<div class="row">
@@ -138,11 +138,10 @@
 
 		isTyping = false;
 
+		hasEnteredPass = false;
+
 		program = "";
 		cycle = "";
-
-		firstKey = false;
-
 
 		// $(".alert").alert();
 		$(".alert").alert();
@@ -152,21 +151,45 @@
 
 	$('#continue').click(function() {
 
-		$('.alert').alert('close');
+		//$('.alert').alert('close');
+		$('.alert').fadeTo(0, 0);
 
 		if (validAccount) {
 			$('#userAccount').fadeToggle("fast", function() {
 				$('#userInfo').fadeToggle("fast");
+				$('#continue').attr("disabled", true);
 			});
 		}
 		else if (validEmail) {
-			$('#email').fadeToggle("fast", function() {
-				$('#userAccount').fadeToggle("fast");
-			});
-			$('#titleSubtext').fadeToggle("fast", function() {
+
+
+			$('#titleSubtext').delay(100).fadeTo(500, 0, function() {
 				$('#titleSubtext').html("We just need some basic info.");
-				$('#titleSubtext').fadeToggle("fast");
+				$('#titleSubtext').fadeTo(500, 1);
 			});
+
+			// $('#email').slideDown(500).fadeToggle("fast", function() {
+			// 	$('#userAccount').slideDown(500);
+			// });
+			$('#email').fadeTo(300, 0).slideUp(200);
+
+			$('#userAccount').delay(520).slideDown(200, function() {
+			});
+
+			// $('#titleSubtext').fadeTo(600, 0, function() {
+			// 	$('#titleSubtext').html("We just need some basic info.");
+			
+			// 	$('#titleSubtext').fadeTo(300, 1, function() {
+			// 		$('#email').fadeToggle("fast", function() {
+			// 		$('#userAccount').fadeToggle("fast");
+			// 	});
+
+			// });
+				$('#continue').attr("disabled", true);
+			// });
+
+
+	
 		}		
 		// else if (!validAccount)
 		// 	validateAccount();
@@ -205,39 +228,8 @@
 		cycle = "cycleSpring";
 	});
 
-	var typingTimer;
-	var doneTypingInterval = 400;
 
-	$('form#register #email').keyup(function() {
-
-		//alertCheck();
-		console.log("Key Up");
-		// alertCheck();
-		clearTimeout(typingTimer);
-		typingTimer = setTimeout(validateEmail, doneTypingInterval);
-		// $('.alert').fadeIn("fast");
-		// if (validateEmail())
-		// 	$('#continue').attr("disabled", false);
-	});
-
-	$('form#register #email').keydown(function() {
-
-		if (!isTyping) {
-			isTyping = true;
-			console.log("Hide")
-			$('.alert').fadeTo(500, 0);
-		}
-		else {
-			isTyping = true;
-			console.log("Typing");
-		}
-		//$(".alert").alert();
-		clearTimeout(typingTimer);
-		$('#continue').attr("disabled", true);
-		// $('.alert').alert('close');
-	});
-
-	function alertCheck() {
+	function alertCheck() { // Not really needed, more purpose as debug
 		// $('#alertText').html("Checking to see if input is valid.");
 		$('#alertText').fadeToggle();
 		$('.alert').removeClass('alert-warning');
@@ -245,8 +237,28 @@
 		// $(".alert").alert();
 	}
 
+	var typingTimer;
+	var doneTypingInterval = 400;
+
+	$('form#register #email').keyup(function() {
+
+		clearTimeout(typingTimer);
+		typingTimer = setTimeout(validateEmail, doneTypingInterval); // Validate email if past typing threshhold
+
+	});
+
+	$('form#register').keydown(function() {
+
+		if (!isTyping) { // User has started typing 
+			isTyping = true;
+			console.log("Hide")
+			$('.alert').fadeTo(500, 0);
+		}
+		clearTimeout(typingTimer);
+		$('#continue').attr("disabled", true); // Typing, so disable continue
+	});
+
 	function validateEmail() {
-		firstKey = false;
 
 		// TODO: Go through some email validation.
 		validEmail = false;
@@ -291,6 +303,43 @@
 		// toggleFeedback('#emailDiv', isValid);
 
 		return validEmail;
+
+	}
+
+	$('form#register #name').keyup(function() {
+
+		clearTimeout(typingTimer);
+		typingTimer = setTimeout(validateName, doneTypingInterval); // Validate email if past typing threshhold
+
+	});
+
+	function validateName() {
+
+		nameIsValid = false; // TODO: Turn isValid into a function 
+
+		if ($('form#register #name').value != "") {
+			nameIsValid = true;
+		}
+
+	}
+
+	$('form#register .passwordField').keyup(function() {
+
+		clearTimeout(typingTimer);
+		typingTimer = setTimeout(validatePassword, doneTypingInterval); // Validate email if past typing threshhold
+
+	});
+
+	function validatePassword() {
+
+		passwordIsValid = false;
+
+		if ($('form#register #password').value == $('form#register #passwordConfirm').value) {
+			passwordIsValid = true;
+
+			validAccount = true;
+			$('#continue').attr("disabled", false);
+		}
 
 	}
 
