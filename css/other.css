@@ -364,3 +364,7 @@ input[type="radio"] {
 .tester {
 	border: 1px solid black;
 }
+
+#register input {
+	margin-bottom: 10px;
+}
