@@ -76,9 +76,9 @@
   			<form id="register" class="form-horizontal">
   				<div class="row">
 	  				<div class="col-lg-6 col-lg-offset-3">
-	  					<input id="email" type="text" placeholder="Email" autocomplete="off">
+	  					<input id="email" type="text" autocomplete="off" placeholder="Email">
 	  					<div id="userAccount">
-		  					<input id="name" type="text" placeholder="Name">
+		  					<input id="name" type="text" autocomplete="off" placeholder="Name">
 		  					<input id="password" type="password" placeholder="Password">
 		  			  	<input id="passwordConfirm" type="password" placeholder="Confirm Password">
 	  			  	</div>
@@ -136,6 +136,8 @@
 		validEmail = false;
 		validAccount = false;
 
+		isTyping = false;
+
 		program = "";
 		cycle = "";
 
@@ -143,6 +145,7 @@
 
 
 		// $(".alert").alert();
+		$(".alert").alert();
 		// $('.alert').alert('close');
 
 	});
@@ -208,6 +211,8 @@
 	$('form#register #email').keyup(function() {
 
 		//alertCheck();
+		console.log("Key Up");
+		// alertCheck();
 		clearTimeout(typingTimer);
 		typingTimer = setTimeout(validateEmail, doneTypingInterval);
 		// $('.alert').fadeIn("fast");
@@ -216,34 +221,28 @@
 	});
 
 	$('form#register #email').keydown(function() {
-		
-		if (!firstKey) {
 
-		 	$('.alert:visible').fadeOut(function() {
-		 		$(this).css({"display":"block", "visibility":"hidden"});
-		 	});
-			firstKey = true;
-
+		if (!isTyping) {
+			isTyping = true;
+			console.log("Hide")
+			$('.alert').fadeTo(500, 0);
 		}
-
-		// console.log(typingTimer);
-		//console.log(typingTimer);
-		// $('.alert:visible').fadeOut();
-
-
-		// $('.alert').attr('visible', 'false');
-
+		else {
+			isTyping = true;
+			console.log("Typing");
+		}
+		//$(".alert").alert();
 		clearTimeout(typingTimer);
 		$('#continue').attr("disabled", true);
 		// $('.alert').alert('close');
 	});
 
 	function alertCheck() {
-		$('#alertText').html("Checking to see if input is valid.");
+		// $('#alertText').html("Checking to see if input is valid.");
+		$('#alertText').fadeToggle();
 		$('.alert').removeClass('alert-warning');
 		$('.alert').addClass('alert-info');
 		// $(".alert").alert();
-
 	}
 
 	function validateEmail() {
@@ -283,19 +282,13 @@
 			$('.alert').removeClass('alert-warning');
 		}
 
-		$('#alertText').html(helpBlockText);
-		// $(".alert").fadeToggle();
-
 		// $('#emailError').html(helpBlockText);
-		// toggleFeedback('#emailDiv', isValid);
+		isTyping = false;
+		console.log("Show");
+		$('#alertText').html(helpBlockText);
+		$('.alert').fadeTo(500, 1);
 
-		console.log(helpBlockText);
-		// $('.alert:hidden').fadeTo(500, 1);
-		 	$('.alert:visible').fadeIn(function() {
-		 		$(this).css({"display":"block", "visibility":"visible"});
-		 	});			// $('.alert').css({"visibility":"visible", "display":"block"}, function() {
-			// 	$(this).fadeIn();
-			// });
+		// toggleFeedback('#emailDiv', isValid);
 
 		return validEmail;
 
