@@ -8,6 +8,7 @@
 
 		<script src="/js/bootstrap-select.js"></script>
 		<link href="/css/bootstrap-select.css" rel="stylesheet" media="screen">
+		<link href="/css/other.css" rel="stylesheet" media="screen">
 
 		<style type="text/css">
 
@@ -77,10 +78,14 @@
   				<div class="row">
 	  				<div class="col-lg-6 col-lg-offset-3">
 	  					<input id="email" type="text" autocomplete="off" placeholder="Email">
-	  					<div id="userAccount" style="position: relative;">
-		  					<input id="name" type="text" autocomplete="off" placeholder="Name">
-		  					<input id="password" class="passwordField" type="password" placeholder="Password">
-		  			  	<input id="passwordConfirm" class="passwordField" type="password" placeholder="Confirm Password">
+	  					<div id="userAccount">
+	  						<!-- <div id="inputName"> -->
+		  						<input id="name" type="text" autocomplete="off" placeholder="Name">
+		  					<!-- </div> -->
+		  					<!-- <div id="inputPassword"> -->
+		  						<input id="password" class="passwordField" type="password" placeholder="Password">
+		  			  		<input id="passwordConfirm" class="passwordField" type="password" placeholder="Confirm Password">
+	  			  		<!-- </div> -->
 	  			  	</div>
 	  			  	<div id="userInfo">
 	  			  		<div class="row">
@@ -129,6 +134,7 @@
 		$('#userInfo').hide();
 		$('#submit').hide();
 
+		$('#continue').fadeTo(0, 0.5);
 		$('#continue').attr("disabled", true);
 
 		getMajors();
@@ -151,52 +157,27 @@
 
 	$('#continue').click(function() {
 
-		//$('.alert').alert('close');
-		$('.alert').fadeTo(0, 0);
+		$('.alert').fadeTo(0, 0); // Hide existing alerts on continue.
 
 		if (validAccount) {
 			$('#userAccount').fadeToggle("fast", function() {
 				$('#userInfo').fadeToggle("fast");
-				$('#continue').attr("disabled", true);
 			});
 		}
 		else if (validEmail) {
-
 
 			$('#titleSubtext').delay(100).fadeTo(500, 0, function() {
 				$('#titleSubtext').html("We just need some basic info.");
 				$('#titleSubtext').fadeTo(500, 1);
 			});
 
-			// $('#email').slideDown(500).fadeToggle("fast", function() {
-			// 	$('#userAccount').slideDown(500);
-			// });
 			$('#email').fadeTo(300, 0).slideUp(200);
 
 			$('#userAccount').delay(520).slideDown(200, function() {
-			});
-
-			// $('#titleSubtext').fadeTo(600, 0, function() {
-			// 	$('#titleSubtext').html("We just need some basic info.");
-			
-			// 	$('#titleSubtext').fadeTo(300, 1, function() {
-			// 		$('#email').fadeToggle("fast", function() {
-			// 		$('#userAccount').fadeToggle("fast");
-			// 	});
-
-			// });
-				$('#continue').attr("disabled", true);
-			// });
-
-
-	
+			});	
 		}		
-		// else if (!validAccount)
-		// 	validateAccount();
-		// else {
-		// 	console.log(program);
-		// 	console.log(cycle);
-		// }
+
+		canContinue(false);
 
 	});
 
@@ -237,6 +218,42 @@
 		// $(".alert").alert();
 	}
 
+	function alertStatus(isValid) {
+		if (!isValid) {
+			$('.alert').removeClass('alert-info');
+			$('.alert').addClass('alert-warning');			
+		}
+		else {
+			$('.alert').addClass('alert-success');
+			$('.alert').removeClass('alert-info');
+			$('.alert').removeClass('alert-warning');
+		}
+	}
+
+	function showAlert(isShown) {
+		// Alert fades in faster than it fades out, currently.
+		if (isShown) {
+			$('.alert').fadeTo(250, 1);
+		}
+		else {
+			$('.alert').fadeTo(400, 0);
+		}
+	}
+
+	function canContinue(canContinue) {
+		console.log("Function canContinue triggered.");
+		if (canContinue) {
+			$('#continue').fadeTo(250, 1, function() {
+				$('#continue').attr("disabled", false);
+			});
+		}
+		else {
+			$('#continue').fadeTo(250, 0.5, function() {
+				$('#continue').attr("disabled", true);
+			});
+		}
+	}
+
 	var typingTimer;
 	var doneTypingInterval = 400;
 
@@ -250,57 +267,48 @@
 	$('form#register').keydown(function() {
 
 		if (!isTyping) { // User has started typing 
+			canContinue(false); // Typing, so disable continue
 			isTyping = true;
-			console.log("Hide")
-			$('.alert').fadeTo(500, 0);
+			showAlert(false);
 		}
 		clearTimeout(typingTimer);
-		$('#continue').attr("disabled", true); // Typing, so disable continue
 	});
 
 	function validateEmail() {
 
-		// TODO: Go through some email validation.
-		validEmail = false;
-		$('#continue').attr("disabled", true);
+		// TODO: Go through some more email validation.
+
+		validEmail = false; // Email is set to not valid before checks because we are unsure.
 
 		email = $('form#register #email').val();
 		email = email.toLowerCase();
 
 		var regex = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
 
-		if (regex.test(email)) {
-			// Valid email true, now check domain.
+		if (regex.test(email)) { 	// Valid email true, now check domain.
 			if (email.indexOf('@drexel.edu', email.length - '@drexel.edu'.length) !== -1) {
 				helpBlockText = "Valid Drexel email!";
 				validEmail = true;
-				$('#continue').attr("disabled", false);
+				canContinue(true);
 			}
 			else {
-				helpBlockText = "Not a Drexel email.";
+				helpBlockText = "Not a Drexel email."; // May allow valid emails in future.
 			}
 		}
 		else {
 			helpBlockText = "Invalid email format.";
 		}
 
-		if (!validEmail) {
-			$('.alert').removeClass('alert-info');
-			$('.alert').addClass('alert-warning');
+		if (!validEmail) { // Sho alert warning email is invalid.
+			alertStatus(validEmail);
+			$('#alertText').html(helpBlockText);
+			showAlert(true);
 		}
 		else {
-			$('.alert').addClass('alert-success');
-			$('.alert').removeClass('alert-info');
-			$('.alert').removeClass('alert-warning');
+			alertStatus(validEmail); // Set alert to success. Currently, not showing alert if valid.
 		}
 
-		// $('#emailError').html(helpBlockText);
 		isTyping = false;
-		console.log("Show");
-		$('#alertText').html(helpBlockText);
-		$('.alert').fadeTo(500, 1);
-
-		// toggleFeedback('#emailDiv', isValid);
 
 		return validEmail;
 
