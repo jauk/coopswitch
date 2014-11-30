@@ -82,10 +82,10 @@
 	  						<!-- <div id="inputName"> -->
 		  						<input id="name" type="text" autocomplete="off" placeholder="Name">
 		  					<!-- </div> -->
-		  					<!-- <div id="inputPassword"> -->
+		  					<div id="inputPassword">
 		  						<input id="password" class="passwordField" type="password" placeholder="Password">
 		  			  		<input id="passwordConfirm" class="passwordField" type="password" placeholder="Confirm Password">
-	  			  		<!-- </div> -->
+	  			  		</div>
 	  			  	</div>
 	  			  	<div id="userInfo">
 	  			  		<div class="row">
@@ -144,10 +144,16 @@
 
 		isTyping = false;
 
+		hasEnabledPass = false;
 		hasEnteredPass = false;
 
 		program = "";
 		cycle = "";
+
+		// $('#password').attr("disabled", true);
+		// $('#passwordConfirm').attr("disabled", true);
+		$('#password').fadeTo(0, 0.5);
+		$('#passwordConfirm').fadeTo(0, 0.5);
 
 		// $(".alert").alert();
 		$(".alert").alert();
@@ -157,12 +163,20 @@
 
 	$('#continue').click(function() {
 
+		// TODO: Update continue button to link to next section. IE: #email, #settings, #info
+		//			 This way it is easier to go forward / back (and implement those buttons.)
+
 		$('.alert').fadeTo(0, 0); // Hide existing alerts on continue.
 
 		if (validAccount) {
-			$('#userAccount').fadeToggle("fast", function() {
-				$('#userInfo').fadeToggle("fast");
-			});
+			// $('#userAccount').fadeToggle("fast", function() {
+			// 	$('#userInfo').fadeToggle("fast");
+			// });
+			$('#userAccount').fadeTo(300, 0).slideUp(200);
+			$('#continue').fadeTo(300, 0).slideUp(200);
+
+			$('#userInfo').delay(520).slideDown(200);
+			$('#submit').delay(520).slideDown(200);
 		}
 		else if (validEmail) {
 
@@ -172,9 +186,7 @@
 			});
 
 			$('#email').fadeTo(300, 0).slideUp(200);
-
-			$('#userAccount').delay(520).slideDown(200, function() {
-			});	
+			$('#userAccount').delay(520).slideDown(200);	
 		}		
 
 		canContinue(false);
@@ -323,15 +335,59 @@
 
 	function validateName() {
 
+		console.log("Validate Name!");
 		nameIsValid = false; // TODO: Turn isValid into a function 
 
-		if ($('form#register #name').value != "") {
+		name = $('form#register #name').val();
+		console.log(name);
+
+		if (name == "") {
+			helpBlockText = "You need a name!";
+		}
+
+		else {
 			nameIsValid = true;
 		}
 
+		if (!nameIsValid) {
+			console.log("Show name alert.");
+			alertStatus(nameIsValid);
+			$('#alertText').html(helpBlockText);
+			showAlert(true);
+
+			enablePassword(false);
+		}
+		else {
+			enablePassword(true);
+			showAlert(false);
+		}
+	
+		isTyping = false;
+
+	}	
+
+	$('#inputPassword').children().keydown(function(e) {
+		if (!hasEnabledPass) {
+			e.preventDefault();
+		}
+	});
+
+	function enablePassword(enable) {
+
+		// TODO: Create div around both password inputs and use JQuery child selector to set.
+		fadeSpeed = 200;
+
+		if (enable) {
+			$('#inputPassword').children().fadeTo(fadeSpeed, 1);
+			hasEnabledPass = true;
+		}
+		else {
+			$('#inputPassword').children().fadeTo(fadeSpeed, 0.5);
+			hasEnabledPass = false;
+		}
 	}
 
-	$('form#register .passwordField').keyup(function() {
+	$('form#register #inputPassword').children().keyup(function() {
 
 		clearTimeout(typingTimer);
 		typingTimer = setTimeout(validatePassword, doneTypingInterval); // Validate email if past typing threshhold
@@ -340,14 +396,38 @@
 
 	function validatePassword() {
 
+		console.log(hasEnteredPass);
 		passwordIsValid = false;
 
-		if ($('form#register #password').value == $('form#register #passwordConfirm').value) {
-			passwordIsValid = true;
+		password = $('form#register #password').val();
+		passwordConfirm = $('form#register #passwordConfirm').val();
 
-			validAccount = true;
-			$('#continue').attr("disabled", false);
+		if (!hasEnteredPass && password != "" && passwordConfirm != "") {
+			hasEnteredPass = true;
 		}
+
+	 	if (hasEnteredPass) {
+			if (password == passwordConfirm) {
+				passwordIsValid = true;
+
+				validAccount = true;
+				canContinue(true);
+			}
+			else {
+				helpBlockText = "Your passwords do not match.";
+			}
+
+			if (!passwordIsValid) {
+				alertStatus(passwordIsValid);
+				$('#alertText').html(helpBlockText);
+				showAlert(true);			
+			}
+			else {
+				showAlert(false);			
+			}			
+		}
+
+		isTyping = false;
 
 	}
 
