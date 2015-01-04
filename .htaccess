@@ -9,8 +9,8 @@ RewriteRule ^(.*)$ $1.php
 
 ErrorDocument 404 /404.php 
 
-AuthType Basic  
-AuthName "Coopswitch is under construction. Contact Justin to demo."  
+#AuthType Basic  
+#AuthName "Coopswitch is under construction. Contact Justin to demo."  
 #AuthUserFile /var/www/coopswitch/.htpasswd
 #AuthUserFile /home/protected/.htpasswd
 #require valid-user
